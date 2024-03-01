@@ -1,1 +1,28 @@
-TO DO
+@startuml
+!theme reddress-darkblue
+interface Actor{
+-Targyak: 
++update(EventType)
++accept(TargyVisitor)
+}
+interface TargyVisitor
+interface SzobaEventListener
+
+class Hallgato implements Actor, SzobaEventListener{
+
+}
+class Oktato implements Actor, SzobaEventListener{
+
+}
+
+note bottom of Hallgato
+El tudja dönteni, hogy ha oktató is van, akkor sebződik-e -> Listener?
+Reagál a szoba állapotára -> Listener?
+Használhatja a tárgyait -> Visitor?
+end note
+note left of Actor::update
+Pl. Gázos a szoba vagy
+Oktatóval találkozott egy hallgato?
+end note
+
+@enduml
