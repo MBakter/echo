@@ -1,57 +1,116 @@
 @startuml UML
 
-class Labirintus {}
-
-class Szoba implements ITargyHolder{
-    - maxJatekos: int
-
-    +getSzomszedok(): Szoba[]
-    +addJatekos(jatekos: Jatekos): void
-    +removeJatekos(jatekos: Jatekos): void
-    +addSzomszed(szoba: Szoba): void
-    +removeSzomszed(szoba: Szoba): void
-    +egyesul(szoba: Szoba): void
-    +szetszed(): Szoba
+class Labirintus {
 
 }
 
-Szoba "1" o-- "0..*" Jatekos: # jatekosok
-Szoba "1" *-- "0..*" Szoba: # szomszedok
-ITargyHolder "1" *-- "0..*" Targy: # targyak
-Szoba *-- ESzobaAllapot: # allapot
-Labirintus "1" *-- "0..*" Szoba: # szobak
+class Room implements IItemHolder{
+    - maxPlayer: int
 
-abstract class Targy {
-  + hasznalhato: boolean
-  + hasznal(): void
+    +getSzomszedok(): Room[]
+    +addHallgato(Hallgato: Hallgato): void
+    +removeHallgato(Hallgato: Hallgato): void
+    +addOktato(Oktato: Oktato): void
+    +removeOktato(Oktato: Oktato): void
+    +addSzomszed(room: Room): void
+    +removeSzomszed(room: Room): void
+    +egyesul(room: Room): void
+    +szetszed(): Room
+    +isFull(): boolean
+
+    +notifyHallgatok(): void
+    +notifyOktatok(): void
+
 }
 
-abstract class Jatekos implements ITargyHolder{
-  + szoba: Szoba
-  + sebez(): void
+Room "1" o-- "0..*" Hallgato: # hallgatok
+Room "1" o-- "0..*" Oktato: # oktatok
+Room "1" *-- "0..*" Room: # szomszedok
+IItemHolder "1" *-- "0..*" Items: # targyak
+Room *-- ESzobaAllapot: # allapot
+Labirintus "1" *-- "0..*" Room: # szobak
 
+abstract class Jatekos implements IItemHolder{
+  + room: Room
+  + move(Room): void
 }
 
-
-class Oktato implements Jatekos{}
-class Hallgato implements Jatekos{
+interface IVisitor {
+  + use(mask: Mask): boolean
+  + use(sponge: Sponge): boolean
+  + use(beer: Beer): boolean
+  + use(cheese: Cheese): boolean
+  + use(transistor: TransistorPair): boolean
 }
 
-class Tranzisztor implements Targy{
-  + pár: Tranzisztor || null
+class ItemVisitor {
+  + saveFromTeacher(items: Item[]): boolean
+  + saveFromPoison(items: Item[]): boolean
+  + makeRoomPoisoned(items: Item[], room: Room): boolean
 }
-class TVSZ implements Targy{
-  + hasznalhatoDb: int
-}
-class SorosPohar implements Targy{
-  + hasznalhatoTime: DateTime
-}
-class Camambert implements Targy{}
-class Maszk implements Targy{}
-class Rongy implements Targy{}
-class Logarléc implements Targy{}
 
-interface ITargyHolder {
+IVisitor <|-- ItemVisitor
+
+abstract class Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class TVSZ extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class Beer extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class TransistorPair extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class Mask extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class Sponge extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class Cheese extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+class Logarlec extends Items {
+  + accept(Visitor)
+  + isAvaliable(): boolean
+}
+
+Items ..> IVisitor
+IVisitor ..>  TVSZ
+IVisitor ..>  TransistorPair
+IVisitor ..>  Beer
+IVisitor ..>  Cheese
+IVisitor ..>  Mask
+IVisitor ..>  Logarlec
+IVisitor ..>  Sponge
+
+
+Hallgato ..> ItemVisitor
+Hallgato ..> Items
+
+
+class Oktato extends Jatekos{}
+class Hallgato extends Jatekos{}
+
+
+
+interface IItemHolder {
     # maxTargy: int
     # addTargy(tárgy: Targy): void
     # removeTargy(tárgy: Targy): void
