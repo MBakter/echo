@@ -1,40 +1,39 @@
 @startuml UML
 
-class Labirintus {
+class Labirinth {
 
 }
 
 class Room implements IItemHolder{
-    - maxPlayer: int
+    + maxPlayer: int
 
-    +getSzomszedok(): Room[]
-    +addHallgato(Hallgato: Hallgato): void
-    +removeHallgato(Hallgato: Hallgato): void
-    +addOktato(Oktato: Oktato): void
-    +removeOktato(Oktato: Oktato): void
-    +addSzomszed(room: Room): void
-    +removeSzomszed(room: Room): void
-    +egyesul(room: Room): void
-    +szetszed(): Room
+    +getNeighbours(): Room[]
+    +addStudent(student: Student): void
+    +removeStudent(student: Student): void
+    +addTeacher(teacher: Teacher): void
+    +removeTeacher(teacher: Teacher): void
+    +addNeighbour(room: Room): void
+    +removeNeighbour(room: Room): void
+    +merge(room: Room): void
+    +split(): Room
     +isFull(): boolean
 
-    +notifyHallgatok(): void
-    +notifyOktatok(): void
+    +notifyStudents(): void
+    +notifyTeachers(): void
 
 }
 
-Room "1" o-- "0..*" Hallgato: # hallgatok
-Room "1" o-- "0..*" Oktato: # oktatok
-Room "1" *-- "0..*" Room: # szomszedok
-IItemHolder "1" *-- "0..*" Items: # targyak
-Room *-- ESzobaAllapot: # allapot
-Labirintus "1" *-- "0..*" Room: # szobak
+Room "1" o-- "0..*" Student: + students
+Room "1" o-- "0..*" Teacher: + teachers
+Room "1" *-- "0..*" Room: + neighbours
+IItemHolder "1" *-- "0..*" Items: + items
+Room *-- ERoomState: + state
+Labirinth "1" *-- "0..*" Room: + rooms
 
-abstract class Jatekos implements IItemHolder{
+abstract class Player implements IItemHolder{
   + room: Room
   + move(Room): void
 }
-
 interface IVisitor {
   + use(mask: Mask): boolean
   + use(sponge: Sponge): boolean
@@ -101,49 +100,26 @@ IVisitor ..>  Logarlec
 IVisitor ..>  Sponge
 
 
-Hallgato ..> ItemVisitor
-Hallgato ..> Items
+Student ..> ItemVisitor
+Student ..> Items
 
 
-class Oktato extends Jatekos{}
-class Hallgato extends Jatekos{}
+class Teacher extends Player{}
+class Student extends Player{}
 
 
 
 interface IItemHolder {
-    # maxTargy: int
-    # addTargy(tárgy: Targy): void
-    # removeTargy(tárgy: Targy): void
+    + maxItem: int
+    + addItemy(item: Item): void
+    + removeItem(item: Item): void
 }
 
-enum ESzobaAllapot {
+enum ERoomState {
   OPENED
   CLOSED
-  GAZOS
+  POISONED
 }
-
-' interface IActor{
-'   +accept(TargyVisitor): void
-'   +mozog(Szoba): Szoba
-' }
-' interface TargyVisitor
-' interface SzobaEventListener{
-'   +update(eventType): void
-' }
-
-' abstract class Actor implements IActor, SzobaEventListener {
-'   #jelenSzoba: Szoba
-'   +felvesz(Targy): void
-'   +lerak(Targy):void
-' }
-' class Hallgato implements Actor {
-'   +hasznal(Targy): void
-' }
-' class Oktato implements Actor {
-' }
-
-' Actor "1" --* "0..*" Szoba
-' IActor - TargyVisitor
 
 
 @enduml
