@@ -1,0 +1,90 @@
+@startuml UML
+
+class Labirintus {}
+
+class Szoba implements ITargyHolder{
+    - maxJatekos: int
+
+    +getSzomszedok(): Szoba[]
+    +addJatekos(jatekos: Jatekos): void
+    +removeJatekos(jatekos: Jatekos): void
+    +addSzomszed(szoba: Szoba): void
+    +removeSzomszed(szoba: Szoba): void
+    +egyesul(szoba: Szoba): void
+    +szetszed(): Szoba
+
+}
+
+Szoba "1" o-- "0..*" Jatekos: # jatekosok
+Szoba "1" *-- "0..*" Szoba: # szomszedok
+ITargyHolder "1" *-- "0..*" Targy: # targyak
+Szoba *-- ESzobaAllapot: # allapot
+Labirintus "1" *-- "0..*" Szoba: # szobak
+
+abstract class Targy {
+  + hasznalhato: boolean
+  + hasznal(): void
+}
+
+abstract class Jatekos implements ITargyHolder{
+  + szoba: Szoba
+  + sebez(): void
+
+}
+
+
+class Oktato implements Jatekos{}
+class Hallgato implements Jatekos{
+}
+
+class Tranzisztor implements Targy{
+  + pár: Tranzisztor || null
+}
+class TVSZ implements Targy{
+  + hasznalhatoDb: int
+}
+class SorosPohar implements Targy{
+  + hasznalhatoTime: DateTime
+}
+class Camambert implements Targy{}
+class Maszk implements Targy{}
+class Rongy implements Targy{}
+class Logarléc implements Targy{}
+
+interface ITargyHolder {
+    # maxTargy: int
+    # addTargy(tárgy: Targy): void
+    # removeTargy(tárgy: Targy): void
+}
+
+enum ESzobaAllapot {
+  OPENED
+  CLOSED
+  GAZOS
+}
+
+' interface IActor{
+'   +accept(TargyVisitor): void
+'   +mozog(Szoba): Szoba
+' }
+' interface TargyVisitor
+' interface SzobaEventListener{
+'   +update(eventType): void
+' }
+
+' abstract class Actor implements IActor, SzobaEventListener {
+'   #jelenSzoba: Szoba
+'   +felvesz(Targy): void
+'   +lerak(Targy):void
+' }
+' class Hallgato implements Actor {
+'   +hasznal(Targy): void
+' }
+' class Oktato implements Actor {
+' }
+
+' Actor "1" --* "0..*" Szoba
+' IActor - TargyVisitor
+
+
+@enduml
