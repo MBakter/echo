@@ -1,32 +1,31 @@
  
 @startuml
-title Player survives
+title Student survives
 actor Room
  
 participant Room order 10
-participant Player order 20
+participant Student order 20
 participant Teacher order 30
-participant Student order 40
-participant ItemA order 50
-participant ItemB order 60
- 
-    Room -> Player : PlayerEntered(Teacher)
-activate Player
+/' participant Student order 40 '/
+collections ItemList order 50
 
-        Player -> Teacher : Teacher.accept(ItemA)
+    Room -> Student : Update(event_type)
+activate Student
+
+        Student -> Teacher : Teacher.accept(ItemA)
         activate Teacher
 
             Teacher -> ItemA : visitTeacher(Teacher)
             activate ItemA
                 alt no protection
-                    Teacher <- ItemA : killPlayer(item_owner)
+                    Teacher <- ItemA : killStudent(item_owner)
                     activate Teacher
-                        Teacher -> Player : Died
+                        Teacher -> Student : Died
                     deactivate Teacher
                 else  item gave protection
-                    Teacher <- ItemA : failedKillPlayer(item_owner)
+                    Teacher <- ItemA : failedKillStudent(item_owner)
                     activate Teacher
-                        Teacher -> Player : Survived
+                        Teacher -> Student : Survived
                     deactivate Teacher
                 end
             deactivate ItemA
@@ -38,7 +37,7 @@ activate Player
         deactivate Teacher
 
 
-        Player -> Teacher : Player.accept(ItemB)
+/'         Student -> Teacher : Student.accept(ItemB)
         activate Teacher
             Teacher -> ItemB 
             activate ItemB
@@ -46,12 +45,12 @@ activate Player
             deactivate ItemB
 
             activate Teacher
-                Teacher -> Player : Died or Not
+                Teacher -> Student : Died or Not
             deactivate Teacher
-        deactivate Teacher
-deactivate Player
+        deactivate Teacher '/
+deactivate Student
 
-    Room -> Player : PlayerEntered(Student)
+/'     Room -> Player : PlayerEntered(Student)
     activate Player
         Player -> Student : Student.accept(ItemA)
         activate Student
@@ -65,7 +64,7 @@ deactivate Player
                 Student -> Player : Died or Not
             deactivate Student
 
-        deactivate Student
+        deactivate Student '/
 deactivate Player
 
 @enduml
