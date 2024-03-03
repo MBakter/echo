@@ -23,7 +23,7 @@ activate Player
             TargetRoom --> Player : Target Room
             Player -> CurrentRoom : RemovePlayer(this)
             Player -> Player : ChangePlayersRoom 
-        else Failor
+        else Failure
             TargetRoom --> Player: Entry Denied
     deactivate TargetRoom
         end
