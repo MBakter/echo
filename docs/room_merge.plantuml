@@ -8,6 +8,5 @@ actor Controller
     activate RoomA
         RoomA -> RoomA : addNeighbour(RoomB)
         RoomA -> RoomA : addItems(RoomB)
-        RoomA -> RoomA : set RoomB to RoomA
     /' deactivate RoomA '/
 @enduml
