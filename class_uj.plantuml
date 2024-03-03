@@ -1,0 +1,115 @@
+@startuml UML
+
+class Labirinth {
+
+}
+
+class Room implements IItemHolder, IItemTarget{
+    + maxPlayer: int
+
+    +getNeighbours(): Room[]
+    +addStudent(student: Student): void
+    +removeStudent(student: Student): void
+    +addTeacher(teacher: Teacher): void
+    +removeTeacher(teacher: Teacher): void
+    +addNeighbour(room: Room): void
+    +removeNeighbour(room: Room): void
+    +merge(room: Room): void
+    +split(): Room
+    +isFull(): boolean
+
+    +notifyStudents(): void
+    +notifyTeachers(): void
+
+}
+
+abstract class Player implements IItemHolder, IItemTarget{
+    + room: Room
+    + move(Room): void
+}
+
+interface IVisitor {
+    visitRoom(Room): void
+    visitStudent(Student): void
+    visitTeacher(Teacher): void
+}
+
+enum EItem{
+    TVSZ
+    Beer
+    Transistor
+    Mask
+    Sponge
+    Cheese
+    Logarlec
+}
+
+abstract class Item{
+    -name: EItem
+    + useItem(EItem, IITemTarget, EuseTarget)
+    + isAvaliable(): boolean
+}
+
+interface IItemTarget{
+    + accept(v: IVisitor)
+}
+
+class Teacher extends Player{}
+
+
+class Student extends Player{
+    useItem(EItem, this, EuseTarget)
+}
+
+enum EuseTarget{
+    Self
+    NotSelf
+}
+
+interface IItemHolder {
+    + maxItem: int
+    + addItemy(Item: Item): void
+    + removeItem(Item: Item): void
+}
+
+enum ERoomState {
+    OPENED
+    CLOSED
+    POISONED
+
+}
+
+class TVSZ implements IVisitor {
+}
+
+class Beer  implements IVisitor {
+}
+
+class Transistor implements IVisitor  {
+}
+
+class Mask  implements IVisitor  {
+}
+
+class Sponge  implements IVisitor  {
+}
+
+class Cheese  implements IVisitor {
+}
+
+class Logarlec  implements IVisitor  {
+}
+
+Room "1" o-- "0..*" Student: + students
+Room "1" o-- "0..*" Teacher: + teachers
+Room "1" *-- "0..*" Room: + neighbours
+IItemHolder "1" *-- "0..*" Item: + Items
+Room *-- ERoomState: + state
+Labirinth "1" *-- "0..*" Room: + rooms
+
+Item ..> IVisitor
+Item ..> EItem
+Student ..> EuseTarget
+Item ..> EuseTarget
+
+@enduml
