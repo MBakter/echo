@@ -1,0 +1,71 @@
+ 
+@startuml
+title Player survives
+actor Room
+ 
+participant Room order 10
+participant Player order 20
+participant Teacher order 30
+participant Student order 40
+participant ItemA order 50
+participant ItemB order 60
+ 
+    Room -> Player : PlayerEntered(Teacher)
+activate Player
+
+        Player -> Teacher : Teacher.accept(ItemA)
+        activate Teacher
+
+            Teacher -> ItemA : useItemA(this"Teacher")
+            activate ItemA
+                alt no protection
+                    Teacher <- ItemA : killPlayer(item_owner)
+                    activate Teacher
+                        Teacher -> Player : Died
+                    deactivate Teacher
+                else  item gave protection
+                    Teacher <- ItemA : failedKillPlayer(item_owner)
+                    activate Teacher
+                        Teacher -> Player : Survived
+                    deactivate Teacher
+                end
+            deactivate ItemA
+
+            activate Teacher
+                
+                
+            deactivate Teacher
+        deactivate Teacher
+
+
+        Player -> Teacher : Player.accept(ItemB)
+        activate Teacher
+            Teacher -> ItemB 
+            activate ItemB
+                Teacher <- ItemB
+            deactivate ItemB
+
+            activate Teacher
+                Teacher -> Player : Died or Not
+            deactivate Teacher
+        deactivate Teacher
+deactivate Player
+
+    Room -> Player : PlayerEntered(Student)
+    activate Player
+        Player -> Student : Student.accept(ItemA)
+        activate Student
+        
+            Student -> ItemA 
+            activate ItemA
+                Student <- ItemA
+            deactivate ItemA
+
+            activate Student
+                Student -> Player : Died or Not
+            deactivate Student
+
+        deactivate Student
+deactivate Player
+
+@enduml
