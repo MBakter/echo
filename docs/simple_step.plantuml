@@ -1,0 +1,22 @@
+@startuml
+title Change Room
+actor Controller
+Controller -> Player : ListMoveOptions()
+Player -> CurrentRoom : GetNeighbor()
+Player <-- CurrentRoom : Neighbor
+Controller <-- Player : MoveOptions
+
+Controller -> Player : Move(Target)
+
+Player -> TargetRoom : AddPlayer(this)
+
+alt Success
+    TargetRoom --> Player : Target Room
+    Player -> CurrentRoom : RemovePlayer(this)
+    Player -> Player : ChangePlayersRoom
+    
+else Failor
+    TargetRoom --> Player: Entry Denied
+end
+
+@enduml
