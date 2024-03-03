@@ -1,0 +1,24 @@
+@startuml
+title Room Split
+
+actor Controller
+ 
+    Controller -> Labyrinth  : Split(RoomA) 
+    Labyrinth -> RoomA : getItems() 
+    activate RoomA
+    /' Labyrinth -> RoomA : getNeighbours()  '/
+    
+        /' Labyrinth <-- RoomA  : rooms '/ 
+        Labyrinth <-- RoomA  : items
+    deactivate RoomA    
+
+        Labyrinth -> NewRoom ** : create
+        Labyrinth -> NewRoom : addNeighbour(RoomA)
+        Labyrinth -> NewRoom : setItems()
+        Labyrinth -> RoomA : addNeighbour(NewRoom)
+
+    activate RoomA
+        Labyrinth -> RoomA : setItems()
+    deactivate RoomA  
+    /' deactivate RoomA '/
+@enduml
