@@ -3,7 +3,8 @@ title Room Merge
 
 actor Controller
  
-    Controller -> RoomA : Merge(RoomB) 
+    Controller -> Labirinth  : Merge(RoomB, RoomA) 
+    Labirinth -> RoomA : Merge(RoomB) 
     activate RoomA
         RoomA -> RoomA : addNeighbour(RoomB)
         RoomA -> RoomA : addItems(RoomB)
