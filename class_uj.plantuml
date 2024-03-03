@@ -29,9 +29,9 @@ abstract class Player implements IItemHolder, IItemTarget{
 }
 
 interface IVisitor {
-    visitRoom(Room): void
-    visitStudent(Student): void
-    visitTeacher(Teacher): void
+    visitRoom(Room, EuseTarget): void
+    visitStudent(Student, EuseTarget): void
+    visitTeacher(Teacher, EuseTarget): void
 }
 
 enum EItem{
@@ -46,19 +46,18 @@ enum EItem{
 
 abstract class Item{
     -name: EItem
-    + useItem(EItem, IITemTarget, EuseTarget)
+    + useItem(EItem, IITemTarget, EuseTarget): void
     + isAvaliable(): boolean
 }
 
 interface IItemTarget{
-    + accept(v: IVisitor)
+    + accept(v: IVisitor, t: EuseTarget)
 }
 
 class Teacher extends Player{}
 
 
 class Student extends Player{
-    useItem(EItem, this, EuseTarget)
 }
 
 enum EuseTarget{
@@ -109,7 +108,7 @@ Labirinth "1" *-- "0..*" Room: + rooms
 
 Item ..> IVisitor
 Item ..> EItem
-Student ..> EuseTarget
 Item ..> EuseTarget
+IVisitor ..> EuseTarget
 
 @enduml
