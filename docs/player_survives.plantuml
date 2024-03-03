@@ -16,7 +16,7 @@ activate Player
         Player -> Teacher : Teacher.accept(ItemA)
         activate Teacher
 
-            Teacher -> ItemA : useItemA(this"Teacher")
+            Teacher -> ItemA : visitTeacher(Teacher)
             activate ItemA
                 alt no protection
                     Teacher <- ItemA : killPlayer(item_owner)
