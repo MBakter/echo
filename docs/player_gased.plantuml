@@ -1,0 +1,35 @@
+@startuml
+title Gas Turned On
+[->TargetRoom : setGasOn
+
+activate Student
+    activate TargetRoom
+        TargetRoom -> Student : gas notification
+    deactivate TargetRoom
+
+    activate Student
+        Student -> Student : Student.accept(ItemA)
+        activate Student
+            Student -> ItemA : visitStudent(Student)
+            activate ItemA
+                alt no protection
+                    Student <- ItemA : stunPlayer(item_owner)
+                    activate Student
+
+                    deactivate Student
+                else  item gave protection
+                    Student <- ItemA : failedStunPlayer(item_owner)
+                    activate Student
+            deactivate ItemA
+                    deactivate Student
+                end
+        deactivate Student
+
+            /' Student <- ItemA '/
+    deactivate Student
+
+    
+
+deactivate Student
+
+@enduml
