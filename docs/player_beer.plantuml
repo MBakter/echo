@@ -1,0 +1,17 @@
+@startuml
+title Use Beer
+
+collections Item order 20
+participant Student order 10
+participant Beer order 50
+actor Controller
+
+    Controller -> Student : listItems()
+    Controller <-- Student : items
+    Controller -> Student : useItem(idx)
+
+        Student -> Item : useItem(Student)
+        Item -> Student : Student.accept(Beer)
+        Student -> Beer : visitStudent(Student)
+        Student <- Beer : setProtection()
+@enduml
