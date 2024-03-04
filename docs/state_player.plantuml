@@ -1,0 +1,15 @@
+@startuml
+title Player State
+
+
+    [*] --> NORMAL
+
+    NORMAL : Can move and iterraact
+    UNCONSCIOUS : Can not interract
+    DEAD : Out of the game
+    NORMAL -> UNCONSCIOUS : Gas
+    NORMAL -> DEAD : Met a teacher
+    UNCONSCIOUS -> DEAD : Met a teacher
+    UNCONSCIOUS -up-> NORMAL : Stun timer is up
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+title Room State
+
+
+
+/'     OPEN : Doors Visibel
+    CLOSED : No doors
+    POISONED : Stuns players '/
+
+    [*] --> OPEN
+    CLOSED -up-> OPEN : Curse timer is up
+    OPEN -> CLOSED : Curse effect
+    OPEN -> POISONED : Chees effect
+    OPEN <- POISONED : Chees timer is up
+
+    
+
+@enduml
