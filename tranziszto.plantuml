@@ -1,0 +1,27 @@
+@startuml
+title Student uses Transistor
+
+actor Controller as c order 1
+collections Item as Item order 30
+participant Player order 20
+participant Transistor order 40
+
+c -> Player : listItems()
+Player --> c : items
+c -> Player : useItem(idx)
+Player -> Item : useItem(Player)
+
+Activate Transistor
+Item -> Transistor : Player.accept(Transistor)
+alt Player has another Transistor, pair it
+Transistor -> Transistor : pair()
+else Pair is set, drop in room
+Transistor -> Transistor : setRoom()
+else Teleport player to pair, clear pair
+Transistor -> Transistor : teleportPlayer(Player)
+else
+end
+
+Deactivate Transistor
+
+@enduml

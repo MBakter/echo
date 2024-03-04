@@ -1,0 +1,15 @@
+@startuml
+title Tárgyfelvétel
+
+actor Controller as c
+
+Activate Player
+c -> Player : addItem()
+Player -> Room : removeItem()
+Deactivate Player
+
+alt No Space
+c -> Player : addItem()
+end
+    
+@enduml
