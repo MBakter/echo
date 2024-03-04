@@ -5,11 +5,11 @@ actor Controller
  
 
  
-    Controller -> Student : Move(Target)
-activate Student
-    Student -> TargetRoom : AddPlayer(Student)
+    Controller -> Player : Move(Target)
+activate Player
+    Player -> TargetRoom : AddPlayer(Player)
     activate TargetRoom
-    TargetRoom -> Student : update(ROOM_POISONOUS)
+    TargetRoom -> Player : update(ROOM_POISONOUS)
 
 
 @enduml

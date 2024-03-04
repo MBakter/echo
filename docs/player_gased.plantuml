@@ -5,30 +5,30 @@ title Room Poisonous
 actor Room
  
 participant Room order 10
-participant Student order 20
+participant Player order 20
 participant Item as i order 60
 collections ItemList as il order 50
 
-    Room -> Student : Update(ROOM_POISONOUS)
-activate Student
+    Room -> Player : Update(ROOM_POISONOUS)
+activate Player
 
         loop
-        Student -> il : getItem(Item)
+        Player -> il : getItem(Item)
         il -> i : get()
         activate i
             i -> il: Item
         deactivate i
-        il -> Student : giveItem(Item)
-        Student -> i : useItem(Student, ROOM_POISONOUS)
+        il -> Player : giveItem(Item)
+        Player -> i : useItem(Player, ROOM_POISONOUS)
         activate i
         
-            i -> Student : accept(Student, ROOM_POISONOUS)
-            Student -> i : visitStudent(Student, ROOM_POISONOUS)
+            i -> Player : accept(Player, ROOM_POISONOUS)
+            Player -> i : visitPlayer(Player, ROOM_POISONOUS)
             alt cannotProtect
-                i -> Student: setState(UNCONSCIOUS)
+                i -> Player: setState(UNCONSCIOUS)
             end
         end
-deactivate Student
+deactivate Player
 deactivate Player
 
 @enduml
