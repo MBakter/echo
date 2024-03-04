@@ -1,0 +1,21 @@
+@startuml
+title Student uses Cheese
+
+actor Controller as c order 1
+participant Cheese as i order 30
+participant Student order 20
+participant Room Order 60
+
+c -> Student : listItems()
+activate Student
+Student --> c : items
+c -> Student : useItem(idx)
+Student -> i : useItem(Room)
+activate i
+i -> Room : accept(Cheese)
+activate Room
+Room -> i : visitRoom(Room)
+i -> Room : setState(POISONED)
+
+
+@enduml
