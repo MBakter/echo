@@ -1,12 +1,18 @@
 @startuml UML
 
 class Labyrinth {
-    +split(): Room
-    +merge(room: Room): void
+    +roomList : Room[]
+
+    +split(room: Room): void
+    +merge(room: Room1, room: Room2): void
 }
 
 class Room implements IItemHolder, IItemTarget{
     + maxPlayer: int
+    + itemList : Item[]
+    + studentList : Student[]
+    + teacherList : Teacher[]
+    + neighbouringRooms : Room[]
 
     +getNeighbours(): Room[]
     +addStudent(student: Student): void
@@ -26,13 +32,16 @@ enum EPlayerState {
 
 abstract class Player implements IItemHolder, IItemTarget{
     + room: Room
+    +itemList : Item[]
+    +state : EPlayerState
+
     + move(Room): void
     + update(EventType): void
     + getState(): EPlayerState
     + setState(EPlayerState): void
 }
 
-Player ..> EPlayerState
+Player "0" o-- "1" EPlayerState
 
 interface IVisitor {
     getType(): string
@@ -52,17 +61,27 @@ abstract class Item{
 
 interface IItemTarget{
     + accept(v: IVisitor, e: EventType)
+    + accept(v: IVisitor)
 }
 
-class Teacher extends Player{}
-
+class Teacher extends Player{
+    move(Room): void
+    + update(EventType): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
+}
 
 class Student extends Player{
+    move(Room): void
+    + update(EventType): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
 }
 
 interface IItemHolder {
     + addItemy(Item: Item): void
     + removeItem(Item: Item): void
+    + listItems() : Item[]
 }
 
 enum ERoomState {
@@ -79,28 +98,40 @@ enum EventType {
 Room ..> EventType
 
 class TVSZ implements IVisitor {
+    +hitPoints : int
+
     + getHitpoints(): int
 }
 
 class Beer implements IVisitor {
+    + timer
+
     + activateBeer(): void
 }
 
 class Transistor implements IVisitor  {
+    + paired : bool
+    + roomOfPair : Room
+
     + setRoom(Room): void
     + pair(): void
     + teleportPlayer(Student): void
 }
 
-class Mask  implements IVisitor  {
+class Mask implements IVisitor  {
+    + timer
+
     + getTime(): float
 }
 
 class Sponge  implements IVisitor  {
+    + timer
+
     + getTime(): float
 }
 
 class Cheese  implements IVisitor {
+    + isUsed : bool
 }
 
 class Logarlec  implements IVisitor  {

@@ -1,5 +1,5 @@
 @startuml
-title Tárgyeldobás
+title Player drops item
 
 actor Controller as c
 
