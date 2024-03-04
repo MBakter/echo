@@ -4,8 +4,8 @@ title Player State
 
     [*] --> NORMAL
 
-    NORMAL : Can move and iterraact
-    UNCONSCIOUS : Can not interract
+    NORMAL : Can move and iterract
+    UNCONSCIOUS : Cannot interract
     DEAD : Out of the game
     NORMAL -> UNCONSCIOUS : Gas
     NORMAL -> DEAD : Met a teacher

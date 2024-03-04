@@ -13,5 +13,5 @@ actor Controller
         Student -> Item : useItem(Student)
         Item -> Student : Student.accept(Beer)
         Student -> Beer : visitStudent(Student)
-        Student <- Beer : setProtection()
+        Beer -> Beer : setProtectionTimer()
 @enduml

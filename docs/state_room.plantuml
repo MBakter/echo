@@ -3,15 +3,15 @@ title Room State
 
 
 
-/'     OPEN : Doors Visibel
+/'  OPEN : Doors Visible
     CLOSED : No doors
     POISONED : Stuns players '/
 
     [*] --> OPEN
     CLOSED -up-> OPEN : Curse timer is up
     OPEN -> CLOSED : Curse effect
-    OPEN -> POISONED : Chees effect
-    OPEN <- POISONED : Chees timer is up
+    OPEN -> POISONED : Cheese effect
+    OPEN <- POISONED : Cheese timer is up
 
     
 

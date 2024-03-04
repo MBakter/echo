@@ -14,6 +14,7 @@ actor Controller
 
         Labyrinth -> NewRoom ** : create
         Labyrinth -> NewRoom : addNeighbour(RoomA)
+        activate NewRoom
         Labyrinth -> NewRoom : setItems()
         Labyrinth -> RoomA : addNeighbour(NewRoom)
 
