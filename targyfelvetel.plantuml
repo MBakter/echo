@@ -1,15 +1,18 @@
 @startuml
-title Tárgyfelvétel
+title Player picks up item
 
 actor Controller as c
+collections Item
+
+c -> Room : listItems()
+Room --> c : items
 
 Activate Player
-c -> Player : addItem()
+c -> Player : addItem(Item)
+Alt If Inventory not Full
+Player -> Item : AddItem(Item)
 Player -> Room : removeItem()
-Deactivate Player
-
-alt No Space
-c -> Player : addItem()
 end
+Deactivate Player
     
 @enduml

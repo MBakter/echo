@@ -1,6 +1,6 @@
 @startuml UML
 
-class Labirinth {
+class Labyrinth {
 
 }
 
@@ -34,18 +34,8 @@ interface IVisitor {
     visitTeacher(Teacher, EuseTarget): void
 }
 
-enum EItem{
-    TVSZ
-    Beer
-    Transistor
-    Mask
-    Sponge
-    Cheese
-    Logarlec
-}
-
 abstract class Item{
-    -name: EItem
+    -itemV: ItemVisitor
     + useItem(EItem, IITemTarget, EuseTarget): void
     + isAvaliable(): boolean
 }
@@ -66,7 +56,6 @@ enum EuseTarget{
 }
 
 interface IItemHolder {
-    + maxItem: int
     + addItemy(Item: Item): void
     + removeItem(Item: Item): void
 }
@@ -102,12 +91,12 @@ class Logarlec  implements IVisitor  {
 Room "1" o-- "0..*" Student: + students
 Room "1" o-- "0..*" Teacher: + teachers
 Room "1" *-- "0..*" Room: + neighbours
-IItemHolder "1" *-- "0..*" Item: + Items
+Player "1" *-- "0..*" Item: + Items
+Room "1" *-- "0..*" Item: + Items
 Room *-- ERoomState: + state
-Labirinth "1" *-- "0..*" Room: + rooms
+Labyrinth "1" *-- "0..*" Room: + rooms
 
 Item ..> IVisitor
-Item ..> EItem
 Item ..> EuseTarget
 IVisitor ..> EuseTarget
 
