@@ -5,7 +5,7 @@ actor Controller as c order 1
 participant Student order 20
 participant Sponge as i order 40
 participant Room order 50
-collections Teacher as t order 60
+collections Teachers as t order 60
 
 c -> Student : listItems()
 activate Student
@@ -16,7 +16,7 @@ activate i
 i -> Room : accept(Sponge)
 activate Room
 Room -> i : visitRoom(Room)
-i -> Room : listTeacher()
+i -> Room : listTeachers()
 Room --> i : teachers
 i -> t : setState(unconscious) 
 

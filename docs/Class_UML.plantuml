@@ -1,0 +1,119 @@
+@startuml UML
+
+class Labyrinth {
+    +split(): Room
+    +merge(room: Room): void
+}
+
+class Room implements IItemHolder, IItemTarget{
+    + maxPlayer: int
+
+    +getNeighbours(): Room[]
+    +addStudent(student: Student): void
+    +removeStudent(student: Student): void
+    +addTeacher(teacher: Teacher): void
+    +removeTeacher(teacher: Teacher): void
+    +addNeighbour(room: Room): void
+    +removeNeighbour(room: Room): void   
+    +isFull(): boolean
+}
+
+enum EPlayerState {
+    UNCONSCIOUS
+    FULL
+    DEAD
+}
+
+abstract class Player implements IItemHolder, IItemTarget{
+    + room: Room
+    + move(Room): void
+    + update(EventType): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
+}
+
+Player ..> EPlayerState
+
+interface IVisitor {
+    getType(): string
+    visitRoom(Room, e: EventType): void
+    visitStudent(Student, e: EventType): void
+    visitTeacher(Teacher, e: EventType): void
+    visitRoom(Room): void
+    visitStudent(Student): void
+    visitTeacher(Teacher): void
+}
+
+abstract class Item{
+    -itemV: ItemVisitor
+    + useItem(t: IItemTarget e: EventType): void
+    + useItem(t: IItemTarget): void
+}
+
+interface IItemTarget{
+    + accept(v: IVisitor, e: EventType)
+}
+
+class Teacher extends Player{}
+
+
+class Student extends Player{
+}
+
+interface IItemHolder {
+    + addItemy(Item: Item): void
+    + removeItem(Item: Item): void
+}
+
+enum ERoomState {
+    OPENED
+    CLOSED
+    POISONED
+}
+
+enum EventType {
+    TEACHER_ENTERS
+    ROOM_POISONOUS
+    ROOM_NOT_POISONOUS
+}
+Room ..> EventType
+
+class TVSZ implements IVisitor {
+    + getHitpoints(): int
+}
+
+class Beer implements IVisitor {
+    + activateBeer(): void
+}
+
+class Transistor implements IVisitor  {
+    + setRoom(Room): void
+    + pair(): void
+    + teleportPlayer(Student): void
+}
+
+class Mask  implements IVisitor  {
+    + getTime(): float
+}
+
+class Sponge  implements IVisitor  {
+    + getTime(): float
+}
+
+class Cheese  implements IVisitor {
+}
+
+class Logarlec  implements IVisitor  {
+}
+
+Room "1" o-- "0..*" Student: + students
+Room "1" o-- "0..*" Teacher: + teachers
+Room "1" *-- "0..*" Room: + neighbours
+Player "1" *-- "0..*" Item: + Items
+Room "1" *-- "0..*" Item: + Items
+Room *-- ERoomState: + state
+Labyrinth "1" *-- "0..*" Room: + rooms
+
+Item ..> IVisitor
+
+@enduml
