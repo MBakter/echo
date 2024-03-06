@@ -1,0 +1,8 @@
+@startuml TeacherAttacks
+title Student Attacked
+collections teacherList as tl
+collections studentList as sl
+
+
+
+@enduml

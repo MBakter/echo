@@ -1,0 +1,57 @@
+@startuml
+!theme reddress-darkblue
+
+interface Visitor
+
+ItemVisitor : saveFromTeacher(list<Items>)
+ItemVisitor : saveFromPoison(list<Items>)
+Visitor : useMask()
+Visitor : useSponge()
+Visitor : useBeer()
+Visitor : useCheese()
+Visitor : useTransistor()
+ItemVisitor : useMask()
+ItemVisitor : useSponge()
+ItemVisitor : useBeer()
+ItemVisitor : useCheese()
+ItemVisitor : useTransistor()
+Visitor <|-- ItemVisitor
+Visitor ..> TVSZ
+Visitor ..> TransistorPair
+Visitor ..> Beer
+Visitor ..> Cheese
+Visitor ..> Mask
+Visitor ..> Logarlec
+Visitor ..> Sponge
+
+interface Items
+
+Items : accept(Visitor)
+Items ..> Visitor
+Items <|-- TVSZ
+Items <|-- TransistorPair
+Items <|-- Beer
+Items <|-- Cheese
+Items <|-- Mask
+Items <|-- Logarlec
+Items <|-- Sponge
+Items *-- ItemList
+
+Beer : isAvaliable()
+Beer : accept()
+TransistorPair : isAvaliable()
+TransistorPair : accept(Visitor)
+Mask : isAvaliable()
+Mask : accept(Visitor)
+TVSZ : isAvaliable()
+TVSZ : accept(Visitor)
+Sponge : isAvaliable()
+Sponge : accept(Visitor)
+Cheese : isAvaliable()
+Cheese : accept(Visitor)
+Logarlec : accept(Visitor)
+
+Hallgato ..> ItemVisitor
+Hallgato ..> Items
+
+@enduml
