@@ -1,0 +1,15 @@
+@startuml
+title Sample Title
+
+actor Controller
+ 
+    Controller -> "c : C" : use(g)
+
+    activate "c : C"
+    "c : C" -> "g : G" : effect(c)
+        activate "g : G"
+            "c : C" <-- "g : G"
+        deactivate "g : G"
+    deactivate "c : C"
+
+@enduml

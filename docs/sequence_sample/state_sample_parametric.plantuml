@@ -1,0 +1,14 @@
+@startuml
+title Sample title
+
+actor Controller
+ 
+ Controller -> "<object>:<Class>" : <function>
+ activate "<object>:<Class>"
+    "<object>:<Class>" -> "<object2>:<Class2>" : <function>
+    activate "<object2>:<Class2>" 
+        "<object>:<Class>" <-- "<object2>:<Class2>" 
+    deactivate "<object2>:<Class2>"
+deactivate "<object>:<Class>"
+
+@enduml
