@@ -1,35 +1,34 @@
 @startuml
-title Gas Turned On
-[->TargetRoom : setGasOn
+title Room Poisonous
+[->Room : setGasOn
 
-activate Student
-    activate TargetRoom
-        TargetRoom -> Student : gas notification
-    deactivate TargetRoom
+actor Room
+ 
+participant Room order 10
+participant Player order 20
+participant Item as i order 60
+collections ItemList as il order 50
 
-    activate Student
-        Student -> Student : Student.accept(ItemA)
-        activate Student
-            Student -> ItemA : visitStudent(Student)
-            activate ItemA
-                alt no protection
-                    Student <- ItemA : stunPlayer(item_owner)
-                    activate Student
+    Room -> Player : Update(ROOM_POISONOUS)
+activate Player
 
-                    deactivate Student
-                else  item gave protection
-                    Student <- ItemA : failedStunPlayer(item_owner)
-                    activate Student
-            deactivate ItemA
-                    deactivate Student
-                end
-        deactivate Student
-
-            /' Student <- ItemA '/
-    deactivate Student
-
-    
-
-deactivate Student
+        loop
+        Player -> il : getItem(Item)
+        il -> i : get()
+        activate i
+            i -> il: Item
+        deactivate i
+        il -> Player : giveItem(Item)
+        Player -> i : useItem(Player, ROOM_POISONOUS)
+        activate i
+        
+            i -> Player : accept(Player, ROOM_POISONOUS)
+            Player -> i : visitPlayer(Player, ROOM_POISONOUS)
+            alt cannotProtect
+                i -> Player: setState(UNCONSCIOUS)
+            end
+        end
+deactivate Player
+deactivate Player
 
 @enduml

@@ -5,42 +5,11 @@ actor Controller
  
 
  
-    Controller -> Student : Move(Target)
-activate Student
-    Student -> TargetRoom : AddPlayer(Student)
+    Controller -> Player : Move(Target)
+activate Player
+    Player -> TargetRoom : AddPlayer(Player)
     activate TargetRoom
-/'     TargetRoom -> EventManager : subscribe (event, Student) '/
+    TargetRoom -> Player : update(ROOM_POISONOUS)
 
-    
-        TargetRoom -> Student : gas notification
-        activate Student
-            Student -> Student : Student.accept(ItemA)
-            activate Student
-                Student -> ItemA : visitStudent(Student)
-                activate ItemA
-                    alt no protection
-                        Student <- ItemA : stunPlayer(item_owner)
-                        activate Student
-
-                        deactivate Student
-                    else  item gave protection
-                        Student <- ItemA : failedStunPlayer(item_owner)
-                        activate Student
-                deactivate ItemA
-                        deactivate Student
-                    end
-            deactivate Student
-
-                /' Student <- ItemA '/
-        deactivate Student
-
-        TargetRoom --> Student : Target Room
-    deactivate TargetRoom
-
-
-    Student -> PreviousRoom : RemovePlayer(this)
-
-
-deactivate Student
 
 @enduml
