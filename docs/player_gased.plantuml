@@ -1,0 +1,34 @@
+@startuml
+title Room Poisonous
+[->Room : setGasOn
+
+actor Room
+ 
+participant Room order 10
+participant Player order 20
+participant Item as i order 60
+collections ItemList as il order 50
+
+    Room -> Player : Update(ROOM_POISONOUS)
+activate Player
+
+        loop
+        Player -> il : getItem(Item)
+        il -> i : get()
+        activate i
+            i -> il: Item
+        deactivate i
+        il -> Player : giveItem(Item)
+        Player -> i : useItem(Player, ROOM_POISONOUS)
+        activate i
+        
+            i -> Player : accept(Player, ROOM_POISONOUS)
+            Player -> i : visitPlayer(Player, ROOM_POISONOUS)
+            alt cannotProtect
+                i -> Player: setState(UNCONSCIOUS)
+            end
+        end
+deactivate Player
+deactivate Player
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+title Room Merge
+
+actor Controller
+ 
+    Controller -> Labirinth  : Merge(RoomB, RoomA) 
+    Labirinth -> RoomA : Merge(RoomB) 
+    activate RoomA
+        RoomA -> RoomA : addNeighbour(RoomB)
+        RoomA -> RoomA : addItems(RoomB)
+    /' deactivate RoomA '/
+@enduml

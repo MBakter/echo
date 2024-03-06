@@ -1,0 +1,17 @@
+ 
+@startuml
+title TVSZ used
+ 
+participant Student order 1
+participant TVSZ as i order 2
+
+Student -> i : visitStudent(Student, TEACHER_ENTERS)
+activate i
+i -> i : getHitpoints
+alt hitpoint > 0
+    i -> i : hitpoint - 1
+else hitpoint == 0
+    i -> Student : setState(DEAD)
+end
+
+@enduml

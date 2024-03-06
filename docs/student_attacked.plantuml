@@ -1,0 +1,33 @@
+ 
+@startuml
+title Student attacked
+actor Room
+ 
+participant Room order 10
+participant Student order 20
+participant Item as i order 60
+collections ItemList as il order 50
+
+    Room -> Student : Update(TEACHER_ENTERS)
+activate Student
+
+        loop
+        Student -> il : getItem(Item)
+        il -> i : get()
+        activate i
+            i -> il: Item
+        deactivate i
+        il -> Student : giveItem(Item)
+        Student -> i : useItem(Student, TEACHER_ENTERS)
+        activate i
+        
+            i -> Student : accept(Student, TEACHER_ENTERS)
+            Student -> i : visitStudent(Student, TEACHER_ENTERS)
+            alt cannotProtect
+                i -> Student: setState(DEAD)
+            end
+        end
+deactivate Student
+deactivate Player
+
+@enduml

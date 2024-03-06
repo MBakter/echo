@@ -1,0 +1,18 @@
+@startuml
+title Player drops item
+
+actor Controller as c
+
+
+c -> Player : listItems()
+Activate Player
+c -> Player : removeItem(i)
+c -> i : <create>
+activate i
+Player -> i: get(i)
+i --> Player : i
+Player -> Room : addItem(i)
+activate Room
+Player -> Player : remove(i)
+
+@enduml
