@@ -1,0 +1,46 @@
+@startuml
+title Student Couple Transistor
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 20
+participant "t2 : Transistor" as Transistor2 order 40
+participant "r : Room" as Room order 50
+
+c -> Student : coupleTransistor(t1, t2)
+activate Student
+
+    group assert
+        Student -> Student : {t1, t2 in itemList}
+    end
+
+    ' alt pair is set
+
+        Student -> Transistor : coupleTransistor(t2)
+        activate Transistor
+            
+
+                Transistor -> Transistor2: pairUpTransistor(t1)
+
+                    activate Transistor2
+                        ' Room -> Room: Move(s)
+
+                    |||
+                    Transistor <-- Transistor2
+                    deactivate Transistor2
+
+
+            
+
+            Student <-- Transistor
+        deactivate Transistor
+    ' end
+
+
+    c <-- Student 
+deactivate Student
+
+
+
+
+@enduml

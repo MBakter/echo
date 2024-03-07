@@ -1,5 +1,5 @@
 @startuml
-title Student uses Transistor
+title Student Places Transistor
 
 actor Controller as c order 10
 participant "t1 : Transistor" as Transistor order 30
