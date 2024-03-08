@@ -1,0 +1,31 @@
+@startuml
+title Student Activates Transistor
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 20
+participant "t2 : Transistor" as Transistor2 order 40
+participant "r : Room" as Room order 50
+
+c -> Student : activateTransistor(t1)
+activate Student
+
+    group assert
+        Student -> Student : {t1 in itemList}
+    end
+
+    Student -> Transistor : activateTransistor(s)
+    activate Transistor
+
+
+        Student <-- Transistor
+    deactivate Transistor
+
+
+    c <-- Student 
+deactivate Student
+
+
+
+
+@enduml

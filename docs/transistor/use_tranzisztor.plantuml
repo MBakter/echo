@@ -1,5 +1,5 @@
 @startuml
-title Student uses Transistor
+title Student Uses Transistor
 
 actor Controller as c order 10
 participant "t1 : Transistor" as Transistor order 30
@@ -14,9 +14,9 @@ activate Student
         Student -> Student : {t1 in itemList}
     end
 
-    Student -> Transistor : activateTransistor(s)
+    Student -> Transistor : useTransistor(s)
     activate Transistor
-        alt pair is set and placed
+        alt activated, pair is set and placed
 
             Transistor -> Transistor2: teleportToTransistor(s)
             activate Transistor2
@@ -29,6 +29,7 @@ activate Student
                 
                 Transistor <-- Transistor2
             deactivate Transistor2
+        else 
 
         end
 

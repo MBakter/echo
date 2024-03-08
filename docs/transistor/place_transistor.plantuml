@@ -14,7 +14,7 @@ activate Student
         Student -> Student : {t1 in itemList}
     end
 
-    alt pair is set
+    alt activated and pair is set
 
         Student -> Transistor : placeTransistor(s)
         activate Transistor
@@ -34,6 +34,13 @@ activate Student
 
             Student <-- Transistor
         deactivate Transistor
+    else
+
+        Student -> Room : addItem(t1)
+        activate Room
+            Student <-- Room 
+        deactivate Room
+
     end
 
 
