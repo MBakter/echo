@@ -7,144 +7,142 @@ class Labyrinth {
     +merge(room: Room1, room: Room2): void
 }
 
-class Room implements IItemHolder, IItemTarget{
-    + maxPlayer: int
+/' Removed implementing IItemHolder '/
+class Room implements IItemTarget{
+    + maxCharacter: int
     + itemList : Item[]
     + studentList : Student[]
     + teacherList : Teacher[]
     + neighbouringRooms : Room[]
 
-    +getNeighbours(): Room[]
-    +addStudent(student: Student): void
-    +removeStudent(student: Student): void
-    +addTeacher(teacher: Teacher): void
-    +removeTeacher(teacher: Teacher): void
-    +addNeighbour(room: Room): void
-    +removeNeighbour(room: Room): void   
-    +isFull(): boolean
+    + getNeighbours(): Room[]
+    + addStudent(student: Student): void
+    + removeStudent(student: Student): void
+    + addTeacher(teacher: Teacher): void
+    + removeTeacher(teacher: Teacher): void
+    + addNeighbour(room: Room): void
+    + removeNeighbour(room: Room): void
+    + addItem(IItem: item): void
+    + removeItem(IItem: item) : void
+
+    + split(): void
+    + merge(room: Room): void
 }
 
-enum EPlayerState {
+enum ECharacterState {
     UNCONSCIOUS
     FULL
     DEAD
 }
 
-abstract class Player implements IItemHolder, IItemTarget{
+/' Removed implementing IItemHolder '/
+abstract class Character implements IItemTarget{
     + room: Room
     +itemList : Item[]
-    +state : EPlayerState
+    +state : ECharacterState
 
     + move(Room): void
     + update(EventType): void
-    + getState(): EPlayerState
-    + setState(EPlayerState): void
+    + getState(): ECharacterState
+    + setState(ECharacterState): void
+    + addItem(IItem: item): void
+    + removeItem(IItem: item) : void
 }
 
-Player "0" o-- "1" EPlayerState
+Character "0" o-- "1" ECharacterState
 
-interface IVisitor {
-    getType(): string
-    visitRoom(Room, e: EventType): void
-    visitStudent(Student, e: EventType): void
-    visitTeacher(Teacher, e: EventType): void
-    visitRoom(Room): void
-    visitStudent(Student): void
-    visitTeacher(Teacher): void
-}
-
-abstract class Item{
-    -itemV: ItemVisitor
-    + useItem(t: IItemTarget e: EventType): void
+interface IItem {
     + useItem(t: IItemTarget): void
+    + pickUp(Student): void
+    + pickUp(Teacher): void
+    + visitRoom(Room): void
+    + visitStudent(Student): void
+    + visitTeacher(Teacher): void
+    + TeacherEnters(Student) : void
+    + RoomPoisoned(Student) : void
+    + RoomCleanFromPoison(Student) : void
 }
 
 interface IItemTarget{
-    + accept(v: IVisitor, e: EventType)
-    + accept(v: IVisitor)
+    + accept(v: IItem, e: EventType)
+    + accept(v: IItem)
 }
 
-class Teacher extends Player{
-    move(Room): void
+class Teacher extends Character{
+    + move(Room): void
     + update(EventType): void
-    + getState(): EPlayerState
-    + setState(EPlayerState): void
+    + getState(): ECharacterState
+    + setState(ECharacterState): void
 }
 
-class Student extends Player{
-    move(Room): void
+class Student extends Character{
+    + move(Room): void
     + update(EventType): void
-    + getState(): EPlayerState
-    + setState(EPlayerState): void
+    + getState(): ECharacterState
+    + setState(ECharacterState): void
 }
 
-interface IItemHolder {
+/' interface IItemHolder {
     + addItemy(Item: Item): void
     + removeItem(Item: Item): void
-    + listItems() : Item[]
-}
+} '/
 
 enum ERoomState {
     OPENED
-    CLOSED
+    CURSED
     POISONED
 }
 
-enum EventType {
-    TEACHER_ENTERS
-    ROOM_POISONOUS
-    ROOM_NOT_POISONOUS
+abstract class Timer {
+    + timer
 }
-Room ..> EventType
 
-class TVSZ implements IVisitor {
+class TVSZ implements IItem {
     +hitPoints : int
 
     + getHitpoints(): int
 }
 
-class Beer implements IVisitor {
+class Beer implements IItem, Timer {
     + timer
 
     + activateBeer(): void
 }
 
-class Transistor implements IVisitor  {
+class Transistor implements IItem  {
     + paired : bool
     + roomOfPair : Room
 
     + setRoom(Room): void
     + pair(): void
-    + teleportPlayer(Student): void
+    + teleportCharacter(Student): void
 }
 
-class Mask implements IVisitor  {
+class Mask implements IItem, Timer  {
     + timer
 
     + getTime(): float
 }
 
-class Sponge  implements IVisitor  {
+class Sponge  implements IItem, Timer  {
     + timer
 
     + getTime(): float
 }
 
-class Cheese  implements IVisitor {
+class Cheese  implements IItem, Timer {
     + isUsed : bool
 }
 
-class Logarlec  implements IVisitor  {
+class Logarlec  implements IItem  {
 }
 
 Room "1" o-- "0..*" Student: + students
 Room "1" o-- "0..*" Teacher: + teachers
 Room "1" *-- "0..*" Room: + neighbours
-Player "1" *-- "0..*" Item: + Items
-Room "1" *-- "0..*" Item: + Items
+Character "1" *-- "0..*" IItem: + Items
+Room "1" *-- "0..*" IItem: + Items
 Room *-- ERoomState: + state
 Labyrinth "1" *-- "0..*" Room: + rooms
-
-Item ..> IVisitor
 
 @enduml
