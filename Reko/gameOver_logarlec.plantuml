@@ -1,17 +1,14 @@
-@startuml Student uses Logarlec
-title Student uses Logarlec
+@startuml Logarlec
+title Student picks up Logarlec, game over
 
 actor Controller as C
-participant "s : Student" as s
 participant "l : Logarlec" as l
+participant "s : Student" as s
 
-C -> s : useItem(l)
+C -> l : pickUp(s)
 Activate C
-Activate s
-s -> l : usedByStudent(s)
-Deactivate s
 Activate l
-l --> C : gameOverLogar()
+l -> C : endGame(VICTORY)
 Deactivate l
 Deactivate C
 

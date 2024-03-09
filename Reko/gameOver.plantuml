@@ -19,7 +19,7 @@ r --> C : false
 end
 end
 alt b == false
-C -> C : gameOver()
+C -> C : endGame(LOSE)
 end
 Deactivate C
 
