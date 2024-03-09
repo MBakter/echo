@@ -8,8 +8,9 @@ class Labyrinth {
 }
 
 /' Removed implementing IItemHolder '/
-class Room implements IItemTarget{
+class Room implements IItemTarget {
     + maxCharacter: int
+    + states : ERoomState[]
     + itemList : Item[]
     + studentList : Student[]
     + teacherList : Teacher[]
@@ -30,8 +31,8 @@ class Room implements IItemTarget{
 }
 
 enum ECharacterState {
+    ALIVE
     UNCONSCIOUS
-    FULL
     DEAD
 }
 
@@ -42,7 +43,9 @@ abstract class Character implements IItemTarget{
     +state : ECharacterState
 
     + move(Room): void
-    + update(EventType): void
+    + TeacherAttacked(Student) : void
+    + RoomPoisoned(Student) : void
+    + RoomCleanFromPoison(Student) : void
     + getState(): ECharacterState
     + setState(ECharacterState): void
     + addItem(IItem: item): void
@@ -58,7 +61,7 @@ interface IItem {
     + visitRoom(Room): void
     + visitStudent(Student): void
     + visitTeacher(Teacher): void
-    + TeacherEnters(Student) : void
+    + TeacherAttacked(Student) : void
     + RoomPoisoned(Student) : void
     + RoomCleanFromPoison(Student) : void
 }
@@ -88,9 +91,9 @@ class Student extends Character{
 } '/
 
 enum ERoomState {
-    OPENED
     CURSED
     POISONED
+    TRANSISTOR_INSIDE
 }
 
 abstract class Timer {
