@@ -6,8 +6,6 @@ participant "s:Student" as s
 collections "l:itemList" as il
 participant "i:Item" as i
 
-/' Not ready yet!'/
-
 r -> s : RoomCleanFromPoison()
 activate s
     s -> il : getSize()
@@ -20,7 +18,7 @@ activate s
             activate i
             alt i is Mask
                 i -> Timer : pauseTimer()
-                
+
             end
         end
     end

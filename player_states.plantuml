@@ -1,0 +1,28 @@
+@startuml player_states
+
+[*] --> Player
+state Player {
+    state c1 <<choice>>
+    state c2 <<choice>>
+    state c3 <<choice>>
+    state DEAD 
+    state ALIVE
+state UNCONSCIOUS {
+        [*] -> RUNNING : startTimer(t)
+    }
+    [*] --> ALIVE
+    ALIVE -> c3 : RoomPoisoned()
+    c3 --> ALIVE : false
+    c3 --> UNCONSCIOUS : true
+    ALIVE --> c2 : TeacherAttacked()
+    c2 --> ALIVE : false
+    c2 --> DEAD : true
+    UNCONSCIOUS --> c1 : TeacherAttacked()
+    c1 --> DEAD : true
+    c1 --> UNCONSCIOUS : false
+
+   
+    RUNNING --> ALIVE: setState(ALIVE) [timer finished]
+    
+     
+}
