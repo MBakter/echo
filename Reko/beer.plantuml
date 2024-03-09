@@ -2,25 +2,23 @@
 title Student uses Beer
 
 actor Controller as C
-participant "hallgato : Student" as s
-participant "sorospohar : Beer" as b
+participant "s : Student" as s
+participant "b : Beer" as b
 actor Timer as t
 
-C -> s : useItem(Beer)
+C -> s : useItem(b)
 Activate C
 Activate s
-s -> b : usedByStudent(hallgato)
+s -> b : usedByStudent(s)
 Activate b
-b -> b : activateBeer()
+alt isUsed == false
+b -> t : startTimer(time)
 Activate b
-alt isActive
-b -> t : startTimer(t)
 Activate t
 t --> b : timeUp()
-Deactivate t
-b -> b : deactivate()
-end
 Deactivate b
+Deactivate t
+end
 Deactivate b
 Deactivate s
 Deactivate C

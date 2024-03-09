@@ -1,0 +1,18 @@
+@startuml Student uses Logarlec
+title Student uses Logarlec
+
+actor Controller as C
+participant "s : Student" as s
+participant "l : Logarlec" as l
+
+C -> s : useItem(l)
+Activate C
+Activate s
+s -> l : usedByStudent(s)
+Deactivate s
+Activate l
+l --> C : gameOverLogar()
+Deactivate l
+Deactivate C
+
+@enduml

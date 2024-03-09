@@ -13,7 +13,7 @@ Activate s
 s -> c : usedByStudent(s)
 Activate c
 alt isUsed == false
-    c -> t : startTimer(t)
+    c -> t : startTimer(time)
     Activate t
     Activate c 
     c -> r : addState(POISONED)
