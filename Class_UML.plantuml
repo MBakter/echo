@@ -19,7 +19,7 @@ class Room implements IItemTarget {
     + getNeighbours(): Room[]
     + addStudent(student: Student): void
     + removeStudent(student: Student): void
-    + addTeacher(teacher: Teacher): void
+    + addTeacher(teacher: Teacher): bool
     + removeTeacher(teacher: Teacher): void
     + addNeighbour(room: Room): void
     + removeNeighbour(room: Room): void
@@ -39,8 +39,8 @@ enum ECharacterState {
 /' Removed implementing IItemHolder '/
 abstract class Character implements IItemTarget{
     + room: Room
-    +itemList : Item[]
-    +state : ECharacterState
+    + itemList : Item[]
+    + state : ECharacterState
 
     + move(Room): void
     + TeacherAttacked(Student) : void

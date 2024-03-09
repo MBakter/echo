@@ -1,0 +1,9 @@
+@startuml teacher_attacks
+
+title Teacher Attacks
+actor Controller
+participant "s:Student" as s
+participant "r:Room" as r
+
+s -> r : addStudent(this)
+
