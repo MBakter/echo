@@ -1,0 +1,14 @@
+@startuml
+    [*] --> Room
+State Room{
+[*] -> Idle
+Idle -> RoomPoisoned : setState(POISONED)
+state pC <<choice>>
+RoomPoisoned --> pC : removeState(POISONED)
+pC --> RoomPoisoned : [POISON left in states]
+pC --> Idle : [no more POISON in states]
+RoomPoisoned: RoomPoisoned()
+
+
+}
+@enduml
