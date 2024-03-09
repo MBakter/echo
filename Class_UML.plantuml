@@ -15,7 +15,7 @@ interface IRoomManager {
 }
 
 /' Removed implementing IItemHolder '/
-class Room implements IItemTarget, IRoomManager {
+class Room implements IRoomManager {
     + maxPlayer: int
     + states : ERoomState[]
     + itemList : Item[]
@@ -51,20 +51,22 @@ enum EPlayerState {
 }
 
 /' Removed implementing IItemHolder '/
-abstract class Player implements IItemTarget{
+abstract class Player {
     + room: Room
     + itemList : Item[]
     + state : EPlayerState
     + timer : ITimer
 
     + move(Room): void
-    + TeacherAttacked(Student) : void
-    + RoomPoisoned(Student) : void
-    + RoomCleanFromPoison(Student) : void
+    + TeacherAttacked() : void
+    + RoomPoisoned() : void
+    + RoomCleanFromPoison() : void
     + getState(): EPlayerState
     + setState(EPlayerState): void
     + addItem(IItem: item): void
     + removeItem(IItem: item) : void
+    + pickItem(item: IItem)
+    + dropItem(item: IItem)
 }
 
 Player "0" o-- "1" EPlayerState
@@ -72,7 +74,7 @@ Player "1" *-- "0..*" IItem: + Items
 Player *-- "1" ITimer
 
 interface IItem {
-    + useItem(t: IItemTarget): void
+    + useItem(p: Player): void
     + pickUp(Student): void
     + pickUp(Teacher): void
     + visitRoom(Room): void
@@ -81,10 +83,6 @@ interface IItem {
     + TeacherAttacked(Student) : bool
     + RoomPoisoned(Student) : void
     + RoomCleanFromPoison(Student) : void
-}
-
-interface IItemTarget{
-    + accept(v: IItem)
 }
 
 class Teacher extends Player{
