@@ -7,9 +7,16 @@ class Labyrinth {
     +merge(room: Room1, room: Room2): void
 }
 
+Labyrinth "1" *-- "0..*" IRoomManager: roomList
+
+interface IRoomManager {
+    + split(): void
+    + merge(room: Room): void
+}
+
 /' Removed implementing IItemHolder '/
-class Room implements IItemTarget {
-    + maxCharacter: int
+class Room implements IItemTarget, IRoomManager {
+    + maxPlayer: int
     + states : ERoomState[]
     + itemList : Item[]
     + studentList : Student[]
@@ -30,29 +37,37 @@ class Room implements IItemTarget {
     + merge(room: Room): void
 }
 
-enum ECharacterState {
+Room "1" o-- "0..*" Student: + students
+Room "1" o-- "0..*" Teacher: + teachers
+Room "1" *-- "0..*" Room: + neighbours
+Room "1" *-- "0..*" IItem: + Items
+Room *-- ERoomState: + state
+
+
+enum EPlayerState {
     ALIVE
     UNCONSCIOUS
     DEAD
 }
 
 /' Removed implementing IItemHolder '/
-abstract class Character implements IItemTarget{
+abstract class Player implements IItemTarget{
     + room: Room
     + itemList : Item[]
-    + state : ECharacterState
+    + state : EPlayerState
 
     + move(Room): void
     + TeacherAttacked(Student) : void
     + RoomPoisoned(Student) : void
     + RoomCleanFromPoison(Student) : void
-    + getState(): ECharacterState
-    + setState(ECharacterState): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
     + addItem(IItem: item): void
     + removeItem(IItem: item) : void
 }
 
-Character "0" o-- "1" ECharacterState
+Player "0" o-- "1" EPlayerState
+Player "1" *-- "0..*" IItem: + Items
 
 interface IItem {
     + useItem(t: IItemTarget): void
@@ -67,22 +82,19 @@ interface IItem {
 }
 
 interface IItemTarget{
-    + accept(v: IItem, e: EventType)
     + accept(v: IItem)
 }
 
-class Teacher extends Character{
+class Teacher extends Player{
     + move(Room): void
-    + update(EventType): void
-    + getState(): ECharacterState
-    + setState(ECharacterState): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
 }
 
-class Student extends Character{
+class Student extends Player{
     + move(Room): void
-    + update(EventType): void
-    + getState(): ECharacterState
-    + setState(ECharacterState): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
 }
 
 /' interface IItemHolder {
@@ -96,20 +108,16 @@ enum ERoomState {
     TRANSISTOR_INSIDE
 }
 
-abstract class Timer {
-    + timer
+interface ITimer {
+    + updateTimer()
+    + startTimer(t)
+    + pauseTimer()
 }
 
 class TVSZ implements IItem {
-    +hitPoints : int
+    + hitPoints : int
 
-    + getHitpoints(): int
-}
-
-class Beer implements IItem, Timer {
-    + timer
-
-    + activateBeer(): void
+    + TeacherAttacked(Teacher) : bool
 }
 
 class Transistor implements IItem  {
@@ -118,34 +126,51 @@ class Transistor implements IItem  {
 
     + setRoom(Room): void
     + pair(): void
-    + teleportCharacter(Student): void
+    + teleportPlayer(Student): void
 }
 
-class Mask implements IItem, Timer  {
-    + timer
-
-    + getTime(): float
+enum BeerState {
+    INACTIVE
+    RUNNING
+    DISABLED
 }
 
-class Sponge  implements IItem, Timer  {
-    + timer
+class Beer implements IItem {
+    + timer : ITimer
+    + state : BeerState
 
-    + getTime(): float
+    + setState(BeerState): void
 }
+Beer *-- "1" ITimer
+Beer *-- "1" BeerState
 
-class Cheese  implements IItem, Timer {
+class Mask implements IItem  {
+    + timer : ITimer
+    + functional : bool
+
+    + setFunctional(bool) : void
+    + RoomPoisoned(Student) : void
+    + RoomClearFromPoison(Student) : void
+
+}
+Mask *-- "1" ITimer
+
+class Sponge  implements IItem {
+    + timer : ITimer
+
+}
+Sponge *-- "1" ITimer
+
+class Cheese  implements IItem {
+    + timer : ITimer
     + isUsed : bool
+
 }
+Cheese *-- "1" ITimer
 
 class Logarlec  implements IItem  {
 }
 
-Room "1" o-- "0..*" Student: + students
-Room "1" o-- "0..*" Teacher: + teachers
-Room "1" *-- "0..*" Room: + neighbours
-Character "1" *-- "0..*" IItem: + Items
-Room "1" *-- "0..*" IItem: + Items
-Room *-- ERoomState: + state
-Labyrinth "1" *-- "0..*" Room: + rooms
+
 
 @enduml

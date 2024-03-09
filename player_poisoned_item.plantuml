@@ -1,0 +1,39 @@
+@startuml teacher_attacks
+
+title Player Poisoned: Item interaction
+participant "s:Student" as s
+participant "i:Item" as i
+participant "b:isSaved" as b
+
+s -> i : RoomPoisoned(this)
+activate i
+activate s
+i -> i : setPlayer(s)
+s -> b : <<create>>
+activate b
+s --> b : false
+
+alt i:Item is Mask
+    alt functional == true
+        i -> Timer : startTimer(time)
+        i --> s : true
+        s --> b : true
+    opt timer runs out
+        Timer -> i : setFunctional(false)
+        activate i
+        i -> s : roomPoisoned(this)
+        deactivate i 
+    end
+        
+    else
+        i --> s : false
+    end
+else
+    i --> s : false
+end
+
+alt b == true
+    s -> s : setState(UNCONSCIOUS)
+end
+    
+@enduml

@@ -21,10 +21,10 @@ alt i:Item is TVSZ
     end
 else i:Item is Beer 
     alt inactive
-        i -> Controller : setTimer()
-        activate Controller
-            Controller -> i : setState(running)
-        deactivate Controller
+        i -> Timer : setTimer()
+        activate Timer
+            Timer -> i : setState(running)
+        deactivate Timer
         i --> s : true
         s --> b : true
     else running
