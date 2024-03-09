@@ -1,0 +1,25 @@
+@startuml 
+title Student Enters Room
+collections "r.teacherList" as tl
+collections "r.studentList" as sl
+participant "r:Room" as Room
+participant "s:Student" as Student
+
+Student -> Room : addStudent(this)
+alt canEnterRoom
+
+    activate Room
+        Room -> sl : add(s:Student)
+            Room -> tl : getSize()
+            activate sl
+                tl --> Room : size
+
+            alt size > 0
+                loop every s:Student in studentList
+                    Room -> sl : s.TeacherAttacked()
+                end
+            end
+            deactivate sl
+    deactivate Room
+end
+@enduml

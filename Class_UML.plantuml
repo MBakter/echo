@@ -61,7 +61,7 @@ interface IItem {
     + visitRoom(Room): void
     + visitStudent(Student): void
     + visitTeacher(Teacher): void
-    + TeacherAttacked(Student) : void
+    + TeacherAttacked(Student) : bool
     + RoomPoisoned(Student) : void
     + RoomCleanFromPoison(Student) : void
 }
