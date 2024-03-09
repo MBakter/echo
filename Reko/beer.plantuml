@@ -1,0 +1,28 @@
+@startuml Student uses Beer
+title Student uses Beer
+
+actor Controller as C
+participant "hallgato : Student" as s
+participant "sorospohar : Beer" as b
+actor Timer as t
+
+C -> s : useItem(Beer)
+Activate C
+Activate s
+s -> b : usedByStudent(hallgato)
+Activate b
+b -> b : activateBeer()
+Activate b
+alt isActive
+b -> t : startTimer(t)
+Activate t
+t --> b : timeUp()
+Deactivate t
+b -> b : deactivate()
+end
+Deactivate b
+Deactivate b
+Deactivate s
+Deactivate C
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml Student uses cheese
+title Student uses cheese
+
+actor Controller as C
+participant "s : Student" as s
+participant "c : Cheese" as c
+participant "r : Room" as r
+actor Timer as t
+
+C -> s : useItem(c)
+Activate C
+Activate s
+s -> c : usedByStudent(s)
+Activate c
+alt isUsed == false
+    c -> t : startTimer(t)
+    Activate t
+    Activate c 
+    c -> r : addState(POISONED)
+    t --> c : timeUp()
+    Deactivate t
+    c -> r : removeState(POISONED)
+    Deactivate c
+    Deactivate c
+end
+Deactivate s
+Deactivate C
+
+@enduml

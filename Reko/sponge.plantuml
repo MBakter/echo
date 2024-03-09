@@ -1,0 +1,28 @@
+@startuml Student uses Sponge
+title Student uses Sponge
+
+actor Controller as C
+participant "hallgato : Student" as s
+participant "sorospohar : Beer" as b
+actor Timer as t
+
+' Itt useItem(cheese) vagy useItem(Item)nek kéne lennie?
+C -> s : useItem(Beer)
+Activate C
+Activate s
+' Még nincs ilyen a class diagrammon
+s -> b : usedByStudent(hallgato)
+Activate b
+' Nincs ilyen függvénye a szobának
+alt isActive == true
+b -> t : getTime()
+t --> b : curTime
+loop for all s:Students in Room
+b -> s : addStatus(IMMUNE, time)
+end
+end
+Deactivate b
+Deactivate s
+Deactivate C
+
+@enduml
