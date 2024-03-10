@@ -1,14 +1,39 @@
-@startuml
-    [*] --> Room
-State Room{
-[*] -> Idle
-Idle -> RoomPoisoned : setState(POISONED)
-state pC <<choice>>
-RoomPoisoned --> pC : removeState(POISONED)
-pC --> RoomPoisoned : [POISON left in states]
-pC --> Idle : [no more POISON in states]
-RoomPoisoned: RoomPoisoned()
+@startuml state_room
+title Room states
+[*] -> statelessRoom
+statelessRoom --> StateAdded
+State StateAdded{
+state cc <<choice>>
+[*] --> CURSED : setState(CURSED)
+CURSED : Prohibit move() to 
+CURSED : and from this room
+CURSED --> cc : removeState(CURSED)
+cc -> [*] : [states clear of CURSED]
+cc --> CURSED : [CURSED left in states]
 
+
+||
+state cp <<choice>>
+[*] --> POISONED : setState(POISONED)
+POISONED : entry / Call RoomPoisoned() for each
+POISONED : player in room
+POISONED --> cp : removeState(POISONED)
+cp -> CLEAR
+CLEAR : entry / Call RoomCleanFromPoison()
+CLEAR : for each player in room
+cp --> POISONED : [POISONED left in states]
+
+||
+state ct <<choice>>
+[*] --> TRANSISTOR_INSIDE : setState(TRANSISTOR_INSIDE)
+TRANSISTOR_INSIDE : Prohibit merge() and
+TRANSISTOR_INSIDE : split() on room
+TRANSISTOR_INSIDE --> ct : removeState(TRANSISTOR_INSIDE)
+ct -> [*] : [states clear of TRANSISTOR_INSIDE]
+ct --> TRANSISTOR_INSIDE : [TRANSISTOR_INSIDE left in states]
 
 }
+statelessRoom -> teacherEntered
+teacherEntered : Call TeacherAttacked() for
+teacherEntered : each student in room
 @enduml
