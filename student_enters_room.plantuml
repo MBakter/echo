@@ -1,4 +1,4 @@
-@startuml 
+@startuml student_enter
 title Student Enters Room
 participant "s:Student" as Student
 participant "r:Room" as Room

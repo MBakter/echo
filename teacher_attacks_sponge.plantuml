@@ -14,7 +14,9 @@ i -> s : getRoom()
 s --> i : r
 alt i:Item is Sponge
     i -> r : getTeachers()
-    r -> i : tl
+    activate r
+    r --> i : tl
+    deactivate r
     loop every t:Teacher in teacherList
     i -> tl : setState(UNCONSCIOUS)
 
