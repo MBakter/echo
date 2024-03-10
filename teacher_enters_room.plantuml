@@ -1,9 +1,9 @@
 @startuml 
 title Teacher Enters Room
+participant "t:Teacher" as Teacher
+participant "r:Room" as Room
 collections "r.teacherList" as tl
 collections "r.studentList" as sl
-participant "r:Room" as Room
-participant "t:Teacher" as Teacher
 
 Teacher -> Room : addTeacher(this)
 alt canEnterRoom

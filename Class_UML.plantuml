@@ -3,15 +3,15 @@
 class Labyrinth {
     +roomList : Room[]
 
-    +split(): void
-    +merge(Room): void
+    + split(): Room
+    + merge(Room): bool
 }
 
 Labyrinth "1" *-- "0..*" IRoomManager: roomList
 
 interface IRoomManager {
-    + split(): void
-    + merge(Room): void
+    + split(): Room
+    + merge(Room): bool
 }
 
 /' Removed implementing IItemHolder '/
@@ -34,15 +34,15 @@ class Room implements IRoomManager {
     + addEffect(ERoomEffects) : void
     + removeEffect(ERoomEffects) : void
 
-    + split(): void
-    + merge(Room): void
+    + split(): Room
+    + merge(Room): bool
 }
 
-Room "1" o-- "0..*" Student: + students
-Room "1" o-- "0..*" Teacher: + teachers
+Room "1" o-- "0..*" Student: + studentList
+Room "1" o-- "0..*" Teacher: + teacherList
 Room "1" *-- "0..*" Room: + neighbours
-Room "1" *-- "0..*" IItem: + Items
-Room *-- ERoomEffects: + state
+Room "1" *-- "0..*" IItem: + itemList
+Room *-- ERoomEffects: + effects
 
 
 enum EPlayerState {
@@ -68,10 +68,11 @@ abstract class Player {
     + removeItem(IItem) : void
     + pickItem(IItem)
     + dropItem(IItem)
+    + timerEnd()
 }
 
 Player "0" o-- "1" EPlayerState
-Player "1" *-- "0..*" IItem: + Items
+Player "1" *-- "0..*" IItem: + itemList
 Player *-- "1" ITimer
 
 interface IItem {
@@ -108,7 +109,6 @@ enum ERoomEffects {
 }
 
 interface ITimer {
-    + updateTimer()
     + startTimer(float)
     + pauseTimer()
 }
@@ -137,8 +137,10 @@ enum BeerState {
 class Beer implements IItem {
     + timer : ITimer
     + state : BeerState
-
+    
+    + timerEnd()
     + setState(BeerState): void
+    + TeacherAttacked(Teacher) : bool
 }
 Beer *-- "1" ITimer
 Beer *-- "1" BeerState
@@ -147,6 +149,7 @@ class Mask implements IItem  {
     + timer : ITimer
     + functional : bool
 
+    + timerEnd()
     + setFunctional(bool) : void
     + RoomPoisoned(Student) : void
     + RoomClearFromPoison(Student) : void
@@ -156,7 +159,9 @@ Mask *-- "1" ITimer
 
 class Sponge  implements IItem {
     + timer : ITimer
+    + functional : bool
 
+    + timerEnd()
 }
 Sponge *-- "1" ITimer
 
@@ -164,6 +169,7 @@ class Cheese  implements IItem {
     + timer : ITimer
     + isUsed : bool
 
+    + timerEnd()
 }
 Cheese *-- "1" ITimer
 

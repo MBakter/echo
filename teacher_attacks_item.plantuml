@@ -23,7 +23,8 @@ else i:Item is Beer
     alt inactive
         i -> Timer : setTimer()
         activate Timer
-            Timer -> i : setState(running)
+            Timer -> i : endTimer()
+            i -> i : setState(running)
         deactivate Timer
         i --> s : true
         s --> b : true

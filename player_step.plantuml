@@ -15,7 +15,7 @@ participant "r:Room" as r
     end
 
     activate r
-    alt canEnterRoom
+    alt teacherList.size + studentList.size < maxPlayer && NO_CURSE
         r --> Player : true
         Player -> Player : setRoom(r)
     else

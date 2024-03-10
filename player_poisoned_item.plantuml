@@ -19,8 +19,9 @@ alt i:Item is Mask
         i --> s : true
         s --> b : true
     opt timer runs out
-        Timer -> i : setFunctional(false)
+        Timer -> i : timerEnd()
         activate i
+        i -> i : setFunctional(false)
         i -> s : roomPoisoned(this)
         deactivate i 
     end
@@ -30,10 +31,20 @@ alt i:Item is Mask
     end
 else
     i --> s : false
+    deactivate i
 end
+
+s -> b : get()
+b --> s : b
+deactivate b
 
 alt b == true
     s -> s : setState(UNCONSCIOUS)
+    s -> Timer : startTimer(time)
+    activate Timer
+    Timer -> s : timerEnd()
+    deactivate Timer
+    s -> s : setState(ALIVE)
 end
     
 @enduml
