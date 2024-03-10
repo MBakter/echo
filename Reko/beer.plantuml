@@ -11,11 +11,15 @@ Activate C
 Activate s
 s -> b : usedByStudent(s)
 Activate b
-alt isUsed == false
+alt state == INACTIVE
 b -> t : startTimer(time)
 Activate b
+b -> b : setState(RUNNING)
+
+else state == RUNNING
 Activate t
-t --> b : timeUp()
+t --> b : updateTimer()
+b -> b : setState(DISABLED)
 Deactivate b
 Deactivate t
 end

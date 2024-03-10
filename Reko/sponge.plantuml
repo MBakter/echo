@@ -12,7 +12,7 @@ alt isUsed == false
 sp -> t : startTimer(time)
 Activate t
 Activate sp
-t --> sp : timeUp()
+t --> sp : updateTimer()
 Deactivate sp
 Deactivate t
 end
