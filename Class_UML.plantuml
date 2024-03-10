@@ -3,45 +3,46 @@
 class Labyrinth {
     +roomList : Room[]
 
-    +split(room: Room): void
-    +merge(room: Room1, room: Room2): void
+    +split(): void
+    +merge(Room): void
 }
 
 Labyrinth "1" *-- "0..*" IRoomManager: roomList
 
 interface IRoomManager {
     + split(): void
-    + merge(room: Room): void
+    + merge(Room): void
 }
 
 /' Removed implementing IItemHolder '/
 class Room implements IRoomManager {
     + maxPlayer: int
-    + states : ERoomState[]
+    + effects : ERoomEffects[]
     + itemList : Item[]
     + studentList : Student[]
     + teacherList : Teacher[]
     + neighbouringRooms : Room[]
 
-    + getNeighbours(): Room[]
-    + addStudent(student: Student): void
-    + removeStudent(student: Student): void
-    + addTeacher(teacher: Teacher): bool
-    + removeTeacher(teacher: Teacher): void
-    + addNeighbour(room: Room): void
-    + removeNeighbour(room: Room): void
-    + addItem(IItem: item): void
-    + removeItem(IItem: item) : void
+    + addStudent(Student): void
+    + removeStudent(Student): void
+    + addTeacher(Teacher): bool
+    + removeTeacher(Teacher): void
+    + addNeighbour(Room): void
+    + removeNeighbour(Room): void
+    + addItem(IItem): void
+    + removeItem(IItem) : void
+    + addEffect(ERoomEffects) : void
+    + removeEffect(ERoomEffects) : void
 
     + split(): void
-    + merge(room: Room): void
+    + merge(Room): void
 }
 
 Room "1" o-- "0..*" Student: + students
 Room "1" o-- "0..*" Teacher: + teachers
 Room "1" *-- "0..*" Room: + neighbours
 Room "1" *-- "0..*" IItem: + Items
-Room *-- ERoomState: + state
+Room *-- ERoomEffects: + state
 
 
 enum EPlayerState {
@@ -63,10 +64,10 @@ abstract class Player {
     + RoomCleanFromPoison() : void
     + getState(): EPlayerState
     + setState(EPlayerState): void
-    + addItem(IItem: item): void
-    + removeItem(IItem: item) : void
-    + pickItem(item: IItem)
-    + dropItem(item: IItem)
+    + addItem(IItem): void
+    + removeItem(IItem) : void
+    + pickItem(IItem)
+    + dropItem(IItem)
 }
 
 Player "0" o-- "1" EPlayerState
@@ -74,12 +75,10 @@ Player "1" *-- "0..*" IItem: + Items
 Player *-- "1" ITimer
 
 interface IItem {
-    + useItem(p: Player): void
+    + useItem(Player): void
     + pickUp(Student): void
     + pickUp(Teacher): void
-    + visitRoom(Room): void
-    + visitStudent(Student): void
-    + visitTeacher(Teacher): void
+
     + TeacherAttacked(Student) : bool
     + RoomPoisoned(Student) : void
     + RoomCleanFromPoison(Student) : void
@@ -102,7 +101,7 @@ class Student extends Player{
     + removeItem(Item: Item): void
 } '/
 
-enum ERoomState {
+enum ERoomEffects {
     CURSED
     POISONED
     TRANSISTOR_INSIDE
@@ -110,7 +109,7 @@ enum ERoomState {
 
 interface ITimer {
     + updateTimer()
-    + startTimer(t)
+    + startTimer(float)
     + pauseTimer()
 }
 

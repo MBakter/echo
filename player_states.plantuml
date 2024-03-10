@@ -22,7 +22,7 @@ state UNCONSCIOUS {
     c1 --> UNCONSCIOUS : false
 
    
-    RUNNING --> ALIVE: setState(ALIVE) [timer finished]
-    
-     
+    RUNNING --> ALIVE: setState(ALIVE) [timer finished]    
 }
+
+@enduml
