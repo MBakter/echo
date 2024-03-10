@@ -1,24 +1,33 @@
 @startuml
 title Transistor States
-
     [*] --> Active
 
     state Active {
-        [*] -> UNCOUPLED
-        UNCOUPLED --> COUPLED : couple(t1) / setCouple(t1)
-        UNCOUPLED <-- COUPLED : uncouple(t1) / unsetCouple(t1)
-        UNCOUPLED <-- COUPLED : pickUpTransistor(p)
-        --
-        [*] -> UNACTIVE
-        UNACTIVE --> ACTIVE : activateTransistor(c)[COUPLED]
-        UNACTIVE --> UNACTIVE : activateTransistor(c)[UNCOUPLED]
-        UNACTIVE <- ACTIVE : deactivateTransistor(c)
-        UNACTIVE <- ACTIVE : placeTransistor(p)[pair PLACED] / teleport(c)
-        UNACTIVE <- ACTIVE : uncouple(t1)
-        --
-        [*] -> UNPLACED
-        UNPLACED -> PLACED : placeTransistor(t1)
-        UNPLACED <-- PLACED : pickUpTransistor(t1)
+        
+
+        [*] -> UNPAIRED
+        UNPAIRED --> PAIRED : pairTransistors(t1) / pair = t1
+        UNPAIRED <-- PAIRED : unpairTransistors(t1) / pair = null
+
+        ||
+        [*] -> INACTIVE
+        'INACTIVE --> ACTIVE : activateTransistor(t1)[PAIRED]
+        state actChoise <<choice>>
+        INACTIVE --> actChoise : activateTransistor(t1)
+        ACTIVE <-- actChoise : [pair != null]
+        INACTIVE <-- actChoise : [pair = null]
+
+        'INACTIVE --> INACTIVE : activateTransistor(t1)[UNPAIRED]
+        INACTIVE <-- ACTIVE : unpairTransistors(t1) / pair = null
+        INACTIVE <-- ACTIVE : deactivateTransistor(c)
+        state placeChoise <<choice>>
+        placeChoise <-- ACTIVE : placeTransistor(c)
+        placeChoise --> ACTIVE : [pair room = null] 
+        placeChoise --> INACTIVE : [pair room != null] / teleport(c) 
+        ||
+        [*] -> NOTPLACED
+        NOTPLACED --> PLACED : setRoom(r) / room = r
+        NOTPLACED <-- PLACED : pickUpTransistor(t1) / room = null
     }
 
 

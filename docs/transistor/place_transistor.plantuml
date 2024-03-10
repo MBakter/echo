@@ -1,51 +1,65 @@
 @startuml
-title Student Places Transistor
+title Student Places Transistor (in r2, pair is in r1)
 
 actor Controller as c order 10
 participant "t1 : Transistor" as Transistor order 30
-participant "s : Student" as Student order 20
+participant "s : Student" as Student order 41
 participant "t2 : Transistor" as Transistor2 order 40
-participant "r : Room" as Room order 50
+participant "r1 : Room" as Room order 50
+participant "r2 : Room" as Room2 order 60
 
-c -> Student : placeTransistor(t1)
-activate Student
+c -> Transistor : placeTransistor(s)
+activate Transistor
 
-    group assert
+/'     group assert
         Student -> Student : {t1 in itemList}
-    end
+    end '/
 
-    alt activated and pair is set
-
-        Student -> Transistor : placeTransistor(s)
-        activate Transistor
-            
-
-                Transistor -> Room: addItem(t1)
-
-                    activate Room
-                        ' Room -> Room: Move(s)
-
-                    |||
-                    Transistor <-- Room
-                    deactivate Room
-
+    alt ACTIVE && pair != null
 
             
 
-            Student <-- Transistor
-        deactivate Transistor
+                Transistor -> Transistor2: teleport(s)
+                activate Transistor2
+                    ' Room -> Room: Move(s)
+
+                    Transistor2 -> Student: move(r1)
+                    activate Student
+
+
+                        Student -> Room2: removeStudent(r2)
+                        activate Room2
+                            Student <-- Room2
+                        deactivate Room2
+
+                        Student -> Room: addStudent(r1)
+                        activate Room
+                            Student <-- Room
+                        deactivate Room
+                    
+                        Transistor2 <-- Student
+                    deactivate Student
+                
+                    Transistor <-- Transistor2
+                deactivate Transistor2
+
+                        Transistor -> Transistor: deactivateTransistor(s)
+
     else
 
-        Student -> Room : addItem(t1)
-        activate Room
-            Student <-- Room 
-        deactivate Room
+                    Transistor -> Student: dropItem(t1)
+                    activate Student
+                        |||
+                    
+                        Transistor <-- Student
+                    deactivate Student
+
 
     end
 
 
-    c <-- Student 
-deactivate Student
+    c <-- Transistor 
+deactivate Transistor
 
 
 
