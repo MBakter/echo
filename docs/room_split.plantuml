@@ -1,25 +1,31 @@
-@startuml
+@startuml splitRoom
 title Room Split
 
+
 actor Controller
- 
-    Controller -> Labyrinth  : Split(RoomA) 
-    Labyrinth -> RoomA : getItems() 
-    activate RoomA
-    /' Labyrinth -> RoomA : getNeighbours()  '/
-    
-        /' Labyrinth <-- RoomA  : rooms '/ 
-        Labyrinth <-- RoomA  : items
-    deactivate RoomA    
+participant "r: Room" as RoomA
+participant "new: Room" as NewRoom
 
-        Labyrinth -> NewRoom ** : create
-        Labyrinth -> NewRoom : addNeighbour(RoomA)
-        activate NewRoom
-        Labyrinth -> NewRoom : setItems()
-        Labyrinth -> RoomA : addNeighbour(NewRoom)
 
-    activate RoomA
-        Labyrinth -> RoomA : setItems()
-    deactivate RoomA  
-    /' deactivate RoomA '/
+Controller -> RoomA  : split()
+activate RoomA
+
+alt r.studentList.size() == 0 && r.teacherList.size() == 0 && ERoomState.TRANSISTOR_INSIDE not in r.states
+RoomA -> NewRoom ** : create
+RoomA -> NewRoom : addNeighbour(r)
+activate NewRoom
+RoomA -> RoomA : addNeighbour(new)
+
+RoomA --> Controller : new
+end
+RoomA --> Controller : null
+
+' szomszédok és itemek elfelezése + statek átadása
+' Alice -> Log : Log attack start
+' loop 1000 times
+' Alice -> Bob: DNS Attack
+' end
+' Alice -> Log : Log attack end
+deactivate NewRoom
+deactivate RoomA
 @enduml
