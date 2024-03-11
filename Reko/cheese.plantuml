@@ -11,16 +11,14 @@ C -> s : useItem(c)
 Activate C
 Activate s
 s -> c : usedByStudent(s)
-Activate c
+activate c
 alt isUsed == false
     c -> t : startTimer(time)
     Activate t
-    Activate c 
-    c -> r : addState(POISONED)
-    t --> c : timeUp()
+    c -> r : addEffect(POISONED)
+    t -> c : timerEnd()
     Deactivate t
-    c -> r : removeState(POISONED)
-    Deactivate c
+    c -> r : removeEffect(POISONED)
     Deactivate c
 end
 Deactivate s

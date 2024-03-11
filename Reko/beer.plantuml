@@ -13,15 +13,9 @@ s -> b : usedByStudent(s)
 Activate b
 alt state == INACTIVE
 b -> t : startTimer(time)
-Activate b
 b -> b : setState(RUNNING)
 
-else state == RUNNING
-Activate t
-t --> b : updateTimer()
-b -> b : setState(DISABLED)
-Deactivate b
-Deactivate t
+
 end
 Deactivate b
 Deactivate s

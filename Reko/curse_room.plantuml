@@ -9,7 +9,7 @@ Activate C
 C -> r : addEffect(CURSED)
 C -> t : startTimer(time)
 Activate t
-t --> C : updateTimer()
+t -> C : endTimer()
 Deactivate t
 C -> r : removeEffect(CURSED)
 Deactivate C
