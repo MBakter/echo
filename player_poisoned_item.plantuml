@@ -40,6 +40,12 @@ deactivate b
 
 alt b == true
     s -> s : setState(UNCONSCIOUS)
+    activate s
+    loop every i item in itemList
+        s -> s : removeItem(i)
+        s -> "r:Room" : addItem(i)
+        deactivate s
+    end
     s -> Timer : startTimer(time)
     activate Timer
     Timer -> s : timerEnd()
