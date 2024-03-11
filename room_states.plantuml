@@ -16,12 +16,12 @@ state Room {
     c1 --> POISONED : counter > 0
     --
     state c2 <<choice>>
-    [*] --> NO_TRANSISTOR
-    NO_TRANSISTOR --> TRANSISTOR : addEffect(TRANSISTOR)
-    TRANSISTOR --> TRANSISTOR : addEffect(TRANSISTOR) [counter++]
-    TRANSISTOR --> c2 : removeEffect(TRANSISTOR) [counter--]
-    c2 --> NO_TRANSISTOR : counter == 0
-    c2 --> TRANSISTOR : counter > 0
+    [*] --> NO_TRANSISTOR_INSIDE
+    NO_TRANSISTOR_INSIDE --> TRANSISTOR_INSIDE : addEffect(TRANSISTOR_INSIDE)
+    TRANSISTOR_INSIDE --> TRANSISTOR_INSIDE : addEffect(TRANSISTOR_INSIDE) [counter++]
+    TRANSISTOR_INSIDE --> c2 : removeEffect(TRANSISTOR_INSIDE) [counter--]
+    c2 --> NO_TRANSISTOR_INSIDE : counter == 0
+    c2 --> TRANSISTOR_INSIDE : counter > 0
 }   
 
 
