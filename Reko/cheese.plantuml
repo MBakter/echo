@@ -10,7 +10,7 @@ actor Timer as t
 C -> s : useItem(c)
 Activate C
 Activate s
-s -> c : usedByStudent(s)
+s -> c : useItem(s)
 activate c
 alt isUsed == false
     c -> t : startTimer(time)
