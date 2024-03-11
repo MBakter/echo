@@ -29,6 +29,7 @@ class Room implements IRoomManager {
     + removeTeacher(Teacher): void
     + addNeighbour(Room): void
     + removeNeighbour(Room): void
+    + getNeighbours() : Room[]
     + addItem(IItem): void
     + removeItem(IItem) : void
     + addEffect(ERoomEffects) : void
@@ -121,7 +122,7 @@ class TVSZ implements IItem {
 
 class Transistor implements IItem  {
     + paired : bool
-    + roomOfPair : Room
+    + room : Room
 
     + setRoom(Room): void
     + pair(): void
