@@ -1,0 +1,15 @@
+@startuml sponge_states
+
+[*] --> Sponge
+state Timer
+state Sponge {
+    state entry <<entryPoint>>
+    [*] --> FUNCTIONAL
+    state FUNCTIONAL
+    FUNCTIONAL --> Timer : startTimer(time)
+    state NON_FUNCTIONAL
+    entry --> NON_FUNCTIONAL
+}
+
+Timer --> entry : timerEnd()
+@enduml

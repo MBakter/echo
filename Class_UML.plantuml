@@ -60,14 +60,13 @@ abstract class Player {
     + timer : ITimer
 
     + move(Room): void
-    + TeacherAttacked() : void
     + RoomPoisoned() : void
     + RoomCleanFromPoison() : void
     + getState(): EPlayerState
     + setState(EPlayerState): void
     + addItem(IItem): void
     + removeItem(IItem) : void
-    + pickItem(IItem)
+    + pickUp(IItem)
     + dropItem(IItem)
     + timerEnd()
 }
@@ -78,11 +77,11 @@ Player *-- "1" ITimer
 
 interface IItem {
     + useItem(Player): void
-    + pickUp(Student): void
-    + pickUp(Teacher): void
+    + pickUp(Player): void
+    + dropItem(Player) : void
 
     + TeacherAttacked(Student) : bool
-    + RoomPoisoned(Student) : void
+    + RoomPoisoned(Student) : bool
     + RoomCleanFromPoison(Student) : void
 }
 
@@ -96,6 +95,7 @@ class Student extends Player{
     + move(Room): void
     + getState(): EPlayerState
     + setState(EPlayerState): void
+    + TeacherAttacked() : void
 }
 
 /' interface IItemHolder {
@@ -110,23 +110,28 @@ enum ERoomEffects {
 }
 
 interface ITimer {
-    + startTimer(float)
-    + pauseTimer()
+    + startTimer(float) : void
+    + pauseTimer() : void
 }
 
 class TVSZ implements IItem {
     + hitPoints : int
 
-    + TeacherAttacked(Teacher) : bool
+    + TeacherAttacked(Student) : bool
 }
 
 class Transistor implements IItem  {
-    + paired : bool
+    + active : bool
     + room : Room
+    + pair: Transistor
 
-    + setRoom(Room): void
-    + pair(): void
-    + teleportPlayer(Student): void
+    + activateTransistor() : void
+    + pairTransistor(Transistor t2) : void
+    + unpairTransistor(Transistor t2) : void
+    + dropItem(Player s) : void
+    + pickUp(Player s) : void
+    + setRoom(Room r) : void
+    + unactivateTransistor() : void
 }
 
 enum BeerState {
@@ -139,9 +144,10 @@ class Beer implements IItem {
     + timer : ITimer
     + state : BeerState
     
-    + timerEnd()
+    + timerEnd() : void
     + setState(BeerState): void
-    + TeacherAttacked(Teacher) : bool
+    + TeacherAttacked(Student) : bool
+    + activateBeer() : void
 }
 Beer *-- "1" ITimer
 Beer *-- "1" BeerState
@@ -149,10 +155,11 @@ Beer *-- "1" BeerState
 class Mask implements IItem  {
     + timer : ITimer
     + functional : bool
+    + student : Student
 
-    + timerEnd()
-    + setFunctional(bool) : void
-    + RoomPoisoned(Student) : void
+    + timerEnd() : void
+    + pickUp(Student) : void
+    + RoomPoisoned(Student) : bool
     + RoomClearFromPoison(Student) : void
 
 }
@@ -162,7 +169,7 @@ class Sponge  implements IItem {
     + timer : ITimer
     + functional : bool
 
-    + timerEnd()
+    + timerEnd() : void
 }
 Sponge *-- "1" ITimer
 
@@ -170,11 +177,12 @@ class Cheese  implements IItem {
     + timer : ITimer
     + isUsed : bool
 
-    + timerEnd()
+    + timerEnd() : void
 }
 Cheese *-- "1" ITimer
 
 class Logarlec  implements IItem  {
+    + pickUp(Student) : void
 }
 
 

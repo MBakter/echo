@@ -21,11 +21,9 @@ alt i:Item is TVSZ
     end
 else i:Item is Beer 
     alt inactive
-        i -> Timer : setTimer()
-        activate Timer
-            Timer -> i : endTimer()
+        i -> Timer : startTimer(time)
+
             i -> i : setState(running)
-        deactivate Timer
         i --> s : true
         s --> b : true
     else running

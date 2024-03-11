@@ -22,7 +22,7 @@ alt i:Item is Sponge
 
     i -> Timer : startTimer(time)
     Activate Timer
-    Timer -> i : updateTimer()
+    Timer -> i : endTimer()
     Deactivate Timer
     i -> tl : setState(ALIVE)
     Deactivate i
