@@ -1,0 +1,16 @@
+@startuml template
+title Template 
+
+actor Controller as c
+participant "<object>:<Class>" as a
+participant "<object2>:<Class2>" as b
+
+c -> a : <function>
+Activate a
+a -> b : <function>
+Activate b
+b --> a
+Deactivate b
+Deactivate a
+
+@enduml

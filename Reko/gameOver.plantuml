@@ -1,0 +1,26 @@
+@startuml Students lose game
+title Students lose game
+
+actor Controller as C
+collections "r : Room" as r
+participant "b : playersLeft" as b
+
+C -> b : <<create>>
+Activate C
+Activate b
+C --> b : false
+loop every r:Room in Labyrinth
+alt studentList != empty
+r --> C : true
+C --> b : true
+Deactivate b
+else
+r --> C : false
+end
+end
+alt b == false
+C -> C : endGame(LOSE)
+end
+Deactivate C
+
+@enduml

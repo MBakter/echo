@@ -1,0 +1,22 @@
+@startuml Student picks up Sponge
+title Student picks up Sponge
+
+actor Controller as C order 0
+participant "s : Student" as s order 20
+participant "sp : Sponge" as sp order 10
+actor Timer as t order 1000
+
+C -> sp : pickUp(s)
+Activate sp
+alt isUsed == false
+sp -> t : startTimer(time)
+Activate t
+Activate sp
+t -> sp : endTimer()
+Deactivate sp
+Deactivate t
+end
+Deactivate sp
+
+
+@enduml
