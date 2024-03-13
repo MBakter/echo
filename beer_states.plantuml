@@ -1,0 +1,18 @@
+@startuml beer_states
+
+[*] --> Beer
+state Timer
+state Beer {
+    state entry <<entryPoint>>
+    [*] --> INACTIVE
+    state INACTIVE
+    state RUNNING
+    state DISABLED
+
+    entry --> DISABLED
+    INACTIVE --> RUNNING : useItem()
+    RUNNING --> Timer : startTimer()
+}
+
+Timer --> entry : timerEnd()
+@enduml

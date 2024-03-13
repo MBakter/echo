@@ -1,0 +1,16 @@
+@startuml teacher_poisoned
+
+title Teacher Poisoned
+participant "r:Room" as r
+participant "t:Teacher" as t
+collections "l:itemList" as il
+
+r -> t : RoomPoisoned()
+activate t
+    t -> t : setState(UNCONSCIOUS)
+    loop every i item in itemList
+        t -> r : addItem(i)
+        t -> t: removeItem(i)
+    end
+deactivate t
+@enduml

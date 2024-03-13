@@ -1,0 +1,21 @@
+@startuml player_poisoned
+
+title Player Poisoned
+participant "r:Room" as r
+participant "s:Student" as s
+collections "l:itemList" as il
+participant "i:Item" as i
+
+r -> s : RoomPoisoned()
+activate s
+    s -> il : getSize()
+    il --> s : size
+    alt size > 0
+        loop every i:Item in l:ItemList
+            s -> il : get()
+            il --> s : i
+            s -> i : RoomPoisoned(this)
+        end
+    end
+
+@enduml

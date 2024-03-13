@@ -1,0 +1,28 @@
+@startuml room_states
+
+[*] -> Room
+
+state Room {
+    [*] -->  NO_CURSE
+    NO_CURSE --> CURSE : addEffect(CURSE)
+    CURSE -> NO_CURSE : removeEffect(CURSE)
+    --
+    state c1 <<choice>>
+    [*] --> NOT_POISONED
+    NOT_POISONED --> POISONED : addEffect(POISONED)
+    POISONED --> POISONED : addEffect(POISONED) [counter++]
+    POISONED --> c1 : removeEfect(POISONED) [counter--]
+    c1 --> NOT_POISONED : counter == 0
+    c1 --> POISONED : counter > 0
+    --
+    state c2 <<choice>>
+    [*] --> NO_TRANSISTOR_INSIDE
+    NO_TRANSISTOR_INSIDE --> TRANSISTOR_INSIDE : addEffect(TRANSISTOR_INSIDE)
+    TRANSISTOR_INSIDE --> TRANSISTOR_INSIDE : addEffect(TRANSISTOR_INSIDE) [counter++]
+    TRANSISTOR_INSIDE --> c2 : removeEffect(TRANSISTOR_INSIDE) [counter--]
+    c2 --> NO_TRANSISTOR_INSIDE : counter == 0
+    c2 --> TRANSISTOR_INSIDE : counter > 0
+}   
+
+
+@enduml

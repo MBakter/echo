@@ -1,0 +1,19 @@
+@startuml teacher_states
+
+[*] --> Teacher
+state Teacher {
+
+    state c3 <<choice>>
+    state DEAD 
+    state ALIVE
+state UNCONSCIOUS {
+        [*] -> RUNNING : startTimer(t)
+    }
+    [*] --> ALIVE
+    ALIVE -> c3 : RoomPoisoned()
+    c3 --> ALIVE : false
+    c3 --> UNCONSCIOUS : true
+    RUNNING --> ALIVE: setState(ALIVE) [timer finished]    
+}
+
+@enduml

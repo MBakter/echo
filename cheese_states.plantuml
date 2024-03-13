@@ -1,0 +1,15 @@
+@startuml cheese_states
+
+[*] --> Cheese
+state Timer
+state Cheese {
+    state entry <<entryPoint>>
+    [*] --> NOT_USED
+    state NOT_USED
+    NOT_USED --> Timer : useItem() / startTimer(time)
+    state USED
+    entry --> USED
+}
+
+Timer --> entry : timerEnd()
+@enduml

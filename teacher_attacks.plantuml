@@ -1,0 +1,22 @@
+@startuml teacher_attacks
+
+title Teacher Attacks
+participant "r:Room" as r
+participant "s:Student" as s
+collections "l:itemList" as il
+participant "i:Item" as i
+
+r -> s : TeacherAttacked()
+activate s
+    s -> il : getSize()
+    il --> s : size
+    alt size > 0
+        loop every i:Item in l:ItemList
+            s -> il : get()
+            il --> s : i
+            s -> i : TeacherAttacked(this)
+        end
+    end
+
+@enduml
+
