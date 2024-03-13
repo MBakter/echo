@@ -1,8 +1,8 @@
 name: Generate PlantUML Diagrams
 on:
   push:
-    paths: ["**.plantuml"]
-    branches: [main]
+    # paths: ["**.plantuml"]
+    branches: [main, pumlaction]
   workflow_dispatch:
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
       - name: Generate PlantUML Diagrams
         uses: rotaract/plantuml-action@v1
         with:
-          format: pdf
+          format: png
           pattern: "docs/**.plantuml"
 
       - name: Upload Diagrams
