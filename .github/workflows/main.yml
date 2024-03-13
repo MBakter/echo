@@ -14,11 +14,11 @@ jobs:
       - name: Generate PlantUML Diagrams
         uses: rotaract/plantuml-action@v1
         with:
-          format: png
+          format: svg
           pattern: 'docs/**.plantuml'
 
       - name: Upload Diagrams
         uses: actions/upload-artifact@v4
         with:
           name: diagrams
-          path: 'docs/**/*.png'
+          path: 'docs/**/*.svg'
