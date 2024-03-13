@@ -17,8 +17,8 @@ jobs:
           format: png
           pattern: 'docs/**.plantuml'
 
-      # - name: Upload Diagrams
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: diagrams
-      #     path: 'docs/**.png'
+      - name: Upload Diagrams
+        uses: actions/upload-artifact@v3
+        with:
+          name: diagrams
+          path: 'docs/**.png'
