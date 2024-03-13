@@ -1,0 +1,12 @@
+@startuml
+title Beer States
+state INACTIVE
+state RUNNING
+state DISABLED
+
+        [*] -> INACTIVE
+        INACTIVE --> RUNNING : RoomPoisoned(s) / startTimer(t);
+        RUNNING --> DISABLED : timerIsUp();
+
+
+@enduml
