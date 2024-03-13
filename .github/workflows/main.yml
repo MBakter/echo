@@ -15,10 +15,10 @@ jobs:
         uses: rotaract/plantuml-action@v1
         with:
           format: png
-          pattern: 'docs/**/**.puml'
+          pattern: 'docs/state_chart_diagrams/**.puml'
 
-      - name: Upload Diagrams
-        uses: actions/upload-artifact@v3
-        with:
-          name: diagrams
-          path: 'docs/**.png'
+      # - name: Upload Diagrams
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: diagrams
+      #     path: 'docs/**.png'
