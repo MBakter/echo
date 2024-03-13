@@ -1,18 +1,16 @@
-@startuml
+@startuml dropItem
 title Player drops item
 
 actor Controller as c
+participant "p: Player" as Player
+participant "r: Room" as Room
+participant "i: Item" as Item
 
 
-c -> Player : listItems()
-Activate Player
-c -> Player : removeItem(i)
-c -> i : <create>
-activate i
-Player -> i: get(i)
-i --> Player : i
+c -> Player : dropItem(i)
+activate Player
+Player -> Item : dropItem(p)
+Item -> Player : removeItem(i)
 Player -> Room : addItem(i)
-activate Room
-Player -> Player : remove(i)
 
 @enduml

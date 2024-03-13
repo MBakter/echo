@@ -1,20 +1,17 @@
-@startuml
+@startuml pickupItem
 title Player picks up item
 
 actor Controller as c
-collections Item
-
-c -> Room : listItems()
-Room --> c : items
+participant "p: Player" as Player
+participant "i: Item" as Item
+participant "r: Room" as Room
 
 Activate Player
-c -> i : <create>
-activate i
-c -> Player : addItem(i)
-Alt If Inventory not Full
-Player -> Item : AddItem(i)
-Player -> Room : removeItem(i)
+c -> Player : pickUp(i)
+alt p.itemList.size() < p.maxItems
+  Player -> Room : removeItem(i)
+  Player -> Item : pickUp(p)
+  Item -> Player: addItem(i)
 end
-Deactivate Player
-    
+
 @enduml
