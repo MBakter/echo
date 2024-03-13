@@ -1,0 +1,32 @@
+@startuml pick_up_transistor
+title Pick Up Transistor
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 41
+participant "t2 : Transistor" as Transistor2 order 40
+participant "r : Room" as Room order 50
+
+c -> Transistor : pickUpTransistor(s)
+activate Transistor
+
+    Transistor -> Student : pickItem(t1)
+    activate Student
+        Transistor <-- Student
+    deactivate Student
+                Transistor -> Room: removeEffect(TRANSISTOR_INSIDE)
+
+                    activate Room
+                        ' Room -> Room: Move(s)
+
+                    |||
+                    Transistor <-- Room
+                    deactivate Room
+
+    c <-- Transistor
+deactivate Transistor
+
+
+
+
+@enduml

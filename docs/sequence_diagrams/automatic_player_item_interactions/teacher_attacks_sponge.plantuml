@@ -1,0 +1,31 @@
+@startuml teacher_attacks_sponge
+
+title Teacher Attacks: Sponge
+participant "s:Student" as s
+participant "i:Item" as i
+participant "r:Room" as r
+collections "tl : teacherList" as tl
+
+s -> i : TeacherAttacked(this)
+activate i
+activate s
+
+i -> s : getRoom()
+s --> i : r
+alt i:Item is Sponge
+    i -> r : getTeachers()
+    activate r
+    r --> i : tl
+    deactivate r
+    loop every t:Teacher in teacherList
+    i -> tl : setState(UNCONSCIOUS)
+
+    i -> Timer : startTimer(time)
+    Activate Timer
+    Timer -> i : endTimer()
+    Deactivate Timer
+    i -> tl : setState(ALIVE)
+    Deactivate i
+end
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml student_picks_up_logarlec
+title Student picks up Logarlec, game over
+
+actor Controller as C
+participant "l : Logarlec" as l
+participant "s : Student" as s
+
+C -> l : pickUp(s)
+Activate C
+Activate l
+l -> C : endGame(VICTORY)
+Deactivate l
+Deactivate C
+
+@enduml
