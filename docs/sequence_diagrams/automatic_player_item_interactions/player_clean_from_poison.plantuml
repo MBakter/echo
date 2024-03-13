@@ -1,0 +1,26 @@
+@startuml player_clean_from_poison
+
+title Player Clean From Poison
+participant "r:Room" as r
+participant "s:Student" as s
+collections "l:itemList" as il
+participant "i:Item" as i
+
+r -> s : RoomCleanFromPoison()
+activate s
+    s -> il : getSize()
+    il --> s : size
+    alt size > 0
+        loop every i:Item in l:ItemList
+            s -> il : get()
+            il --> s : i
+            s -> i : RoomCleanFromPoison(this)
+            activate i
+            alt i is Mask
+                i -> Timer : pauseTimer()
+
+            end
+        end
+    end
+
+@enduml

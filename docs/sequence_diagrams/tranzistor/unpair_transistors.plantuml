@@ -1,0 +1,34 @@
+@startuml unpair_transistors
+title Unpair Transistors
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 20
+participant "t2 : Transistor" as Transistor2 order 40
+participant "r1 : Room" as Room order 50
+participant "r2 : Room" as Room2 order 60
+
+c -> Transistor : unpairTransistor(t2)
+activate Transistor
+
+
+    opt t1.room = t2
+
+
+
+        Transistor -> Transistor2: unsetPair(t1)
+
+            activate Transistor2
+
+
+    Transistor <-- Transistor2
+    deactivate Transistor2
+    end
+
+    c <-- Transistor
+deactivate Transistor
+
+
+
+
+@enduml

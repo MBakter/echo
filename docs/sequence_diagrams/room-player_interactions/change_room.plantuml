@@ -1,0 +1,27 @@
+@startuml changeRoom
+
+title Change Room
+actor Controller
+participant "p:Player" as Player
+participant "r:Room" as r
+
+    Controller -> Player : move(r:Room)
+    activate Player
+
+    alt Player is Teacher
+    Player -> r : addTeacher(this)
+    else Player is Student
+    Player -> r : addStudent(this)
+    end
+
+    activate r
+    alt teacherList.size + studentList.size < maxPlayer && NO_CURSE
+        r --> Player : true
+        Player -> Player : setRoom(r)
+    else
+        r --> Player : false
+    end
+    deactivate r
+deactivate Player
+
+@enduml

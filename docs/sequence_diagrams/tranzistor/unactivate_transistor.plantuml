@@ -1,0 +1,19 @@
+@startuml unactivate_transistor
+title Unactivate Transistor
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 20
+
+c -> Transistor : unactivateTransistor()
+activate Transistor
+
+    Transistor -> Transistor : active = false;
+
+    c <-- Transistor
+deactivate Transistor
+
+
+
+
+@enduml

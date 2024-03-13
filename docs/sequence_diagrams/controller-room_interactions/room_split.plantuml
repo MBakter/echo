@@ -1,0 +1,31 @@
+@startuml room_split
+title Room Split
+
+
+actor Controller
+participant "r: Room" as RoomA
+participant "new: Room" as NewRoom
+
+
+Controller -> RoomA  : split()
+activate RoomA
+
+alt r.studentList.size() == 0 && r.teacherList.size() == 0 && ERoomState.TRANSISTOR_INSIDE not in r.states
+RoomA -> NewRoom ** : create
+RoomA -> NewRoom : addNeighbour(r)
+activate NewRoom
+RoomA -> RoomA : addNeighbour(new)
+
+RoomA --> Controller : new
+end
+RoomA --> Controller : null
+
+' szomszédok és itemek elfelezése + statek átadása
+' Alice -> Log : Log attack start
+' loop 1000 times
+' Alice -> Bob: DNS Attack
+' end
+' Alice -> Log : Log attack end
+deactivate NewRoom
+deactivate RoomA
+@enduml

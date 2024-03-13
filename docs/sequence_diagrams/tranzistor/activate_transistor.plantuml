@@ -1,0 +1,23 @@
+@startuml activate_transistor
+title Activate Transistor
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 20
+participant "t2 : Transistor" as Transistor2 order 40
+participant "r : Room" as Room order 50
+
+c -> Transistor : activateTransistor()
+activate Transistor
+
+opt pair != null
+    Transistor -> Transistor : active = ture;
+end
+
+    c <-- Transistor
+deactivate Transistor
+
+
+
+
+@enduml

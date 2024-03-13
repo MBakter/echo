@@ -1,8 +1,0 @@
-@startuml
-title TVSZ States
-
-        [*] -> PROTECTIVE :/ hitPoints = 3
-                PROTECTIVE --> PROTECTIVE : TeacherAttacked(Teacher) / hitPoints - 1
-        PROTECTIVE --> DISABLED : [hitPoints = 0]
-
-@enduml

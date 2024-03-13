@@ -1,7 +1,0 @@
-@startuml tvsz_states
-
-[*] --> TVSZ
-state TVSZ {
-    [*] -> canSave 
-    canSave -> canSave 
-}
