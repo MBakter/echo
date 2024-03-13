@@ -17,6 +17,12 @@ jobs:
           format: svg
           pattern: 'docs/**.plantuml'
 
+      - name: Generate PlantUML Diagrams
+        uses: rotaract/plantuml-action@v1
+        with:
+          format: svg
+          pattern: 'docs/**.puml'
+
       - name: Upload Diagrams
         uses: actions/upload-artifact@v4
         with:
