@@ -1,8 +1,9 @@
 name: Generate PlantUML Diagrams
 on:
   push:
-    # paths: ["**.plantuml"]
-    branches: [main, pumlaction]
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
