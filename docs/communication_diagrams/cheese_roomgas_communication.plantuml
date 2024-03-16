@@ -1,0 +1,18 @@
+@startuml cd
+
+title  Set Room Gased
+
+skinparam linestyle ortho
+rectangle "r:Room" as r
+rectangle "c:Controller" as c
+rectangle "che:Cheese" as che
+rectangle "s:Student" as s
+
+c --> che: 1. <<create>>
+c --> r: 3. <<create>>
+c -> s: 2. <<create>>\n4. addItem(che)\n5. setRoom(r)\n6. useItem(c)
+s --> che: 6.1. useItem(s);
+che --> c: 6.1.1. setTimer(t, timerEnd());
+che --> r: 6.1.2. addEffect(POISON);
+
+@enduml

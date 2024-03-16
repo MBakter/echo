@@ -1,0 +1,14 @@
+@startuml cd
+
+title  Use Beer
+
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "b:Beer" as b
+rectangle "s:Student" as s
+
+c --> b: 1. <<create>>
+c -> s: 2. <<create>> 3. addItem(b) \n4. useItem(b)
+
+
+@enduml

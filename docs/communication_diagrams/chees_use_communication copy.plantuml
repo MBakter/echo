@@ -1,0 +1,14 @@
+@startuml cd
+
+title  Use Cheese
+
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "che:Cheese" as che
+rectangle "s:Student" as s
+
+c --> che: 1. <<create>>
+c -> s: 2. <<create>>\n3. addItem(che)\n4. useItem(c)
+
+
+@enduml

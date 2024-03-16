@@ -1,0 +1,30 @@
+@startuml ser
+title  Teleport Student
+
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r1:Room" as r1
+rectangle "r2:Room" as r2
+rectangle "s:Student" as s
+
+rectangle "t1:Transistor" as t1
+rectangle "t2:Transistor" as t2
+rectangle "t3:Transistor" as t3
+c --> s: 1. <<create>> \n 7. setRoom(r1) \n 8. addItem(t1) \n 9. addItem(t2) \n 13.dropItem(t1)\n
+s --> t2: 13.1. dropItem(s)
+t2 --> s: 13.1.1. removeItem(t2)
+t2 --> r1: 13.1.2. addItem(t2)
+t2 --> t2: 13.1.3. teleport(s)
+c --> r1: 2. <<create>> \n 6. AddStudent(s)  
+c --> r2: 3. <<create>>
+c --> t1: 5. <<create>>\n11. pairTransistors(t2)\n12. activateTransistors()
+c --> t2: 4. <<create>> \n 10. setRoom(r2)
+
+
+
+
+t1 --> t2: 12.1 setPair(t1)
+
+
+
+@enduml
