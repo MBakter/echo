@@ -1,0 +1,15 @@
+@startuml teacher_room_poison_removed
+title Teacher's room is no longer poisoned
+
+actor Controller as c
+participant "r : Room" as r
+collections "r.teacherList" as t
+
+c -> r : removeEffect(POISONED)
+Activate c
+Activate r
+loop every t:Teacher in teacherList
+r -> t : roomCleanFromPoison()
+end
+
+@enduml
