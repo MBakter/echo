@@ -6,7 +6,7 @@ rectangle "rCursed:Room" as r1
 rectangle "r:Room" as r2
 rectangle "t:Teacher" as s
 c --> s: 1. <<create>>\n\n2. setState(ALIVE)\n\n4.move(rCursed)
-c -> r1: 3. <<create>>\t5. addEffect(CURSED)
-c -> r2: 6. <<create>>
-
+c -> r1: 3. <<create>>\n\n6. addEffect(CURSED)
+c -> r2: 7. <<create>>
+s->r1: 5. addTeacher(t)
 @enduml

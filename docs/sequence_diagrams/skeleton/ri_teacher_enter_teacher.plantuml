@@ -1,0 +1,21 @@
+@startuml teacher_enter_teacher
+title Teacher enters room with other teacher(s)
+
+actor Controller as c
+participant "t : Teacher" as s
+participant "r : Room" as r
+
+
+c -> s : move(r)
+Activate c
+Activate s
+s -> r : addStudent(s)
+
+
+Activate r
+r --> s : true
+Deactivate r
+Deactivate s
+Deactivate c
+
+@enduml
