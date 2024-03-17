@@ -1,1 +1,12 @@
-TODO
+@startuml student_enter_student
+title Student enters room with other student(s)
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "s1:Student1" as s1
+rectangle "s2:Student2" as s2
+c --> s1: 1. <<create>>\n\n2. setState(ALIVE)\n\n6. move(r)
+c --> s2: 3. <<create>>\n\n4. setState(ALIVE)
+c --> r: 5. <<create>>
+s1 -> r: 7. addStudent(s1)
+@enduml
