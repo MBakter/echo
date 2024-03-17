@@ -54,7 +54,7 @@ enum EPlayerState {
 }
 
 /' Removed implementing IItemHolder '/
-abstract class Player {
+abstract class Player implements ITimer{
     + room: Room
     + itemList : Item[]
     + state : EPlayerState
@@ -74,7 +74,6 @@ abstract class Player {
 
 Player "0" o-- "1" EPlayerState
 Player "1" *-- "0..*" IItem: + itemList
-Player *-- "1" ITimer
 
 interface IItem {
     + useItem(Player): void
@@ -113,8 +112,7 @@ enum ERoomEffects {
 }
 
 interface ITimer {
-    + startTimer(float) : void
-    + pauseTimer() : void
+    + timerEnd() : void
 }
 
 class TVSZ implements IItem {
@@ -143,8 +141,8 @@ enum BeerState {
     DISABLED
 }
 
-class Beer implements IItem {
-    + timer : ITimer
+class Beer implements IItem, ITimer {
+    + timer : Timer
     + state : BeerState
     
     + timerEnd() : void
@@ -152,11 +150,10 @@ class Beer implements IItem {
     + TeacherAttacked(Student) : bool
     /'+ activateBeer() : void '/
 }
-Beer *-- "1" ITimer
 Beer *-- "1" BeerState
 
-class Mask implements IItem  {
-    + timer : ITimer
+class Mask implements IItem, ITimer  {
+    + timer : Timer
     + functional : bool
     + student : Student
 
@@ -166,29 +163,31 @@ class Mask implements IItem  {
     + RoomClearFromPoison(Student) : void
 
 }
-Mask *-- "1" ITimer
 
-class Sponge  implements IItem {
-    + timer : ITimer
+class Sponge  implements IItem, ITimer {
+    + timer : Timer
     + functional : bool
 
     + timerEnd() : void
     + TeacherAttackable(Student) : void
 }
-Sponge *-- "1" ITimer
 
-class Cheese  implements IItem {
-    + timer : ITimer
+class Cheese  implements IItem, ITimer {
+    + timer : Timer
     + isUsed : bool
 
     + timerEnd() : void
 }
-Cheese *-- "1" ITimer
 
 class Logarlec  implements IItem  {
     + pickUp(Student) : void
 }
 
+class Timer {
+    pauseTimer(IItem) : void
+    startTimer(IItem, float) : void
+}
+Timer "1"*--> "1" ITimer
 
 
 @enduml

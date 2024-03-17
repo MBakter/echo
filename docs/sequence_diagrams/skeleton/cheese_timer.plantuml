@@ -2,10 +2,11 @@
 
 title Cheese timer
 participant "Controller" as c
+participant "r:Room" as r
 participant "s:Student" as s
 participant "ch:Cheese" as ch
 participant "Timer"
-participant "r:Room" as r
+
 
 c -> s : useItem(ch)
 activate s
@@ -14,10 +15,12 @@ activate ch
 ch -> s : getRoom()
 s --> ch : r
 ch -> Timer : startTimer()
+activate Timer
 ch -> r : addEffect(POISONOUS)
 activate r
 r -> s : RoomPoisoned()
 Timer -> ch : timerEnd()
+deactivate Timer
 ch -> r : removeEffect(POISONOUS)
 r -> s : RoomCleanFromPoison()
 deactivate r
