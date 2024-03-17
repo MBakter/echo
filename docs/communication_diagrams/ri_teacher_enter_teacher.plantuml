@@ -1,5 +1,5 @@
 @startuml teacher_enter_teacher
-title Student enters room with teacher(s)
+title Teacher enters room with teacher(s)
 skinparam linestyle ortho
 rectangle "c:Controller" as c
 rectangle "r:Room" as r
