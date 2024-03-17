@@ -1,0 +1,17 @@
+@startuml student_room_poisoned
+title Student's room is poisoned
+
+actor Controller as c
+participant "r : Room" as r
+collections "r.studentList" as s
+
+c -> r : addEffect(POISONED)
+Activate r
+loop every s:Student in studentList
+r -> s : roomPoisoned()
+Activate s
+Deactivate s
+end
+Deactivate r
+
+@enduml
