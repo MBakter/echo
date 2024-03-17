@@ -1,4 +1,4 @@
-@startuml student_leave_curse
+@startuml teacher_leave_curse
 title Teacher tries to leave cursed room
 skinparam linestyle ortho
 rectangle "c:Controller" as c

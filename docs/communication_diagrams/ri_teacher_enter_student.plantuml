@@ -1,4 +1,4 @@
-@startuml student_enter_curse
+@startuml teacher_enter_student
 title Teacher enters room with student(s)
 skinparam linestyle ortho
 rectangle "c:Controller" as c

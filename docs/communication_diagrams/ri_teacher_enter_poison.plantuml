@@ -1,4 +1,4 @@
-@startuml student_enter_poison
+@startuml teacher_enter_poison
 title Teacher enters poisoned room
 skinparam linestyle ortho
 rectangle "c:Controller" as c
