@@ -1,0 +1,21 @@
+@startuml teacher_enter_student
+title Teacher enters room with student(s)
+
+actor Controller as c order 0
+collections "r.studentList" as s order 9
+participant "r : Room" as r order 5
+participant "t : Teacher" as t order 1
+
+c -> t : move(r)
+Activate c
+Activate t
+t -> r : addTeacher(t)
+Activate r
+r --> t : true
+Deactivate t
+Deactivate c
+loop every s:Student in studentList
+r -> s : teacherAttacked()
+Deactivate r
+end
+@enduml

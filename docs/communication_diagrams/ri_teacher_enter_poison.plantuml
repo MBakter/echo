@@ -1,0 +1,9 @@
+@startuml student_enter_poison
+title Teacher enters poisoned room
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "t:Teacher" as s
+c --> s: 1. <<create>>\n\n3. setState(ALIVE)
+c -> r: 2. <<create>>\t4. addEffect(POISONED)
+@enduml

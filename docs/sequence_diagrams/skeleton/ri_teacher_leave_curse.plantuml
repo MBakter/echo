@@ -1,0 +1,21 @@
+@startuml teacher_leave_curse
+title Teacher tries to leave cursed room
+
+actor Controller as c
+participant "t : Teacher" as s
+participant "rCursed : Room" as r1
+participant "r : Room" as r2
+
+c -> s : move(r2)
+Activate c
+Activate s
+s -> r2 : addTeacher(t)
+
+
+Activate r2
+r2 --> s : false
+Deactivate r2
+Deactivate s
+Deactivate c
+
+@enduml
