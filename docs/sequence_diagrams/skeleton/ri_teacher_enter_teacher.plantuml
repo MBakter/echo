@@ -9,7 +9,7 @@ participant "r : Room" as r
 c -> s : move(r)
 Activate c
 Activate s
-s -> r : addStudent(s)
+s -> r : addTeacher(t)
 
 
 Activate r
