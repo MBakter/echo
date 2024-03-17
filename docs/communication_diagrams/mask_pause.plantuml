@@ -1,0 +1,13 @@
+@startuml ser
+title Mask pause
+rectangle "c:Controller" as c
+rectangle "m:Mask" as m
+rectangle "s:Student" as s
+rectangle "r:Room" as r
+
+c --> s: 1. <<create>> \n 5. addItem(sp)  \n 7. setRoom(r)
+c --> m: 2. <<create>> 
+c --> r: 3. <<create>> \n 6.addStudent(s) \n 8. addEffect(POISONOUS)
+r -> s: 9. RoomPoisoned()
+s -> m: 10. RoomPoisoned(s)
+m -> m : 11. startTimer()

@@ -1,0 +1,27 @@
+@startuml hms
+
+title Mask Pause
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "m:Mask" as m
+participant "Timer"
+
+c -> r : removeEffect(POISONOUS)
+activate r
+r -> s : RoomCleanFromPoison()
+activate s
+s -> m : RoomCleanFromPoison(s)
+activate m
+m -> Timer : pauseTimer()
+activate Timer
+Timer --> m
+deactivate Timer
+m --> s
+deactivate m
+s --> r
+deactivate s
+r --> c
+deactivate r
+
+@enduml

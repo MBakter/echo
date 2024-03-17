@@ -6,7 +6,7 @@ rectangle "s:Student" as s
 rectangle "r:Room" as r
 
 c --> r : 3. <<create>> \n
-c --> s: 1. <<create>> \n 4. addItem(m)
+c --> s: 1. <<create>> \n 4. addItem(m) \n 7. setRoom(r)
 c --> m : 2. <<create>> \n 5. setStudent(s) \n 6. setFunctional()
 
 

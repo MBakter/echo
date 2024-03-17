@@ -7,9 +7,9 @@ rectangle "r:Room" as r
 rectangle "t:Teacher" as t
 
 
-c --> s: 1. <<create>> \n 5. addItem(sp) 
+c --> s: 1. <<create>> \n 5. addItem(sp) \n 7. setRoom(r)
 c --> sp: 2. <<create>> 
 c --> r: 3. <<create>> \n 6.addStudent(s)
-c --> t: 4. <<create>> \n 7. setRoom(r)
+c --> t: 4. <<create>> \n 8. setRoom(r)
 
 @enduml

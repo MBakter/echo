@@ -6,9 +6,12 @@ rectangle "s:Student" as s
 rectangle "r:Room" as r
 rectangle "t:Teacher" as t
 
-c --> s: 1. <<create>> \n 5. addItem(sp)
-c --> t: 2. <<create>> \n 7. setRoom(r)
+c --> s: 1. <<create>> \n 5. pickUp(sp) \n 9. setRoom(r)
+s -> sp : 6. pickUp(s)
+sp -> s : 8. addItem(sp)
+sp -> sp : 7. startTimer()
+c --> t: 2. <<create>> \n 10. setRoom(r)
 c --> r: 3. <<create>> \n 
-c --> sp : 4. <<create>> \n 6. startTimer()
+c --> sp : 4. <<create>>
 
 @enduml

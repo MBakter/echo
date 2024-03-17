@@ -6,9 +6,9 @@ rectangle "b:Beer" as b
 rectangle "t:Teacher" as t
 rectangle "s:Student" as s
 
-c --> s: 1. <<create>> \n 5. addItem(b) 
+c --> s: 1. <<create>> \n 5. addItem(b) \n 7. setRoom(r)
 c --> b: 2. <<create>> 
 c --> r: 3. <<create>> \n 6. addStudent(s)
-c --> t: 4. <<create>> \n 7. setRoom(r)
+c --> t: 4. <<create>> \n 8. setRoom(r)
 
 @enduml
