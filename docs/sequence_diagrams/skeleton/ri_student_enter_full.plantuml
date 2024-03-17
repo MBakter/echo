@@ -1,0 +1,21 @@
+@startuml student_enter_full
+title Student tries to enter full room
+
+actor Controller as c
+participant "s : Student" as s
+participant "r : Room" as r
+
+
+c -> s : move(r)
+Activate c
+Activate s
+s -> r : addStudent(s)
+
+
+Activate r
+r --> s : false
+Deactivate r
+Deactivate s
+Deactivate c
+
+@enduml

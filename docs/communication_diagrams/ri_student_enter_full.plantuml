@@ -1,1 +1,18 @@
-TODO
+@startuml student_enter_full
+title Student tries to enter full room
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "s:Student" as s
+rectangle "s1:Student" as s1
+rectangle "s2:Student" as s2
+rectangle "s3:Student" as s3
+c --> s: 1. <<create>>\n\n2. setState(ALIVE)\n\n3. move(r)
+c --> s1: 3. <<create>>\n\n4. setState(ALIVE)\n\n5. move(r)
+c --> s2: 6. <<create>>\n\n7. setState(ALIVE)\n\n8. move(r)
+c --> s3: 9. <<create>>\n\n10. setState(ALIVE)
+c -> r: 1. <<create>>\t
+note right of r{
+    maxPlayer = 3
+}
+@enduml

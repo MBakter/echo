@@ -1,0 +1,9 @@
+@startuml student_enter_empty
+title Student enters empty room
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "s:Student" as s
+c --> s: 1. <<create>>\n\n3. setState(ALIVE)
+c -> r: 2. <<create>>\t
+@enduml
