@@ -1,0 +1,14 @@
+@startuml ser
+title Student saved by TVSZ
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "tvsz:TVSZ" as tv
+rectangle "t:Teacher" as t
+rectangle "s:Student" as s
+
+c --> s: 1. <<create>> \n 5. addItem(tvsz)
+c --> r : 3. <<create>> \n 6. addStudent(s)
+c --> tv : 2. <<create>> 
+c --> t : 4. <<create>> \n 7. setRoom(r)
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml ser
+title Student saved by Sponge
+rectangle "c:Controller" as c
+rectangle "sp:Sponge" as sp
+rectangle "s:Student" as s
+rectangle "r:Room" as r
+rectangle "t:Teacher" as t
+
+c --> s: 1. <<create>> \n 5. addItem(sp)
+c --> t: 2. <<create>> \n 7. setRoom(r)
+c --> r: 3. <<create>> \n 
+c --> sp : 4. <<create>> \n 6. startTimer()
+
+@enduml

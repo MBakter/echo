@@ -1,0 +1,13 @@
+@startuml ser
+title Teacher saved by Mask
+rectangle "c:Controller" as c
+rectangle "m:Mask" as m
+rectangle "t:Teacher" as t
+rectangle "r:Room" as r
+
+c --> r : 3. <<create>> \n
+c --> t: 1. <<create>> \n 4. addItem(m)
+c --> m : 2. <<create>> \n 5. setStudent(t) \n 6. setFunctional()
+
+
+@enduml

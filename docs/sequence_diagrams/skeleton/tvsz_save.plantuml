@@ -1,0 +1,19 @@
+@startuml hms
+
+title Student saved by TVSZ
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "tvsz:TVSZ" as t
+participant "t:Teacher"
+
+c -> r : addTeacher(t)
+activate r
+r -> s : TeacherAttacked()
+activate s
+s -> t : TeacherAttacked(s)
+activate t
+t --> s : true
+deactivate t
+
+deactivate s

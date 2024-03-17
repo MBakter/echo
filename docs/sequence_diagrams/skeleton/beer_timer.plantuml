@@ -1,0 +1,41 @@
+@startuml hms
+
+title Beer timer
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "b:Beer" as b
+participant "Timer"
+participant "t:Teacher"
+
+c -> s : useItem(b)
+activate s
+s -> b : useItem(s)
+activate b
+b -> Timer : startTimer()
+activate Timer
+b -> b : setState(RUNNING)
+b --> s
+deactivate s
+Timer -> b : timerEnd()
+deactivate Timer
+b -> b : setState(INACTIVE)
+deactivate b
+note right
+A kontroller várakozik annyi ideig 
+amennyi a timer futási ideje, majd
+utána küldi a TeacherAttacked()
+értesítést
+end note
+c -> r : addTeacher(t)
+activate r
+r -> s : TeacherAttacked()
+activate s
+s -> b : TeacherAttacked(s)
+activate b
+b --> s : false
+deactivate b
+
+deactivate s
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml hms
+
+title Sponge timer
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "sp:Sponge" as sp
+participant "Timer"
+participant "t:Teacher"
+
+c -> s : pickUp(sp)
+activate s
+s -> sp : pickUp(s)
+activate sp
+sp -> Timer : startTimer()
+activate Timer
+sp --> s
+deactivate s
+Timer -> sp : timerEnd()
+deactivate Timer
+sp --> sp : functional = false
+deactivate sp
+note right
+A kontroller várakozik annyi ideig 
+amennyi a timer futási ideje, majd
+utána küldi a TeacherAttacked()
+értesítést
+end note
+c -> r : addTeacher(t)
+r -> s : TeacherAttackable()
+activate s
+s -> sp : TeacherAttackable(s)
+activate sp
+sp --> s : false
+deactivate sp
+s -> s : setState(DEAD)
+deactivate s
+
+@enduml

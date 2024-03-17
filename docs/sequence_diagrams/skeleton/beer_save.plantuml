@@ -1,0 +1,28 @@
+@startuml hms
+
+title Student saved by Beer
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "b:Beer" as b
+
+c -> s : useItem(b)
+s -> b : useItem(s)
+activate b
+b -> Timer : startTimer()
+b -> b : setState(RUNNING)
+b --> s
+deactivate b
+s --> c
+c -> r : addTeacher(t)
+activate r
+r -> s : TeacherAttacked()
+activate s
+s -> b : TeacherAttacked(s)
+activate b
+b --> s : true
+deactivate b
+
+deactivate s
+
+@enduml

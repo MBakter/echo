@@ -1,0 +1,26 @@
+@startuml hms
+
+title Cheese timer
+participant "Controller" as c
+participant "s:Student" as s
+participant "ch:Cheese" as ch
+participant "Timer"
+participant "r:Room" as r
+
+c -> s : useItem(ch)
+activate s
+s -> ch : useItem(s)
+activate ch
+ch -> s : getRoom()
+s --> ch : r
+ch -> Timer : startTimer()
+ch -> r : addEffect(POISONOUS)
+activate r
+r -> s : RoomPoisoned()
+Timer -> ch : timerEnd()
+ch -> r : removeEffect(POISONOUS)
+r -> s : RoomCleanFromPoison()
+deactivate r
+deactivate s
+
+@enduml

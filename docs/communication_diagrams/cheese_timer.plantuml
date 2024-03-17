@@ -1,0 +1,12 @@
+@startuml ser
+title Cheese timer
+rectangle "c:Controller" as c
+rectangle "c:Cheese" as ch
+rectangle "s:Student" as s
+rectangle "r:Room" as r
+
+c --> s: 1. <<create>> \n 5. addItem(ch)
+c --> ch: 2. <<create>> \n 6. startTimer()
+c --> r: 3. <<create>> \n 4.addStudent(s)
+
+@enduml

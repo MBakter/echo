@@ -1,0 +1,27 @@
+@startuml hms
+
+title Student saved by Sponge
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "sp:Sponge" as sp
+participant "t:Teacher" as t
+
+
+c -> r : addTeacher(t)
+r -> s : TeacherAttackable()
+activate s
+s -> sp : TeacherAttackable(s)
+activate sp
+sp -> r : getTeachers()
+activate r
+r --> sp : teacherList
+deactivate r
+loop all t Teacher in teachersList
+sp -> t : setState(UNCONSCIOUS)
+end
+sp --> s : true
+deactivate sp
+deactivate s
+
+@enduml

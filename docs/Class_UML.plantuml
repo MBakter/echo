@@ -27,6 +27,7 @@ class Room implements IRoomManager {
     + removeStudent(Student): void
     + addTeacher(Teacher): bool
     + removeTeacher(Teacher): void
+    + getTeachers() : Teacher[]
     + addNeighbour(Room): void
     + removeNeighbour(Room): void
     + getNeighbours() : Room[]
@@ -83,6 +84,7 @@ interface IItem {
     + TeacherAttacked(Student) : bool
     + RoomPoisoned(Student) : bool
     + RoomCleanFromPoison(Student) : void
+    + TeacherAttackable(Student) : void
 }
 
 class Teacher extends Player{
@@ -96,6 +98,7 @@ class Student extends Player{
     + getState(): EPlayerState
     + setState(EPlayerState): void
     + TeacherAttacked() : void
+    + TeacherAttackable() : void
 }
 
 /' interface IItemHolder {
@@ -147,7 +150,7 @@ class Beer implements IItem {
     + timerEnd() : void
     + setState(BeerState): void
     + TeacherAttacked(Student) : bool
-    + activateBeer() : void
+    /'+ activateBeer() : void '/
 }
 Beer *-- "1" ITimer
 Beer *-- "1" BeerState
@@ -170,6 +173,7 @@ class Sponge  implements IItem {
     + functional : bool
 
     + timerEnd() : void
+    + TeacherAttackable(Student) : void
 }
 Sponge *-- "1" ITimer
 

@@ -1,0 +1,19 @@
+@startuml hms
+
+title Student saved by Mask
+participant "Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "m:Mask" as m
+
+c -> r : addEffect(POISONOUS)
+r -> s : RoomPoisoned()
+activate s
+s -> m : RoomPoisoned(s)
+activate m
+
+m --> s : true
+deactivate m
+deactivate s
+
+@enduml
