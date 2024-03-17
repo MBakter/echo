@@ -1,5 +1,5 @@
 @startuml ser
-title  Pair Two Transistors
+title  Pick Up and Pair Two Transistors
 
 skinparam linestyle ortho
 rectangle "c:Controller" as c
@@ -8,21 +8,21 @@ rectangle "s:Student" as s
 
 rectangle "t1:Transistor" as t1
 rectangle "t2:Transistor" as t2
-c -> s: 1. <<create>> \n 6. setRoom(r) \n 9. pickUp(t1)  \n 10. pickUp(t2) 
+c --> s: 1. <<create>> \n 6. setRoom(r) \n 9. pickUp(t1)  \n 10. pickUp(t2) 
 c -> r: 2. <<create>> \n 5. AddStudent(s)  
-c --> t1: 3. <<create>> \n 7. placeItem(r)  \n 11. pairTransistors(t2)
-c -> t2: 4. <<create>> \n 8. placeItem(r)
+c --> t1: 3. <<create>> \n 7. setRoom(r)  \n 11. pairTransistors(t2)
+c --> t2: 4. <<create>> \n 8. setRoom(r)
 
-s -> t1: 9.1. pickUp(s)
-s -> t2: 10.1. pickUp(s)
+' s -> t1: 9.1. pickUp(s)
+' s -> t2: 10.1. pickUp(s)
 
-t2 -> s: 10.1.1. addItem(t2)
-t2 -> r: 10.1.2. removeEffect(TRANSINSIDE)
+' t2 -> s: 10.1.1. addItem(t2)
+' t2 -> r: 10.1.2. removeEffect(TRANSINSIDE)
 
-t1 -> s: 9.1.2. addItem(t1)
-t1 -> r: 9.1.1. removeEffect(TRANSINSIDE)
+' t1 -> s: 9.1.2. addItem(t1)
+' t1 -> r: 9.1.1. removeEffect(TRANSINSIDE)
 
-t1 --> t2: 11.1 setPair(t1)
+' t1 --> t2: 11.1 setPair(t1)
 
 
 

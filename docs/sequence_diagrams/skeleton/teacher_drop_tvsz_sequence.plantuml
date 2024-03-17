@@ -1,0 +1,37 @@
+@startuml player_drops_item
+
+!$targetActor = "t"
+!$targetActorClass = "Teacher"
+!$targetItem = "tvsz"
+!$targetItemClass = "TVSZ"
+title  $targetActorClass Drops $targetItemClass
+
+actor Controller as c 
+participant "$targetActor:$targetActorClass" as s
+participant "r:Room" as r
+
+participant "$targetItem:$targetItemClass" as targetItem
+
+c -> s : dropItem($targetItem)
+activate s
+
+    s -> targetItem : dropItem($targetActor)
+    activate targetItem
+
+        targetItem -> s : removeItem($targetItem)
+        activate s
+            targetItem <-- s 
+        deactivate s
+
+        s <-- targetItem
+    deactivate targetItem
+
+    s -> r : addItem($targetItem)
+    activate r
+        s <-- r 
+    deactivate r
+    
+    c <-- s
+deactivate s
+
+@enduml

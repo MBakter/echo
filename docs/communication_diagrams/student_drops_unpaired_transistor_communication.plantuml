@@ -1,0 +1,25 @@
+@startuml cd
+
+!$targetActor = "s"
+!$targetActorClass = "Student"
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "$targetActor:$targetActorClass" as s
+rectangle "r:Room" as r
+
+!$targetItem = "tr"
+!$targetItem2 = "tr2"
+!$targetItemClass = "Transistor"
+rectangle "$targetItem:$targetItemClass" as targetItem
+rectangle "$targetItem2:$targetItemClass" as targetItem2
+title  $targetActorClass Drops $targetItemClass (active and upactive)
+
+c --> targetItem: 1. <<create>>
+c --> targetItem2: 6. <<create>>\n7. activateTransistor
+
+c -left-> r: 2. <<create>>
+c -right-> s: 3. <<create>> \n4. addItem($targetItem) 5. dropItem($targetItem) \n 8. addItem($targetItem2) 9. dropItem($targetItem)
+
+ 
+
+@enduml

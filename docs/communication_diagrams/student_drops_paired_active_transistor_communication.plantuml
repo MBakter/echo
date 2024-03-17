@@ -1,0 +1,24 @@
+@startuml cd
+
+!$targetActor = "s"
+!$targetActorClass = "Student"
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "$targetActor:$targetActorClass" as s
+rectangle "r:Room" as r
+
+!$targetItem1 = "tr1"
+!$targetItem2 = "tr2"
+!$targetItemClass = "Transistor"
+rectangle "$targetItem1:$targetItemClass" as targetItem1
+rectangle "$targetItem2:$targetItemClass" as targetItem2
+title  $targetActorClass Drops Paired $targetItemClass
+
+c --> targetItem1: 1. <<create>>\n7. setRoom(r)
+c --> targetItem2: 2. <<create>>\n3. pairTransistors($targetItem1)\n7. activateTransistor(r)
+
+c -left-> r: 2. <<create>>
+c -right-> s: 3. <<create>> 4. addItem($targetItem1)\n8. dropItem($targetItem1)
+
+
+@enduml
