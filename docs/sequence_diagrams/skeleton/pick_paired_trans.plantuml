@@ -2,9 +2,9 @@
 title "Student picks paired Transistor"
 
 participant "c:Controller" as c
-participant "r:Room" as r
 participant "s:Student" as s
 participant "t:Transistor" as i
+participant "r:Room" as r
 
 c -> s : pickUp(i)
 activate s
@@ -12,6 +12,10 @@ s -> i : pickUp(s)
 activate s
 activate i
 i -> i : room == null
+i -> r : removeEffect(TRANSISTOR_INSIDE)
+activate r
+r --> i
+deactivate r
 i -> s : addItem(t)
 deactivate s
 deactivate i
