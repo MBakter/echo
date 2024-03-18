@@ -1,0 +1,21 @@
+@startuml room_split
+title Room Split
+
+actor Controller
+participant "r1: Room" as RoomA
+participant "new: Room" as NewRoom
+
+
+Controller -> RoomA  : split()
+activate RoomA
+
+RoomA -> NewRoom ** : create
+RoomA -> NewRoom : addNeighbour(r)
+activate NewRoom
+RoomA -> RoomA : addNeighbour(new)
+
+RoomA --> Controller : new
+
+deactivate NewRoom
+deactivate RoomA
+@enduml

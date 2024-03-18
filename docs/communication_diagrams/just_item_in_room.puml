@@ -1,0 +1,22 @@
+@startuml just_item_in_room
+
+title Just item in room
+rectangle "c:Controller" as c
+rectangle "l:Logarlec" as l
+rectangle "m:Mask"as m
+rectangle "b:Beer" as b
+rectangle "r2:Room" as r2
+rectangle "r1:Room" as r1
+
+c-d->r1: 1. <<create>>\n 6. addItem(l)\n 7. addItem(m)\n 9. addNeighbour(r2)
+c-d->r2: 2. <<create>>\n 8. addItem(b)
+c->l: 3. <<create>>
+c->m: 4. <<create>>
+c->b: 5. <<create>>
+r1-d-r2
+r1-d-l
+r1-d-m
+r2-b
+
+
+@enduml

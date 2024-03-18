@@ -1,0 +1,14 @@
+@startuml activated_transistor_in_room
+
+title Activated Transistor in room
+rectangle "c:Controller" as c
+rectangle "r1:Room" as r1
+rectangle "r2:Room" as r2
+rectangle "t:Transistor" as t
+
+c->r1: 1. <<create>>
+c->r2: 2. <<create>>
+c-d->t: 3. <<create>>\n4. setRoom(r1)
+t->r1: 4.1. addEffect(TRANZISTOR_INSIDE)
+
+@enduml

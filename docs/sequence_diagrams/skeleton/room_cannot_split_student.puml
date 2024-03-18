@@ -1,0 +1,11 @@
+@startuml room_cannot_split_student
+title Room cannot split student
+
+actor Controller
+participant "r1: Room" as r1
+participant "r2: Room" as r2
+participant "s: Student" as s
+
+Controller -> r1 : Split()
+r1 --> Controller : null
+@enduml

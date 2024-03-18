@@ -1,0 +1,11 @@
+@startuml room_cannot_split_transistor
+title Room cannot split Transistor
+
+actor Controller
+participant "r1: Room" as r1
+participant "r2: Room" as r2
+participant "t: Transistor" as t
+
+Controller -> r1 : Split()
+r1 --> Controller : false
+@enduml
