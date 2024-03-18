@@ -1,0 +1,25 @@
+@startuml pi
+title "Student picks paired Transistor"
+
+participant "c:Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "t:Transistor" as i
+
+c -> s : pickUp(i)
+activate s
+s -> i : pickUp(s)
+activate s
+activate i
+i -> i : room == null
+i -> s : addItem(t)
+deactivate s
+deactivate i
+s -> r : removeItem(i)
+activate r
+r --> s 
+deactivate r
+s --> c
+deactivate s
+
+@enduml

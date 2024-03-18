@@ -1,0 +1,30 @@
+@startuml pi
+
+title "Student picks item (standard)"
+
+participant "c:Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "i:Item" as i
+
+c -> s : pickUp(i)
+activate s
+s -> i : pickUp(s)
+activate s
+note right
+Az itemek lehetnek: 
+Mask, Cheese, TVSZ
+Transistor (unpaired)
+end note
+activate i
+i -> s : addItem(i)
+deactivate i
+deactivate s
+s -> r : removeItem(i)
+activate r
+r --> s 
+deactivate r
+s --> c
+deactivate s
+
+@enduml

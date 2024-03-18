@@ -1,0 +1,19 @@
+@startuml pi
+title "Teacher picks item"
+
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "i:Item" as i
+rectangle "t:Teacher" as s
+
+c --> s: 1. <<create>> \n 5. setRoom(r)
+c --> r : 2. <<create>> \n 4. addTeacher(t)
+c --> i : 3. <<create>> 
+note right
+Az itemek lehetnek: 
+Mask, Cheese, TVSZ
+Transistor, Logarléc,
+Sponge
+end note
+
+@enduml
