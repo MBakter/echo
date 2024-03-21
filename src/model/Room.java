@@ -2,6 +2,10 @@ package model;
 
 import java.util.List;
 
+import model.items.IItem;
+import model.player.Student;
+import model.player.Teacher;
+
 public class Room implements IRoomManager {
 
     private int maxPlayer;

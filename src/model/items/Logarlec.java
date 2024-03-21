@@ -1,4 +1,7 @@
-package model;
+package model.items;
+
+import model.player.Player;
+import model.player.Student;
 
 public class Logarlec implements IItem {
 

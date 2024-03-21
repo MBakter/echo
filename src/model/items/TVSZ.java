@@ -1,9 +1,10 @@
-package model;
+package model.items;
 
-public class Mask implements IItem, ITimer {
-    private controller.Timer timer;
-    private boolean functional;
-    private Player wearer;
+import model.player.Player;
+import model.player.Student;
+
+public class TVSZ implements IItem {
+    private int hitpoints;
 
     @Override
     public void useItem(Player p) {
@@ -13,33 +14,33 @@ public class Mask implements IItem, ITimer {
 
     @Override
     public void pickUp(Player p) {
-        wearer = p;
         p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        timer.pauseTimer();
         p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        /* Do nothing */
+        if(hitpoints > 0) {
+            hitpoints--;
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        if(!functional)
-            return false;
-        timer.startTimer();
-        return true;
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        timer.pauseTimer();
+        /* Do nothing */
+        return;
     }
 
     @Override
@@ -48,9 +49,5 @@ public class Mask implements IItem, ITimer {
         return false;
     }
 
-    @Override
-    public void timerEnd() {
-        functional = false;
-    }
 
 }

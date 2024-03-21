@@ -1,12 +1,23 @@
-package model;
+package model.items;
 
-public class TVSZ implements IItem {
-    private int hitpoints;
+import model.ERoomEffects;
+import model.ITimer;
+import model.Room;
+import model.player.Player;
+import model.player.Student;
+
+public class Cheese implements IItem, ITimer {
+    private controller.Timer timer;
+    private boolean isUsed;
+    private Room room;
 
     @Override
     public void useItem(Player p) {
-        /* Do nothing */
-        return;
+        if(isUsed) 
+            return;
+        timer.startTimer();
+        room = p.getRoom();
+        room.addEffect(ERoomEffects.POISONED);
     }
 
     @Override
@@ -21,10 +32,7 @@ public class TVSZ implements IItem {
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        if(hitpoints > 0) {
-            hitpoints--;
-            return true;
-        }
+        /* Do nothing */
         return false;
     }
 
@@ -46,5 +54,10 @@ public class TVSZ implements IItem {
         return false;
     }
 
-
+    @Override
+    public void timerEnd() {
+        room.removeEffect(ERoomEffects.POISONED);
+    }
+    
+    
 }

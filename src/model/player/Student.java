@@ -1,4 +1,7 @@
-package model;
+package model.player;
+
+import model.Room;
+import model.items.IItem;
 
 public class Student extends Player {
 

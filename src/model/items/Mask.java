@@ -1,8 +1,13 @@
-package model;
+package model.items;
 
-public class Sponge implements IItem, ITimer {
+import model.ITimer;
+import model.player.Player;
+import model.player.Student;
+
+public class Mask implements IItem, ITimer {
     private controller.Timer timer;
     private boolean functional;
+    private Player wearer;
 
     @Override
     public void useItem(Player p) {
@@ -12,15 +17,14 @@ public class Sponge implements IItem, ITimer {
 
     @Override
     public void pickUp(Player p) {
-        timer.startTimer();
-        functional = true;
+        wearer = p;
         p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        p.removeItem(this);
         timer.pauseTimer();
+        p.removeItem(this);
     }
 
     @Override
@@ -31,26 +35,21 @@ public class Sponge implements IItem, ITimer {
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        /* Do nothing */
-        return false;
+        if(!functional)
+            return false;
+        timer.startTimer();
+        return true;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        /* Do nothing */
-        return;
+        timer.pauseTimer();
     }
-    
+
     @Override
     public boolean TeacherAttackable(Student s) {
-        if(!functional)
-            return false;
-
-        Room r = s.getRoom();
-        for (Teacher t : r.getTeachers()) 
-            t.setState(EPlayerState.UNCONSCIOUS);
-
-        return true;
+        /* Do nothing */
+        return false;
     }
 
     @Override

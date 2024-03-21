@@ -1,17 +1,17 @@
-package model;
+package model.items;
 
-public class Cheese implements IItem, ITimer {
+import model.ITimer;
+import model.player.Player;
+import model.player.Student;
+
+public class Beer implements IItem, ITimer {
     private controller.Timer timer;
-    private boolean isUsed;
-    private Room room;
+    private EBeerState state; //Default: INACTIVE
 
     @Override
     public void useItem(Player p) {
-        if(isUsed) 
-            return;
         timer.startTimer();
-        room = p.getRoom();
-        room.addEffect(ERoomEffects.POISONED);
+        state = EBeerState.RUNNING;
     }
 
     @Override
@@ -21,12 +21,24 @@ public class Cheese implements IItem, ITimer {
 
     @Override
     public void dropItem(Player p) {
+        timer.pauseTimer();
         p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        /* Do nothing */
+        switch (state) {
+            case INACTIVE:
+                timer.startTimer();
+                state = EBeerState.RUNNING;
+                return true;
+            case RUNNING:
+                return true;
+            case DISABLED:
+                return false;
+            default:
+                break;
+        }
         return false;
     }
 
@@ -50,8 +62,8 @@ public class Cheese implements IItem, ITimer {
 
     @Override
     public void timerEnd() {
-        room.removeEffect(ERoomEffects.POISONED);
+        state = EBeerState.DISABLED;
     }
     
-    
+
 }

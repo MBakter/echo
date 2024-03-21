@@ -1,6 +1,10 @@
-package model;
+package model.player;
 
 import java.util.List;
+
+import model.ITimer;
+import model.Room;
+import model.items.IItem;
 
 public abstract class Player implements ITimer {
     protected Room room;

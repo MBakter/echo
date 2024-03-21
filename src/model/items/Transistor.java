@@ -1,4 +1,9 @@
-package model;
+package model.items;
+
+import model.ERoomEffects;
+import model.Room;
+import model.player.Player;
+import model.player.Student;
 
 public class Transistor implements IItem {
     private boolean active;

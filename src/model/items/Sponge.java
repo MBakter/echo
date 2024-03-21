@@ -1,40 +1,38 @@
-package model;
+package model.items;
 
-public class Beer implements IItem, ITimer {
+import model.ITimer;
+import model.Room;
+import model.player.EPlayerState;
+import model.player.Player;
+import model.player.Student;
+import model.player.Teacher;
+
+public class Sponge implements IItem, ITimer {
     private controller.Timer timer;
-    private EBeerState state; //Default: INACTIVE
+    private boolean functional;
 
     @Override
     public void useItem(Player p) {
-        timer.startTimer();
-        state = EBeerState.RUNNING;
+        /* Do nothing */
+        return;
     }
 
     @Override
     public void pickUp(Player p) {
+        timer.startTimer();
+        functional = true;
         p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        timer.pauseTimer();
         p.removeItem(this);
+        timer.pauseTimer();
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        switch (state) {
-            case INACTIVE:
-                timer.startTimer();
-                state = EBeerState.RUNNING;
-                return true;
-            case RUNNING:
-                return true;
-            case DISABLED:
-                return false;
-            default:
-                break;
-        }
+        /* Do nothing */
         return false;
     }
 
@@ -49,17 +47,22 @@ public class Beer implements IItem, ITimer {
         /* Do nothing */
         return;
     }
-
+    
     @Override
     public boolean TeacherAttackable(Student s) {
-        /* Do nothing */
-        return false;
+        if(!functional)
+            return false;
+
+        Room r = s.getRoom();
+        for (Teacher t : r.getTeachers()) 
+            t.setState(EPlayerState.UNCONSCIOUS);
+
+        return true;
     }
 
     @Override
     public void timerEnd() {
-        state = EBeerState.DISABLED;
+        functional = false;
     }
-    
 
 }
