@@ -3,11 +3,15 @@ package model;
 public class Cheese implements IItem, ITimer {
     private controller.Timer timer;
     private boolean isUsed;
+    private Room room;
 
     @Override
     public void useItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        if(isUsed) 
+            return;
+        timer.startTimer();
+        room = p.getRoom();
+        room.addEffect(ERoomEffects.POISONED);
     }
 
     @Override
@@ -22,32 +26,31 @@ public class Cheese implements IItem, ITimer {
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttacked'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomPoisoned'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomCleanFromPoison'");
+        /* Do nothing */
+        return;
     }
 
     @Override
     public boolean TeacherAttackable(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void timerEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
+        room.removeEffect(ERoomEffects.POISONED);
     }
     
     

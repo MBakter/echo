@@ -3,16 +3,17 @@ package model;
 public class Mask implements IItem, ITimer {
     private controller.Timer timer;
     private boolean functional;
-    private Student student;
+    private Player wearer;
 
     @Override
     public void useItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        /* Do nothing */
+        return;
     }
 
     @Override
     public void pickUp(Player p) {
+        wearer = p;
         p.addItem(this);
     }
 
@@ -24,32 +25,32 @@ public class Mask implements IItem, ITimer {
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttacked'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomPoisoned'");
+        if(!functional)
+            return false;
+        timer.startTimer();
+        return true;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomCleanFromPoison'");
+        timer.pauseTimer();
     }
 
     @Override
     public boolean TeacherAttackable(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void timerEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
+        functional = false;
     }
 
 }

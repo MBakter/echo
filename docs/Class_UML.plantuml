@@ -65,6 +65,7 @@ abstract class Player implements ITimer{
     + RoomCleanFromPoison() : void
     + getState(): EPlayerState
     + setState(EPlayerState): void
+    + getRoom() : Room
     + addItem(IItem): void
     + removeItem(IItem) : void
     + pickUp(IItem)
@@ -175,7 +176,8 @@ class Sponge  implements IItem, ITimer {
 class Cheese  implements IItem, ITimer {
     + timer : Timer
     + isUsed : bool
-
+    + room : Room
+    
     + timerEnd() : void
 }
 
