@@ -94,6 +94,9 @@ public class Skeleton {
                     if(line == null)
                         break;
                     number = Integer.parseInt(line);
+                    
+                    if(number == 9)
+                        return;
 
                     if (tests.containsKey(number)){
 
@@ -144,6 +147,7 @@ public class Skeleton {
             } 
         }
     }
+    
     public static void testList(Map<Integer, ITestcase> m, Integer option){
         
         if (m.containsKey(option)){
