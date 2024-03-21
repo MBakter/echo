@@ -1,0 +1,21 @@
+@startuml student_enter_empty
+title Student enters empty room
+
+actor Controller as c
+participant "s : Student" as s
+participant "r : Room" as r
+
+
+c -> s : move(r)
+Activate c
+Activate s
+s -> r : addStudent(s)
+
+
+Activate r
+r --> s : true
+Deactivate r
+Deactivate s
+Deactivate c
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml student_room_poison_removed
+title Student's room is no longer poisoned
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "s:Student" as s
+c --> s: 1. <<create>>\n\n3. setState(ALIVE)
+c -> r: 2. <<create>>\t3. addEffect(POISONED)\t4. r.studentList.Add(s)
+@enduml

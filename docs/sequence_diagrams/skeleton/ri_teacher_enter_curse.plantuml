@@ -1,0 +1,21 @@
+@startuml teacher_enter_curse
+title Teacher tries to enter cursed room
+
+actor Controller as c
+participant "t : Teacher" as s
+participant "r : Room" as r
+
+
+c -> s : move(r)
+Activate c
+Activate s
+s -> r : addTeacher(t)
+
+
+Activate r
+r --> s : false
+Deactivate r
+Deactivate s
+Deactivate c
+
+@enduml

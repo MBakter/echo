@@ -1,0 +1,25 @@
+@startuml student_enter_poison
+title Student enters poisoned room
+
+actor Controller as c
+participant "s : Student" as s
+participant "r : Room" as r
+
+
+c -> s : move(r)
+Activate c
+Activate s
+s -> r : addStudent(s)
+
+
+Activate r
+r --> s : true
+Deactivate s
+Deactivate c
+r -> s : roomPoisoned()
+Activate s
+Deactivate s
+Deactivate r
+
+
+@enduml

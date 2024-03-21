@@ -1,0 +1,12 @@
+@startuml student_leave_curse
+title Student tries to leave cursed room
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "rCursed:Room" as r1
+rectangle "r:Room" as r2
+rectangle "s:Student" as s
+c --> s: 1. <<create>>\n\n2. setState(ALIVE)\n\n4.move(rCursed)
+c -> r1: 3. <<create>>\n\n6. addEffect(CURSED)
+c -> r2: 7. <<create>>\t
+s->r1: 5. addStudent(s)
+@enduml

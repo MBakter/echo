@@ -1,0 +1,25 @@
+@startuml teacher_enter_full
+title Teacher tries to enter full room
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "t:Teacher" as s
+rectangle "t1:Teacher" as s1
+rectangle "t2:Teacher" as s2
+rectangle "t3:Teacher" as s3
+c --> s1: 2. <<create>>\n\n3. setState(ALIVE)\n\n4. move(r)
+s1 --> r: 5. addTeacher(t1)
+
+c --> s2: 6. <<create>>\n\n7. setState(ALIVE)\n\n8. move(r)
+s2 --> r: 9. addTeacher(t2)
+
+c --> s3: 10. <<create>>\n\n11. setState(ALIVE)\n\n12. move(r)
+s3 --> r: 13. addTeacher(t3)
+
+c --> s: 14. <<create>>\n\n15. setState(ALIVE)
+
+c --> r: 1. <<create>>\t
+note right of r{
+    maxPlayer = 3
+}
+@enduml

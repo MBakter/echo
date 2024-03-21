@@ -1,0 +1,25 @@
+@startuml teacher_leave_poison
+title Teacher leaves poisoned room
+
+actor Controller as c
+participant "t : Teacher" as s
+participant "r : Room" as r1
+participant "emptyRoom : Room" as r2
+
+c -> s : move(r2)
+Activate c
+Activate s
+s -> r2 : addTeacher(s)
+
+
+Activate r2
+r2 --> s : true
+Deactivate s
+Deactivate c
+r2 -> s : roomCleanFromPoison()
+Deactivate r2
+Activate s
+Deactivate s
+
+
+@enduml

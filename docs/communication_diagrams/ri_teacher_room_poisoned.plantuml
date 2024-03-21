@@ -1,0 +1,10 @@
+@startuml teacher_room_poisoned
+title Teacher's room is poisoned
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "r:Room" as r
+rectangle "t:Teacher" as s
+c --> s: 1. <<create>>\n\n3. setState(ALIVE)\n\n4. move(r)
+c -> r: 2. <<create>>\t
+s -> r: 5. addStudent(s)
+@enduml
