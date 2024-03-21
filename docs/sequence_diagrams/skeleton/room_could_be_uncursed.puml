@@ -1,0 +1,10 @@
+@startuml room_coul_be_uncursed
+title Room could be uncursed
+
+actor "c: Controller" as c
+participant "r: Room" as r
+
+c -> r: removeEffect(POISONED)
+
+
+@enduml

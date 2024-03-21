@@ -1,0 +1,22 @@
+@startuml room_merge
+title Room Merge
+
+actor Controller
+participant "r1: Room" as r1
+participant "r2: Room" as r2
+
+Controller -> r1 : Merge(r2)
+activate r1
+r1 -> r2 : getNeighbours()
+r2-->r1: neighboursList
+loop every n:Room in neighboursList
+    r1 -> r1: addNeighbour(n)
+end
+r1 -> r2 : getItems()
+r2-->r1: itemList
+loop every i:IItem in itemList
+    r1 -> r1: addItems(i)
+end
+r1 --> Controller : true
+Controller -> r2 : destroy
+@enduml

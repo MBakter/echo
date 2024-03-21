@@ -1,0 +1,14 @@
+@startuml student_in_room
+
+title Student in room
+rectangle "c:Controller" as c
+rectangle "r1:Room" as r1
+rectangle "r2:Room" as r2
+rectangle "s:Student" as s
+
+c->r1: 1. <<create>>
+c->r2: 2. <<create>>
+c-d->s: 3. <<create>>\n4. move(r1)
+s->r1: 4.1. addStudent(s)
+
+@enduml

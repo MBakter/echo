@@ -1,0 +1,11 @@
+@startuml room_cannot_merge_transistor
+title Room cannot merge Transistor
+
+actor Controller
+participant "r1: Room" as r1
+participant "r2: Room" as r2
+participant "t: Transistor" as t
+
+Controller -> r1 : Merge(r2)
+r1 --> Controller : false
+@enduml
