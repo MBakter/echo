@@ -10,8 +10,8 @@ public class Logarlec implements IItem {
 
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        p.addItem(this);
+        
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Logarlec implements IItem {
     }
 
     @Override
-    public void TeacherAttackable(Student s) {
+    public boolean TeacherAttackable(Student s) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
     }

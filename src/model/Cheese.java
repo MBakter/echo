@@ -12,14 +12,12 @@ public class Cheese implements IItem, ITimer {
 
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        p.removeItem(this);
     }
 
     @Override
@@ -41,7 +39,7 @@ public class Cheese implements IItem, ITimer {
     }
 
     @Override
-    public void TeacherAttackable(Student s) {
+    public boolean TeacherAttackable(Student s) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
     }

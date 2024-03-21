@@ -2,56 +2,63 @@ package model;
 
 public class Beer implements IItem, ITimer {
     private controller.Timer timer;
-    private EBeerState state;
-
-    void setState(EBeerState s) {}
+    private EBeerState state; //Default: INACTIVE
 
     @Override
     public void useItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        timer.startTimer();
+        state = EBeerState.RUNNING;
     }
 
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        timer.pauseTimer();
+        p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttacked'");
+        switch (state) {
+            case INACTIVE:
+                timer.startTimer();
+                state = EBeerState.RUNNING;
+                return true;
+            case RUNNING:
+                return true;
+            case DISABLED:
+                return false;
+            default:
+                break;
+        }
+        return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomPoisoned'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomCleanFromPoison'");
+        /* Do nothing */
+        return;
     }
 
     @Override
-    public void TeacherAttackable(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+    public boolean TeacherAttackable(Student s) {
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void timerEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
+        state = EBeerState.DISABLED;
     }
     
 

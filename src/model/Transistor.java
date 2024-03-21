@@ -17,16 +17,21 @@ public class Transistor implements IItem {
         throw new UnsupportedOperationException("Unimplemented method 'useItem'");
     }
 
+    //Külön kéne választani a pickUp(Student) és pickUp(Teacher)-re, hogy tanár ne vehesse fel a párosított tranzisztort v.
+    //legyen úgy, hogy felveheti majd ledobhatja valahova ezzel megszivatva a hallgatókat...
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        if(pair != null) {
+            room.removeEffect(ERoomEffects.TRANSISTOR_INSIDE);
+            room = null;
+        }
+        p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        p.removeItem(this);
+        room = p.getRoom();
     }
 
     @Override
@@ -48,7 +53,7 @@ public class Transistor implements IItem {
     }
     
     @Override
-    public void TeacherAttackable(Student s) {
+    public boolean TeacherAttackable(Student s) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
     }

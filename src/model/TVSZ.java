@@ -5,44 +5,45 @@ public class TVSZ implements IItem {
 
     @Override
     public void useItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        /* Do nothing */
+        return;
     }
 
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttacked'");
+        if(hitpoints > 0) {
+            hitpoints--;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomPoisoned'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomCleanFromPoison'");
+        /* Do nothing */
+        return;
     }
 
     @Override
-    public void TeacherAttackable(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+    public boolean TeacherAttackable(Student s) {
+        /* Do nothing */
+        return false;
     }
 
 

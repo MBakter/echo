@@ -5,52 +5,57 @@ public class Sponge implements IItem, ITimer {
     private boolean functional;
 
     @Override
-    public void timerEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
-    }
-
-    @Override
     public void useItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        /* Do nothing */
+        return;
     }
 
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        timer.startTimer();
+        functional = true;
+        p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        p.removeItem(this);
+        timer.pauseTimer();
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttacked'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomPoisoned'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomCleanFromPoison'");
+        /* Do nothing */
+        return;
     }
     
     @Override
-    public void TeacherAttackable(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+    public boolean TeacherAttackable(Student s) {
+        if(!functional)
+            return false;
+
+        Room r = s.getRoom();
+        for (Teacher t : r.getTeachers()) 
+            t.setState(EPlayerState.UNCONSCIOUS);
+
+        return true;
     }
 
+    @Override
+    public void timerEnd() {
+        functional = false;
+    }
 
 }

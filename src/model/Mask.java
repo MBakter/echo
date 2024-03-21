@@ -6,12 +6,6 @@ public class Mask implements IItem, ITimer {
     private Student student;
 
     @Override
-    public void timerEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
-    }
-
-    @Override
     public void useItem(Player p) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'useItem'");
@@ -19,14 +13,13 @@ public class Mask implements IItem, ITimer {
 
     @Override
     public void pickUp(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
+        p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        timer.pauseTimer();
+        p.removeItem(this);
     }
 
     @Override
@@ -48,9 +41,15 @@ public class Mask implements IItem, ITimer {
     }
 
     @Override
-    public void TeacherAttackable(Student s) {
+    public boolean TeacherAttackable(Student s) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+    }
+
+    @Override
+    public void timerEnd() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
     }
 
 }
