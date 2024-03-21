@@ -3,6 +3,25 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+class test1 implements ITestcase{
+    public void runTest() {
+        System.out.println("BUTTOOON");
+    }
+    public String testTitle() {
+        return "My first option!";
+    };
+}
+class test2 implements ITestcase{
+    public void runTest() {
+        System.out.println("BUTTOOON");
+    }
+    public String testTitle() {
+        return "My second option!";
+    };
+}
 
 public class Skeleton {
     
@@ -25,53 +44,97 @@ public class Skeleton {
                             + "---------------------");
     }
 
+  
     public static void Menu() {
+        // Test Category List
+        Map<Integer, Map<Integer, ITestcase>> tests = new HashMap<Integer, Map<Integer, ITestcase>>();
+
+        // 1 Pickup Tests
+        Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
+        tests.put(1, ItemPickTests); // Testlist put to categorylist
+        ItemPickTests.put(1, new test1()); 
+        ItemPickTests.put(2, new test2()); 
+
+        // 2 Drop Tests
+        Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();
+        tests.put(2, ItemDropTests); // Testlist put to categorylist
+
+        // 3 Use Tests
+        Map<Integer, ITestcase> ItemUseTests = new HashMap<Integer, ITestcase>();
+        tests.put(3, ItemUseTests); // Testlist put to categorylist
+
+        // 4 RoomIneraction Tests
+        Map<Integer, ITestcase> RoomInteractionTests = new HashMap<Integer, ITestcase>();
+        tests.put(4, RoomInteractionTests); // Testlist put to categorylist
+
+        // 5 Room functionality Tests
+        Map<Integer, ITestcase> RoomFunctionalityTests = new HashMap<Integer, ITestcase>();
+        tests.put(5, RoomFunctionalityTests); // Testlist put to categorylist
+
+        // 6 Item functionality Tests
+        Map<Integer, ITestcase> ItemFunctionalityTests = new HashMap<Integer, ITestcase>();
+        tests.put(6, ItemFunctionalityTests); // Testlist put to categorylist
+
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
-
         int number = 0;
-        System.out.println("Press ANY BUTTON to start...");
+        int categoryMenu = 0;
+        //System.out.println("Press ANY BUTTON to start...");
 
         while (true) {
             try {
-                String line = br.readLine();
+                String line;// = br.readLine();
         
-                clearScreen();
-                printMenu();
-                System.out.print("Enter a number: ");
-        
-                line = br.readLine();
-                if(line == null)
-                    break;
-                number = Integer.parseInt(line);
+                if  (categoryMenu == 0) {
+                    clearScreen();
+                    printMenu();
+                    System.out.print("Enter a number: ");
+            
+                    line = br.readLine();
+                    if(line == null)
+                        break;
+                    number = Integer.parseInt(line);
+
+                    if (tests.containsKey(number)){
+
+                        categoryMenu = number;
+                        System.out.format("Switching to %d%n", categoryMenu);
+                    } else {
+                        System.out.print("wrong number");
+                    };
                 
-                switch (number) {
-                    case 1:
-                        System.out.println("Switching to 1");
+                } 
+                if (categoryMenu != 0) {
+                    
+                    clearScreen();
+                    System.out.println("Press 0 to return to category menu:");
+                    for (Map.Entry<Integer, ITestcase> e : tests.get(categoryMenu).entrySet()){
+                        System.out.format("Option %d: %s %n", e.getKey(), e.getValue().testTitle());
+                    }
+                    System.out.print("Enter a number: ");
+            
+                    line = br.readLine();
+                    if(line == null)
                         break;
-                    case 2:
-                        System.out.println("Switching to 2");
-                        break;
-                    case 3:
-                        System.out.println("Switching to 3");
-                        break;
-                    case 4:
-                        System.out.println("Switching to 4");
-                        break;
-                    case 5:
-                        System.out.println("Switching to 5");
-                        break;
-                    case 6:
-                        System.out.println("Switching to 6");
-                        break;
-                    case 9:
-                        System.out.println("Bye!");
-                        return;
-                    default:
-                        System.out.println("Incorrect input!");
-                        break;
+                    number = Integer.parseInt(line);
+
+                    if (number == 0) {
+                        categoryMenu = 0;
+                    }
+
+                    switch (categoryMenu) {
+                        case 1: //Item pickup
+                            testList(ItemPickTests, number);
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                    System.out.println("Press RETURN to continue...");
+                    line = br.readLine();
                 }
                 
+
             } catch (NumberFormatException e) {
                 System.out.println("Not a number!");
             } catch (IOException e) {
@@ -79,6 +142,15 @@ public class Skeleton {
                 e.printStackTrace();
             } 
         }
+    }
+    public static void testList(Map<Integer, ITestcase> m, Integer option){
+        
+        if (m.containsKey(option)){
+            m.get(option).runTest();
+        } else {
+            System.out.println("There is no option like this");
+        }
+        
     }
 
     public static void main(String[] args) {
