@@ -1,0 +1,87 @@
+@startuml player_drops_item
+
+!$targetActor = "s"
+!$targetActorClass = "Student"
+!$targetItem = "che"
+!$targetItemClass = "Cheese"
+title  $targetActorClass uses $targetItemClass
+
+actor Controller as c 
+participant "$targetActor:$targetActorClass" as s
+participant "r:Room" as r
+
+participant "$targetItem:$targetItemClass" as targetItem
+
+c -> s : useItem($targetItem)
+activate s
+
+    s -> targetItem : useItem($targetActor)
+    activate targetItem
+        targetItem -> targetItem:  timer.startTimer(time, che)
+
+        targetItem -> r: addEffect(POISON)
+        activate r
+
+                ref over s, r
+                    Player Poisoned
+                end ref
+
+            targetItem <-- r 
+        deactivate r
+
+        targetItem -> s : removeItem($targetItem)
+        activate s
+            targetItem <-- s 
+        deactivate s
+
+        s <-- targetItem
+    deactivate targetItem
+
+    s -> r : addItem($targetItem)
+    activate r
+        s <-- r 
+    deactivate r
+    
+    c <-- s
+deactivate s
+c ->  targetItem: timerEnd()
+activate targetItem
+
+    targetItem -> r: removeEffect(POISON)
+    activate r
+        ref over s, r
+            Player Clear from Poison
+        end ref
+        targetItem <-- r 
+    deactivate r
+
+    c <-- targetItem
+deactivate targetItem
+@enduml
+' @startuml student_uses_cheese
+' title Student uses cheese
+
+' actor Controller as C
+' participant "s : Student" as s
+' participant "c : Cheese" as c
+' participant "r : Room" as r
+' actor Timer as t
+
+' C -> s : useItem(c)
+' Activate C
+' Activate s
+' s -> c : useItem(s)
+' activate c
+' alt isUsed == false
+'     c -> t : startTimer(time)
+'     Activate t
+'     c -> r : addEffect(POISONED)
+'     t -> c : timerEnd()
+'     Deactivate t
+'     c -> r : removeEffect(POISONED)
+'     Deactivate c
+' end
+' Deactivate s
+' Deactivate C
+
+' @enduml

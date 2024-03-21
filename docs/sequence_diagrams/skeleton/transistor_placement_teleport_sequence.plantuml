@@ -1,0 +1,68 @@
+@startuml student_places_transistor
+title Student Places Paired Active (pair is placed) Transistor
+
+actor Controller as c order 10
+participant "t1 : Transistor" as Transistor order 30
+participant "s : Student" as Student order 11
+participant "t2 : Transistor" as Transistor2 order 40
+participant "r1 : Room" as Room order 50
+participant "r2 : Room" as Room2 order 60
+
+c -> Student : dropItem(t1)
+activate Student
+
+    Student -> Transistor : dropItem(s)
+    activate Transistor
+        Transistor -> Transistor2: teleport(s)
+
+        activate Transistor2
+            ' Room -> Room: Move(s)
+
+            Transistor2 -> Student: move(r1)
+            activate Student
+
+
+                Student -> Room2: removeStudent(r1)
+                activate Room2
+                    Student <-- Room2
+                deactivate Room2
+
+                Student -> Room: addStudent(r2)
+                activate Room
+                    Student <-- Room
+                deactivate Room
+
+                Transistor2 <-- Student
+            deactivate Student
+
+            Transistor <-- Transistor2
+        deactivate Transistor2
+
+        Transistor -> Transistor: deactivateTransistor(s)
+
+        Transistor -> Room2: addItem(t1)
+        activate Room2
+            Transistor <-- Room2
+        deactivate Room2
+        
+        Transistor -> Room2: addEffect(TRANSISTOR_INSIDE)
+        activate Room2
+            Transistor <-- Room2
+        deactivate Room2
+
+        Transistor -> Student: removeItem(t1)
+        activate Student
+            Transistor <-- Student
+        deactivate Student
+
+        
+    Student <-- Transistor
+    deactivate Transistor
+
+    c <-- Student
+deactivate Student
+
+
+
+
+@enduml

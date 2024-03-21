@@ -1,0 +1,21 @@
+@startuml cd
+
+!$targetActor = "s"
+!$targetActorClass = "Student"
+skinparam linestyle ortho
+rectangle "c:Controller" as c
+rectangle "$targetActor:$targetActorClass" as s
+rectangle "r:Room" as r
+
+!$targetItem = "b"
+!$targetItemClass = "Beer"
+rectangle "$targetItem:$targetItemClass" as targetItem
+title  $targetActorClass Drops $targetItemClass
+
+c --> targetItem: 1. <<create>>
+
+c -left-> r: 2. <<create>>
+c -right-> s: 3. <<create>> 4. addItem($targetItem) \n5. dropItem($targetItem)
+ 
+
+@enduml

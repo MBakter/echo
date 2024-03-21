@@ -1,0 +1,36 @@
+@startuml player_drops_item
+
+!$targetActor = "s"
+!$targetActorClass = "Student"
+!$targetItem = "b"
+!$targetItemClass = "Beer"
+title  $targetActorClass Uses $targetItemClass
+
+actor Controller as c 
+participant "$targetActor:$targetActorClass" as s
+participant "r:Room" as r
+
+participant "$targetItem:$targetItemClass" as targetItem
+
+c -> s : useItem($targetItem)
+activate s
+
+    s -> targetItem : useItem($targetActor)
+    activate targetItem
+        targetItem -> targetItem:  timer.startTimer(time, che)
+        targetItem -> targetItem:  setState(RUNNING)
+
+        s <-- targetItem
+    deactivate targetItem
+    
+    c <-- s
+deactivate s
+
+c ->  targetItem: timerEnd()
+activate targetItem
+
+        targetItem -> targetItem:  setState(DISABLED)
+
+    c <-- targetItem
+deactivate targetItem
+@enduml
