@@ -130,11 +130,12 @@ public class Skeleton {
                         default:
                             break;
                     }
-                    System.out.println("Press RETURN to continue...");
-                    line = br.readLine();
+                    if (categoryMenu != 0) {
+                        System.out.println("Press RETURN to continue...");
+                        line = br.readLine();
+                    }
                 }
                 
-
             } catch (NumberFormatException e) {
                 System.out.println("Not a number!");
             } catch (IOException e) {
