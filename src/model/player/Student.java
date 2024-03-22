@@ -5,6 +5,9 @@ import model.items.IItem;
 
 public class Student extends Player {
 
+    public Student(){
+        System.out.println("<<create>> Student");
+    }
     public void move(Room r) {
 
     }

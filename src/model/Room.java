@@ -15,7 +15,10 @@ public class Room implements IRoomManager {
     private List<Teacher> teacherList;
     private List<Room> neighbouringRooms;
 
-    public boolean addStudent(Student s) { return false; }
+    public boolean addStudent(Student s) { 
+        System.out.println("addStudent()->Room");
+        return false; 
+    }
     public boolean removeStudent(Student s) { return false; }
     public boolean addTeacher(Teacher t) { return false; }
     public boolean removeTeacher(Teacher t) { return false; }
@@ -23,11 +26,15 @@ public class Room implements IRoomManager {
     public void addNeighbour(Room r) {}
     public void removeNeighbour(Room r) {}
     public List<Room> getNeighbours() { return neighbouringRooms; }
-    public void addItem(IItem i) {}
+    public void addItem(IItem i) {
+        System.out.print("addItem()->Room");
+    }
     public void removeItem(IItem i) {}
     public void addEffect(ERoomEffects e) {}
     public void removeEffect(ERoomEffects e) {}
-
+    public Room(){
+        System.out.println("<<create>> Room");
+    }
     @Override
     public Room split() {
         // TODO Auto-generated method stub
