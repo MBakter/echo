@@ -7,6 +7,9 @@ import model.Room;
 import model.items.IItem;
 
 public abstract class Player implements ITimer {
+    Player(){
+        System.out.println("\""+this.toString()+"\" created");
+    }
     protected Room room;
     protected List<IItem> itemList;
     protected EPlayerState state;

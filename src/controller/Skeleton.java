@@ -66,6 +66,7 @@ public class Skeleton {
         // 4 RoomIneraction Tests
         Map<Integer, ITestcase> RoomInteractionTests = new HashMap<Integer, ITestcase>();
         tests.put(4, RoomInteractionTests); // Testlist put to categorylist
+        new fill().fill(RoomInteractionTests);
 
         // 5 Room functionality Tests
         Map<Integer, ITestcase> RoomFunctionalityTests = new HashMap<Integer, ITestcase>();
@@ -112,7 +113,7 @@ public class Skeleton {
                     clearScreen();
                     System.out.println("Press 0 to return to category menu:");
                     for (Map.Entry<Integer, ITestcase> e : tests.get(categoryMenu).entrySet()){
-                        System.out.format("Option %d: %s %n", e.getKey(), e.getValue().testTitle());
+                        System.out.format("Option %d:\t%s %n", e.getKey(), e.getValue().testTitle());
                     }
                     System.out.print("Enter a number: ");
             
@@ -129,7 +130,9 @@ public class Skeleton {
                         case 1: //Item pickup
                             testList(ItemPickTests, number);
                             break;
-                    
+                        case 4:
+                            testList(RoomInteractionTests, number);
+                            break;
                         default:
                             break;
                     }
