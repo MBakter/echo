@@ -130,7 +130,9 @@ public class Skeleton {
                         case 1: //Item pickup
                             testList(ItemPickTests, number);
                             break;
-
+                        case 5:
+                            testList(RoomFunctionalityTests, number);
+                            break;
                         default:
                             break;
                     }

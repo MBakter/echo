@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.items.IItem;
@@ -15,7 +16,22 @@ public class Room implements IRoomManager {
     private List<Teacher> teacherList;
     private List<Room> neighbouringRooms;
 
-    public boolean addStudent(Student s) { return false; }
+    public Room() {
+        maxPlayer = 4;
+        effects = new ArrayList<>();
+        itemList = new ArrayList<>();
+        studentList = new ArrayList<>();
+        teacherList = new ArrayList<>();
+        neighbouringRooms = new ArrayList<>();
+    }
+
+    public boolean addStudent(Student s) {
+        if(studentList.size() < maxPlayer) {
+            studentList.add(s);
+            return true;
+        }
+        return false;
+    }
     public boolean removeStudent(Student s) { return false; }
     public boolean addTeacher(Teacher t) { return false; }
     public boolean removeTeacher(Teacher t) { return false; }
@@ -25,8 +41,12 @@ public class Room implements IRoomManager {
     public List<Room> getNeighbours() { return neighbouringRooms; }
     public void addItem(IItem i) {}
     public void removeItem(IItem i) {}
-    public void addEffect(ERoomEffects e) {}
-    public void removeEffect(ERoomEffects e) {}
+    public void addEffect(ERoomEffects e) {
+        effects.add(e);
+    }
+    public void removeEffect(ERoomEffects e) {
+        effects.remove(e);
+    }
 
     /**
      * Megpróbálja a szobát ketté választani.

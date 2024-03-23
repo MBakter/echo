@@ -3,6 +3,7 @@ package controller;
 import java.util.Map;
 
 import model.*;
+import model.items.*;
 import model.player.*;
 
 class fillRF {
@@ -20,25 +21,28 @@ class room_merge implements ITestcase {
   public void runTest() {
     System.out.println("---\tSetup\t---");
 
-    Student s = new Student();
+    Room r1 = new Room();
+    Room r2 = new Room();
+    Logarlec l = new Logarlec();
+    Mask m = new Mask();
+    Beer b = new Beer();
 
-    Room r = new Room();
+    System.out.println("Controller : addItem("+l+") -> "+r1);
+    r1.addItem(l);
 
-    System.out.println("Controller : setState("+s+") -> ALIVE");
-    s.setState(EPlayerState.ALIVE);
+    System.out.println("Controller : addItem("+m+") -> "+r1);
+    r1.addItem(m);
 
-    System.out.println("Controller : addEffect("+r+") -> CURSED");
-    r.addEffect(ERoomEffects.CURSED);
+    System.out.println("Controller : addItem("+b+") -> "+r2);
+    r2.addItem(b);
 
-    Room sRoom = new Room();
-
-    System.out.println("Controller : move("+sRoom+") -> "+s);
-    s.move(sRoom);
+    System.out.println("Controller : addNeighbour("+r2+") -> "+r1);
+    r1.addNeighbour(r2);
 
     System.out.println("---\tStart of test\t---");
 
-    System.out.println("Controller : move("+r+") -> "+s);
-    s.move(r);
+    System.out.println("Controller : merge("+r2+") -> "+r1);
+    r1.merge(r2);
   }
 
   public String testTitle() {
@@ -48,7 +52,23 @@ class room_merge implements ITestcase {
 
 class room_merge_transistor implements ITestcase {
   public void runTest() {
-    System.out.println("BUTTOOON");
+    System.out.println("---\tSetup\t---");
+
+    Room r1 = new Room();
+    Room r2 = new Room();
+    Transistor t = new Transistor();
+
+    System.out.println("Controller : setRoom("+r1+") -> "+t);
+    t.setRoom(r1);
+
+    System.out.println("Transistor : addEffect(TRANSISTOR_INSIDE) -> "+r1);
+    r1.addEffect(ERoomEffects.TRANSISTOR_INSIDE);
+
+
+    System.out.println("---\tStart of test\t---");
+
+    System.out.println("Controller : merge("+r2+") -> "+r1);
+    r1.merge(r2);
   }
 
   public String testTitle() {
@@ -58,7 +78,22 @@ class room_merge_transistor implements ITestcase {
 
 class room_merge_not_empty implements ITestcase {
   public void runTest() {
-    System.out.println("BUTTOOON");
+    System.out.println("---\tSetup\t---");
+
+    Room r1 = new Room();
+    Room r2 = new Room();
+    Student s = new Student();
+
+    System.out.println("Controller : move("+r1+") -> "+s);
+    s.move(r1);
+
+    System.out.println("Student : addStudent("+s+") -> "+r1);
+    r1.addStudent(s);
+
+    System.out.println("---\tStart of test\t---");
+
+    System.out.println("Controller : merge("+r2+") -> "+r1);
+    r1.merge(r2);
   }
 
   public String testTitle() {
@@ -68,7 +103,30 @@ class room_merge_not_empty implements ITestcase {
 
 class room_split implements ITestcase {
   public void runTest() {
-    System.out.println("BUTTOOON");
+    System.out.println("---\tSetup\t---");
+
+    Room r1 = new Room();
+    Room r2 = new Room();
+    Logarlec l = new Logarlec();
+    Mask m = new Mask();
+    Beer b = new Beer();
+
+    System.out.println("Controller : addItem("+l+") -> "+r1);
+    r1.addItem(l);
+
+    System.out.println("Controller : addItem("+m+") -> "+r1);
+    r1.addItem(m);
+
+    System.out.println("Controller : addItem("+b+") -> "+r2);
+    r2.addItem(b);
+
+    System.out.println("Controller : addNeighbour("+r2+") -> "+r1);
+    r1.addNeighbour(r2);
+
+    System.out.println("---\tStart of test\t---");
+
+    System.out.println("Controller : split() -> "+r1);
+    r1.split();
   }
 
   public String testTitle() {
@@ -78,7 +136,23 @@ class room_split implements ITestcase {
 
 class room_split_transistor implements ITestcase {
   public void runTest() {
-    System.out.println("BUTTOOON");
+    System.out.println("---\tSetup\t---");
+
+    Room r1 = new Room();
+    Room r2 = new Room();
+    Transistor t = new Transistor();
+
+    System.out.println("Controller : setRoom("+r1+") -> "+t);
+    t.setRoom(r1);
+
+    System.out.println("Transistor : addEffect(TRANSISTOR_INSIDE) -> "+r1);
+    r1.addEffect(ERoomEffects.TRANSISTOR_INSIDE);
+
+
+    System.out.println("---\tStart of test\t---");
+
+    System.out.println("Controller : split() -> "+r1);
+    r1.split();
   }
 
   public String testTitle() {
@@ -88,7 +162,22 @@ class room_split_transistor implements ITestcase {
 
 class room_split_not_empty implements ITestcase {
   public void runTest() {
-    System.out.println("BUTTOOON");
+    System.out.println("---\tSetup\t---");
+
+    Room r1 = new Room();
+    Room r2 = new Room();
+    Student s = new Student();
+
+    System.out.println("Controller : move("+r1+") -> "+s);
+    s.move(r1);
+
+    System.out.println("Student : addStudent("+s+") -> "+r1);
+    r1.addStudent(s);
+
+    System.out.println("---\tStart of test\t---");
+
+    System.out.println("Controller : split() -> "+r1);
+    r1.split();
   }
 
   public String testTitle() {
