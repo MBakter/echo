@@ -24,11 +24,11 @@ class test2 implements ITestcase{
 }
 
 public class Skeleton {
-    
-    private static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
-    } 
+
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     private static void printMenu() {
         System.out.println("Logarlec game tester -- Echo team");
@@ -44,7 +44,7 @@ public class Skeleton {
                             + "---------------------");
     }
 
-  
+
     public static void Menu() {
         // Test Category List
         Map<Integer, Map<Integer, ITestcase>> tests = new HashMap<Integer, Map<Integer, ITestcase>>();
@@ -52,8 +52,8 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-        ItemPickTests.put(1, new test1()); 
-        ItemPickTests.put(2, new test2()); 
+        ItemPickTests.put(1, new test1());
+        ItemPickTests.put(2, new test2());
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();
@@ -70,6 +70,7 @@ public class Skeleton {
         // 5 Room functionality Tests
         Map<Integer, ITestcase> RoomFunctionalityTests = new HashMap<Integer, ITestcase>();
         tests.put(5, RoomFunctionalityTests); // Testlist put to categorylist
+        fillRF.fill(RoomFunctionalityTests);
 
         // 6 Item functionality Tests
         Map<Integer, ITestcase> ItemFunctionalityTests = new HashMap<Integer, ITestcase>();
@@ -84,17 +85,17 @@ public class Skeleton {
         while (true) {
             try {
                 String line;// = br.readLine();
-        
+
                 if  (categoryMenu == 0) {
                     clearScreen();
                     printMenu();
                     System.out.print("Enter a number: ");
-            
+
                     line = br.readLine();
                     if(line == null)
                         break;
                     number = Integer.parseInt(line);
-                    
+
                     if(number == 9)
                         return;
 
@@ -105,17 +106,17 @@ public class Skeleton {
                     } else {
                         System.out.print("wrong number");
                     };
-                
-                } 
+
+                }
                 if (categoryMenu != 0) {
-                    
+
                     clearScreen();
                     System.out.println("Press 0 to return to category menu:");
                     for (Map.Entry<Integer, ITestcase> e : tests.get(categoryMenu).entrySet()){
                         System.out.format("Option %d: %s %n", e.getKey(), e.getValue().testTitle());
                     }
                     System.out.print("Enter a number: ");
-            
+
                     line = br.readLine();
                     if(line == null)
                         break;
@@ -129,7 +130,7 @@ public class Skeleton {
                         case 1: //Item pickup
                             testList(ItemPickTests, number);
                             break;
-                    
+
                         default:
                             break;
                     }
@@ -138,24 +139,24 @@ public class Skeleton {
                         line = br.readLine();
                     }
                 }
-                
+
             } catch (NumberFormatException e) {
                 System.out.println("Not a number!");
             } catch (IOException e) {
                 System.out.println("Could not read input");
                 e.printStackTrace();
-            } 
+            }
         }
     }
-    
+
     public static void testList(Map<Integer, ITestcase> m, Integer option){
-        
+
         if (m.containsKey(option)){
             m.get(option).runTest();
         } else {
             System.out.println("There is no option like this");
         }
-        
+
     }
 
     public static void main(String[] args) {
