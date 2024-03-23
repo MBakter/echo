@@ -7,8 +7,9 @@ import model.Room;
 import model.items.IItem;
 
 public abstract class Player implements ITimer {
+
     Player(){
-        System.out.println("\""+this.toString()+"\" created");
+        System.out.println("<<create>> \""+this.toString()+"\"");
     }
     protected Room room;
     protected List<IItem> itemList;
@@ -16,7 +17,10 @@ public abstract class Player implements ITimer {
     protected controller.Timer timer;
 
     public EPlayerState getState() { return state; }
-    public void setState(EPlayerState s) {}
+    public void setState(EPlayerState s) {
+        state = s;
+        System.out.println("\t"+this + ": state set to "+ state);
+    }
     public Room getRoom() { return room; }
 
     public void move(Room r) {}

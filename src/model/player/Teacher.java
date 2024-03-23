@@ -3,6 +3,11 @@ package model.player;
 import model.Room;
 
 public class Teacher extends Player {
+    @Override
+    public String toString(){
+        return "Teacher@"+this.hashCode()/10000;
+    }
+
         /**
      * Az oktató megpróbál az r szobába mozogni
      * 

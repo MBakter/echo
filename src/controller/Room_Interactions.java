@@ -33,17 +33,18 @@ class fill{
 
 class student_enter_cursed implements ITestcase{
     public void runTest() {
+        System.out.println("---\tSetup\t---");
         Student s = new Student();
         Room r = new Room();
         Room sRoom = new Room();
-        System.out.println("Controller calls \""+s.toString()+".move("+sRoom.toString()+")\"");
-        //System.out.println("Controller called move on student");
-        //System.out.println("Controller -> ");
+        System.out.println("Controller : move("+sRoom.toString()+") -> "+s.toString());
         s.move(sRoom);
+        System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
         s.setState(EPlayerState.ALIVE);
+        System.out.println("Controller : addEffect("+r.toString()+") -> CURSED");
         r.addEffect(ERoomEffects.CURSED);
-        System.out.println("Controller calls \""+s.toString()+".move("+r.toString()+")\"");
-        //System.out.println("Controller called move on student");
+        System.out.println("---\tStart of test\t---");
+        System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
         s.move(r);
     }
     public String testTitle() {
@@ -53,7 +54,19 @@ class student_enter_cursed implements ITestcase{
 
 class student_leave_cursed  implements ITestcase{
     public void runTest() {
+        System.out.println("---\tSetup\t---");
         Student s = new Student();
+        Room r = new Room();
+        Room sRoom = new Room();
+        System.out.println("Controller : move("+sRoom.toString()+") -> "+s.toString());
+        s.move(sRoom);
+        System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
+        s.setState(EPlayerState.ALIVE);
+        System.out.println("Controller : addEffect("+r.toString()+") -> CURSED");
+        r.addEffect(ERoomEffects.CURSED);
+        System.out.println("---\tStart of test\t---");
+        System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
+        s.move(r);
         
     }
     public String testTitle() {

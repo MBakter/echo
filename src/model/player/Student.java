@@ -4,7 +4,10 @@ import model.Room;
 import model.items.IItem;
 
 public class Student extends Player {
-
+    @Override
+    public String toString(){
+        return "Student@"+Integer.toString(this.hashCode()).substring(0, 4);
+    }
     public Student(){
         //System.out.println("Student created");
     }
@@ -14,14 +17,13 @@ public class Student extends Player {
      * @param   r   a szoba ahová mozogni akar a hallgató, ennek hívjuk meg az addStudent függvényét
      */
     public void move(Room r) {
-        if(room == null){
+         if(room == null){
             room = r;
-            //System.out.println("Initial room set for sudent");
-            System.out.println("Student \""+ this.toString() +"\"s initial room is set to: \"" + r.toString() +"\"");
+            
             return;
-        }
-        //System.out.println("Student tries to move");
-        System.out.println("Student \""+ this.toString() +"\" calls room \""+ r.toString() +".addStudent(this)\"");
+        } 
+        System.out.println(this.toString()+": addStudent("+this.toString()+") -> "+r.toString());
+        
         boolean moveResult = r.addStudent(this);
     }
 

@@ -9,6 +9,10 @@ import model.player.Teacher;
 
 public class Room implements IRoomManager {
 
+    public String toString(){
+        return "Room@"+Integer.toString(this.hashCode()).substring(0, 4);
+    }
+
     private int maxPlayer;
     private List<ERoomEffects> effects = new ArrayList<ERoomEffects>();
     private List<IItem> itemList;
@@ -18,7 +22,7 @@ public class Room implements IRoomManager {
 
     public Room(){
         //System.out.println("Room created");
-        System.out.println("\""+this.toString()+"\" created");
+        System.out.println("<<create>> \""+this.toString()+"\"");
     }
 
     /**
@@ -28,18 +32,15 @@ public class Room implements IRoomManager {
      * @return  Sikerült-e mozogni a szobába
      */
     public boolean addStudent(Student s) { 
-        boolean moveResult = true;
         if(effects.contains(ERoomEffects.CURSED)){
-            //System.out.println("Student couldnt enter cursed room");
-            System.out.println("Student \"" + s.toString() + "\" could not move to cursed room \"" + this.toString() + "\"");
-            moveResult = false;
+            System.out.println("\tStudent \"" + s.toString() + "\" could not move to cursed room \"" + this.toString() + "\"");
+            return false;
         }
         if(s.getRoom().effects.contains(ERoomEffects.CURSED)){
-            System.out.println("Student \"" + s.toString() + "\" could not move from cursed room \"" + s.getRoom().toString() + "\"");
-            moveResult = false;
-        }
-        
-        return moveResult;
+            System.out.println("\tStudent \"" + s.toString() + "\" could not move from cursed room \"" + s.getRoom().toString() + "\"");
+            return false;
+        }        
+        return false;
     }
     public boolean removeStudent(Student s) { return false; }
     public boolean addTeacher(Teacher t) { return false; }
@@ -52,8 +53,7 @@ public class Room implements IRoomManager {
     public void removeItem(IItem i) {}
     public void addEffect(ERoomEffects e) {
         effects.add(e);
-        System.out.println("New effect added to room \"" + this.toString() + "\": " + e.toString());
-        //System.out.println("New effect added to room: " + e.toString());
+        System.out.println("\tNew effect added to room \"" + this.toString() + "\": " + e.toString());
     }
     public void removeEffect(ERoomEffects e) {}
 
