@@ -39,20 +39,20 @@ class student_enter_cursed implements ITestcase{
 
         Room r = new Room();
 
-        System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
+        System.out.println("Controller : setState("+s+") -> ALIVE");
         s.setState(EPlayerState.ALIVE);
 
-        System.out.println("Controller : addEffect("+r.toString()+") -> CURSED");
+        System.out.println("Controller : addEffect("+r+") -> CURSED");
         r.addEffect(ERoomEffects.CURSED);
 
         Room sRoom = new Room();
 
-        System.out.println("Controller : move("+sRoom.toString()+") -> "+s.toString());
+        System.out.println("Controller : move("+sRoom+") -> "+s);
         s.move(sRoom);
 
         System.out.println("---\tStart of test\t---");
 
-        System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
+        System.out.println("Controller : move("+r+") -> "+s);
         s.move(r);
     }
     public String testTitle() {
@@ -66,22 +66,22 @@ class student_leave_cursed  implements ITestcase{
         
         Student s = new Student();
 
-        System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
+        System.out.println("Controller : setState("+s+") -> ALIVE");
         s.setState(EPlayerState.ALIVE);        
         
         Room rCursed = new Room();
 
-        System.out.println("Controller : move("+rCursed.toString()+") -> "+s.toString());
+        System.out.println("Controller : move("+rCursed+") -> "+s);
         s.move(rCursed);
 
-        System.out.println("Controller : addEffect("+rCursed.toString()+") -> CURSED");
+        System.out.println("Controller : addEffect("+rCursed+") -> CURSED");
         rCursed.addEffect(ERoomEffects.CURSED);
 
         Room r = new Room();
 
         System.out.println("---\tStart of test\t---");
 
-        System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
+        System.out.println("Controller : move("+r+") -> "+s);
         s.move(r);        
     }
     public String testTitle() {
@@ -91,7 +91,10 @@ class student_leave_cursed  implements ITestcase{
 
 class student_enter_poison implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató gázos szobába lép";
