@@ -34,16 +34,24 @@ class fill{
 class student_enter_cursed implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
+
         Student s = new Student();
+
         Room r = new Room();
-        Room sRoom = new Room();
-        System.out.println("Controller : move("+sRoom.toString()+") -> "+s.toString());
-        s.move(sRoom);
+
         System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
         s.setState(EPlayerState.ALIVE);
+
         System.out.println("Controller : addEffect("+r.toString()+") -> CURSED");
         r.addEffect(ERoomEffects.CURSED);
+
+        Room sRoom = new Room();
+
+        System.out.println("Controller : move("+sRoom.toString()+") -> "+s.toString());
+        s.move(sRoom);
+
         System.out.println("---\tStart of test\t---");
+
         System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
         s.move(r);
     }
@@ -55,19 +63,26 @@ class student_enter_cursed implements ITestcase{
 class student_leave_cursed  implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
-        Student s = new Student();
-        Room r = new Room();
-        Room sRoom = new Room();
-        System.out.println("Controller : move("+sRoom.toString()+") -> "+s.toString());
-        s.move(sRoom);
-        System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
-        s.setState(EPlayerState.ALIVE);
-        System.out.println("Controller : addEffect("+r.toString()+") -> CURSED");
-        r.addEffect(ERoomEffects.CURSED);
-        System.out.println("---\tStart of test\t---");
-        System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
-        s.move(r);
         
+        Student s = new Student();
+
+        System.out.println("Controller : setState("+s.toString()+") -> ALIVE");
+        s.setState(EPlayerState.ALIVE);        
+        
+        Room rCursed = new Room();
+
+        System.out.println("Controller : move("+rCursed.toString()+") -> "+s.toString());
+        s.move(rCursed);
+
+        System.out.println("Controller : addEffect("+rCursed.toString()+") -> CURSED");
+        rCursed.addEffect(ERoomEffects.CURSED);
+
+        Room r = new Room();
+
+        System.out.println("---\tStart of test\t---");
+
+        System.out.println("Controller : move("+r.toString()+") -> "+s.toString());
+        s.move(r);        
     }
     public String testTitle() {
         return "Hallgató átkozott szobából próbál kilépni";

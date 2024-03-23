@@ -19,12 +19,13 @@ public class Student extends Player {
     public void move(Room r) {
          if(room == null){
             room = r;
-            
+            System.out.println("\t"+this+": room initially set to "+r);
             return;
         } 
-        System.out.println(this.toString()+": addStudent("+this.toString()+") -> "+r.toString());
-        
+        System.out.println("\t"+this+": current room is "+room);
+        System.out.println(this+": addStudent("+this+") -> "+r);        
         boolean moveResult = r.addStudent(this);
+        System.out.println("\t"+this+": current room is "+room);
     }
 
     public void TeacherAttacked() {

@@ -33,7 +33,7 @@ public class Room implements IRoomManager {
      */
     public boolean addStudent(Student s) { 
         if(effects.contains(ERoomEffects.CURSED)){
-            System.out.println("\tStudent \"" + s.toString() + "\" could not move to cursed room \"" + this.toString() + "\"");
+            System.out.println("\tStudent \"" + s + "\" could not move to cursed room \"" + this + "\"");
             return false;
         }
         if(s.getRoom().effects.contains(ERoomEffects.CURSED)){
@@ -53,7 +53,7 @@ public class Room implements IRoomManager {
     public void removeItem(IItem i) {}
     public void addEffect(ERoomEffects e) {
         effects.add(e);
-        System.out.println("\tNew effect added to room \"" + this.toString() + "\": " + e.toString());
+        System.out.println("\t"+this+": Effect added: "+e);
     }
     public void removeEffect(ERoomEffects e) {}
 
