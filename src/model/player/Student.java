@@ -17,16 +17,34 @@ public class Student extends Player {
      * @param   r   a szoba ahová mozogni akar a hallgató, ennek hívjuk meg az addStudent függvényét
      */
     public void move(Room r) {
-         if(room == null){
-            room = r;
-            System.out.println("\t"+this+": room initially set to "+r);
-            return;
-        } 
         System.out.println("\t"+this+": current room is "+room);
-        System.out.println(this+": addStudent("+this+") -> "+r);        
+        System.out.println("\t"+this+": addStudent("+this+") -> "+r);        
         boolean moveResult = r.addStudent(this);
+        if(moveResult){
+            room = r;
+            System.out.println("\t"+this+": moving to "+r+" successful");
+            System.out.println("\t"+r+": Students in room: "+r.getStudents());
+        }            
+        else{
+            System.out.println("\t"+this+": moving to "+r+" failed");
+        }            
         System.out.println("\t"+this+": current room is "+room);
+
     }
+    @Override
+    public void RoomPoisoned() {
+        System.out.println("\t"+this+": RoomPoisoned called");
+        boolean saved = false;
+        for (IItem iItem : itemList) {
+            saved = iItem.RoomPoisoned(this);
+        }
+        if(!saved){
+            state = EPlayerState.UNCONSCIOUS;
+            System.out.println("\t"+this+": State set to: "+state);
+        }else{
+            System.out.println("\t"+this+": Saved from poison!");
+        }        
+    };
 
     public void TeacherAttacked() {
         for (IItem item : itemList) 

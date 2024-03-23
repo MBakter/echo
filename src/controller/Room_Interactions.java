@@ -93,8 +93,19 @@ class student_enter_poison implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
         
+        Student s = new Student();
+        Room initRoom = new Room();
+        Room r = new Room();
+
+        s.setState(EPlayerState.ALIVE);
+        
+        s.move(initRoom);
+
+        r.addEffect(ERoomEffects.POISONED);
+
         System.out.println("---\tStart of test\t---");
      
+        s.move(r);
     }
     public String testTitle() {
         return "Hallgató gázos szobába lép";
@@ -103,7 +114,18 @@ class student_enter_poison implements ITestcase{
 
 class student_room_poisoned implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        Student s = new Student();
+        Room initRoom = new Room();
+
+        s.setState(EPlayerState.ALIVE);
+        
+        s.move(initRoom);        
+
+        System.out.println("---\tStart of test\t---");
+     
+        initRoom.addEffect(ERoomEffects.POISONED);
     }
     public String testTitle() {
         return "Hallgató szobája gázos lesz";
@@ -112,7 +134,10 @@ class student_room_poisoned implements ITestcase{
 
 class student_leave_poison implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató kilép a gázos szobából";
@@ -121,7 +146,10 @@ class student_leave_poison implements ITestcase{
 
 class student_room_poison_removed implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató szobájáról lekerül a gáz";
@@ -130,7 +158,10 @@ class student_room_poison_removed implements ITestcase{
 
 class student_enter_student implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató szobába lép, amiben hallgató van";
@@ -139,7 +170,10 @@ class student_enter_student implements ITestcase{
 
 class student_enter_teacher implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató szobába lép, amiben oktató van";
@@ -148,7 +182,10 @@ class student_enter_teacher implements ITestcase{
 
 class student_enter_full implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató teli szobába próbál lépni";
@@ -157,7 +194,10 @@ class student_enter_full implements ITestcase{
 
 class student_enter_empty implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Hallgató üres szobába lép";
@@ -166,7 +206,10 @@ class student_enter_empty implements ITestcase{
 
 class teacher_enter_cursed implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató átkozott szobába próbál lépni";
@@ -175,7 +218,10 @@ class teacher_enter_cursed implements ITestcase{
 
 class teacher_leave_cursed implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató átkozott szobából próbál kilépni";
@@ -184,7 +230,10 @@ class teacher_leave_cursed implements ITestcase{
 
 class teacher_enter_poisoned implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató gázos szobába lép";
@@ -193,7 +242,10 @@ class teacher_enter_poisoned implements ITestcase{
 
 class teacher_room_poisoned implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató szobája gázos lesz";
@@ -202,7 +254,10 @@ class teacher_room_poisoned implements ITestcase{
 
 class teacher_room_poison_removed implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató szobájáról lekerül a gáz";
@@ -211,7 +266,10 @@ class teacher_room_poison_removed implements ITestcase{
 
 class teacher_enter_student implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató szobába lép, amiben hallgató van";
@@ -220,7 +278,10 @@ class teacher_enter_student implements ITestcase{
 
 class teacher_enter_teacher implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató szobába lép, amiben oktató van";
@@ -229,7 +290,10 @@ class teacher_enter_teacher implements ITestcase{
 
 class teacher_enter_full implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató teli szobába próbál lépni";
@@ -238,7 +302,10 @@ class teacher_enter_full implements ITestcase{
 
 class teacher_enter_empty implements ITestcase{
     public void runTest() {
-        System.out.println("Eredmeny");
+        System.out.println("---\tSetup\t---");
+        
+        System.out.println("---\tStart of test\t---");
+     
     }
     public String testTitle() {
         return "Oktató üres szobába lép";

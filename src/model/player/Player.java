@@ -1,5 +1,6 @@
 package model.player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.ITimer;
@@ -11,8 +12,9 @@ public abstract class Player implements ITimer {
     Player(){
         System.out.println("<<create>> \""+this.toString()+"\"");
     }
+
     protected Room room;
-    protected List<IItem> itemList;
+    protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
     protected controller.Timer timer;
 
@@ -24,9 +26,15 @@ public abstract class Player implements ITimer {
     public Room getRoom() { return room; }
 
     public void move(Room r) {}
-    public void RoomPoisoned() {}
+    public void RoomPoisoned() {
+        System.out.println("\t"+this+": RoomPoisoned called");
+        state = EPlayerState.UNCONSCIOUS;
+        System.out.println("\t"+this+": State set to: "+state);
+    };
     public void RoomCleanFromPoison() {}
-    public void addItem(IItem i) {}
+    public void addItem(IItem i) {
+        itemList.add(i);
+    }
     public void removeItem(IItem i)  {}
     public void pickUp(IItem i) {}
     public void dropItem(IItem i) {}

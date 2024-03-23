@@ -14,15 +14,15 @@ public class Room implements IRoomManager {
     }
 
     private int maxPlayer;
-    private List<ERoomEffects> effects = new ArrayList<ERoomEffects>();
-    private List<IItem> itemList;
-    private List<Student> studentList;
-    private List<Teacher> teacherList;
-    private List<Room> neighbouringRooms;
+    private List<ERoomEffects> effects = new ArrayList<>();
+    private List<IItem> itemList = new ArrayList<>();
+    private List<Student> studentList = new ArrayList<>();
+    private List<Teacher> teacherList = new ArrayList<>();
+    private List<Room> neighbouringRooms = new ArrayList<>();
 
     public Room(){
         //System.out.println("Room created");
-        System.out.println("<<create>> \""+this.toString()+"\"");
+        System.out.println("<<create>> \""+this+"\"");
     }
 
     /**
@@ -32,19 +32,26 @@ public class Room implements IRoomManager {
      * @return  Sikerült-e mozogni a szobába
      */
     public boolean addStudent(Student s) { 
-        if(effects.contains(ERoomEffects.CURSED)){
-            System.out.println("\tStudent \"" + s + "\" could not move to cursed room \"" + this + "\"");
+        if(s.getRoom() == null){
+            studentList.add(s);
+            return true;
+        }
+        if(effects.contains(ERoomEffects.CURSED) || s.getRoom().effects.contains(ERoomEffects.CURSED)){
             return false;
         }
-        if(s.getRoom().effects.contains(ERoomEffects.CURSED)){
-            System.out.println("\tStudent \"" + s.toString() + "\" could not move from cursed room \"" + s.getRoom().toString() + "\"");
-            return false;
-        }        
+
+        if(effects.contains(ERoomEffects.POISONED)){
+            studentList.add(s);
+            s.RoomPoisoned();
+            return true;
+        }
+
         return false;
     }
     public boolean removeStudent(Student s) { return false; }
     public boolean addTeacher(Teacher t) { return false; }
     public boolean removeTeacher(Teacher t) { return false; }
+    public List<Student> getStudents() { return studentList; }
     public List<Teacher> getTeachers() { return teacherList; }
     public void addNeighbour(Room r) {}
     public void removeNeighbour(Room r) {}
@@ -54,6 +61,16 @@ public class Room implements IRoomManager {
     public void addEffect(ERoomEffects e) {
         effects.add(e);
         System.out.println("\t"+this+": Effect added: "+e);
+        if(!studentList.isEmpty()){
+            for (Student s : studentList) {
+                s.RoomPoisoned();
+            }
+        }
+        if(!teacherList.isEmpty()){
+            for (Teacher t : teacherList) {
+                t.RoomPoisoned();
+            }
+        }
     }
     public void removeEffect(ERoomEffects e) {}
 

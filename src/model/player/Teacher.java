@@ -17,4 +17,5 @@ public class Teacher extends Player {
         r.addTeacher(this);
         System.out.println("Teacher called room's addTeacher");
     }
+
 }
