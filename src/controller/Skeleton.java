@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import controller.DropItem.*;
 
 class test1 implements ITestcase{
     public void runTest() {
@@ -54,6 +55,9 @@ public class Skeleton {
         tests.put(1, ItemPickTests); // Testlist put to categorylist
         ItemPickTests.put(1, new test1());
         ItemPickTests.put(2, new test2());
+        ItemPickTests.put(1, new test1()); 
+        ItemPickTests.put(2, new test2()); 
+        ItemPickTests.put(3, new StudentDropsMask()); 
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();

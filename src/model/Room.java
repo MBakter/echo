@@ -163,7 +163,9 @@ public class Room implements IRoomManager {
     public void addNeighbour(Room r) {}
     public void removeNeighbour(Room r) {}
     public List<Room> getNeighbours() { return neighbouringRooms; }
-    public void addItem(IItem i) {}
+    public void addItem(IItem i) {
+        System.out.print("addItem()->Room");
+    }
     public void removeItem(IItem i) {}
 
     /**

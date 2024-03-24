@@ -41,12 +41,20 @@ public abstract class Player implements ITimer {
     }
     public void addItem(IItem i) {
         itemList.add(i);
+    
+        System.out.print("addItem()->Player");
     }
-    public void removeItem(IItem i)  {}
+    public void removeItem(IItem i)  {
+        System.out.print("removeItem()->Player");
+    }
     public void pickUp(IItem i) {
         i.pickUp(this);
     }
-    public void dropItem(IItem i) {}
+    public void dropItem(IItem i) {
+        System.out.print("dropItem()->Player");
+        i.dropItem(this);
+        room.addItem(i);
+    }
 
     @Override
     public void timerEnd() {

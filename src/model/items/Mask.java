@@ -9,7 +9,10 @@ public class Mask implements IItem, ITimer {
     private controller.Timer timer;
     private boolean functional;
     private Player wearer;
-
+    public Mask (){
+        System.out.println("<<create>> Mask");
+        timer = new Timer();
+    }
     @Override
     public String toString(){
         return "Mask@"+Integer.toString(this.hashCode()).substring(0, 4);

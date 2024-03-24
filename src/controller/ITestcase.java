@@ -1,7 +1,7 @@
 package controller;
 
 
-interface ITestcase {
+public interface ITestcase {
     public void runTest();
     public String testTitle();
 }

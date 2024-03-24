@@ -8,14 +8,15 @@ public class Student extends Player {
     public String toString(){
         return "Student@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
-    public Student(){
-        //System.out.println("Student created");
-    }
     /**
      * A hallgató megpróbál az r szobába mozogni
      * 
      * @param   r   a szoba ahová mozogni akar a hallgató, ennek hívjuk meg az addStudent függvényét
      */
+
+    public Student(){
+        System.out.println("<<create>> Student");
+    }
     public void move(Room r) {
         System.out.println("\t"+this+": current room is "+room);
         System.out.println(""+this+": addStudent("+this+") -> "+r);        
