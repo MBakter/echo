@@ -1,9 +1,26 @@
 package controller;
 
 import model.player.*;
+
+import java.util.Map;
+
 import model.*;
 import model.items.*;
 
+class fillIF {
+    public static void fill(Map<Integer, ITestcase> tests) {
+      tests.put(1, new Beer_save());
+      tests.put(2, new TVSZ_save());
+      tests.put(3, new Sponge_save());
+      tests.put(4, new Mask_save());
+      tests.put(5, new Cheese_timer());
+      tests.put(6, new Cheese_timer_end());
+      tests.put(7, new Beer_timer());
+      tests.put(8, new Sponge_timer());
+      tests.put(9, new Mask_pause());
+    }
+  }
+  
 class Beer_save implements ITestcase{
     public void runTest() {
 

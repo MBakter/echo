@@ -25,7 +25,7 @@ class room_merge implements ITestcase {
     Room r2 = new Room();
     Logarlec l = new Logarlec();
     Mask m = new Mask();
-    Beer b = new Beer();
+    Beer b = new Beer(new Timer());
 
     System.out.println("Controller : addItem("+l+") -> "+r1);
     r1.addItem(l);
@@ -109,7 +109,7 @@ class room_split implements ITestcase {
     Room r2 = new Room();
     Logarlec l = new Logarlec();
     Mask m = new Mask();
-    Beer b = new Beer();
+    Beer b = new Beer(new Timer());
 
     System.out.println("Controller : addItem("+l+") -> "+r1);
     r1.addItem(l);

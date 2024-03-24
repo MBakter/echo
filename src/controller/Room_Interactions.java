@@ -8,7 +8,7 @@ import model.player.EPlayerState;
 import model.player.Student;
 import model.player.Teacher;
 
-class fill{
+class RIfill{
     public void fill(Map<Integer, ITestcase> l){
         l.put(1, new student_enter_cursed());
         l.put(2, new student_leave_cursed());

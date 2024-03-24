@@ -7,23 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import controller.DropItem.*;
 
-class test1 implements ITestcase{
-    public void runTest() {
-        System.out.println("BUTTOOON");
-    }
-    public String testTitle() {
-        return "My first option!";
-    };
-}
-class test2 implements ITestcase{
-    public void runTest() {
-        System.out.println("BUTTOOON");
-    }
-    public String testTitle() {
-        return "My second option!";
-    };
-}
-
 public class Skeleton {
 
     private static void clearScreen() {
@@ -53,10 +36,6 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-        ItemPickTests.put(1, new test1());
-        ItemPickTests.put(2, new test2());
-        ItemPickTests.put(1, new test1()); 
-        ItemPickTests.put(2, new test2()); 
         ItemPickTests.put(3, new StudentDropsMask()); 
 
         // 2 Drop Tests
@@ -70,7 +49,7 @@ public class Skeleton {
         // 4 RoomIneraction Tests
         Map<Integer, ITestcase> RoomInteractionTests = new HashMap<Integer, ITestcase>();
         tests.put(4, RoomInteractionTests); // Testlist put to categorylist
-        new fill().fill(RoomInteractionTests);
+        new RIfill().fill(RoomInteractionTests);
 
         // 5 Room functionality Tests
         Map<Integer, ITestcase> RoomFunctionalityTests = new HashMap<Integer, ITestcase>();
@@ -80,6 +59,7 @@ public class Skeleton {
         // 6 Item functionality Tests
         Map<Integer, ITestcase> ItemFunctionalityTests = new HashMap<Integer, ITestcase>();
         tests.put(6, ItemFunctionalityTests); // Testlist put to categorylist
+        fillIF.fill(ItemFunctionalityTests);
 
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -135,10 +115,20 @@ public class Skeleton {
                         case 1: //Item pickup
                             testList(ItemPickTests, number);
                             break;
-                        case 5:
-                            testList(RoomFunctionalityTests, number);
-                        case 4:
+                        case 2: //Item drop
+                            testList(ItemDropTests, number);
+                            break;
+                        case 3: //Item use
+                            testList(ItemUseTests, number);
+                            break;
+                        case 4: //Room interactions
                             testList(RoomInteractionTests, number);
+                            break;
+                        case 5: // Room functionality
+                            testList(RoomFunctionalityTests, number);
+                            break;
+                        case 6: // Item functionality
+                            testList(ItemFunctionalityTests, number);
                             break;
                         default:
                             break;
