@@ -31,7 +31,9 @@ public abstract class Player implements ITimer {
         state = EPlayerState.UNCONSCIOUS;
         System.out.println("\t"+this+": State set to: "+state);
     };
-    public void RoomCleanFromPoison() {}
+    public void RoomCleanFromPoison() {
+        System.out.println("\t"+this+": RoomCleanFromPoison called");
+    }
     public void addItem(IItem i) {
         itemList.add(i);
     }

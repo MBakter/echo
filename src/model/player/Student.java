@@ -45,8 +45,16 @@ public class Student extends Player {
             System.out.println("\t"+this+": Saved from poison!");
         }        
     };
+    @Override
+    public void RoomCleanFromPoison() {
+        System.out.println("\t"+this+": RoomCleanFromPoison called");
+        for (IItem iItem : itemList) {
+            iItem.RoomCleanFromPoison(this);
+        }
+    }
 
     public void TeacherAttacked() {
+        System.out.println("\t"+this+": TeacherAttacked called!");
         for (IItem item : itemList) 
             if(item.TeacherAttackable(this)) 
                 return;      

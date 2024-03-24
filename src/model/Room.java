@@ -32,24 +32,86 @@ public class Room implements IRoomManager {
      * @return  Sikerült-e mozogni a szobába
      */
     public boolean addStudent(Student s) { 
+
+        int playersInRoom = teacherList.size()+studentList.size();
+
+        // Initialize student's room
         if(s.getRoom() == null){
             studentList.add(s);
             return true;
         }
-        if(effects.contains(ERoomEffects.CURSED) || s.getRoom().effects.contains(ERoomEffects.CURSED)){
+        // Enter or leave cursed room
+        if(effects.contains(ERoomEffects.CURSED) || s.getRoom().effects.contains(ERoomEffects.CURSED)
+        || maxPlayer == playersInRoom){
             return false;
         }
-
+        // Leave poisoned room to not poisoned
+        if(s.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)){
+            s.getRoom().removeStudent(s);
+            studentList.add(s);
+            s.RoomCleanFromPoison();;
+            checkAttacks();
+            return true;
+        }
+        // Enter poisoned
         if(effects.contains(ERoomEffects.POISONED)){
+            s.getRoom().removeStudent(s);
             studentList.add(s);
             s.RoomPoisoned();
+            checkAttacks();
             return true;
         }
 
-        return false;
+        s.getRoom().removeStudent(s);
+        studentList.add(s);
+        checkAttacks(); 
+        return true;
     }
+    public void checkAttacks(){
+        if(!studentList.isEmpty() && !teacherList.isEmpty()){
+            for (Student s : studentList) {
+                s.TeacherAttacked();
+            }
+        }
+    }
+
     public boolean removeStudent(Student s) { return false; }
-    public boolean addTeacher(Teacher t) { return false; }
+    public boolean addTeacher(Teacher t) { 
+
+        int playersInRoom = teacherList.size()+studentList.size();
+
+        // Initialize Teacher's room
+        if(t.getRoom() == null){
+            teacherList.add(t);
+            return true;
+        }
+        // Enter or leave cursed room
+        if(effects.contains(ERoomEffects.CURSED) || t.getRoom().effects.contains(ERoomEffects.CURSED)
+        || playersInRoom == maxPlayer){
+            return false;
+        }
+        // Leave poisoned room to not poisoned
+        if(t.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)){
+            t.getRoom().removeTeacher(t);
+            teacherList.add(t);
+            t.RoomCleanFromPoison();;
+            checkAttacks();
+            return true;
+        }
+        // Enter poisoned
+        if(effects.contains(ERoomEffects.POISONED)){
+            t.getRoom().removeTeacher(t);
+            teacherList.add(t);
+            t.RoomPoisoned();
+            checkAttacks();
+            return true;
+        }
+
+        t.getRoom().removeTeacher(t);
+        teacherList.add(t);
+        checkAttacks(); 
+        return true;
+     }
     public boolean removeTeacher(Teacher t) { return false; }
     public List<Student> getStudents() { return studentList; }
     public List<Teacher> getTeachers() { return teacherList; }
@@ -61,7 +123,15 @@ public class Room implements IRoomManager {
     public void addEffect(ERoomEffects e) {
         effects.add(e);
         System.out.println("\t"+this+": Effect added: "+e);
-        if(!studentList.isEmpty()){
+        if(e == ERoomEffects.POISONED){
+            for (Student s : studentList) {
+                s.RoomPoisoned();
+            }
+            for (Teacher t : teacherList) {
+                t.RoomPoisoned();
+            }
+        }
+/*         if(!studentList.isEmpty() && e == ERoomEffects.POISONED){
             for (Student s : studentList) {
                 s.RoomPoisoned();
             }
@@ -70,9 +140,27 @@ public class Room implements IRoomManager {
             for (Teacher t : teacherList) {
                 t.RoomPoisoned();
             }
+        } */
+    }
+    public void removeEffect(ERoomEffects e) {
+        System.out.println("\t"+this+": Effects before removal: "+effects);
+        effects.remove(e);
+        System.out.println("\t"+this+": Effects after removal: "+effects);
+        if(!effects.contains(ERoomEffects.POISONED)){
+            for (Student s : studentList) {
+                s.RoomCleanFromPoison();
+            }
+            for (Teacher t : teacherList) {
+                t.RoomCleanFromPoison();
+            }
         }
     }
-    public void removeEffect(ERoomEffects e) {}
+
+    public int getMax(){return maxPlayer;}
+    public void setMax(int n){
+        maxPlayer = n;
+        System.out.println("\t"+this+": Max size set to: "+n);
+    }
 
     @Override
     public Room split() {

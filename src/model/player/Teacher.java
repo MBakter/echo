@@ -5,7 +5,7 @@ import model.Room;
 public class Teacher extends Player {
     @Override
     public String toString(){
-        return "Teacher@"+this.hashCode()/10000;
+        return "Teacher@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
         /**
@@ -14,8 +14,19 @@ public class Teacher extends Player {
      * @param   r   a szoba ahová mozogni akar az okató, ennek hívjuk meg az addTeacher függvényét
      */
     public void move(Room r) {
-        r.addTeacher(this);
-        System.out.println("Teacher called room's addTeacher");
+        System.out.println("\t"+this+": current room is "+room);
+        System.out.println("\t"+this+": addTeacher("+this+") -> "+r);        
+        boolean moveResult = r.addTeacher(this);
+        if(moveResult){
+            room = r;
+            System.out.println("\t"+this+": moving to "+r+" successful");
+            System.out.println("\t"+r+": Teachers in room: "+r.getTeachers());
+        }            
+        else{
+            System.out.println("\t"+this+": moving to "+r+" failed");
+        }            
+        System.out.println("\t"+this+": current room is "+room);
+
     }
 
 }
