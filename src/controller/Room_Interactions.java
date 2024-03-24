@@ -31,7 +31,9 @@ class RIfill{
         l.put(19, new teacher_enter_empty());
     }
 }
-
+/**
+ * Hallgató átkozott szobába próbál lépni
+ */
 class student_enter_cursed implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -55,10 +57,12 @@ class student_enter_cursed implements ITestcase{
         s.move(r);
     }
     public String testTitle() {
-        return "Hallgató átkozott szobába próbál lépni";
+        return "Student tries to enter cursed room";
     };
 }
-
+/**
+ * Hallgató átkozott szobából próbál kilépni
+ */
 class student_leave_cursed  implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -82,10 +86,12 @@ class student_leave_cursed  implements ITestcase{
         s.move(r);        
     }
     public String testTitle() {
-        return "Hallgató átkozott szobából próbál kilépni";
+        return "Student tries to leave cursed room";
     };
 }
-
+/**
+ * Hallgató gázos szobába lép
+ */
 class student_enter_poison implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");        
@@ -109,10 +115,12 @@ class student_enter_poison implements ITestcase{
         s.move(r);
     }
     public String testTitle() {
-        return "Hallgató gázos szobába lép";
+        return "Student enters poisoned room";
     };
 }
-
+/**
+ * Hallgató szobája gázos lesz
+ */
 class student_room_poisoned implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -132,10 +140,12 @@ class student_room_poisoned implements ITestcase{
         initRoom.addEffect(ERoomEffects.POISONED);
     }
     public String testTitle() {
-        return "Hallgató szobája gázos lesz";
+        return "Student's room is poisoned";
     };
 }
-
+/**
+ * Hallgató kilép a gázos szobából
+ */
 class student_leave_poison implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -162,10 +172,12 @@ class student_leave_poison implements ITestcase{
         s.move(r);
     }
     public String testTitle() {
-        return "Hallgató kilép a gázos szobából";
+        return "Student leaves poisoned room";
     };
 }
-
+/**
+ * Hallgató szobájáról lekerül a gáz
+ */
 class student_room_poison_removed implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -189,10 +201,12 @@ class student_room_poison_removed implements ITestcase{
 
     }
     public String testTitle() {
-        return "Hallgató szobájáról lekerül a gáz";
+        return "Student's room is no longer poisoned";
     };
 }
-
+/**
+ * Hallgató szobába lép, amiben hallgató van
+ */
 class student_enter_student implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -215,10 +229,12 @@ class student_enter_student implements ITestcase{
         s2.move(initRoom);
     }
     public String testTitle() {
-        return "Hallgató szobába lép, amiben hallgató van";
+        return "Student enters room with other student(s)";
     };
 }
-
+/**
+ * Hallgató szobába lép, amiben oktató van
+ */
 class student_enter_teacher implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -244,10 +260,12 @@ class student_enter_teacher implements ITestcase{
         s.move(r);
     }
     public String testTitle() {
-        return "Hallgató szobába lép, amiben oktató van";
+        return "Student enters room with teacher(s)";
     };
 }
-
+/**
+ * Hallgató teli szobába próbál lépni
+ */
 class student_enter_full implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -289,10 +307,12 @@ class student_enter_full implements ITestcase{
      
     }
     public String testTitle() {
-        return "Hallgató teli szobába próbál lépni";
+        return "Student tries to enter full room";
     };
 }
-
+/**
+ * Hallgató üres szobába lép
+ */
 class student_enter_empty implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -309,10 +329,12 @@ class student_enter_empty implements ITestcase{
         s.move(initRoom);
     }
     public String testTitle() {
-        return "Hallgató üres szobába lép";
+        return "Student enters empty room";
     };
 }
-
+/**
+ * Oktató átkozott szobába próbál lépni
+ */
 class teacher_enter_cursed implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -337,10 +359,12 @@ class teacher_enter_cursed implements ITestcase{
 
     }
     public String testTitle() {
-        return "Oktató átkozott szobába próbál lépni";
+        return "Teacher tries to enter cursed room";
     };
 }
-
+/**
+ * Oktató átkozott szobából próbál kilépni
+ */
 class teacher_leave_cursed implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -364,10 +388,12 @@ class teacher_leave_cursed implements ITestcase{
         t.move(r);  
     }
     public String testTitle() {
-        return "Oktató átkozott szobából próbál kilépni";
+        return "Teacher tries to leave cursed room";
     };
 }
-
+/**
+ * Oktató gázos szobába lép
+ */
 class teacher_enter_poison implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -391,10 +417,12 @@ class teacher_enter_poison implements ITestcase{
         t.move(r);
     }
     public String testTitle() {
-        return "Oktató gázos szobába lép";
+        return "Teacher enters poisoned room";
     };
 }
-
+/**
+ * Oktató szobája gázos lesz
+ */
 class teacher_room_poisoned implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -414,10 +442,12 @@ class teacher_room_poisoned implements ITestcase{
         initRoom.addEffect(ERoomEffects.POISONED);
     }
     public String testTitle() {
-        return "Oktató szobája gázos lesz";
+        return "Teacher's room is poisoned";
     };
 }
-
+/**
+ * Oktató szobájáról lekerül a gáz
+ */
 class teacher_room_poison_removed implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -440,10 +470,12 @@ class teacher_room_poison_removed implements ITestcase{
         initRoom.removeEffect(ERoomEffects.POISONED);
     }
     public String testTitle() {
-        return "Oktató szobájáról lekerül a gáz";
+        return "Teacher's room is no longer poisoned";
     };
 }
-
+/**
+ * Oktató szobába lép, amiben hallgató van
+ */
 class teacher_enter_student implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -469,10 +501,12 @@ class teacher_enter_student implements ITestcase{
         t.move(initRoom);
     }
     public String testTitle() {
-        return "Oktató szobába lép, amiben hallgató van";
+        return "Teacher enters room with student(s)";
     };
 }
-
+/**
+ * Oktató szobába lép, amiben oktató van
+ */
 class teacher_enter_teacher implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -498,10 +532,12 @@ class teacher_enter_teacher implements ITestcase{
         t1.move(initRoom);
     }
     public String testTitle() {
-        return "Oktató szobába lép, amiben oktató van";
+        return "Teacher enters room with teacher(s)";
     };
 }
-
+/**
+ * Oktató teli szobába próbál lépni
+ */
 class teacher_enter_full implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -543,10 +579,12 @@ class teacher_enter_full implements ITestcase{
      
     }
     public String testTitle() {
-        return "Oktató teli szobába próbál lépni";
+        return "Teacher tries to enter full room";
     };
 }
-
+/**
+ * Oktató üres szobába lép
+ */
 class teacher_enter_empty implements ITestcase{
     public void runTest() {
         System.out.println("---\tSetup\t---");
@@ -563,6 +601,6 @@ class teacher_enter_empty implements ITestcase{
         t.move(initRoom);
     }
     public String testTitle() {
-        return "Oktató üres szobába lép";
+        return "Teacher enters empty room";
     };
 }
