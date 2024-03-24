@@ -87,9 +87,6 @@ class room_merge_not_empty implements ITestcase {
     System.out.println("Controller : move("+r1+") -> "+s);
     s.move(r1);
 
-    System.out.println("Student : addStudent("+s+") -> "+r1);
-    r1.addStudent(s);
-
     System.out.println("---\tStart of test\t---");
 
     System.out.println("Controller : merge("+r2+") -> "+r1);
@@ -170,9 +167,6 @@ class room_split_not_empty implements ITestcase {
 
     System.out.println("Controller : move("+r1+") -> "+s);
     s.move(r1);
-
-    System.out.println("Student : addStudent("+s+") -> "+r1);
-    r1.addStudent(s);
 
     System.out.println("---\tStart of test\t---");
 
