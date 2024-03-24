@@ -6,6 +6,23 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+class test1 implements ITestcase{
+    public void runTest() {
+        System.out.println("BUTTOOON");
+    }
+    public String testTitle() {
+        return "My first option!";
+    };
+}
+class test2 implements ITestcase{
+    public void runTest() {
+        System.out.println("BUTTOOON");
+    }
+    public String testTitle() {
+        return "My second option!";
+    };
+}
+
 public class Skeleton {
 
     private static void clearScreen() {
@@ -35,8 +52,8 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-        ItemPickTests.put(1, new test1()); 
-        ItemPickTests.put(2, new test2()); 
+        ItemPickTests.put(1, new test1());
+        ItemPickTests.put(2, new test2());
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();
@@ -56,20 +73,8 @@ public class Skeleton {
         fillRF.fill(RoomFunctionalityTests);
 
         // 6 Item functionality Tests
-        Map<Integer, ITestcase> ItemFunctionalityTests = new HashMap<Integer, ITestcase>()
-        {{
-            put(1, new Beer_save());
-            put(2, new TVSZ_save());
-            put(3, new Sponge_save());
-            put(4, new Mask_save());
-            put(5, new Cheese_timer());
-            put(6, new Cheese_timer_end());
-            put(7, new Beer_timer());
-            put(8, new Sponge_timer());
-            put(9, new Mask_pause());
-        }}; 
+        Map<Integer, ITestcase> ItemFunctionalityTests = new HashMap<Integer, ITestcase>();
         tests.put(6, ItemFunctionalityTests); // Testlist put to categorylist
-
 
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -125,8 +130,6 @@ public class Skeleton {
                         case 1: //Item pickup
                             testList(ItemPickTests, number);
                             break;
-                        case 6:
-                            testList(ItemFunctionalityTests, number);
                         case 5:
                             testList(RoomFunctionalityTests, number);
                             break;
