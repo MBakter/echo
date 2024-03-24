@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import controller.DropItem.*;
 
 public class Skeleton {
 
@@ -36,15 +35,17 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-        ItemPickTests.put(3, new StudentDropsMask()); 
+        //ItemPickTests.put(3, new DropItem()); 
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();
         tests.put(2, ItemDropTests); // Testlist put to categorylist
+        DIfill.fill(ItemDropTests);
 
         // 3 Use Tests
         Map<Integer, ITestcase> ItemUseTests = new HashMap<Integer, ITestcase>();
         tests.put(3, ItemUseTests); // Testlist put to categorylist
+        UIfill.fill(ItemUseTests);
 
         // 4 RoomIneraction Tests
         Map<Integer, ITestcase> RoomInteractionTests = new HashMap<Integer, ITestcase>();

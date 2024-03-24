@@ -15,8 +15,9 @@ public class Student extends Player {
      */
 
     public Student(){
-        System.out.println("<<create>> Student");
+
     }
+    
     public void move(Room r) {
         System.out.println("\t"+this+": current room is "+room);
         System.out.println(""+this+": addStudent("+this+") -> "+r);        

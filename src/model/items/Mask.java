@@ -10,7 +10,7 @@ public class Mask implements IItem, ITimer {
     private boolean functional;
     private Player wearer;
     public Mask (){
-        System.out.println("<<create>> Mask");
+        System.out.println("<<create>> " + this.toString());
         timer = new Timer();
     }
     @Override
@@ -39,16 +39,16 @@ public class Mask implements IItem, ITimer {
     public void pickUp(Player p) {
         wearer = p;
 
-        System.out.println("Mask : addItem(" + this.toString() + ") -> " + p.toString());
+        System.out.println("\t"+"Mask : addItem(" + this.toString() + ") -> " + p.toString());
         p.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("Mask : pauseTimer(" + this.toString() + ") -> " + timer.toString());
+        System.out.println("\t"+"Mask : pauseTimer(" + this.toString() + ") -> " + timer.toString());
         timer.pauseTimer(this);
         
-        System.out.println("Mask : removeItem( " + this.toString() + ") -> " + p.toString());
+        System.out.println("\t"+"Mask : removeItem( " + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 

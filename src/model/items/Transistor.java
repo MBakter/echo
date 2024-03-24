@@ -19,11 +19,31 @@ public class Transistor implements IItem {
         System.out.println("<<create>> " + this.toString());
     }
 
-    public void ActivateTransistor() {}
-    public void PairTransistor(Transistor t2) {}
+    public void ActivateTransistor() {
+        System.out.println("\t"+this+": ActivateTransistor called");
+        active = true;
+    }
+    public void PairTransistor(Transistor t2) {
+        System.out.println("\t"+this+": PairTransistor called");
+        pair = t2;
+
+        System.out.println("\t"+"Transistor : setPair( " + this.toString() + ") -> " + t2.toString());
+        t2.setPair(this);
+
+    }
+    private void setPair(Transistor transistor) {
+        System.out.println("\t"+this+": setPair called");
+        pair = transistor;
+    }
+
     public void UnpairTransistor(Transistor t2) {}
-    public void setRoom(Room r) {}
-    public void UnactivateTransistor() {}
+    public void setRoom(Room r) {
+        room = r;
+    }
+    public void deactivateTransistor(Player p) {
+        System.out.println("\t"+this+": deactivateTransistor called");
+        active = false;
+    }
 
     @Override
     public void useItem(Player p) {
@@ -44,8 +64,29 @@ public class Transistor implements IItem {
 
     @Override
     public void dropItem(Player p) {
-        p.removeItem(this);
+        
+        if (pair != null){
+            if (pair.room != null && active){
+                System.out.println("\t"+"Transistor : teleport( " + p.toString() + ") -> " + this.toString());
+                teleport(p);
+
+                System.out.println("\t"+"Transistor : deactivateTransistor( " + p.toString() + ") -> " + this.toString());
+                deactivateTransistor(p);
+            }
+
+        }
+
         room = p.getRoom();
+        System.out.println("\t"+"Transistor : removeItem( " + this.toString() + ") -> " + p.toString());
+        p.removeItem(this);
+
+    }
+
+    private void teleport(Player p) {
+        System.out.println("\t"+this+": teleport called");
+
+        System.out.println("\t"+"Transistor : move( " + pair.room.toString() + ") -> " + p.toString());
+        p.move(pair.room);
     }
 
     @Override

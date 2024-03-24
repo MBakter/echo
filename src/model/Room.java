@@ -36,7 +36,7 @@ public class Room implements IRoomManager {
      * @return  Sikerült-e mozogni a szobába
      */
     public boolean addStudent(Student s) { 
-
+        System.out.println("\t"+this+": addStudent called");
         int playersInRoom = teacherList.size()+studentList.size();
 
         // Initialize student's room
@@ -164,7 +164,7 @@ public class Room implements IRoomManager {
     public void removeNeighbour(Room r) {}
     public List<Room> getNeighbours() { return neighbouringRooms; }
     public void addItem(IItem i) {
-        System.out.print("addItem()->Room");
+        System.out.println("\t"+this+": Effects after addition: "+effects);
     }
     public void removeItem(IItem i) {}
 

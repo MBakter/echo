@@ -24,9 +24,12 @@ public abstract class Player implements ITimer {
         System.out.println("\t"+this + ": state set to "+ state);
     }
     public Room getRoom() { return room; }
-    public void setRoom(Room r) { room = r; }
+    public void setRoom(Room r) { 
+        System.out.println("\t"+this+": setRoom called");
+        room = r; 
+    }
 
-    public void move(Room r) {}
+    public void move(Room r) {    }
 
     /**
      * Alap RoomPoisoned függvény, eszméletét veszti a Player
@@ -40,24 +43,32 @@ public abstract class Player implements ITimer {
         System.out.println("\t"+this+": RoomCleanFromPoison called");
     }
     public void addItem(IItem i) {
+        System.out.println("\t"+this+": addItem called");
         itemList.add(i);
-    
-        System.out.print("addItem()->Player");
+
     }
     public void removeItem(IItem i)  {
-        System.out.print("removeItem()->Player");
+        System.out.println("\t"+this+": removeItem called");
     }
     public void pickUp(IItem i) {
+        System.out.println("\t"+this+": pickUp called");
+
+        System.out.println(""+this+": pickUp("+this+") -> "+i); 
         i.pickUp(this);
     }
     public void dropItem(IItem i) {
-        System.out.print("dropItem()->Player");
+        System.out.println("\t"+this+": dropItem called");
+
+        System.out.println("\t"+this+": dropItem("+this+") -> "+i); 
         i.dropItem(this);
+
+        System.out.println("\t"+this+": addItem("+i+") -> "+room); 
         room.addItem(i);
     }
 
     @Override
     public void timerEnd() {
+        System.out.println("\t"+this+": timerEnd called");
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
     }

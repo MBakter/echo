@@ -12,7 +12,7 @@ rectangle "r:Room" as r
 !$targetItemClass = "Transistor"
 rectangle "$targetItem:$targetItemClass" as targetItem
 rectangle "$targetItem2:$targetItemClass" as targetItem2
-title  $targetActorClass Drops $targetItemClass (active and upactive)
+title  $targetActorClass Drops $targetItemClass (active and uppaired)
 
 c --> targetItem: 1. <<create>>
 c --> targetItem2: 6. <<create>>\n7. activateTransistor

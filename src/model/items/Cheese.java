@@ -23,6 +23,11 @@ public class Cheese implements IItem, ITimer {
         t.addItem(this);
     }
 
+    public Cheese() {
+        System.out.println("<<create>> " + this.toString());
+        timer = new Timer();
+    }
+
     public void startTimer() {
         System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
@@ -37,6 +42,12 @@ public class Cheese implements IItem, ITimer {
 
         System.out.println("Cheese : addEffect(POISONED) -> " + room.toString());
         room.addEffect(ERoomEffects.POISONED);
+
+        System.out.println("Cheese : removeItem(" + this.toString() + ") -> " + p.toString());
+        p.removeItem(this);
+
+        System.out.println("Cheese : addItem(" + this.toString() + ") -> " + room.toString());
+        room.addItem(this);
     }
 
     @Override
