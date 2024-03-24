@@ -8,7 +8,7 @@ import model.player.Player;
 import model.player.Student;
 
 public class Cheese implements IItem, ITimer {
-    private controller.Timer timer;
+    private Timer timer;
     private boolean isUsed;
     private Room room;
 
@@ -17,14 +17,15 @@ public class Cheese implements IItem, ITimer {
         return "Cheese@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
-    public Cheese() {
+    public Cheese(Timer t) {
         System.out.println("<<create>> " + this.toString());
-        timer = new Timer();
+        timer = t;
+        t.addItem(this);
     }
 
     public void startTimer() {
-        System.out.println("Cheese : startTimer() -> " + timer.toString());
-        timer.startTimer(2);
+        System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
+        timer.startTimer(this, 2);
     }
 
     @Override

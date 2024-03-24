@@ -17,9 +17,10 @@ public class Sponge implements IItem, ITimer {
         return "Sponge@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
-    public Sponge() {
+    public Sponge(Timer t) {
         System.out.println("<<create>> " + this.toString());
-        timer = new Timer();
+        timer = t;
+        t.addItem(this);
     }
 
     @Override
@@ -30,8 +31,8 @@ public class Sponge implements IItem, ITimer {
 
     @Override
     public void pickUp(Player p) {
-        System.out.println("Sponge : startTimer() -> " + timer.toString());
-        timer.startTimer(2);
+        System.out.println("Sponge : startTimer(\" + this.toString() + \", 2) -> " + timer.toString());
+        timer.startTimer(this, 2);
 
         functional = true;
         System.out.println("Sponge : setFunctional -> " + (functional ? "true" : "false"));
@@ -45,8 +46,8 @@ public class Sponge implements IItem, ITimer {
         System.out.println("Sponge : addItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
         
-        System.out.println("Sponge : pauseTimer() -> " + timer.toString());
-        timer.pauseTimer();
+        System.out.println("Sponge : pauseTimer(" + this.toString() + ") -> " + timer.toString());
+        timer.pauseTimer(this);
     }
 
     @Override

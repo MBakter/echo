@@ -4,6 +4,7 @@ import model.player.Player;
 import model.player.Student;
 
 public interface IItem {
+
     public void useItem(Player p);
     public void pickUp(Player p);
     public void dropItem(Player p);

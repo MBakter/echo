@@ -55,12 +55,15 @@ public class Skeleton {
         // 6 Item functionality Tests
         Map<Integer, ITestcase> ItemFunctionalityTests = new HashMap<Integer, ITestcase>()
         {{
-             put(1, new Beer_save());
-             put(2, new TVSZ_save());
-             put(3, new Sponge_save());
-             put(4, new Mask_save());
-             put(5, new Cheese_timer());
-
+            put(1, new Beer_save());
+            put(2, new TVSZ_save());
+            put(3, new Sponge_save());
+            put(4, new Mask_save());
+            put(5, new Cheese_timer());
+            put(6, new Cheese_timer_end());
+            put(7, new Beer_timer());
+            put(8, new Sponge_timer());
+            put(9, new Mask_pause());
         }}; 
         tests.put(6, ItemFunctionalityTests); // Testlist put to categorylist
 
