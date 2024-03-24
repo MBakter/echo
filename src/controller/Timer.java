@@ -5,6 +5,6 @@ import java.util.List;
 public class Timer {
     private List<model.ITimer> items;
 
-    public void startTimer() {}
+    public void startTimer(int time) {}
     public void pauseTimer() {}
 }

@@ -9,6 +9,10 @@ public class Student extends Player {
 
     }
 
+    public void useItem(IItem i) {
+        i.useItem(this);
+    }
+
     public void TeacherAttacked() {
         for (IItem item : itemList) 
             if(item.TeacherAttackable(this)) 

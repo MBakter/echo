@@ -10,6 +10,15 @@ public class Transistor implements IItem {
     private Room room;
     private Transistor pair;
 
+    @Override
+    public String toString(){
+        return "Transistor@"+Integer.toString(this.hashCode()).substring(0, 4);
+    }
+
+    public Transistor() {
+        System.out.println("<<create>> " + this.toString());
+    }
+
     public void ActivateTransistor() {}
     public void PairTransistor(Transistor t2) {}
     public void UnpairTransistor(Transistor t2) {}
