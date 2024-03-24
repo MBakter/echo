@@ -20,6 +20,9 @@ public class Room implements IRoomManager {
     private List<Teacher> teacherList = new ArrayList<>();
     private List<Room> neighbouringRooms = new ArrayList<>();
 
+    /**
+     * Teszthez kiírjuk a <<create>>-et és beállítjuk az alap méretet
+     */
     public Room(){
         //System.out.println("Room created");
         System.out.println("\n<<create>> \""+this+"\"");
@@ -63,11 +66,15 @@ public class Room implements IRoomManager {
             return true;
         }
 
+        // Both rooms clear of effects
         s.getRoom().removeStudent(s);
         studentList.add(s);
         checkAttacks(); 
         return true;
     }
+    /**
+     * Megnézzük, hogy egy szobába került-e hallgató és oktató
+     */
     private void checkAttacks(){
         if(!studentList.isEmpty() && !teacherList.isEmpty()){
             for (Student s : studentList) {
@@ -76,6 +83,12 @@ public class Room implements IRoomManager {
         }
     }
 
+    /**
+     * Hallgató eltávolítása a szoba listájából
+     * 
+     * @param s Keresett hallgató
+     * @return  Benne volt-e a hallgató a listában
+     */
     public boolean removeStudent(Student s) { 
         boolean contains = studentList.contains(s);
         if(contains){
@@ -85,6 +98,13 @@ public class Room implements IRoomManager {
 
         return contains;
      }
+    
+    /**
+     * Megpróbálja a jelenlegi szobába mozgatni az adott oktatót.
+     * 
+     * @param t Az oktató, aki mozogni próbál a jelenlegi szobába
+     * @return  Sikerült-e mozogni a szobába
+     */
     public boolean addTeacher(Teacher t) { 
 
         int playersInRoom = teacherList.size()+studentList.size();
@@ -116,11 +136,19 @@ public class Room implements IRoomManager {
             return true;
         }
 
+        // Both rooms clear
         t.getRoom().removeTeacher(t);
         teacherList.add(t);
         checkAttacks(); 
         return true;
      }
+
+    /**
+    * Oktató eltávolítása a szoba listájából
+    * 
+    * @param s Keresett oktató
+    * @return  Benne volt-e az oktató a listában
+    */
     public boolean removeTeacher(Teacher t) { 
         boolean contains = teacherList.contains(t);
         if(contains){
@@ -137,9 +165,15 @@ public class Room implements IRoomManager {
     public List<Room> getNeighbours() { return neighbouringRooms; }
     public void addItem(IItem i) {}
     public void removeItem(IItem i) {}
+
+    /**
+     * Effektus rakása a szobára, effektus aktiválódása esemény indítása
+     * 
+     * @param e Az effektus, amit a szobára teszünk
+     */
     public void addEffect(ERoomEffects e) {
         effects.add(e);
-        System.out.println("\t"+this+": Effect added: "+e);
+        System.out.println("\t"+this+": Effects after addition: "+effects);
         if(e == ERoomEffects.POISONED){
             for (Student s : studentList) {
                 s.RoomPoisoned();
@@ -148,17 +182,12 @@ public class Room implements IRoomManager {
                 t.RoomPoisoned();
             }
         }
-/*         if(!studentList.isEmpty() && e == ERoomEffects.POISONED){
-            for (Student s : studentList) {
-                s.RoomPoisoned();
-            }
-        }
-        if(!teacherList.isEmpty()){
-            for (Teacher t : teacherList) {
-                t.RoomPoisoned();
-            }
-        } */
     }
+    /**
+     * Effektus eltávolítása a szobáról, effektus eltávolítása esemény indítása
+     * 
+     * @param e Az effektus, amit a szobáról leveszünk
+     */
     public void removeEffect(ERoomEffects e) {
         System.out.println("\t"+this+": Effects before removal: "+effects);
         effects.remove(e);

@@ -9,26 +9,26 @@ import model.player.Student;
 import model.player.Teacher;
 
 class fill{
-    public void fill(Map<Integer, ITestcase> asd){
-        asd.put(1, new student_enter_cursed());
-        asd.put(2, new student_leave_cursed());
-        asd.put(3, new student_enter_poison());
-        asd.put(4, new student_room_poisoned());
-        asd.put(5, new student_leave_poison());
-        asd.put(6, new student_room_poison_removed());
-        asd.put(7, new student_enter_student());
-        asd.put(8, new student_enter_teacher());
-        asd.put(9, new student_enter_full());
-        asd.put(10, new student_enter_empty());
-        asd.put(11, new teacher_enter_cursed());
-        asd.put(12, new teacher_leave_cursed());
-        asd.put(13, new teacher_enter_poison());
-        asd.put(14, new teacher_room_poisoned());
-        asd.put(15, new teacher_room_poison_removed());
-        asd.put(16, new teacher_enter_student());
-        asd.put(17, new teacher_enter_teacher());
-        asd.put(18, new teacher_enter_full());
-        asd.put(19, new teacher_enter_empty());
+    public void fill(Map<Integer, ITestcase> l){
+        l.put(1, new student_enter_cursed());
+        l.put(2, new student_leave_cursed());
+        l.put(3, new student_enter_poison());
+        l.put(4, new student_room_poisoned());
+        l.put(5, new student_leave_poison());
+        l.put(6, new student_room_poison_removed());
+        l.put(7, new student_enter_student());
+        l.put(8, new student_enter_teacher());
+        l.put(9, new student_enter_full());
+        l.put(10, new student_enter_empty());
+        l.put(11, new teacher_enter_cursed());
+        l.put(12, new teacher_leave_cursed());
+        l.put(13, new teacher_enter_poison());
+        l.put(14, new teacher_room_poisoned());
+        l.put(15, new teacher_room_poison_removed());
+        l.put(16, new teacher_enter_student());
+        l.put(17, new teacher_enter_teacher());
+        l.put(18, new teacher_enter_full());
+        l.put(19, new teacher_enter_empty());
     }
 }
 

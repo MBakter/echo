@@ -26,6 +26,10 @@ public abstract class Player implements ITimer {
     public Room getRoom() { return room; }
 
     public void move(Room r) {}
+
+    /**
+     * Alap RoomPoisoned függvény, eszméletét veszti a Player
+     */
     public void RoomPoisoned() {
         System.out.println("\t"+this+": RoomPoisoned called");
         state = EPlayerState.UNCONSCIOUS;

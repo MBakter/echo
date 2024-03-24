@@ -31,6 +31,9 @@ public class Student extends Player {
         System.out.println("\t"+this+": current room is "+room);
 
     }
+    /**
+     * A hallgató megpróbálja megmenti magát a méregtől a tárgyaival
+     */
     @Override
     public void RoomPoisoned() {
         System.out.println("\t"+this+": RoomPoisoned called");
@@ -45,6 +48,9 @@ public class Student extends Player {
             System.out.println("\t"+this+": Saved from poison!");
         }        
     };
+    /**
+     * A szobáról lekerül a méreg, a hallgató itemei erről értesülnek
+     */
     @Override
     public void RoomCleanFromPoison() {
         System.out.println("\t"+this+": RoomCleanFromPoison called");
@@ -53,6 +59,9 @@ public class Student extends Player {
         }
     }
 
+    /**
+     * A hallgatót megtámadja egy oktató, tárgyaival megpróbálja menteni magát
+     */
     public void TeacherAttacked() {
         System.out.println("\t"+this+": TeacherAttacked called!");
         for (IItem item : itemList) 
