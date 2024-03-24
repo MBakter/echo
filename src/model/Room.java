@@ -22,7 +22,8 @@ public class Room implements IRoomManager {
 
     public Room(){
         //System.out.println("Room created");
-        System.out.println("<<create>> \""+this+"\"");
+        System.out.println("\n<<create>> \""+this+"\"");
+        setMax(5);
     }
 
     /**
@@ -41,12 +42,12 @@ public class Room implements IRoomManager {
             return true;
         }
         // Enter or leave cursed room
-        if(effects.contains(ERoomEffects.CURSED) || s.getRoom().effects.contains(ERoomEffects.CURSED)
+        else if(effects.contains(ERoomEffects.CURSED) || s.getRoom().effects.contains(ERoomEffects.CURSED)
         || maxPlayer == playersInRoom){
             return false;
         }
         // Leave poisoned room to not poisoned
-        if(s.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)){
+        else if(s.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)){
             s.getRoom().removeStudent(s);
             studentList.add(s);
             s.RoomCleanFromPoison();;
@@ -54,7 +55,7 @@ public class Room implements IRoomManager {
             return true;
         }
         // Enter poisoned
-        if(effects.contains(ERoomEffects.POISONED)){
+        else if(effects.contains(ERoomEffects.POISONED)){
             s.getRoom().removeStudent(s);
             studentList.add(s);
             s.RoomPoisoned();
@@ -67,7 +68,7 @@ public class Room implements IRoomManager {
         checkAttacks(); 
         return true;
     }
-    public void checkAttacks(){
+    private void checkAttacks(){
         if(!studentList.isEmpty() && !teacherList.isEmpty()){
             for (Student s : studentList) {
                 s.TeacherAttacked();
@@ -75,7 +76,15 @@ public class Room implements IRoomManager {
         }
     }
 
-    public boolean removeStudent(Student s) { return false; }
+    public boolean removeStudent(Student s) { 
+        boolean contains = studentList.contains(s);
+        if(contains){
+            studentList.remove(s);
+            System.out.println("\t"+this+": "+s+" removed");
+        }
+
+        return contains;
+     }
     public boolean addTeacher(Teacher t) { 
 
         int playersInRoom = teacherList.size()+studentList.size();
@@ -86,12 +95,12 @@ public class Room implements IRoomManager {
             return true;
         }
         // Enter or leave cursed room
-        if(effects.contains(ERoomEffects.CURSED) || t.getRoom().effects.contains(ERoomEffects.CURSED)
+        else if(effects.contains(ERoomEffects.CURSED) || t.getRoom().effects.contains(ERoomEffects.CURSED)
         || playersInRoom == maxPlayer){
             return false;
         }
         // Leave poisoned room to not poisoned
-        if(t.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)){
+        else if(t.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)){
             t.getRoom().removeTeacher(t);
             teacherList.add(t);
             t.RoomCleanFromPoison();;
@@ -99,7 +108,7 @@ public class Room implements IRoomManager {
             return true;
         }
         // Enter poisoned
-        if(effects.contains(ERoomEffects.POISONED)){
+        else if(effects.contains(ERoomEffects.POISONED)){
             t.getRoom().removeTeacher(t);
             teacherList.add(t);
             t.RoomPoisoned();
@@ -112,7 +121,15 @@ public class Room implements IRoomManager {
         checkAttacks(); 
         return true;
      }
-    public boolean removeTeacher(Teacher t) { return false; }
+    public boolean removeTeacher(Teacher t) { 
+        boolean contains = teacherList.contains(t);
+        if(contains){
+            teacherList.remove(t);
+            System.out.println("\t"+this+": "+t+" removed");
+        }
+
+        return contains;
+     }
     public List<Student> getStudents() { return studentList; }
     public List<Teacher> getTeachers() { return teacherList; }
     public void addNeighbour(Room r) {}

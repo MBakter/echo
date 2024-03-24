@@ -10,7 +10,7 @@ import model.items.IItem;
 public abstract class Player implements ITimer {
 
     Player(){
-        System.out.println("<<create>> \""+this.toString()+"\"");
+        System.out.println("\n<<create>> \""+this.toString()+"\"");
     }
 
     protected Room room;

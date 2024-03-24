@@ -15,7 +15,7 @@ public class Teacher extends Player {
      */
     public void move(Room r) {
         System.out.println("\t"+this+": current room is "+room);
-        System.out.println("\t"+this+": addTeacher("+this+") -> "+r);        
+        System.out.println(""+this+": addTeacher("+this+") -> "+r);        
         boolean moveResult = r.addTeacher(this);
         if(moveResult){
             room = r;
