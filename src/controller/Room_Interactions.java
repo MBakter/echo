@@ -346,15 +346,15 @@ class teacher_enter_cursed implements ITestcase{
         System.out.println("\nController : setState(ALIVE) -> "+t);
         t.setState(EPlayerState.ALIVE);
 
-        System.out.println("\nController : addEffect(POISONED) -> "+r);
+        System.out.println("\nController : addEffect(CURSED) -> "+r);
         r.addEffect(ERoomEffects.CURSED);        
 
-        System.out.println("Controller : move("+initRoom+") -> "+t);
+        System.out.println("\nController : move("+initRoom+") -> "+t);
         t.move(initRoom);
 
         System.out.println("\n---\tStart of test\t---");
 
-        System.out.println("Controller : move("+r+") -> "+t);
+        System.out.println("\nController : move("+r+") -> "+t);
         t.move(r);
 
     }
@@ -376,7 +376,7 @@ class teacher_leave_cursed implements ITestcase{
         System.out.println("\nController : setState(ALIVE) -> "+t);
         t.setState(EPlayerState.ALIVE);             
         
-        System.out.println("Controller : move("+rCursed+") -> "+t);
+        System.out.println("\nController : move("+rCursed+") -> "+t);
         t.move(rCursed);
 
         System.out.println("\nController : addEffect(CURSED) -> "+rCursed);
@@ -384,7 +384,7 @@ class teacher_leave_cursed implements ITestcase{
 
         System.out.println("\n---\tStart of test\t---");
 
-        System.out.println("Controller : move("+r+") -> "+t);
+        System.out.println("\nController : move("+r+") -> "+t);
         t.move(r);  
     }
     public String testTitle() {
