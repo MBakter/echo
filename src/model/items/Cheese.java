@@ -77,8 +77,8 @@ public class Cheese implements IItem, ITimer {
 
     @Override
     public void timerEnd() {
-        room.removeEffect(ERoomEffects.POISONED);
         System.out.println("Cheese : removeEffect(POISONED) -> " + room.toString());
+        room.removeEffect(ERoomEffects.POISONED);
     }
     
     

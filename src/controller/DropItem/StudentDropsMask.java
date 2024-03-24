@@ -12,7 +12,7 @@ public class StudentDropsMask implements ITestcase{
         //System.out.println("WOWOWOWO");
         Student s = new Student();
         Room r = new Room();
-        Mask m = new Mask();
+        Mask m = new Mask(new controller.Timer());
 
         printFunction("s");r.addStudent(s);
         //System.out.print("m:Mask");

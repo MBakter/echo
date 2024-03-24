@@ -25,7 +25,7 @@ public class Room implements IRoomManager {
      */
     public Room(){
         //System.out.println("Room created");
-        System.out.println("\n<<create>> \""+this+"\"");
+        System.out.println("<<create>> \""+this+"\"");
         setMax(5);
     }
 

@@ -16,7 +16,7 @@ public class Skeleton {
 
     private static void printMenu() {
         System.out.println("Logarlec game tester -- Echo team");
-        System.out.println("To test the model, please enter a number from the list");
+        System.out.println("\nTo test the model, please enter a number from the list");
         System.out.println("_____________________\n"
                             + "1. Item pickup\n"
                             + "2. Item drop\n"
@@ -36,7 +36,6 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-        ItemPickTests.put(3, new StudentDropsMask()); 
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();
@@ -74,7 +73,7 @@ public class Skeleton {
                 if  (categoryMenu == 0) {
                     clearScreen();
                     printMenu();
-                    System.out.print("Enter a number: ");
+                    System.out.print("\nEnter a number: ");
 
                     line = br.readLine();
                     if(line == null)
@@ -87,20 +86,20 @@ public class Skeleton {
                     if (tests.containsKey(number)){
 
                         categoryMenu = number;
-                        System.out.format("Switching to %d%n", categoryMenu);
+                        System.out.format("\nSwitching to %d%n", categoryMenu);
                     } else {
-                        System.out.print("wrong number");
+                        System.out.print("\nWrong Number");
                     };
 
                 }
                 if (categoryMenu != 0) {
 
                     clearScreen();
-                    System.out.println("Press 0 to return to category menu:");
+                    System.out.println("Press 0 to return to category menu:\n");
                     for (Map.Entry<Integer, ITestcase> e : tests.get(categoryMenu).entrySet()){
                         System.out.format("Option %d:\t%s %n", e.getKey(), e.getValue().testTitle());
                     }
-                    System.out.print("Enter a number: ");
+                    System.out.print("\nEnter a number: ");
 
                     line = br.readLine();
                     if(line == null)
@@ -134,15 +133,15 @@ public class Skeleton {
                             break;
                     }
                     if (categoryMenu != 0) {
-                        System.out.println("Press RETURN to continue...");
+                        System.out.println("\nPress RETURN to continue...");
                         line = br.readLine();
                     }
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Not a number!");
+                System.out.println("\nNot a number!");
             } catch (IOException e) {
-                System.out.println("Could not read input");
+                System.out.println("\nCould not read input");
                 e.printStackTrace();
             }
         }
@@ -153,7 +152,7 @@ public class Skeleton {
         if (m.containsKey(option)){
             m.get(option).runTest();
         } else {
-            System.out.println("There is no option like this");
+            System.out.println("\nThere is no option like this");
         }
 
     }

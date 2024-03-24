@@ -13,6 +13,7 @@ public class TVSZ implements IItem {
 
     public TVSZ() {
         System.out.println("<<create>> " + this.toString());
+        hitpoints = 3;
     }
 
     @Override

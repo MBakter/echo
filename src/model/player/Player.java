@@ -10,7 +10,7 @@ import model.items.IItem;
 public abstract class Player implements ITimer {
 
     Player(){
-        System.out.println("\n<<create>> \""+this.toString()+"\"");
+        System.out.println("<<create>> \""+this.toString()+"\"");
     }
 
     protected Room room;
@@ -22,6 +22,9 @@ public abstract class Player implements ITimer {
     public void setState(EPlayerState s) {
         state = s;
         System.out.println("\t"+this + ": state set to "+ state);
+        
+        /* if(state == EPlayerState.UNCONSCIOUS)
+            timer.startTimer(this, 2); */
     }
     public Room getRoom() { return room; }
     public void setRoom(Room r) { room = r; }
@@ -41,24 +44,26 @@ public abstract class Player implements ITimer {
     }
     public void addItem(IItem i) {
         itemList.add(i);
-    
-        System.out.print("addItem()->Player");
+
+        System.out.println(this.toString() + ": Item added: " + i.toString());
     }
     public void removeItem(IItem i)  {
-        System.out.print("removeItem()->Player");
+        System.out.println(this.toString() + ": Item removed: " + i.toString());
+        itemList.remove(i);
     }
     public void pickUp(IItem i) {
         i.pickUp(this);
+        room.removeItem(i);
     }
     public void dropItem(IItem i) {
-        System.out.print("dropItem()->Player");
+        System.out.println(this.toString() + ": dropItem(" + this.toString() + ")-> " + i.toString());
         i.dropItem(this);
+        System.out.println(this.toString() + ": addItem(" + i.toString() + ")-> " + room.toString());
         room.addItem(i);
     }
 
     @Override
     public void timerEnd() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timerEnd'");
+        state = EPlayerState.ALIVE;
     }
 }

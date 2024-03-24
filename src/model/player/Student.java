@@ -37,17 +37,17 @@ public class Student extends Player {
      */
     @Override
     public void RoomPoisoned() {
+
         System.out.println("\t"+this+": RoomPoisoned called");
-        boolean saved = false;
-        for (IItem iItem : itemList) {
-            saved = iItem.RoomPoisoned(this);
-        }
-        if(!saved){
-            state = EPlayerState.UNCONSCIOUS;
-            System.out.println("\t"+this+": State set to: "+state);
-        }else{
-            System.out.println("\t"+this+": Saved from poison!");
-        }        
+        for (IItem iItem : itemList) 
+            if(iItem.RoomPoisoned(this)) {
+                System.out.println("\t"+this+": Saved from poison!");
+                return;
+            }
+
+        state = EPlayerState.UNCONSCIOUS;
+        System.out.println("\t"+this+": State set to: "+state);
+      
     };
     /**
      * A szobáról lekerül a méreg, a hallgató itemei erről értesülnek
@@ -70,18 +70,19 @@ public class Student extends Player {
     public void TeacherAttacked() {
         System.out.println("\t"+this+": TeacherAttacked called!");
         for (IItem item : itemList) 
-            if(item.TeacherAttackable(this)) 
+            if(item.TeacherAttackable(this)) {
+                System.out.println(this + ": Survived attack");
                 return;      
+            }
 
         for (IItem item : itemList) 
-            if(item.TeacherAttacked(this))
-                return;
+            if(item.TeacherAttacked(this)) {
+                System.out.println(this + ": Survived attack");
+                return;      
+            }
         
         state = EPlayerState.DEAD;
-    }
-
-    public void TeacherAttackable() {
-
+        System.out.println(this + ": setState -> " + state);
     }
 
 }

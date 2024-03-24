@@ -35,12 +35,18 @@ class TimedObject {
         if(time <= 0 )
             return false;
         time--;
+        if(time == 0)
+            active = false;
         return time == 0 ? false : true;
     }
 }
 
 public class Timer {
     private List<TimedObject> list;
+
+    public String toString(){
+        return "Timer@"+Integer.toString(this.hashCode()).substring(0, 4);
+    }
 
     public Timer() {
         list = new ArrayList<TimedObject>();
@@ -62,7 +68,7 @@ public class Timer {
 
     public void startTimer(ITimer o, int time) {
         for (TimedObject to : list) {
-            if(to.getObject().equals(o)) {
+            if(to.getObject().equals(o) && !to.isActive()) {
                 to.activate(time);
             }
         }

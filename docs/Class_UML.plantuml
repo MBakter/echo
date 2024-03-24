@@ -98,7 +98,6 @@ class Student extends Player{
     + getState(): EPlayerState
     + setState(EPlayerState): void
     + TeacherAttacked() : void
-    + TeacherAttackable() : void
 }
 
 /' interface IItemHolder {

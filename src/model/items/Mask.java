@@ -9,10 +9,7 @@ public class Mask implements IItem, ITimer {
     private controller.Timer timer;
     private boolean functional;
     private Player wearer;
-    public Mask (){
-        System.out.println("<<create>> Mask");
-        timer = new Timer();
-    }
+
     @Override
     public String toString(){
         return "Mask@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -22,6 +19,7 @@ public class Mask implements IItem, ITimer {
         System.out.println("<<create>> " + this.toString());
         timer = t;
         t.addItem(this);
+        functional = true;
     }
 
     public void setPlayer(Player p) {
@@ -60,8 +58,12 @@ public class Mask implements IItem, ITimer {
 
     @Override
     public boolean RoomPoisoned(Student s) {
+
+        System.out.println("Mask : functional: " + (functional == true ? "true" : "false"));
+
         if(!functional)
             return false;
+
         System.out.println("Mask : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
         return true;

@@ -31,7 +31,7 @@ public class Sponge implements IItem, ITimer {
 
     @Override
     public void pickUp(Player p) {
-        System.out.println("Sponge : startTimer(\" + this.toString() + \", 2) -> " + timer.toString());
+        System.out.println("Sponge : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
 
         functional = true;
