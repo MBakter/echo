@@ -8,19 +8,37 @@ import model.Room;
 import model.items.IItem;
 
 public abstract class Player implements ITimer {
+
+    Player(){
+        System.out.println("\n<<create>> \""+this.toString()+"\"");
+    }
+
     protected Room room;
     protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
     protected controller.Timer timer;
 
     public EPlayerState getState() { return state; }
-    public void setState(EPlayerState s) {}
+    public void setState(EPlayerState s) {
+        state = s;
+        System.out.println("\t"+this + ": state set to "+ state);
+    }
     public Room getRoom() { return room; }
     public void setRoom(Room r) { room = r; }
 
     public void move(Room r) {}
-    public void RoomPoisoned() {}
-    public void RoomCleanFromPoison() {}
+
+    /**
+     * Alap RoomPoisoned függvény, eszméletét veszti a Player
+     */
+    public void RoomPoisoned() {
+        System.out.println("\t"+this+": RoomPoisoned called");
+        state = EPlayerState.UNCONSCIOUS;
+        System.out.println("\t"+this+": State set to: "+state);
+    };
+    public void RoomCleanFromPoison() {
+        System.out.println("\t"+this+": RoomCleanFromPoison called");
+    }
     public void addItem(IItem i) {
         itemList.add(i);
     }
