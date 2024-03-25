@@ -27,7 +27,7 @@ class student_drop_mask implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Mask m = new Mask();
         Room r = new Room();
         Student s = new Student();
@@ -38,7 +38,7 @@ class student_drop_mask implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + m.toString() + ") -> " + s.toString());
         s.dropItem(m);
@@ -53,7 +53,7 @@ class student_drop_cheese implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Cheese c = new Cheese();
         Room r = new Room();
         Student s = new Student();
@@ -64,7 +64,7 @@ class student_drop_cheese implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + c.toString() + ") -> " + s.toString());
         s.dropItem(c);
@@ -80,7 +80,7 @@ class student_drop_beer implements ITestcase{
     public void runTest() {
 
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Timer t = new Timer();
         Beer b = new Beer();
         Room r = new Room();
@@ -92,7 +92,7 @@ class student_drop_beer implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + b.toString() + ") -> " + s.toString());
         s.dropItem(b);
@@ -107,7 +107,7 @@ class student_drop_tvsz implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         TVSZ tvsz = new TVSZ();
         Room r = new Room();
         Student s = new Student();
@@ -118,7 +118,7 @@ class student_drop_tvsz implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + tvsz.toString() + ") -> " + s.toString());
         s.dropItem(tvsz);
@@ -133,7 +133,7 @@ class student_drop_transistor_paired implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Transistor t1 = new Transistor();
         Transistor t2 = new Transistor();
         Room r1 = new Room();
@@ -155,7 +155,7 @@ class student_drop_transistor_paired implements ITestcase{
         System.out.println("Controller : ActivateTransistor() -> " + t2.toString());
         t2.ActivateTransistor();
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + t2.toString() + ") -> " + s.toString());
         s.dropItem(t2);
@@ -170,7 +170,7 @@ class student_drop_transistor_paired_notplacedpair implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Transistor t1 = new Transistor();
         Transistor t2 = new Transistor();
         Room r1 = new Room();
@@ -192,7 +192,7 @@ class student_drop_transistor_paired_notplacedpair implements ITestcase{
         System.out.println("Controller : ActivateTransistor() -> " + t2.toString());
         t2.ActivateTransistor();
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + t2.toString() + ") -> " + s.toString());
         s.dropItem(t2);
@@ -207,7 +207,7 @@ class student_drop_transistor_unpaired implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Transistor t1 = new Transistor();
         Transistor t2 = new Transistor();
         Room r1 = new Room();
@@ -227,7 +227,7 @@ class student_drop_transistor_unpaired implements ITestcase{
         System.out.println("Controller : ActivateTransistor() -> " + t2.toString());
         t2.ActivateTransistor();
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + t2.toString() + ") -> " + s.toString());
         s.dropItem(t2);
@@ -242,7 +242,7 @@ class teacher_drop_mask implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Mask m = new Mask();
         Room r = new Room();
         Teacher s = new Teacher();
@@ -253,7 +253,7 @@ class teacher_drop_mask implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + m.toString() + ") -> " + s.toString());
         s.dropItem(m);
@@ -268,7 +268,7 @@ class teacher_drop_cheese implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Cheese c = new Cheese();
         Room r = new Room();
         Teacher s = new Teacher();
@@ -279,7 +279,7 @@ class teacher_drop_cheese implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + c.toString() + ") -> " + s.toString());
         s.dropItem(c);
@@ -294,7 +294,7 @@ class teacher_drop_beer implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Beer b = new Beer();
         Room r = new Room();
         Teacher s = new Teacher();
@@ -305,7 +305,7 @@ class teacher_drop_beer implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + b.toString() + ") -> " + s.toString());
         s.dropItem(b);
@@ -320,7 +320,7 @@ class teacher_drop_tvsz implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         TVSZ tvsz = new TVSZ();
         Room r = new Room();
         Teacher s = new Teacher();
@@ -331,7 +331,7 @@ class teacher_drop_tvsz implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : dropItem(" + tvsz.toString() + ") -> " + s.toString());
         s.dropItem(tvsz);

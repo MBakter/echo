@@ -22,14 +22,14 @@ class student_pairs_transistor implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Transistor t1 = new Transistor();
         Transistor t2 = new Transistor();
         Room r1 = new Room();
         Room r2= new Room();
         Student s = new Student();
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
         System.out.println("Controller : PairTransistor(" + t1.toString() + ") -> " + t2.toString());
         t2.PairTransistor(t1);
 
@@ -43,14 +43,14 @@ class student_activates_transistor implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Transistor t1 = new Transistor();
         Transistor t2 = new Transistor();
         Room r1 = new Room();
         Room r2= new Room();
         Student s = new Student();
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
         System.out.println("Controller : ActivateTransistor() -> " + t2.toString());
         t2.ActivateTransistor();
 
@@ -64,7 +64,7 @@ class student_uses_beer implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Timer t = new Timer();
         Beer b = new Beer(t);
         Room r = new Room();
@@ -73,7 +73,7 @@ class student_uses_beer implements ITestcase{
         System.out.println("Controller : addItem(" + b.toString() + ") -> " + s.toString());
         s.addItem(b);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : useItem(" + b.toString() + ") -> " + s.toString());
         s.useItem(b);
@@ -88,7 +88,7 @@ class student_timerup_beer implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Timer t = new Timer();
         Beer b = new Beer(t);
         Room r = new Room();
@@ -97,7 +97,7 @@ class student_timerup_beer implements ITestcase{
         System.out.println("Controller : addItem(" + b.toString() + ") -> " + s.toString());
         s.addItem(b);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Timer : timerEnd() -> " + b.toString());
         b.timerEnd();
@@ -112,7 +112,7 @@ class student_uses_cheese implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Timer t = new Timer();
         Cheese c = new Cheese(t);
         Room r = new Room();
@@ -127,7 +127,7 @@ class student_uses_cheese implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Controller : useItem(" + c.toString() + ") -> " + s.toString());
         s.useItem(c);
@@ -143,7 +143,7 @@ class student_timerup_cheese implements ITestcase{
 
     public void runTest() {
 
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         Timer t = new Timer();
         Cheese c = new Cheese(t);
         Room r = new Room();
@@ -155,7 +155,7 @@ class student_timerup_cheese implements ITestcase{
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
-        System.out.println("---\tStart of test\t---");
+        System.out.println("\n---\tStart of test\t---\n");
 
         System.out.println("Timer : timerEnd() -> " + c.toString());
         c.timerEnd();

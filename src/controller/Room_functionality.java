@@ -19,7 +19,7 @@ class fillRF {
 
 class room_merge implements ITestcase {
   public void runTest() {
-    System.out.println("---\tSetup\t---");
+    System.out.println("\n---\tSetup\t---\n");
 
     Room r1 = new Room();
     Room r2 = new Room();
@@ -39,7 +39,7 @@ class room_merge implements ITestcase {
     System.out.println("Controller : addNeighbour("+r2+") -> "+r1);
     r1.addNeighbour(r2);
 
-    System.out.println("---\tStart of test\t---");
+    System.out.println("\n---\tStart of test\t---\n");
 
     System.out.println("Controller : merge("+r2+") -> "+r1);
     r1.merge(r2);
@@ -52,7 +52,7 @@ class room_merge implements ITestcase {
 
 class room_merge_transistor implements ITestcase {
   public void runTest() {
-    System.out.println("---\tSetup\t---");
+    System.out.println("\n---\tSetup\t---\n");
 
     Room r1 = new Room();
     Room r2 = new Room();
@@ -65,7 +65,7 @@ class room_merge_transistor implements ITestcase {
     r1.addEffect(ERoomEffects.TRANSISTOR_INSIDE);
 
 
-    System.out.println("---\tStart of test\t---");
+    System.out.println("\n---\tStart of test\t---\n");
 
     System.out.println("Controller : merge("+r2+") -> "+r1);
     r1.merge(r2);
@@ -78,7 +78,7 @@ class room_merge_transistor implements ITestcase {
 
 class room_merge_not_empty implements ITestcase {
   public void runTest() {
-    System.out.println("---\tSetup\t---");
+    System.out.println("\n---\tSetup\t---\n");
 
     Room r1 = new Room();
     Room r2 = new Room();
@@ -90,7 +90,7 @@ class room_merge_not_empty implements ITestcase {
     System.out.println("Student : addStudent("+s+") -> "+r1);
     r1.addStudent(s);
 
-    System.out.println("---\tStart of test\t---");
+    System.out.println("\n---\tStart of test\t---\n");
 
     System.out.println("Controller : merge("+r2+") -> "+r1);
     r1.merge(r2);
@@ -103,7 +103,7 @@ class room_merge_not_empty implements ITestcase {
 
 class room_split implements ITestcase {
   public void runTest() {
-    System.out.println("---\tSetup\t---");
+    System.out.println("\n---\tSetup\t---\n");
 
     Room r1 = new Room();
     Room r2 = new Room();
@@ -123,7 +123,7 @@ class room_split implements ITestcase {
     System.out.println("Controller : addNeighbour("+r2+") -> "+r1);
     r1.addNeighbour(r2);
 
-    System.out.println("---\tStart of test\t---");
+    System.out.println("\n---\tStart of test\t---\n");
 
     System.out.println("Controller : split() -> "+r1);
     r1.split();
@@ -136,7 +136,7 @@ class room_split implements ITestcase {
 
 class room_split_transistor implements ITestcase {
   public void runTest() {
-    System.out.println("---\tSetup\t---");
+    System.out.println("\n---\tSetup\t---\n");
 
     Room r1 = new Room();
     Room r2 = new Room();
@@ -149,7 +149,7 @@ class room_split_transistor implements ITestcase {
     r1.addEffect(ERoomEffects.TRANSISTOR_INSIDE);
 
 
-    System.out.println("---\tStart of test\t---");
+    System.out.println("\n---\tStart of test\t---\n");
 
     System.out.println("Controller : split() -> "+r1);
     r1.split();
@@ -162,7 +162,7 @@ class room_split_transistor implements ITestcase {
 
 class room_split_not_empty implements ITestcase {
   public void runTest() {
-    System.out.println("---\tSetup\t---");
+    System.out.println("\n---\tSetup\t---\n");
 
     Room r1 = new Room();
     Room r2 = new Room();
@@ -174,7 +174,7 @@ class room_split_not_empty implements ITestcase {
     System.out.println("Student : addStudent("+s+") -> "+r1);
     r1.addStudent(s);
 
-    System.out.println("---\tStart of test\t---");
+    System.out.println("\n---\tStart of test\t---\n");
 
     System.out.println("Controller : split() -> "+r1);
     r1.split();

@@ -34,7 +34,7 @@ class RIfill{
 
 class student_enter_cursed implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
 
         Student s = new Student();
         Room r = new Room();
@@ -61,7 +61,7 @@ class student_enter_cursed implements ITestcase{
 
 class student_leave_cursed  implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Room rCursed = new Room();
@@ -88,7 +88,7 @@ class student_leave_cursed  implements ITestcase{
 
 class student_enter_poison implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");        
+        System.out.println("\n---\tSetup\t---\n");        
 
         Student s = new Student();
         Room initRoom = new Room();
@@ -115,7 +115,7 @@ class student_enter_poison implements ITestcase{
 
 class student_room_poisoned implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Room initRoom = new Room();
@@ -138,7 +138,7 @@ class student_room_poisoned implements ITestcase{
 
 class student_leave_poison implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Room initRoom = new Room();
@@ -168,7 +168,7 @@ class student_leave_poison implements ITestcase{
 
 class student_room_poison_removed implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Room initRoom = new Room();
@@ -195,7 +195,7 @@ class student_room_poison_removed implements ITestcase{
 
 class student_enter_student implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s1 = new Student();
         Student s2 = new Student();
@@ -221,7 +221,7 @@ class student_enter_student implements ITestcase{
 
 class student_enter_teacher implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Teacher t = new Teacher();
@@ -250,7 +250,7 @@ class student_enter_teacher implements ITestcase{
 
 class student_enter_full implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s1 = new Student();
         Student s2 = new Student();
@@ -295,7 +295,7 @@ class student_enter_full implements ITestcase{
 
 class student_enter_empty implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Room initRoom = new Room();
@@ -315,7 +315,7 @@ class student_enter_empty implements ITestcase{
 
 class teacher_enter_cursed implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
 
         Teacher t = new Teacher();
         Room r = new Room();
@@ -343,7 +343,7 @@ class teacher_enter_cursed implements ITestcase{
 
 class teacher_leave_cursed implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t = new Teacher();
         Room r = new Room();
@@ -370,7 +370,7 @@ class teacher_leave_cursed implements ITestcase{
 
 class teacher_enter_poison implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t = new Teacher();
         Room initRoom = new Room();
@@ -397,7 +397,7 @@ class teacher_enter_poison implements ITestcase{
 
 class teacher_room_poisoned implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t = new Teacher();
         Room initRoom = new Room();
@@ -420,7 +420,7 @@ class teacher_room_poisoned implements ITestcase{
 
 class teacher_room_poison_removed implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t = new Teacher();
         Room initRoom = new Room();
@@ -446,7 +446,7 @@ class teacher_room_poison_removed implements ITestcase{
 
 class teacher_enter_student implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Student s = new Student();
         Teacher t = new Teacher();
@@ -475,7 +475,7 @@ class teacher_enter_student implements ITestcase{
 
 class teacher_enter_teacher implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t1 = new Teacher();
         Teacher t2 = new Teacher();
@@ -504,7 +504,7 @@ class teacher_enter_teacher implements ITestcase{
 
 class teacher_enter_full implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t1 = new Teacher();
         Teacher t2 = new Teacher();
@@ -549,7 +549,7 @@ class teacher_enter_full implements ITestcase{
 
 class teacher_enter_empty implements ITestcase{
     public void runTest() {
-        System.out.println("---\tSetup\t---");
+        System.out.println("\n---\tSetup\t---\n");
         
         Teacher t = new Teacher();
         Room initRoom = new Room();
