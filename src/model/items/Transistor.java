@@ -27,7 +27,7 @@ public class Transistor implements IItem {
         System.out.println("\t"+this+": PairTransistor called");
         pair = t2;
 
-        System.out.println("\t"+"Transistor : setPair( " + this.toString() + ") -> " + t2.toString());
+        System.out.println("\t"+this+" : setPair( " + this.toString() + ") -> " + t2.toString());
         t2.setPair(this);
 
     }
@@ -36,8 +36,11 @@ public class Transistor implements IItem {
         pair = transistor;
     }
 
-    public void UnpairTransistor(Transistor t2) {}
+    public void UnpairTransistor(Transistor t2) {
+        System.out.println("\t"+this+": UnpairTransistor called");
+    }
     public void setRoom(Room r) {
+        System.out.println("\t"+this+": setRoom called");
         room = r;
     }
     public void deactivateTransistor(Player p) {
@@ -64,20 +67,21 @@ public class Transistor implements IItem {
 
     @Override
     public void dropItem(Player p) {
+        System.out.println("\t"+this+": dropItem called");
         
         if (pair != null){
             if (pair.room != null && active){
-                System.out.println("\t"+"Transistor : teleport( " + p.toString() + ") -> " + this.toString());
+                System.out.println("\t"+this+" : teleport( " + p.toString() + ") -> " + this.toString());
                 teleport(p);
 
-                System.out.println("\t"+"Transistor : deactivateTransistor( " + p.toString() + ") -> " + this.toString());
+                System.out.println("\t"+this+" : deactivateTransistor( " + p.toString() + ") -> " + this.toString());
                 deactivateTransistor(p);
             }
 
         }
 
         room = p.getRoom();
-        System.out.println("\t"+"Transistor : removeItem( " + this.toString() + ") -> " + p.toString());
+        System.out.println("\t"+this+" : removeItem( " + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
 
     }
@@ -85,7 +89,7 @@ public class Transistor implements IItem {
     private void teleport(Player p) {
         System.out.println("\t"+this+": teleport called");
 
-        System.out.println("\t"+"Transistor : move( " + pair.room.toString() + ") -> " + p.toString());
+        System.out.println("\t"+this+" : move( " + pair.room.toString() + ") -> " + p.toString());
         p.move(pair.room);
     }
 

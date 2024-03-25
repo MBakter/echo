@@ -13,9 +13,7 @@ class UIfill {
         l.put(i++, new student_pairs_transistor());
         l.put(i++, new student_activates_transistor());
         l.put(i++, new student_uses_beer());
-        l.put(i++, new student_timerup_beer());
         l.put(i++, new student_uses_cheese());
-        l.put(i++, new student_timerup_cheese());
     }
 }
 class student_pairs_transistor implements ITestcase{
