@@ -10,6 +10,9 @@ public class Logarlec implements IItem {
         return "Logarlec@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
+    /*
+     * Konstruktor
+     */
     public Logarlec() {
         System.out.println("<<create>> " + this.toString());
     }
@@ -24,6 +27,7 @@ public class Logarlec implements IItem {
     public void pickUp(Player p) {
         System.out.println("Logarlec : addItem(" + this.toString() + ") -> " + p.toString());
         p.addItem(this);
+        System.out.println("Logarlec : endGame(VICTORY) -> Controller");
     }
 
     @Override

@@ -15,6 +15,9 @@ public class Transistor implements IItem {
         return "Transistor@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
+    /*
+     * Konstruktor
+     */
     public Transistor() {
         System.out.println("<<create>> " + this.toString());
     }
@@ -54,8 +57,6 @@ public class Transistor implements IItem {
         throw new UnsupportedOperationException("Unimplemented method 'useItem'");
     }
 
-    //Külön kéne választani a pickUp(Student) és pickUp(Teacher)-re, hogy tanár ne vehesse fel a párosított tranzisztort v.
-    //legyen úgy, hogy felveheti majd ledobhatja valahova ezzel megszivatva a hallgatókat...
     @Override
     public void pickUp(Player p) {
         if(pair != null) {
@@ -95,26 +96,26 @@ public class Transistor implements IItem {
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttacked'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public boolean RoomPoisoned(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomPoisoned'");
+        /* Do nothing */
+        return false;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'RoomCleanFromPoison'");
+        /* Do nothing */
+        return;
     }
     
     @Override
     public boolean TeacherAttackable(Student s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'TeacherAttackable'");
+        /* Do nothing */
+        return false;
     }
 
 }

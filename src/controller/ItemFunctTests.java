@@ -78,10 +78,6 @@ class TVSZ_save implements ITestcase{
     };
 }
 
-/*  
-    TODO: Kommunikációs diagram átírása: s.pickUp kitörli a szobából így előtte
-    abba is bele kell tenni az itemet
-*/
 class Sponge_save implements ITestcase{
     public void runTest() {
 
@@ -112,9 +108,6 @@ class Sponge_save implements ITestcase{
     };
 }
 
-/*  
-    TODO: A controller->room : addStudent(s) kimaradt
-*/
 class Mask_save implements ITestcase{
     public void runTest() {
 
@@ -141,9 +134,6 @@ class Mask_save implements ITestcase{
     };
 }
 
-/*  
-    TODO: Ezt két külön diagramra kell tenni. Itt legyen az ahol csak aktiválódik use-nál
-*/
 class Cheese_timer implements ITestcase{
     public void runTest() {
 

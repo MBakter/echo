@@ -17,12 +17,21 @@ public class Cheese implements IItem, ITimer {
         return "Cheese@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
+    /*
+     * Konstruktor
+     * Paraméterként kapja a Timer osztályt amit a kontroller kezel
+     * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
+     */
     public Cheese(Timer t) {
         System.out.println("<<create>> " + this.toString());
         timer = t;
         t.addItem(this);
     }
 
+    /*
+     * Csak a tesztekhez kell
+     * Elindítja a cheese timerét
+     */
     public void startTimer() {
         System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);

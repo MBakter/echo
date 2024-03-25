@@ -14,6 +14,11 @@ public class Beer implements IItem, ITimer {
         return "Beer@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
+    /*
+     * Konstruktor
+     * Paraméterként kapja a Timer osztályt amit a kontroller kezel
+     * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
+     */
     public Beer(Timer t) {
         System.out.println("<<create>> " + this.toString());
         timer = t;

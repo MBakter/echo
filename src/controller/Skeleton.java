@@ -35,7 +35,7 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-        //ItemPickTests.put(3, new DropItem()); 
+        IPUFill.fill(ItemPickTests);
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();
@@ -50,7 +50,7 @@ public class Skeleton {
         // 4 RoomIneraction Tests
         Map<Integer, ITestcase> RoomInteractionTests = new HashMap<Integer, ITestcase>();
         tests.put(4, RoomInteractionTests); // Testlist put to categorylist
-        new RIfill().fill(RoomInteractionTests);
+        RIfill.fill(RoomInteractionTests);
 
         // 5 Room functionality Tests
         Map<Integer, ITestcase> RoomFunctionalityTests = new HashMap<Integer, ITestcase>();

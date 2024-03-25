@@ -14,6 +14,11 @@ public class Mask implements IItem, ITimer {
         return "Mask@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
+    /*
+     * Konstruktor
+     * Paraméterként kapja a Timer osztályt amit a kontroller kezel
+     * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
+     */
     public Mask(Timer t) {
         System.out.println("<<create>> " + this.toString());
         timer = t;
@@ -21,6 +26,9 @@ public class Mask implements IItem, ITimer {
         functional = true;
     }
 
+    /*
+     * Beállítja a hordozót a paraméterként kapott Playerre
+     */
     public void setPlayer(Player p) {
         wearer = p;
         System.out.println("Mask : setWearer -> " + wearer.toString());

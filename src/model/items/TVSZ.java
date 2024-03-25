@@ -11,6 +11,9 @@ public class TVSZ implements IItem {
         return "TVSZ@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
 
+    /*
+     * Konstruktor
+     */
     public TVSZ() {
         System.out.println("<<create>> " + this.toString());
         hitpoints = 3;

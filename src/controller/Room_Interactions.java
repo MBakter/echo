@@ -9,7 +9,7 @@ import model.player.Student;
 import model.player.Teacher;
 
 class RIfill{
-    public void fill(Map<Integer, ITestcase> l){
+    public static void fill(Map<Integer, ITestcase> l){
         l.put(1, new student_enter_cursed());
         l.put(2, new student_leave_cursed());
         l.put(3, new student_enter_poison());
