@@ -23,11 +23,6 @@ public class Cheese implements IItem, ITimer {
         t.addItem(this);
     }
 
-    public Cheese() {
-        System.out.println("<<create>> " + this.toString());
-        timer = new Timer();
-    }
-
     public void startTimer() {
         System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);

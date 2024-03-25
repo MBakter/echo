@@ -35,10 +35,7 @@ public class Skeleton {
         // 1 Pickup Tests
         Map<Integer, ITestcase> ItemPickTests = new HashMap<Integer, ITestcase>();
         tests.put(1, ItemPickTests); // Testlist put to categorylist
-<<<<<<< HEAD
-=======
         //ItemPickTests.put(3, new DropItem()); 
->>>>>>> gazs_tests
 
         // 2 Drop Tests
         Map<Integer, ITestcase> ItemDropTests = new HashMap<Integer, ITestcase>();

@@ -28,7 +28,7 @@ class student_drop_mask implements ITestcase{
     public void runTest() {
 
         System.out.println("\n---\tSetup\t---\n");
-        Mask m = new Mask();
+        Mask m = new Mask(new Timer());
         Room r = new Room();
         Student s = new Student();
 
@@ -54,7 +54,7 @@ class student_drop_cheese implements ITestcase{
     public void runTest() {
 
         System.out.println("\n---\tSetup\t---\n");
-        Cheese c = new Cheese();
+        Cheese c = new Cheese(new Timer());
         Room r = new Room();
         Student s = new Student();
 
@@ -82,7 +82,7 @@ class student_drop_beer implements ITestcase{
 
         System.out.println("\n---\tSetup\t---\n");
         Timer t = new Timer();
-        Beer b = new Beer();
+        Beer b = new Beer(new Timer());
         Room r = new Room();
         Student s = new Student();
 
@@ -243,7 +243,7 @@ class teacher_drop_mask implements ITestcase{
     public void runTest() {
 
         System.out.println("\n---\tSetup\t---\n");
-        Mask m = new Mask();
+        Mask m = new Mask(new Timer());
         Room r = new Room();
         Teacher s = new Teacher();
 
@@ -269,7 +269,7 @@ class teacher_drop_cheese implements ITestcase{
     public void runTest() {
 
         System.out.println("\n---\tSetup\t---\n");
-        Cheese c = new Cheese();
+        Cheese c = new Cheese(new Timer());
         Room r = new Room();
         Teacher s = new Teacher();
 
@@ -295,7 +295,7 @@ class teacher_drop_beer implements ITestcase{
     public void runTest() {
 
         System.out.println("\n---\tSetup\t---\n");
-        Beer b = new Beer();
+        Beer b = new Beer(new Timer());
         Room r = new Room();
         Teacher s = new Teacher();
 
