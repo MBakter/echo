@@ -17,7 +17,7 @@ rectangle "$targetItem:$targetItemClass" as targetItem
 c --> targetItem: 1. <<create>>
 
 c -left-> r: 2. <<create>>
-c -right-> s: 3. <<create>> 4. addItem($targetItem) \n5. dropItem($targetItem)
+c -right-> s: 3. <<create>> 4. addItem($targetItem) \n5. setRoom(r) 6. dropItem($targetItem)
 
 
  

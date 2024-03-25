@@ -172,8 +172,7 @@ class Cheese_timer implements ITestcase{
 
 class Cheese_timer_end implements ITestcase{
     public void runTest() {
-
-        System.out.println("\n---\tSetup\t---\n");
+        System.out.println("---\tSetup\t---");
         Timer timer = new Timer();
         Student s = new Student();
         Cheese c = new Cheese(timer);
@@ -210,8 +209,7 @@ class Cheese_timer_end implements ITestcase{
 
 class Beer_timer implements ITestcase{
     public void runTest() {
-        
-        System.out.println("\n---\tSetup\t---\n");
+        System.out.println("---\tSetup\t---");
         Timer timer = new Timer();
         Student s = new Student();
         Beer b = new Beer(timer);

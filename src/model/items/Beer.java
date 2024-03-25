@@ -20,6 +20,11 @@ public class Beer implements IItem, ITimer {
         t.addItem(this);
     }
 
+    public Beer() {
+        System.out.println("<<create>> " + this.toString());
+        timer = new Timer();
+    }
+
     @Override
     public void useItem(Player p) {
         System.out.println("Beer : startTimer(" + this.toString() + ", 2) -> " + timer.toString());

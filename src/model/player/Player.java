@@ -27,9 +27,12 @@ public abstract class Player implements ITimer {
             timer.startTimer(this, 2); */
     }
     public Room getRoom() { return room; }
-    public void setRoom(Room r) { room = r; }
+    public void setRoom(Room r) { 
+        System.out.println("\t"+this+": setRoom called");
+        room = r; 
+    }
 
-    public void move(Room r) {}
+    public void move(Room r) {    }
 
     /**
      * Alap RoomPoisoned függvény, eszméletét veszti a Player
@@ -43,6 +46,7 @@ public abstract class Player implements ITimer {
         System.out.println("\t"+this+": RoomCleanFromPoison called");
     }
     public void addItem(IItem i) {
+        System.out.println("\t"+this+": addItem called");
         itemList.add(i);
 
         System.out.println(this.toString() + ": Item added: " + i.toString());
@@ -52,6 +56,9 @@ public abstract class Player implements ITimer {
         itemList.remove(i);
     }
     public void pickUp(IItem i) {
+        System.out.println("\t"+this+": pickUp called");
+
+        System.out.println(""+this+": pickUp("+this+") -> "+i); 
         i.pickUp(this);
         room.removeItem(i);
     }
