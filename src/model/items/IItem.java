@@ -2,6 +2,7 @@ package model.items;
 
 import model.player.Player;
 import model.player.Student;
+import model.player.Teacher;
 
 public interface IItem {
 
@@ -14,11 +15,18 @@ public interface IItem {
 
     /*
      * A tárgy felvétele.
-     * Paraméterként kap egy Player-t
-     * Majd a játékos listájába beleteszi magát illetve 
-     * ha olyan a tulajdonsága akkor stoppert indít
+     * Paraméterként kap egy Student-et
+     * Majd a hallgató listájába beleteszi magát illetve 
+     * tulajdonságából adódóan csinálhat mást is
      */
-    public void pickUp(Player p);
+    public void pickUp(Student s);
+
+    /*
+     * A tárgy felvétele.
+     * Paraméterként kap egy Teacher-t
+     * Majd az oktató listájába beleteszi magát 
+     */
+    public void pickUp(Teacher t);
 
     /*
      * A tárgy eldobása.

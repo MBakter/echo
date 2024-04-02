@@ -14,19 +14,21 @@ interface IRoomManager {
     + merge(Room): bool
 }
 
-/' Removed implementing IItemHolder '/
 class Room implements IRoomManager {
     + maxPlayer: int
     + effects : ERoomEffects[]
     + itemList : Item[]
     + studentList : Student[]
     + teacherList : Teacher[]
+    + cleanerList : Cleaner[]
     + neighbouringRooms : Room[]
 
     + addStudent(Student): void
     + removeStudent(Student): void
     + addTeacher(Teacher): bool
     + removeTeacher(Teacher): void
+    + addCleaner(Cleaner): bool
+    + removeCleaner(Cleaner): void
     + getTeachers() : Teacher[]
     + addNeighbour(Room): void
     + removeNeighbour(Room): void
@@ -35,6 +37,7 @@ class Room implements IRoomManager {
     + removeItem(IItem) : void
     + addEffect(ERoomEffects) : void
     + removeEffect(ERoomEffects) : void
+    + purifyRoom() : void
 
     + split(): Room
     + merge(Room): bool
@@ -53,7 +56,6 @@ enum EPlayerState {
     DEAD
 }
 
-/' Removed implementing IItemHolder '/
 abstract class Player implements ITimer{
     + room: Room
     + itemList : Item[]
@@ -63,14 +65,15 @@ abstract class Player implements ITimer{
     + move(Room): void
     + RoomPoisoned() : void
     + RoomCleanFromPoison() : void
+    + CleanerEntered() : void
     + getState(): EPlayerState
     + setState(EPlayerState): void
     + getRoom() : Room
     + addItem(IItem): void
     + removeItem(IItem) : void
-    + pickUp(IItem)
-    + dropItem(IItem)
-    + timerEnd()
+    + pickUp(IItem) : void
+    + dropItem(IItem) : void
+    + timerEnd() : void
 }
 
 Player "0" o-- "1" EPlayerState
@@ -78,7 +81,8 @@ Player "1" *-- "0..*" IItem: + itemList
 
 interface IItem {
     + useItem(Player): void
-    + pickUp(Player): void
+    + pickUp(Student): void
+    + pickUp(Teacher) : void
     + dropItem(Player) : void
 
     + TeacherAttacked(Student) : bool
@@ -87,28 +91,30 @@ interface IItem {
     + TeacherAttackable(Student) : void
 }
 
-class Teacher extends Player{
+class Teacher extends Player {
     + move(Room): void
     + getState(): EPlayerState
     + setState(EPlayerState): void
 }
 
-class Student extends Player{
+class Student extends Player {
     + move(Room): void
     + getState(): EPlayerState
     + setState(EPlayerState): void
     + TeacherAttacked() : void
 }
 
-/' interface IItemHolder {
-    + addItemy(Item: Item): void
-    + removeItem(Item: Item): void
-} '/
+class Cleaner extends Player {
+    + move(Room): void
+    + getState(): EPlayerState
+    + setState(EPlayerState): void
+}
 
 enum ERoomEffects {
     CURSED
     POISONED
     TRANSISTOR_INSIDE
+    STICKY
 }
 
 interface ITimer {
@@ -117,6 +123,7 @@ interface ITimer {
 
 class TVSZ implements IItem {
     + hitPoints : int
+    + fake : bool
 
     + TeacherAttacked(Student) : bool
 }
@@ -127,11 +134,10 @@ class Transistor implements IItem  {
     + pair: Transistor
 
     + activateTransistor() : void
-    + pairTransistor(Transistor t2) : void
-    + unpairTransistor(Transistor t2) : void
-    + dropItem(Player s) : void
-    + pickUp(Player s) : void
-    + setRoom(Room r) : void
+    + pairTransistor(Transistor) : void
+    + unpairTransistor(Transistor) : void
+    + dropItem(Player) : void
+    + setRoom(Room) : void
     + unactivateTransistor() : void
 }
 
@@ -145,10 +151,10 @@ class Beer implements IItem, ITimer {
     + timer : Timer
     + state : BeerState
     
+    + useItem(Player) : void
     + timerEnd() : void
     + setState(BeerState): void
     + TeacherAttacked(Student) : bool
-    /'+ activateBeer() : void '/
 }
 Beer *-- "1" BeerState
 
@@ -156,6 +162,7 @@ class Mask implements IItem, ITimer  {
     + timer : Timer
     + functional : bool
     + student : Student
+    + fake : bool
 
     + timerEnd() : void
     + pickUp(Student) : void
@@ -164,7 +171,7 @@ class Mask implements IItem, ITimer  {
 
 }
 
-class Sponge  implements IItem, ITimer {
+class Sponge implements IItem, ITimer {
     + timer : Timer
     + functional : bool
 
@@ -172,16 +179,26 @@ class Sponge  implements IItem, ITimer {
     + TeacherAttackable(Student) : void
 }
 
-class Cheese  implements IItem, ITimer {
+class Cheese implements IItem, ITimer {
     + timer : Timer
     + isUsed : bool
     + room : Room
     
+    + useItem(Player) : void
     + timerEnd() : void
 }
 
+class Purifier implements IItem {
+    + isUsed : bool
+
+    + useItem(Player) : void
+}
+
 class Logarlec  implements IItem  {
-    + pickUp(Student) : void
+    + fake : bool
+
+    + useItem(Student) : void
+    + dropItem(Player) : void
 }
 
 class Timer {

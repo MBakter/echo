@@ -35,15 +35,21 @@ public class Sponge implements IItem, ITimer {
     }
 
     @Override
-    public void pickUp(Player p) {
+    public void pickUp(Student s) {
         System.out.println("Sponge : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
 
         functional = true;
         System.out.println("Sponge : setFunctional -> " + (functional ? "true" : "false"));
         
-        System.out.println("Sponge : addItem(" + this.toString() + ") -> " + p.toString());
-        p.addItem(this);
+        System.out.println("Sponge : addItem(" + this.toString() + ") -> " + s.toString());
+        s.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Teacher t) {
+        System.out.println("Sponge : addItem( " + this.toString() + ") -> " + t.toString());
+        t.addItem(this);
     }
 
     @Override

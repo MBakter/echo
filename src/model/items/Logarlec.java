@@ -2,6 +2,7 @@ package model.items;
 
 import model.player.Player;
 import model.player.Student;
+import model.player.Teacher;
 
 public class Logarlec implements IItem {
 
@@ -24,10 +25,16 @@ public class Logarlec implements IItem {
     }
 
     @Override
-    public void pickUp(Player p) {
-        System.out.println("Logarlec : addItem(" + this.toString() + ") -> " + p.toString());
-        p.addItem(this);
+    public void pickUp(Student s) {
+        System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + s.toString());
+        s.addItem(this);
         System.out.println("Logarlec : endGame(VICTORY) -> Controller");
+    }
+
+    @Override
+    public void pickUp(Teacher t) {
+        System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + t.toString());
+        t.addItem(this);
     }
 
     @Override

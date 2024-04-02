@@ -2,6 +2,7 @@ package model.items;
 
 import model.player.Player;
 import model.player.Student;
+import model.player.Teacher;
 
 public class TVSZ implements IItem {
     private int hitpoints;
@@ -26,9 +27,15 @@ public class TVSZ implements IItem {
     }
 
     @Override
-    public void pickUp(Player p) {
-        System.out.println("TVSZ : addItem(" + this.toString() + ") -> " + p.toString());
-        p.addItem(this);
+    public void pickUp(Student s) {
+        System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + s.toString());
+        s.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Teacher t) {
+        System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + t.toString());
+        t.addItem(this);
     }
 
     @Override

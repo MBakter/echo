@@ -4,6 +4,7 @@ import model.ERoomEffects;
 import model.Room;
 import model.player.Player;
 import model.player.Student;
+import model.player.Teacher;
 
 public class Transistor implements IItem {
     private boolean active;
@@ -53,17 +54,23 @@ public class Transistor implements IItem {
 
     @Override
     public void useItem(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        return;
     }
 
     @Override
-    public void pickUp(Player p) {
+    public void pickUp(Student s) {
+        System.out.println("Transistor : addItem( " + this.toString() + ") -> " + s.toString());
         if(pair != null) {
             room.removeEffect(ERoomEffects.TRANSISTOR_INSIDE);
             room = null;
         }
-        p.addItem(this);
+        s.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Teacher t) {
+        System.out.println("Transistor : addItem( " + this.toString() + ") -> " + t.toString());
+        t.addItem(this);
     }
 
     @Override

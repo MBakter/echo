@@ -57,6 +57,14 @@ public class Student extends Player {
         }
     }
 
+    public void pickUp(IItem i) {
+        System.out.println("\t"+this+": pickUp called");
+
+        System.out.println(""+this+": pickUp("+this+") -> "+i); 
+        i.pickUp(this);
+        room.removeItem(i);
+    }
+    
     public void useItem(IItem i) {
         i.useItem(this);
     }

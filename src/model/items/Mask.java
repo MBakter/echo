@@ -4,6 +4,7 @@ import controller.Timer;
 import model.ITimer;
 import model.player.Player;
 import model.player.Student;
+import model.player.Teacher;
 
 public class Mask implements IItem, ITimer {
     private controller.Timer timer;
@@ -41,11 +42,17 @@ public class Mask implements IItem, ITimer {
     }
 
     @Override
-    public void pickUp(Player p) {
-        wearer = p;
+    public void pickUp(Student s) {
+        wearer = s;
+        
+        System.out.println("Mask : addItem( " + this.toString() + ") -> " + s.toString());
+        s.addItem(this);
+    }
 
-        System.out.println("\t"+"Mask : addItem(" + this.toString() + ") -> " + p.toString());
-        p.addItem(this);
+    @Override
+    public void pickUp(Teacher t) {
+        System.out.println("Mask : addItem( " + this.toString() + ") -> " + t.toString());
+        t.addItem(this);
     }
 
     @Override

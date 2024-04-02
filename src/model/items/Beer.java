@@ -4,6 +4,7 @@ import controller.Timer;
 import model.ITimer;
 import model.player.Player;
 import model.player.Student;
+import model.player.Teacher;
 
 public class Beer implements IItem, ITimer {
     private Timer timer;
@@ -35,9 +36,15 @@ public class Beer implements IItem, ITimer {
     }
 
     @Override
-    public void pickUp(Player p) {
-        System.out.println("Beer : addItem( " + this.toString() + ") -> " + p.toString());
-        p.addItem(this);
+    public void pickUp(Student s) {
+        System.out.println("Beer : addItem( " + this.toString() + ") -> " + s.toString());
+        s.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Teacher t) {
+        System.out.println("Beer : addItem( " + this.toString() + ") -> " + t.toString());
+        t.addItem(this);
     }
 
     @Override

@@ -32,7 +32,7 @@ public abstract class Player implements ITimer {
         room = r; 
     }
 
-    public void move(Room r) {    }
+    public abstract void move(Room r);
 
     /**
      * Alap RoomPoisoned függvény, eszméletét veszti a Player
@@ -55,13 +55,9 @@ public abstract class Player implements ITimer {
         System.out.println(this.toString() + ": Item removed: " + i.toString());
         itemList.remove(i);
     }
-    public void pickUp(IItem i) {
-        System.out.println("\t"+this+": pickUp called");
 
-        System.out.println(""+this+": pickUp("+this+") -> "+i); 
-        i.pickUp(this);
-        room.removeItem(i);
-    }
+    public abstract void pickUp(IItem i);
+
     public void dropItem(IItem i) {
         System.out.println(this.toString() + ": dropItem(" + this.toString() + ")-> " + i.toString());
         i.dropItem(this);

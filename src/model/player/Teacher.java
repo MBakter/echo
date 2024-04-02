@@ -1,6 +1,7 @@
 package model.player;
 
 import model.Room;
+import model.items.IItem;
 
 public class Teacher extends Player {
     @Override
@@ -29,4 +30,12 @@ public class Teacher extends Player {
 
     }
 
+    public void pickUp(IItem i) {
+        System.out.println("\t"+this+": pickUp called");
+
+        System.out.println(""+this+": pickUp("+this+") -> "+i); 
+        i.pickUp(this);
+        room.removeItem(i);
+    }
+    
 }
