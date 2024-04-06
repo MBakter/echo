@@ -1,0 +1,28 @@
+@startuml ce
+title Cleaner Entered
+
+participant "r : Room" as r
+participant "s : Student" as s
+participant "r2 : Room" as r2
+
+r -> s : CleanerEntered()
+activate r
+activate s
+alt s.state != UNCONSCIOUS
+s -> r : getNeighbours()
+activate r
+r --> s : neighbouringList
+deactivate r
+loop every r2 Room in neighbouringList
+s -> s : move(r2)
+note right
+Random sorrendben 
+próbál belépni, 
+majd ha sikerül akkor
+kilép a ciklusból
+end note
+end
+end
+s --> r
+deactivate s
+deactivate r

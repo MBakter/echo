@@ -1,0 +1,35 @@
+@startuml student_uses_beer_2
+title Student uses Beer
+
+actor Controller as C
+participant "s : Student" as s
+participant "b : Beer" as b
+actor Timer as t
+collections "il : itemList" as il
+
+C -> s : useItem(b)
+Activate s
+s -> b : useItem(s)
+Activate b
+alt state == INACTIVE
+b -> t : startTimer(time)
+b -> b : setState(RUNNING)
+end
+b --> s
+Deactivate b
+s --> C
+Deactivate s
+
+C -> s : useItem(b)
+activate s
+s -> b : useItem(s)
+b -> s : getItemList()
+s --> b : itemList
+alt itemList not null 
+b -> il : get(i)
+il --> b : i:IItem
+b -> s : dropItem(i)
+end
+deactivate s
+
+@enduml

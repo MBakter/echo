@@ -22,6 +22,9 @@ class Room implements IRoomManager {
     + teacherList : Teacher[]
     + cleanerList : Cleaner[]
     + neighbouringRooms : Room[]
+    + isSticky : bool
+    + isCleaned : bool
+    + numOfVisitors : int
 
     + addStudent(Student): void
     + removeStudent(Student): void
@@ -58,7 +61,7 @@ enum EPlayerState {
 
 abstract class Player implements ITimer{
     + room: Room
-    + itemList : Item[]
+    + itemList : IItem[]
     + state : EPlayerState
     + timer : ITimer
 
@@ -71,6 +74,7 @@ abstract class Player implements ITimer{
     + getRoom() : Room
     + addItem(IItem): void
     + removeItem(IItem) : void
+    + getItemList() : IItem[]
     + pickUp(IItem) : void
     + dropItem(IItem) : void
     + timerEnd() : void

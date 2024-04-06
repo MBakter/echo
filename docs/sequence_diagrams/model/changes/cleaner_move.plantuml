@@ -1,0 +1,33 @@
+@startuml cleaner_move
+
+title Cleaner move
+actor Controller
+participant "c : Cleaner" as c
+participant "r : Room" as r
+collections "tl : TeacherList" as tc
+collections "sl : StudentList" as sc
+
+    Controller -> c : move(r)
+    activate c
+    c -> r : addCleaner(c)
+    activate r
+    alt teacherList.size + studentList.size < maxPlayer && NO_CURSE
+        loop every t:Teacher in tl
+        r -> tc : CleanerEntered()
+        end
+        loop every s:Student in sl
+        r -> sc : CleanerEntered()
+        end
+        opt r.effects.contains(POISONOUS) 
+            r -> r : purifyRoom()
+            r --> r : isCleaned = true
+        end
+        r --> c : true
+        c -> c : setRoom(r)
+    else
+        r --> c : false
+        deactivate r
+    end
+deactivate c
+
+@enduml

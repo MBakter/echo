@@ -1,0 +1,30 @@
+@startuml puri
+title Purifier
+
+actor Controller as c
+participant "s : Student" as s
+participant "p : Purifier" as p
+participant "r : Room" as r
+collections "tl : TeacherList" as tc
+collections "sl : StudentList" as sc
+
+c -> s : useItem(p)
+activate s
+s -> p : useItem(s)
+activate p
+p -> r : purifyRoom()
+activate r
+loop every t:Teacher in tl
+r -> tc : RoomCleanFromPoison()
+end
+loop every s:Student in sl
+r -> sc : RoomCleanFromPoison()
+end
+r --> p
+deactivate r
+p --> s
+deactivate p
+s --> c
+deactivate s
+
+@enduml
