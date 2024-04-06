@@ -1,0 +1,30 @@
+@startuml pi
+
+title "Student picks sticky item"
+
+participant "c:Controller" as c
+participant "r:Room" as r
+participant "s:Student" as s
+participant "i:Item" as i
+
+c -> s : pickUp(i)
+activate s
+s -> i : pickUp(s)
+activate i
+alt r.isSticky is false
+note right 
+Ez minden item felvételénél
+ugyanígy lesz, az összes 
+pickup diagram kibővül
+egy ilyen esetvizsgálattal
+end note
+i -> s : addItem(i)
+deactivate i
+s -> r : removeItem(i)
+activate r
+r --> s 
+deactivate r
+s --> c
+deactivate s
+end
+@enduml

@@ -1,0 +1,28 @@
+@startuml roomstik
+
+title Room becomes sticky
+actor Controller as c
+participant "p:Player" as p
+participant "r:Room" as r
+
+    c -> p : move(r:Room)
+    activate p
+
+    alt p is Teacher
+    p -> r : addTeacher(this)
+    activate r
+    else p is Student
+    p -> r : addStudent(this)
+    else
+    p --> c
+    end
+    alt r.isCleaned == true && numOfvisitors >= MaxVisitorsAfterCleanup
+    r -> r : isSticky = true
+    else r.isCleaned = true
+    r -> r : numOfVisitors++
+    end
+    r --> p
+    p --> c
+deactivate p
+
+@enduml

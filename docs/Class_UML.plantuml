@@ -25,6 +25,7 @@ class Room implements IRoomManager {
     + isSticky : bool
     + isCleaned : bool
     + numOfVisitors : int
+    + MaxVisitorsAfterCleanup : static int
 
     + addStudent(Student): void
     + removeStudent(Student): void
