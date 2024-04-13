@@ -1,4 +1,4 @@
-package controller;
+package controller.tests;
 
 import java.util.Map;
 

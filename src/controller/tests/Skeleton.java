@@ -1,4 +1,4 @@
-package controller;
+package controller.tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,7 +1,8 @@
-package controller;
+package controller.tests;
 
 import java.util.Map;
 
+import controller.Timer;
 import model.*;
 import model.items.*;
 import model.player.*;

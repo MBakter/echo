@@ -1,4 +1,4 @@
-package controller;
+package controller.tests;
 
 
 public interface ITestcase {

@@ -1,21 +1,14 @@
 @startuml UML
 
-class Labyrinth {
-    +roomList : Room[]
-
-    + split(): Room
-    + merge(Room): bool
-}
-
-Labyrinth "1" *-- "0..*" IRoomManager: roomList
+title Logarlec Class Diagram of Model
 
 interface IRoomManager {
-    + split(): Room
-    + merge(Room): bool
+    + split() : Room
+    + merge(Room) : bool
 }
 
 class Room implements IRoomManager {
-    + maxPlayer: int
+    + maxPlayer : int
     + effects : ERoomEffects[]
     + itemList : Item[]
     + studentList : Student[]
@@ -27,32 +20,32 @@ class Room implements IRoomManager {
     + numOfVisitors : int
     + MaxVisitorsAfterCleanup : static int
 
-    + addStudent(Student): void
-    + removeStudent(Student): void
-    + addTeacher(Teacher): bool
-    + removeTeacher(Teacher): void
-    + addCleaner(Cleaner): bool
-    + removeCleaner(Cleaner): void
+    + addStudent(Student) : void
+    + removeStudent(Student) : void
+    + addTeacher(Teacher) : bool
+    + removeTeacher(Teacher) : void
+    + addCleaner(Cleaner) : bool
+    + removeCleaner(Cleaner) : void
     + getTeachers() : Teacher[]
-    + addNeighbour(Room): void
-    + removeNeighbour(Room): void
+    + addNeighbour(Room) : void
+    + removeNeighbour(Room) : void
     + getNeighbours() : Room[]
-    + addItem(IItem): void
+    + addItem(IItem) : void
     + removeItem(IItem) : void
     + addEffect(ERoomEffects) : void
     + removeEffect(ERoomEffects) : void
     + purifyRoom() : void
 
-    + split(): Room
-    + merge(Room): bool
+    + split() : Room
+    + merge(Room) : bool
 }
 
 Room "1" o-- "0..*" Student: + studentList
 Room "1" o-- "0..*" Teacher: + teacherList
+Room "1" o-- "0..*" Cleaner: + cleanerList
 Room "1" *-- "0..*" Room: + neighbours
 Room "1" *-- "0..*" IItem: + itemList
 Room *-- ERoomEffects: + effects
-
 
 enum EPlayerState {
     ALIVE
@@ -60,11 +53,12 @@ enum EPlayerState {
     DEAD
 }
 
-abstract class Player implements ITimer{
-    + room: Room
+abstract class Player implements ITimedEntity{
+    + room  : Room
     + itemList : IItem[]
     + state : EPlayerState
     + timer : ITimer
+    + TIME  : static final int
 
     + move(Room): void
     + RoomPoisoned() : void
@@ -83,10 +77,11 @@ abstract class Player implements ITimer{
 
 Player "0" o-- "1" EPlayerState
 Player "1" *-- "0..*" IItem: + itemList
+Player *--"1" ITimer
 
 interface IItem {
-    + useItem(Player): void
-    + pickUp(Student): void
+    + useItem(Player) : void
+    + pickUp(Student) : void
     + pickUp(Teacher) : void
     + dropItem(Player) : void
 
@@ -97,22 +92,22 @@ interface IItem {
 }
 
 class Teacher extends Player {
-    + move(Room): void
-    + getState(): EPlayerState
-    + setState(EPlayerState): void
+    + move(Room) : void
+    + getState() : EPlayerState
+    + setState(EPlayerState) : void
 }
 
 class Student extends Player {
-    + move(Room): void
-    + getState(): EPlayerState
-    + setState(EPlayerState): void
+    + move(Room) : void
+    + getState() : EPlayerState
+    + setState(EPlayerState) : void
     + TeacherAttacked() : void
 }
 
 class Cleaner extends Player {
-    + move(Room): void
-    + getState(): EPlayerState
-    + setState(EPlayerState): void
+    + move(Room) : void
+    + getState() : EPlayerState
+    + setState(EPlayerState) : void
 }
 
 enum ERoomEffects {
@@ -123,6 +118,12 @@ enum ERoomEffects {
 }
 
 interface ITimer {
+    + startTimer(ITimedEntity) : void
+    + pauseTimer(ITimedEntity, int) : void
+    + addItem(ITimedEntity) : void
+}
+
+interface ITimedEntity {
     + timerEnd() : void
 }
 
@@ -143,31 +144,34 @@ class Transistor implements IItem  {
     + unpairTransistor(Transistor) : void
     + dropItem(Player) : void
     + setRoom(Room) : void
-    + unactivateTransistor() : void
+    + deactivateTransistor() : void
 }
 
-enum BeerState {
+enum EBeerState {
     INACTIVE
     RUNNING
     DISABLED
 }
 
-class Beer implements IItem, ITimer {
+class Beer implements IItem, ITimedEntity {
     + timer : Timer
     + state : BeerState
+    + TIME  : static final int
     
     + useItem(Player) : void
     + timerEnd() : void
-    + setState(BeerState): void
+    + setState(BeerState) : void
     + TeacherAttacked(Student) : bool
 }
 Beer *-- "1" BeerState
+Beer *--"1" ITimer
 
-class Mask implements IItem, ITimer  {
+class Mask implements IItem, ITimedEntity  {
     + timer : Timer
     + functional : bool
     + student : Student
     + fake : bool
+    + TIME  : static final int
 
     + timerEnd() : void
     + pickUp(Student) : void
@@ -175,23 +179,28 @@ class Mask implements IItem, ITimer  {
     + RoomClearFromPoison(Student) : void
 
 }
+Mask *--"1" ITimer
 
-class Sponge implements IItem, ITimer {
+class Sponge implements IItem, ITimedEntity {
     + timer : Timer
     + functional : bool
+    + TIME  : static final int
 
     + timerEnd() : void
     + TeacherAttackable(Student) : void
 }
+Sponge *--"1" ITimer
 
-class Cheese implements IItem, ITimer {
+class Cheese implements IItem, ITimedEntity {
     + timer : Timer
     + isUsed : bool
     + room : Room
-    
+    + TIME  : static final int
+
     + useItem(Player) : void
     + timerEnd() : void
 }
+Cheese *--"1" ITimer
 
 class Purifier implements IItem {
     + isUsed : bool
@@ -205,12 +214,5 @@ class Logarlec  implements IItem  {
     + useItem(Student) : void
     + dropItem(Player) : void
 }
-
-class Timer {
-    pauseTimer(IItem) : void
-    startTimer(IItem, float) : void
-}
-Timer "1"*--> "1" ITimer
-
 
 @enduml
