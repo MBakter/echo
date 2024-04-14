@@ -1,0 +1,58 @@
+@startuml UML
+
+title Logarlec Class Diagram of Controller
+
+class Labyrinth {
+    + roomList : List<Room>
+
+    + generateFromFile(File) : void
+    + randomMove() : void
+}
+
+class TimedObject {
+    + time : int
+    + object : ITimer
+    + active : boolean
+
+    + TimedObject(ITimedEntity)
+    + getObject() : ITimer
+    + getTime() : int
+    + isActive() : boolean
+    + activate(int) : void
+    + pause() : void
+    + iterateTime() : boolean
+}
+
+interface ITimer {
+    + startTimer(ITimedEntity, int) : void
+    + pauseTimer(ITimedEntity) : void
+    + addItem(ITimedEntity) : void
+}
+
+class Timer implements ITimer {
+    + list : List<TimedObject>
+
+    + Timer()
+    + getList() : List<TimedObject>
+    + addItem(ITimedEntity) : void
+    + iterateTime() : void
+    + startTimer(ITimer, int) : void
+    + pauseTimer(ITimer) : void
+}
+Timer "1"*--"0,..." TimedObject
+
+class Controller {
+    + players : static List<Player>
+    + endOfGame : static boolean
+    + mapDirectoryPath : static final String
+    
+    + main(String[]) : static void
+    + chooseMap() : static void
+    + initGame() : static void
+    + GameCycle() : static void
+    + StudentMove(Student) : static void
+    + TeacherMove(Teacher) : static void
+    + CleanerMove(Cleaner) : static void
+    + endGame(boolean) : static void
+}
+Controller .-> Timer

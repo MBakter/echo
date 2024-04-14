@@ -1,0 +1,17 @@
+@startuml sta
+
+start
+
+if (functional == true) then (yes)
+  :variable r = s.getRoom()
+  FOR every t Teacher in r.getTeachers()
+    t.setState(UNCONSCIOUS)
+  END FOR
+  return true;
+else (no)
+  :return false;
+endif
+
+stop
+
+@enduml

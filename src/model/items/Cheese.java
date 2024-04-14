@@ -42,7 +42,10 @@ public class Cheese implements IItem, ITimer {
     public void useItem(Player p) {
         if(isUsed) 
             return;
-        startTimer();
+        
+        System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
+        timer.startTimer(this, 2);
+        
         room = p.getRoom();
 
         System.out.println("Cheese : addEffect(POISONED) -> " + room.toString());

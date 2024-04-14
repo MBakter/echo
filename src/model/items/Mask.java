@@ -9,7 +9,8 @@ import model.player.Teacher;
 public class Mask implements IItem, ITimer {
     private controller.Timer timer;
     private boolean functional;
-    private Player wearer;
+    private Student wearer;
+
     @Override
     public String toString(){
         return "Mask@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -28,10 +29,10 @@ public class Mask implements IItem, ITimer {
     }
 
     /*
-     * Beállítja a hordozót a paraméterként kapott Playerre
+     * Beállítja a hordozót a paraméterként kapott Studentre
      */
-    public void setPlayer(Player p) {
-        wearer = p;
+    public void setWearer(Student s) {
+        wearer = s;
         System.out.println("Mask : setWearer -> " + wearer.toString());
     }
 

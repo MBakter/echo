@@ -32,9 +32,11 @@ public class Timer {
 
     public void startTimer(ITimer o, int time) {
         for (TimedObject to : list) {
-            if(to.getObject().equals(o) && !to.isActive()) {
+            if(to.getObject().equals(o) && to.isPaused()) 
+                to.resume();
+            if(to.getObject().equals(o) && !to.isActive()) 
                 to.activate(time);
-            }
+            
         }
     }
 

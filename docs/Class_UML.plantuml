@@ -83,7 +83,7 @@ interface IItem {
     + useItem(Player) : void
     + pickUp(Student) : void
     + pickUp(Teacher) : void
-    + dropItem(Player) : void
+    + dropItem(Player) : void 
 
     + TeacherAttacked(Student) : bool
     + RoomPoisoned(Student) : bool
@@ -118,8 +118,8 @@ enum ERoomEffects {
 }
 
 interface ITimer {
-    + startTimer(ITimedEntity) : void
-    + pauseTimer(ITimedEntity, int) : void
+    + startTimer(ITimedEntity, int) : void
+    + pauseTimer(ITimedEntity) : void
     + addItem(ITimedEntity) : void
 }
 
@@ -163,13 +163,13 @@ class Beer implements IItem, ITimedEntity {
     + setState(BeerState) : void
     + TeacherAttacked(Student) : bool
 }
-Beer *-- "1" BeerState
+Beer *-- "1" EBeerState
 Beer *--"1" ITimer
 
 class Mask implements IItem, ITimedEntity  {
     + timer : Timer
     + functional : bool
-    + student : Student
+    + wearer : Student
     + fake : bool
     + TIME  : static final int
 

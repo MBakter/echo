@@ -1,0 +1,21 @@
+@startuml toi
+
+start
+
+if (active == false OR paused == true) then (yes)
+  :return true;
+else (no)
+  if(time <= 0) then (yes)
+    :return false;
+    else (no)
+    :time--;
+    if(time == 0) then(yes)
+    :active = false;
+    endif
+    :return time == 0 ? false : true;
+  endif
+endif
+
+stop
+
+@enduml

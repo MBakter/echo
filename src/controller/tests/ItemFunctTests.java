@@ -119,8 +119,8 @@ class Mask_save implements ITestcase{
         Room r = new Room();
         System.out.println("Controller : addItem(" + m.toString() + ") -> " + s.toString());
         s.addItem(m);
-        System.out.println("Controller : setPlayer(" + s.toString() + ") -> " + m.toString());
-        m.setPlayer(s);
+        System.out.println("Controller : setWearer(" + s.toString() + ") -> " + m.toString());
+        m.setWearer(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
