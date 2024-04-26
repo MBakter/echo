@@ -1,0 +1,35 @@
+create room r1
+create teacher t
+link r1 te
+create room r2
+link r1 r2
+create mask m
+link m r2
+create room r3 
+link r3 r2
+create logar l
+link l r3
+create room r4
+link r3 r4
+create room r5
+link r4 r5
+link r2 r5
+create room r6
+link r5 r6
+link r4 r6
+link r2 r6
+create room r7
+link r2 r7
+create student st
+link r7 st
+create tvsz tvsz1
+state tvsz1 hitPoint 1
+link tvsz1 st
+create room r8
+link r7 r8
+link te r2
+interact pickup te m
+link st r2
+link st r3
+interact st pickup l
+stat

@@ -5,5 +5,6 @@ public enum ECommand {
     LINK,
     STATE,
     INTERACT,
-    STAT  
+    STAT ,
+    CONTROL
 }
