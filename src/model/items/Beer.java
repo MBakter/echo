@@ -5,8 +5,9 @@ import model.ITimer;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Beer implements IItem, ITimer {
+public class Beer implements IItem, ITimer, IPrintStat {
     private Timer timer;
     private EBeerState state; //Default: INACTIVE
 
@@ -99,5 +100,8 @@ public class Beer implements IItem, ITimer {
         //System.out.println("Beer : setState -> " + state.toString());
     }
     
-
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will beer room info\n");
+    }
 }

@@ -3,8 +3,9 @@ package model.items;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Logarlec implements IItem {
+public class Logarlec implements IItem, IPrintStat {
 
     @Override
     public String toString(){
@@ -67,4 +68,8 @@ public class Logarlec implements IItem {
         return false;
     }
     
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print logarlec info\n");
+    }
 }

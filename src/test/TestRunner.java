@@ -12,6 +12,12 @@ import model.items.*;
  * TestRunner
  */
 public class TestRunner {
+    private enum Type {
+        Player,
+        Item,
+        Room
+    }
+
     private ArrayList<CommandData> commands;
 
     private HashMap<String, IItem> items = new HashMap<>();
@@ -115,25 +121,46 @@ public class TestRunner {
         }
     }
 
-    private void CmdLink(ArrayList<String> args) {
+    private Type getType(String name) {
         for (String savedName : rooms.keySet()) {
-            if (savedName.equals(args.get(0))) {
-                //System.out.printf("Talált object: %s\n", rooms.get(savedName).toString());
+            if (savedName.equals(name)) {
+                return Type.Room;
             }
 
         }
         for (String savedName : players.keySet()) {
-            if (savedName.equals(args.get(0))) {
-                //System.out.printf("Talált object: %s\n", players.get(savedName).toString());
+            if (savedName.equals(name)) {
+                return Type.Player;
             }
 
         }
         for (String savedName : items.keySet()) {
-            if (savedName.equals(args.get(0))) {
-                //System.out.printf("Talált object: %s\n", items.get(savedName).toString());
+            if (savedName.equals(name)) {
+                return Type.Item;
             }
 
         }
+        return null;
+    }
+
+    private void CmdLink(ArrayList<String> args) {
+        Type arg1 = getType(args.get(0));
+        if(arg1 == Type.Room){
+            if(getType(args.get(1)) == Type.Room){
+                rooms.get(args.get(0)).addNeighbour(rooms.get(args.get(1)));
+                System.out.printf("%s connected to %s\n",args.get(0),args.get(1));
+            }
+        }
+        if(arg1 == Type.Player){
+            if(getType(args.get(1)) == Type.Room){
+                players.get(args.get(0)).move(rooms.get(args.get(1)));
+                System.out.printf("%s moved to %s\n",args.get(0),args.get(1));
+            }
+        }
+        if(arg1 == Type.Item){
+            
+        }
+
     }
 
     private void CmdState(ArrayList<String> args) {
@@ -145,7 +172,16 @@ public class TestRunner {
     }
 
     private void CmdStat(ArrayList<String> args) {
-
+        System.out.println("Stat:");
+        for (var item : players.keySet()) {
+            players.get(item).PrintStat();
+        }
+        for (var item : items.keySet()) {
+            items.get(item).PrintStat();
+        }
+        for (var item : rooms.keySet()) {
+            rooms.get(item).PrintStat();
+        }
     }
 
     private void CmdControl(ArrayList<String> args) {

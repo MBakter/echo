@@ -7,8 +7,9 @@ import model.Room;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Cheese implements IItem, ITimer {
+public class Cheese implements IItem, ITimer, IPrintStat {
     private Timer timer;
     private boolean isUsed;
     private Room room;
@@ -106,5 +107,8 @@ public class Cheese implements IItem, ITimer {
         room.removeEffect(ERoomEffects.POISONED);
     }
     
-    
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print cheese info\n");
+    }
 }

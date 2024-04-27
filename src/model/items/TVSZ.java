@@ -3,8 +3,9 @@ package model.items;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class TVSZ implements IItem {
+public class TVSZ implements IItem, IPrintStat {
     private int hitpoints;
 
     @Override
@@ -73,5 +74,8 @@ public class TVSZ implements IItem {
         return false;
     }
 
-
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print tvsz info\n");
+    }
 }

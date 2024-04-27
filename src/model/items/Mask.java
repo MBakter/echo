@@ -5,8 +5,9 @@ import model.ITimer;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Mask implements IItem, ITimer {
+public class Mask implements IItem, ITimer, IPrintStat {
     private controller.Timer timer;
     private boolean functional;
     private Student wearer;
@@ -102,4 +103,8 @@ public class Mask implements IItem, ITimer {
         //System.out.println("Mask : setFunctional -> " + (functional ? "true" : "false"));
     }
 
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print mask info\n");
+    }
 }

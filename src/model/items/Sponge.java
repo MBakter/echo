@@ -7,8 +7,9 @@ import model.player.EPlayerState;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Sponge implements IItem, ITimer {
+public class Sponge implements IItem, ITimer, IPrintStat {
     private controller.Timer timer;
     private boolean functional;
 
@@ -99,4 +100,8 @@ public class Sponge implements IItem, ITimer {
         //System.out.println("Sponge : setFunctional -> " + (functional ? "true" : "false"));
     }
 
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print sponge info\n");
+    }
 }

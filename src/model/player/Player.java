@@ -6,8 +6,9 @@ import java.util.List;
 import model.ITimer;
 import model.Room;
 import model.items.IItem;
+import test.IPrintStat;
 
-public abstract class Player implements ITimer {
+public abstract class Player implements ITimer, IPrintStat {
 
     Player(){
         ////System.out.println("<<create>> \""+this.toString()+"\"");
@@ -68,5 +69,10 @@ public abstract class Player implements ITimer {
     @Override
     public void timerEnd() {
         state = EPlayerState.ALIVE;
+    }
+    
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print player info\n");
     }
 }

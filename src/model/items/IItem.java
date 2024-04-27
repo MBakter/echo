@@ -4,7 +4,10 @@ import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
 
-public interface IItem {
+public interface IItem{
+
+    // Tudom hogy ez csúnya.
+    public void PrintStat();
 
     /*
      * A tárgy használata.

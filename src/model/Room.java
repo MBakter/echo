@@ -6,8 +6,9 @@ import java.util.List;
 import model.items.IItem;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Room implements IRoomManager {
+public class Room implements IRoomManager, IPrintStat {
 
     public String toString(){
         return "Room@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -160,7 +161,9 @@ public class Room implements IRoomManager {
      }
     public List<Student> getStudents() { return studentList; }
     public List<Teacher> getTeachers() { return teacherList; }
-    public void addNeighbour(Room r) {}
+    public void addNeighbour(Room r) {
+        neighbouringRooms.add(r);
+    }
     public void removeNeighbour(Room r) {}
     public List<Room> getNeighbours() { return neighbouringRooms; }
     public void addItem(IItem i) {
@@ -259,6 +262,11 @@ public class Room implements IRoomManager {
         }
         ////System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" successfully merged");
         return true;
+    }
+
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print room info\n");
     }
 
 }

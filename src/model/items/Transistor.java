@@ -6,8 +6,9 @@ import model.Room;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
+import test.IPrintStat;
 
-public class Transistor implements IItem {
+public class Transistor implements IItem , IPrintStat{
     private boolean active;
     private Room room;
     private Transistor pair;
@@ -126,4 +127,8 @@ public class Transistor implements IItem {
         return false;
     }
 
+    @Override
+    public void PrintStat() {
+        System.out.printf("This will print transistor info\n");
+    }
 }
