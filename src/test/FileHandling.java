@@ -3,6 +3,7 @@ package test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,15 +32,44 @@ public class FileHandling {
         return lineList;
     }
 
-    public static void main(String[] args) {
+    // Main runner For testing 
+    public static void main(String[] args) throws IOException {
         FileHandling fh = new FileHandling();
         
         //File file = new File(currentDir, path);
         var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
+        fh.WriteTestResult(list.get(0).subject, "src/test/test_txt/test_output/test1_outtttt.txt");
 
         TestRunner tr = new TestRunner(list);
-
         tr.Evaluate();
+    }
+
+    // Writing out the resulting lines of String to the designated File.
+    public void WriteTestResult(ArrayList<String> textLineListResult, String testPathToResultFile) throws IOException{
+        String currentDir = System.getProperty("user.dir");
+        File currDirPath = new File(currentDir);
+        File filePath = new File(currDirPath, testPathToResultFile);
+        FileWriter myWriter = null;
+
+        try {
+            myWriter = new FileWriter(filePath);
+            for (int i = 0; i < textLineListResult.size(); i++) {
+                myWriter.write(textLineListResult.get(i));
+                if (i != textLineListResult.size() -1)  myWriter.write(System.lineSeparator());
+            }
+            myWriter.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (myWriter != null){
+                try{
+                    myWriter.close();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            } 
+        }
     }
 
     // Read file with a given path (as a string) and it splits into individual commands
