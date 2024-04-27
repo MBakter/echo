@@ -24,7 +24,7 @@ public class Cheese implements IItem, ITimer {
      * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
      */
     public Cheese(Timer t) {
-        System.out.println("<<create>> " + this.toString());
+        //System.out.println("<<create>> " + this.toString());
         timer = t;
         t.addItem(this);
     }
@@ -34,7 +34,7 @@ public class Cheese implements IItem, ITimer {
      * Elindítja a cheese timerét
      */
     public void startTimer() {
-        System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
+        //System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
     }
 
@@ -43,36 +43,36 @@ public class Cheese implements IItem, ITimer {
         if(isUsed) 
             return;
         
-        System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
+        //System.out.println("Cheese : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
         
         room = p.getRoom();
 
-        System.out.println("Cheese : addEffect(POISONED) -> " + room.toString());
+        //System.out.println("Cheese : addEffect(POISONED) -> " + room.toString());
         room.addEffect(ERoomEffects.POISONED);
 
-        System.out.println("Cheese : removeItem(" + this.toString() + ") -> " + p.toString());
+        //System.out.println("Cheese : removeItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
 
-        System.out.println("Cheese : addItem(" + this.toString() + ") -> " + room.toString());
+        //System.out.println("Cheese : addItem(" + this.toString() + ") -> " + room.toString());
         room.addItem(this);
     }
 
     @Override
     public void pickUp(Student s) {
-        System.out.println("Cheese : addItem( " + this.toString() + ") -> " + s.toString());
+        //System.out.println("Cheese : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        System.out.println("Cheese : addItem( " + this.toString() + ") -> " + t.toString());
+        //System.out.println("Cheese : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("Cheese : removeItem( " + this.toString() + ") -> " + p.toString());
+        //System.out.println("Cheese : removeItem( " + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 
@@ -102,7 +102,7 @@ public class Cheese implements IItem, ITimer {
 
     @Override
     public void timerEnd() {
-        System.out.println("Cheese : removeEffect(POISONED) -> " + room.toString());
+        //System.out.println("Cheese : removeEffect(POISONED) -> " + room.toString());
         room.removeEffect(ERoomEffects.POISONED);
     }
     

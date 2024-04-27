@@ -1,6 +1,6 @@
 create room r1
 create teacher t
-link r1 te
+link r1 t
 create room r2
 link r1 r2
 create mask m
@@ -27,8 +27,8 @@ state tvsz1 hitPoint 1
 link tvsz1 st
 create room r8
 link r7 r8
-link te r2
-interact pickup te m
+link t r2
+interact pickup t m
 link st r2
 link st r3
 interact st pickup l

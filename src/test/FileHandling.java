@@ -10,7 +10,14 @@ import java.util.ArrayList;
 
 
 public class FileHandling {
-
+    private boolean debug = false;
+    // Write read strings to terminal
+    private void Debug(){
+        if(debug == false)
+            debug = true;
+        else
+            debug = false;
+    }
     // Read the text from the Input Stream.
     private ArrayList<String> readFromInputStream(InputStream inputStream) throws IOException{
         ArrayList<String> lineList = new ArrayList<>();
@@ -26,9 +33,13 @@ public class FileHandling {
 
     public static void main(String[] args) {
         FileHandling fh = new FileHandling();
-
+        
         //File file = new File(currentDir, path);
-        fh.ReadTest("src/test/test_txt/test_input/test1.txt");
+        var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
+
+        TestRunner tr = new TestRunner(list);
+
+        tr.Evaluate();
     }
 
     // Read file with a given path (as a string) and it splits into individual commands
@@ -43,10 +54,13 @@ public class FileHandling {
         try {
             fis = new FileInputStream(filePath);
             ArrayList<String> lines = readFromInputStream(fis); 
-
-            for (String string : lines) {
-                System.out.println(string);
+            
+            if(debug){
+                for (String string : lines) {
+                    System.out.println(string);
+                }
             }
+
             fis.close();
 
             list = tokeniseLine(lines);
@@ -98,7 +112,8 @@ public class FileHandling {
         for (int i = 1; i < split.length; i++){
             command.subject.add(split[i]);
         }
-        System.out.println("valami "+ command.type);
+        if(debug)
+            System.out.println("valami "+ command.type);
         return command;
     };
 }

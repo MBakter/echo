@@ -15,7 +15,7 @@ public class Logarlec implements IItem {
      * Konstruktor
      */
     public Logarlec() {
-        System.out.println("<<create>> " + this.toString());
+        //System.out.println("<<create>> " + this.toString());
     }
 
     @Override
@@ -26,20 +26,20 @@ public class Logarlec implements IItem {
 
     @Override
     public void pickUp(Student s) {
-        System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + s.toString());
+        //System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
-        System.out.println("Logarlec : endGame(VICTORY) -> Controller");
+        //System.out.println("Logarlec : endGame(VICTORY) -> Controller");
     }
 
     @Override
     public void pickUp(Teacher t) {
-        System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + t.toString());
+        //System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("Logarlec : removeItem(" + this.toString() + ") -> " + p.toString());
+        //System.out.println("Logarlec : removeItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 

@@ -15,18 +15,18 @@ public class Student extends Player {
      */
 
     public void move(Room r) {
-        System.out.println("\t"+this+": current room is "+room);
-        System.out.println(""+this+": addStudent("+this+") -> "+r);        
+        ////System.out.println("\t"+this+": current room is "+room);
+        ////System.out.println(""+this+": addStudent("+this+") -> "+r);        
         boolean moveResult = r.addStudent(this);
         if(moveResult){
             room = r;
-            System.out.println("\t"+this+": moving to "+r+" successful");
-            System.out.println("\t"+r+": Students in room: "+r.getStudents());
+            ////System.out.println("\t"+this+": moving to "+r+" successful");
+            ////System.out.println("\t"+r+": Students in room: "+r.getStudents());
         }            
         else{
-            System.out.println("\t"+this+": moving to "+r+" failed");
+            ////System.out.println("\t"+this+": moving to "+r+" failed");
         }            
-        System.out.println("\t"+this+": current room is "+room);
+        ////System.out.println("\t"+this+": current room is "+room);
 
     }
     /**
@@ -35,15 +35,15 @@ public class Student extends Player {
     @Override
     public void RoomPoisoned() {
 
-        System.out.println("\t"+this+": RoomPoisoned called");
+        ////System.out.println("\t"+this+": RoomPoisoned called");
         for (IItem iItem : itemList) 
             if(iItem.RoomPoisoned(this)) {
-                System.out.println("\t"+this+": Saved from poison!");
+                ////System.out.println("\t"+this+": Saved from poison!");
                 return;
             }
 
         state = EPlayerState.UNCONSCIOUS;
-        System.out.println("\t"+this+": State set to: "+state);
+        ////System.out.println("\t"+this+": State set to: "+state);
       
     };
     /**
@@ -51,16 +51,16 @@ public class Student extends Player {
      */
     @Override
     public void RoomCleanFromPoison() {
-        System.out.println("\t"+this+": RoomCleanFromPoison called");
+        ////System.out.println("\t"+this+": RoomCleanFromPoison called");
         for (IItem iItem : itemList) {
             iItem.RoomCleanFromPoison(this);
         }
     }
 
     public void pickUp(IItem i) {
-        System.out.println("\t"+this+": pickUp called");
+        ////System.out.println("\t"+this+": pickUp called");
 
-        System.out.println(""+this+": pickUp("+this+") -> "+i); 
+        ////System.out.println(""+this+": pickUp("+this+") -> "+i); 
         i.pickUp(this);
         room.removeItem(i);
     }
@@ -73,21 +73,21 @@ public class Student extends Player {
      * A hallgatót megtámadja egy oktató, tárgyaival megpróbálja menteni magát
      */
     public void TeacherAttacked() {
-        System.out.println("\t"+this+": TeacherAttacked called!");
+        ////System.out.println("\t"+this+": TeacherAttacked called!");
         for (IItem item : itemList) 
             if(item.TeacherAttackable(this)) {
-                System.out.println(this + ": Survived attack");
+                ////System.out.println(this + ": Survived attack");
                 return;      
             }
 
         for (IItem item : itemList) 
             if(item.TeacherAttacked(this)) {
-                System.out.println(this + ": Survived attack");
+                ////System.out.println(this + ": Survived attack");
                 return;      
             }
         
         state = EPlayerState.DEAD;
-        System.out.println(this + ": setState -> " + state);
+        ////System.out.println(this + ": setState -> " + state);
     }
 
 }

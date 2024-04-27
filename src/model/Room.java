@@ -24,8 +24,8 @@ public class Room implements IRoomManager {
      * Teszthez kiírjuk a <<create>>-et és beállítjuk az alap méretet
      */
     public Room(){
-        //System.out.println("Room created");
-        System.out.println("<<create>> \""+this+"\"");
+        //////System.out.println("Room created");
+        //////System.out.println("<<create>> \""+this+"\"");
         setMax(5);
     }
 
@@ -36,7 +36,7 @@ public class Room implements IRoomManager {
      * @return  Sikerült-e mozogni a szobába
      */
     public boolean addStudent(Student s) { 
-        System.out.println("\t"+this+": addStudent called");
+        //////System.out.println("\t"+this+": addStudent called");
         int playersInRoom = teacherList.size()+studentList.size();
 
         // Initialize student's room
@@ -93,7 +93,7 @@ public class Room implements IRoomManager {
         boolean contains = studentList.contains(s);
         if(contains){
             studentList.remove(s);
-            System.out.println("\t"+this+": "+s+" removed");
+            ////System.out.println("\t"+this+": "+s+" removed");
         }
 
         return contains;
@@ -153,7 +153,7 @@ public class Room implements IRoomManager {
         boolean contains = teacherList.contains(t);
         if(contains){
             teacherList.remove(t);
-            System.out.println("\t"+this+": "+t+" removed");
+            ////System.out.println("\t"+this+": "+t+" removed");
         }
 
         return contains;
@@ -164,7 +164,7 @@ public class Room implements IRoomManager {
     public void removeNeighbour(Room r) {}
     public List<Room> getNeighbours() { return neighbouringRooms; }
     public void addItem(IItem i) {
-        System.out.println("\t"+this+": Item Added: "+i);
+        ////System.out.println("\t"+this+": Item Added: "+i);
     }
     public void removeItem(IItem i) {}
 
@@ -175,7 +175,7 @@ public class Room implements IRoomManager {
      */
     public void addEffect(ERoomEffects e) {
         effects.add(e);
-        System.out.println("\t"+this+": Effects after addition: "+effects);
+        ////System.out.println("\t"+this+": Effects after addition: "+effects);
         if(e == ERoomEffects.POISONED){
             for (Student s : studentList) {
                 s.RoomPoisoned();
@@ -191,9 +191,9 @@ public class Room implements IRoomManager {
      * @param e Az effektus, amit a szobáról leveszünk
      */
     public void removeEffect(ERoomEffects e) {
-        System.out.println("\t"+this+": Effects before removal: "+effects);
+        ////System.out.println("\t"+this+": Effects before removal: "+effects);
         effects.remove(e);
-        System.out.println("\t"+this+": Effects after removal: "+effects);
+        ////System.out.println("\t"+this+": Effects after removal: "+effects);
         if(!effects.contains(ERoomEffects.POISONED)){
             for (Student s : studentList) {
                 s.RoomCleanFromPoison();
@@ -207,7 +207,7 @@ public class Room implements IRoomManager {
     public int getMax(){return maxPlayer;}
     public void setMax(int n){
         maxPlayer = n;
-        System.out.println("\t"+this+": Max size set to: "+n);
+        ////System.out.println("\t"+this+": Max size set to: "+n);
     }
 
     /**
@@ -218,18 +218,18 @@ public class Room implements IRoomManager {
     @Override
     public Room split() {
         if(studentList.size() > 0 || teacherList.size() > 0) {
-            System.out.println("\tRoom \"" + this.toString() + "\" cannot split because it is not empty");
+            ////System.out.println("\tRoom \"" + this.toString() + "\" cannot split because it is not empty");
             return null;
         }
         if(effects.contains(ERoomEffects.TRANSISTOR_INSIDE)){
-            System.out.println("\tRoom \"" + this.toString() + "\" cannot split because transistor is inside");
+            ////System.out.println("\tRoom \"" + this.toString() + "\" cannot split because transistor is inside");
             return null;
         }
         Room newRoom = new Room();
         newRoom.maxPlayer = this.maxPlayer;
         newRoom.addNeighbour(this);
         this.addNeighbour(newRoom);
-        System.out.println("\tRoom \"" + this.toString() + "\" successfully split");
+        ////System.out.println("\tRoom \"" + this.toString() + "\" successfully split");
         return newRoom;
     }
 
@@ -242,11 +242,11 @@ public class Room implements IRoomManager {
     @Override
     public boolean merge(Room r) {
         if(studentList.size() > 0 || teacherList.size() > 0 || r.studentList.size() > 0 || r.teacherList.size() > 0){
-            System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" cannot merge because one is not empty");
+            ////System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" cannot merge because one is not empty");
             return false;
         }
         if(effects.contains(ERoomEffects.TRANSISTOR_INSIDE) || r.effects.contains(ERoomEffects.TRANSISTOR_INSIDE)){
-            System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" cannot merge because transistor is inside");
+            ////System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" cannot merge because transistor is inside");
             return false;
         }
         List<Room> nb = r.getNeighbours();
@@ -257,7 +257,7 @@ public class Room implements IRoomManager {
         for (IItem i : items) {
             addItem(i);
         }
-        System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" successfully merged");
+        ////System.out.println("\tRoom \"" + this.toString() + "\" and \"" + r.toString() + "\" successfully merged");
         return true;
     }
 

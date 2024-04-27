@@ -22,7 +22,7 @@ public class Mask implements IItem, ITimer {
      * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
      */
     public Mask(Timer t) {
-        System.out.println("<<create>> " + this.toString());
+        //System.out.println("<<create>> " + this.toString());
         timer = t;
         t.addItem(this);
         functional = true;
@@ -33,7 +33,7 @@ public class Mask implements IItem, ITimer {
      */
     public void setWearer(Student s) {
         wearer = s;
-        System.out.println("Mask : setWearer -> " + wearer.toString());
+        //System.out.println("Mask : setWearer -> " + wearer.toString());
     }
 
     @Override
@@ -46,22 +46,22 @@ public class Mask implements IItem, ITimer {
     public void pickUp(Student s) {
         wearer = s;
         
-        System.out.println("Mask : addItem( " + this.toString() + ") -> " + s.toString());
+        //System.out.println("Mask : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        System.out.println("Mask : addItem( " + this.toString() + ") -> " + t.toString());
+        //System.out.println("Mask : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("\t"+"Mask : pauseTimer(" + this.toString() + ") -> " + timer.toString());
+        //System.out.println("\t"+"Mask : pauseTimer(" + this.toString() + ") -> " + timer.toString());
         timer.pauseTimer(this);
         
-        System.out.println("\t"+"Mask : removeItem( " + this.toString() + ") -> " + p.toString());
+        //System.out.println("\t"+"Mask : removeItem( " + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 
@@ -74,19 +74,19 @@ public class Mask implements IItem, ITimer {
     @Override
     public boolean RoomPoisoned(Student s) {
 
-        System.out.println("Mask : functional: " + (functional == true ? "true" : "false"));
+        //System.out.println("Mask : functional: " + (functional == true ? "true" : "false"));
 
         if(!functional)
             return false;
 
-        System.out.println("Mask : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
+        //System.out.println("Mask : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
         return true;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        System.out.println("Mask : pauseTimer(" + this.toString() + ") -> " + timer.toString());
+        //System.out.println("Mask : pauseTimer(" + this.toString() + ") -> " + timer.toString());
         timer.pauseTimer(this);
     }
 
@@ -99,7 +99,7 @@ public class Mask implements IItem, ITimer {
     @Override
     public void timerEnd() {
         functional = false;
-        System.out.println("Mask : setFunctional -> " + (functional ? "true" : "false"));
+        //System.out.println("Mask : setFunctional -> " + (functional ? "true" : "false"));
     }
 
 }

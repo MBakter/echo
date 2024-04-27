@@ -16,7 +16,7 @@ public class TVSZ implements IItem {
      * Konstruktor
      */
     public TVSZ() {
-        System.out.println("<<create>> " + this.toString());
+        //System.out.println("<<create>> " + this.toString());
         hitpoints = 3;
     }
 
@@ -28,28 +28,28 @@ public class TVSZ implements IItem {
 
     @Override
     public void pickUp(Student s) {
-        System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + s.toString());
+        //System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + t.toString());
+        //System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("TVSZ : removeItem(" + this.toString() + ") -> " + p.toString());
+        //System.out.println("TVSZ : removeItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
         if(hitpoints > 0) {
-            System.out.print("TVSZ : hitpoints => " + hitpoints);
+            //System.out.print("TVSZ : hitpoints => " + hitpoints);
             hitpoints--;
-            System.out.println(" -> " + hitpoints);
+            //System.out.println(" -> " + hitpoints);
             return true;
         }
         return false;
