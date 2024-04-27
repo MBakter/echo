@@ -41,10 +41,11 @@ public class Room implements ICRoom, IVRoom {
             return false;
         studentList.add(s);
         s.getRoom().remove(s);
-        for (Teacher t : teacherList) {
+        for (int i = 0; i < teacherList.size(); i++) {
             s.TeacherAttacked();
         }
         return true;
+
     }
 
     /**
@@ -259,11 +260,10 @@ public class Room implements ICRoom, IVRoom {
      * A szoba léptetése
      */
     public void stepRoom() {
-        for (Teacher t : teacherList) {
+        for (int i = 0; i < teacherList.size(); i++)
             for (Student s : studentList) {
                 s.TeacherAttacked();
             }
-        }
     }
 
     /**
