@@ -2,67 +2,67 @@ package model.player;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import model.ITimer;
-import model.ITimedEntity;
-import model.Room;
+import model.*;
 import model.items.IItem;
 
 public abstract class Player implements ITimedEntity {
-
-    Player(){
-        System.out.println("<<create>> \""+this.toString()+"\"");
-    }
 
     protected Room room;
     protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
     protected ITimer timer;
 
-    public EPlayerState getState() { return state; }
+    Player(ITimer t) {
+        state = EPlayerState.ALIVE;
+        t.addItem(this);
+    }
+
+    public EPlayerState getState() {
+        return state;
+    }
+
     public void setState(EPlayerState s) {
         state = s;
-        System.out.println("\t"+this + ": state set to "+ state);
-        
-        /* if(state == EPlayerState.UNCONSCIOUS)
-            timer.startTimer(this, 2); */
-    }
-    public Room getRoom() { return room; }
-    public void setRoom(Room r) { 
-        System.out.println("\t"+this+": setRoom called");
-        room = r; 
     }
 
-    public abstract void move(Room r);
+    public Room getRoom() {
+        return room;
+    }
 
-    /**
-     * Alap RoomPoisoned függvény, eszméletét veszti a Player
-     */
+    public void setRoom(Room r) {
+        room = r;
+    }
+
+    public abstract void getOut();
+    public abstract boolean move(Room r);
+
+
     public void RoomPoisoned() {
-        System.out.println("\t"+this+": RoomPoisoned called");
         state = EPlayerState.UNCONSCIOUS;
-        System.out.println("\t"+this+": State set to: "+state);
+        timer.startTimer(this, 3);
+        for (IItem i : itemList) {
+            dropItem(i);
+        }
     };
-    public void RoomCleanFromPoison() {
-        System.out.println("\t"+this+": RoomCleanFromPoison called");
-    }
-    public void addItem(IItem i) {
-        System.out.println("\t"+this+": addItem called");
-        itemList.add(i);
 
-        System.out.println(this.toString() + ": Item added: " + i.toString());
+    public void RoomCleanFromPoison() {
+        if(state == EPlayerState.UNCONSCIOUS) {
+            state = EPlayerState.ALIVE;
+        }
     }
-    public void removeItem(IItem i)  {
-        System.out.println(this.toString() + ": Item removed: " + i.toString());
+
+    public void addItem(IItem i) {
+        itemList.add(i);
+    }
+
+    public void removeItem(IItem i) {
         itemList.remove(i);
     }
 
-    public abstract void pickUp(IItem i);
+    public abstract boolean pickUp(IItem i);
 
     public void dropItem(IItem i) {
-        System.out.println(this.toString() + ": dropItem(" + this.toString() + ")-> " + i.toString());
         i.dropItem(this);
-        System.out.println(this.toString() + ": addItem(" + i.toString() + ")-> " + room.toString());
         room.addItem(i);
     }
 
@@ -72,6 +72,6 @@ public abstract class Player implements ITimedEntity {
 
     @Override
     public void timerEnd() {
-        state = EPlayerState.ALIVE;
+        RoomCleanFromPoison();
     }
 }
