@@ -1,5 +1,6 @@
 package model.items;
 
+import controller.TimedObject;
 import controller.Timer;
 import model.ERoomEffects;
 import model.ITimer;
@@ -13,6 +14,10 @@ public class Cheese implements IItem, ITimer, IPrintStat {
     private Timer timer;
     private boolean isUsed;
     private Room room;
+    private String name;
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString(){
@@ -24,8 +29,12 @@ public class Cheese implements IItem, ITimer, IPrintStat {
      * Paraméterként kapja a Timer osztályt amit a kontroller kezel
      * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
      */
+    public Cheese(String s, Timer t) {
+        name = s;
+        timer = t;
+        t.addItem(this);
+    }
     public Cheese(Timer t) {
-        //System.out.println("<<create>> " + this.toString());
         timer = t;
         t.addItem(this);
     }
@@ -108,7 +117,16 @@ public class Cheese implements IItem, ITimer, IPrintStat {
     }
     
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print cheese info\n");
+    public void PrintStat(String name) {
+        int myTime = 0;
+        for (TimedObject to : timer.getList()) {
+            if(to.getObject().equals(this)){
+                myTime = to.getTime();
+            }
+        }
+        System.out.printf("%s timer %d%n",name, myTime);
+        System.out.printf("%s isUsed %s%n",name, isUsed);
+        room = new Room("NOT IMPLEMENTED");
+        System.out.printf("%s room %s%n",name,room.getName());
     }
 }

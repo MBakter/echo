@@ -4,6 +4,11 @@ import model.Room;
 import model.items.IItem;
 
 public class Cleaner extends Player {
+    public Cleaner(String s) {
+        super(s);
+    }
+    public Cleaner() {
+    }
     @Override
     public String toString(){
         return "Cleaner@"+Integer.toString(this.hashCode()).substring(0, 4);

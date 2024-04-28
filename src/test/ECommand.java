@@ -6,5 +6,7 @@ public enum ECommand {
     STATE,
     INTERACT,
     STAT ,
-    CONTROL
+    CONTROL,
+    SAVE,
+    LOAD
 }

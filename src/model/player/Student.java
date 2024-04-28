@@ -4,6 +4,11 @@ import model.Room;
 import model.items.IItem;
 
 public class Student extends Player {
+    public Student(String s) {
+        super(s);
+    }
+    public Student() {
+    }
     @Override
     public String toString(){
         return "Student@"+Integer.toString(this.hashCode()).substring(0, 4);

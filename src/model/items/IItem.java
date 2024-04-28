@@ -5,9 +5,9 @@ import model.player.Student;
 import model.player.Teacher;
 
 public interface IItem{
-
+    public String getName();
     // Tudom hogy ez csúnya.
-    public void PrintStat();
+    public void PrintStat(String name);
 
     /*
      * A tárgy használata.

@@ -7,6 +7,11 @@ import test.IPrintStat;
 
 public class Logarlec implements IItem, IPrintStat {
 
+    private boolean fake = false;
+    private String name;
+    public String getName() {
+        return name;
+    }
     @Override
     public String toString(){
         return "Logarlec@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -15,8 +20,10 @@ public class Logarlec implements IItem, IPrintStat {
     /*
      * Konstruktor
      */
+    public Logarlec(String s) {
+        name = s;
+    }
     public Logarlec() {
-        //System.out.println("<<create>> " + this.toString());
     }
 
     @Override
@@ -69,7 +76,7 @@ public class Logarlec implements IItem, IPrintStat {
     }
     
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print logarlec info\n");
+    public void PrintStat(String name) {
+        System.out.printf("%s fake %s%n", name, fake);
     }
 }

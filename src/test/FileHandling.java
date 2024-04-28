@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class FileHandling {
@@ -31,17 +32,30 @@ public class FileHandling {
         }
         return lineList;
     }
+    public void processInput(){
+
+    }
 
     // Main runner For testing 
     public static void main(String[] args) throws IOException {
         FileHandling fh = new FileHandling();
+        Scanner scan=new Scanner(System.in);
+        boolean exit = false;
+        TestRunner tr = new TestRunner();
+        while(!exit){
+            String input = scan.nextLine();
+            tr.addCommand((fh.interpreteLine(input.split(" "))));
+            if(input.equals("exit"))
+                exit = true;
+        }
+        
         
         //File file = new File(currentDir, path);
         var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
         fh.WriteTestResult(list.get(0).subject, "src/test/test_txt/test_output/test1_outtttt.txt");
 
-        TestRunner tr = new TestRunner(list);
-        tr.Evaluate();
+        //TestRunner tr2 = new TestRunner(list);
+        //tr.evaluate();
     }
 
     // Writing out the resulting lines of String to the designated File.
@@ -135,7 +149,8 @@ public class FileHandling {
             case "control": command.type = ECommand.CONTROL; break;
             case "interact": command.type = ECommand.INTERACT; break;
             case "stat": command.type = ECommand.STAT; break;
-            default: throw new IOException("Wrong string at start of line, wrong command naming \"" + split[0] + "\"");
+            //default: throw new IOException("Wrong string at start of line, wrong command naming \"" + split[0] + "\"");
+            default: System.out.println("Unrecognized command");
         }
 
         // Appending the rest of the words as subject

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import model.items.IItem;
@@ -9,17 +10,34 @@ import model.player.Teacher;
 import test.IPrintStat;
 
 public class Room implements IRoomManager, IPrintStat {
-
+    public Room(String s){
+        name = s;
+    }
     public String toString(){
         return "Room@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
-
+    private String name;
+    public String getName(){
+        return name;
+    }
     private int maxPlayer;
     private List<ERoomEffects> effects = new ArrayList<>();
     private List<IItem> itemList = new ArrayList<>();
     private List<Student> studentList = new ArrayList<>();
     private List<Teacher> teacherList = new ArrayList<>();
     private List<Room> neighbouringRooms = new ArrayList<>();
+
+    public List<ERoomEffects> getEffects(){
+        return effects;
+    }
+    public List<IItem>  getItems(){
+        return itemList;
+    }
+    // TODO
+/*     public List<Cleaner> getCleaners(){
+        return null;
+    } */
+
 
     /**
      * Teszthez kiírjuk a <<create>>-et és beállítjuk az alap méretet
@@ -265,8 +283,49 @@ public class Room implements IRoomManager, IPrintStat {
     }
 
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print room info\n");
+    public void PrintStat(String faszom) {
+        System.out.printf("%s effects",name);
+        for (var effect : effects) {
+            System.out.printf(" %s", effect);
+        }
+        System.out.printf("%n");
+
+        System.out.printf("%s itemList",name);
+        for (var item : itemList) {
+            System.out.printf(" %s", item.getName());
+        }
+        System.out.printf("%n");
+
+        System.out.printf("%s studentList",name);
+        for (var student : studentList) {
+            System.out.printf(" %s", student.getName());
+        }
+        System.out.printf("%n");
+
+        System.out.printf("%s teacherList",name);
+        for (var teacher : teacherList) {
+            System.out.printf(" %s", teacher.getName());
+        }
+        System.out.printf("%n");
+        
+        // TODO klíner
+        System.out.printf("%s cleanerList",name);
+        for (var teacher : teacherList) {
+            System.out.printf(" %s", teacher.getName());
+        }
+        System.out.printf("%n");
+
+        System.out.printf("%s neighbouringRooms",name);
+        for (var neighbour : neighbouringRooms) {
+            System.out.printf(" %s", neighbour.getName());
+        }
+        System.out.printf("%n");
+        
+        System.out.printf("%s sticky %s%n",name,false);
+        System.out.printf("%s cleaned %s%n",name,false);
+        // TODO kieg
+        int numOfVisitors = teacherList.size()+studentList.size() + 0;
+        System.out.printf("%s numOfVisitors %d%n",name, numOfVisitors);
     }
 
 }

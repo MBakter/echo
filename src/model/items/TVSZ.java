@@ -7,7 +7,11 @@ import test.IPrintStat;
 
 public class TVSZ implements IItem, IPrintStat {
     private int hitpoints;
-
+    private boolean fake;
+    private String name;
+    public String getName() {
+        return name;
+    }
     @Override
     public String toString(){
         return "TVSZ@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -16,11 +20,13 @@ public class TVSZ implements IItem, IPrintStat {
     /*
      * Konstruktor
      */
-    public TVSZ() {
-        //System.out.println("<<create>> " + this.toString());
+    public TVSZ(String s) {
+        name = s;
         hitpoints = 3;
     }
-
+    public TVSZ() {
+        hitpoints = 3;
+    }
     @Override
     public void useItem(Player p) {
         /* Do nothing */
@@ -75,7 +81,8 @@ public class TVSZ implements IItem, IPrintStat {
     }
 
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print tvsz info\n");
+    public void PrintStat(String name) {
+        System.out.printf("%s hitPoint %d%n",name,hitpoints);
+        System.out.printf("%s fake %s%n",name,fake);
     }
 }

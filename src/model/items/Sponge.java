@@ -1,5 +1,6 @@
 package model.items;
 
+import controller.TimedObject;
 import controller.Timer;
 import model.ITimer;
 import model.Room;
@@ -12,7 +13,10 @@ import test.IPrintStat;
 public class Sponge implements IItem, ITimer, IPrintStat {
     private controller.Timer timer;
     private boolean functional;
-
+    private String name;
+    public String getName() {
+        return name;
+    }
     @Override
     public String toString(){
         return "Sponge@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -23,12 +27,15 @@ public class Sponge implements IItem, ITimer, IPrintStat {
      * Paraméterként kapja a Timer osztályt amit a kontroller kezel
      * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
      */
-    public Sponge(Timer t) {
-        //System.out.println("<<create>> " + this.toString());
+    public Sponge(String s, Timer t) {
+        name = s;
         timer = t;
         t.addItem(this);
     }
-
+    public Sponge(Timer t) {
+        timer = t;
+        t.addItem(this);
+    }
     @Override
     public void useItem(Player p) {
         /* Do nothing */
@@ -101,7 +108,15 @@ public class Sponge implements IItem, ITimer, IPrintStat {
     }
 
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print sponge info\n");
+    public void PrintStat(String name) {
+                int myTime = 0;
+        for (TimedObject to : timer.getList()) {
+            if (to.getObject().equals(this)) {
+                myTime = to.getTime();
+            }
+        }
+        System.out.printf("%s timer %d%n", name, myTime);
+        System.out.printf("%s functional %s%n", name, functional);
+
     }
 }

@@ -9,16 +9,24 @@ import model.items.IItem;
 import test.IPrintStat;
 
 public abstract class Player implements ITimer, IPrintStat {
-
-    Player(){
+    private String name;
+    public String getName(){
+        return name;
+    }
+    protected Player(String s){
+        name = s;
         ////System.out.println("<<create>> \""+this.toString()+"\"");
     }
-
+    protected Player(){
+        ////System.out.println("<<create>> \""+this.toString()+"\"");
+    }
     protected Room room;
     protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
     protected controller.Timer timer;
-
+    public List<IItem> getItems(){
+        return this.itemList;
+    }
     public EPlayerState getState() { return state; }
     public void setState(EPlayerState s) {
         state = s;
@@ -72,7 +80,14 @@ public abstract class Player implements ITimer, IPrintStat {
     }
     
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print player info\n");
+    public void PrintStat(String fasz) {
+        //System.out.printf("%s room %\n", this.toString());
+        System.out.printf("%s room %s%n", name, room.getName());
+        System.out.printf("%s EPlayerState %s%n", name, state);
+        System.out.printf("%s itemList", name);
+        for (var item : itemList) {
+            System.out.printf(" %s", item.getName());
+        }
+        System.out.printf("%n");
     }
 }

@@ -12,7 +12,10 @@ public class Transistor implements IItem , IPrintStat{
     private boolean active;
     private Room room;
     private Transistor pair;
-
+    private String name;
+    public String getName() {
+        return name;
+    }
     @Override
     public String toString(){
         return "Transistor@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -21,10 +24,11 @@ public class Transistor implements IItem , IPrintStat{
     /*
      * Konstruktor
      */
-    public Transistor() {
-        //System.out.println("<<create>> " + this.toString());
+    public Transistor(String s) {
+        name = s;
     }
-
+    public Transistor() {
+    }
     public void ActivateTransistor() {
         //System.out.println("\t"+this+": ActivateTransistor called");
         active = true;
@@ -128,7 +132,9 @@ public class Transistor implements IItem , IPrintStat{
     }
 
     @Override
-    public void PrintStat() {
-        System.out.printf("This will print transistor info\n");
+    public void PrintStat(String gasdgag) {
+        System.out.printf("%s pair %s", name, pair.getName());
+        System.out.printf("%s active %s",name, active);
+        System.out.printf("%s room %s", name, room.getName());
     }
 }
