@@ -3,9 +3,7 @@ package model.items;
 
 import model.ERoomEffects;
 import model.Room;
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import model.player.*;
 
 public class Transistor implements IItem {
     private boolean active;
@@ -62,6 +60,11 @@ public class Transistor implements IItem {
     @Override
     public void pickUp(Teacher t) {
         t.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
     }
 
     @Override

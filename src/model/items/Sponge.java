@@ -2,11 +2,7 @@ package model.items;
 
 import controller.Timer;
 import model.*;
-import model.player.EPlayerState;
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
-
+import model.player.*;
 public class Sponge implements IItem, ITimedEntity {
     private ITimer timer;
     private boolean functional;
@@ -46,6 +42,11 @@ public class Sponge implements IItem, ITimedEntity {
         t.addItem(this);
     }
 
+    @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
+    
     @Override
     public void dropItem(Player p) {
         p.removeItem(this);

@@ -1,8 +1,6 @@
 package model.items;
 
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import model.player.*;
 
 public interface IItem {
 
@@ -27,6 +25,13 @@ public interface IItem {
      * Majd az oktató listájába beleteszi magát 
      */
     public void pickUp(Teacher t);
+
+    /*
+     * A tárgy felvétele.
+     * Paraméterként kap egy Cleaner-t
+     * Majd a takarító listájába beleteszi magát 
+     */
+    public void pickUp(Cleaner c);
 
     /*
      * A tárgy eldobása.

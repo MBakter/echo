@@ -38,6 +38,11 @@ public class Logarlec implements IItem {
     }
 
     @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
+
+    @Override
     public void dropItem(Player p) {
         p.removeItem(this);
     }

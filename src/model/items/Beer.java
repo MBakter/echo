@@ -2,9 +2,7 @@ package model.items;
 
 import controller.Timer;
 import model.*;
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import model.player.*;
 
 public class Beer implements IItem, ITimedEntity {
     private ITimer timer;
@@ -41,6 +39,11 @@ public class Beer implements IItem, ITimedEntity {
     @Override
     public void pickUp(Teacher t) {
         t.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
     }
 
     @Override

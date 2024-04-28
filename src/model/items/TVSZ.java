@@ -2,9 +2,7 @@ package model.items;
 
 import java.util.Random;
 
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import model.player.*;
 
 public class TVSZ implements IItem {
     private int hitpoints;
@@ -38,6 +36,11 @@ public class TVSZ implements IItem {
     @Override
     public void pickUp(Teacher t) {
         t.addItem(this);
+    }
+
+    @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
     }
 
     @Override
