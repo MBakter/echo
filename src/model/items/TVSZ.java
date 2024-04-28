@@ -11,12 +11,14 @@ public class TVSZ implements IItem, IPrintStat {
     private int hitpoints;
     private boolean fake;
     private String name;
+
     public String getName() {
         return name;
     }
+
     @Override
-    public String toString(){
-        return "TVSZ@"+Integer.toString(this.hashCode()).substring(0, 4);
+    public String toString() {
+        return "TVSZ@" + Integer.toString(this.hashCode()).substring(0, 4);
     }
 
     /*
@@ -26,9 +28,11 @@ public class TVSZ implements IItem, IPrintStat {
         name = s;
         hitpoints = 3;
     }
+
     public TVSZ() {
         hitpoints = 3;
     }
+
     @Override
     public void useItem(Player p) {
         /* Do nothing */
@@ -37,28 +41,31 @@ public class TVSZ implements IItem, IPrintStat {
 
     @Override
     public void pickUp(Student s) {
-        //System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + s.toString());
+        // System.out.println("TVSZ : addItem( " + this.toString() + ") -> " +
+        // s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        //System.out.println("TVSZ : addItem( " + this.toString() + ") -> " + t.toString());
+        // System.out.println("TVSZ : addItem( " + this.toString() + ") -> " +
+        // t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        //System.out.println("TVSZ : removeItem(" + this.toString() + ") -> " + p.toString());
+        // System.out.println("TVSZ : removeItem(" + this.toString() + ") -> " +
+        // p.toString());
         p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        if(hitpoints > 0) {
-            //System.out.print("TVSZ : hitpoints => " + hitpoints);
+        if (hitpoints > 0) {
+            // System.out.print("TVSZ : hitpoints => " + hitpoints);
             hitpoints--;
-            //System.out.println(" -> " + hitpoints);
+            // System.out.println(" -> " + hitpoints);
             return true;
         }
         return false;
@@ -84,13 +91,22 @@ public class TVSZ implements IItem, IPrintStat {
 
     @Override
     public void printStat(String name) {
-        System.out.printf("%s hitPoint %d%n",name,hitpoints);
-        System.out.printf("%s fake %s%n",name,fake);
+        System.out.printf("%s hitPoint %d%n", name, hitpoints);
+        System.out.printf("%s fake %s%n", name, fake);
     }
+
     @Override
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
+
     @Override
-    public void setState(ArrayList<String> args){}
+    public void setState(ArrayList<String> args) {
+        if (args.get(1).equals("fake")) {
+            if (args.get(2).equals("true"))
+                fake = true;
+            if (args.get(2).equals("false"))
+                fake = false;
+        }
+    }
 }

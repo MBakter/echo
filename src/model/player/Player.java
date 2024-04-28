@@ -86,13 +86,13 @@ public abstract class Player implements ITimer, IPrintStat {
     @Override
     public void printStat(String fasz) {
         //System.out.printf("%s room %\n", this.toString());
-        System.out.printf("%s room %s%n", name, room.getName());
+/*         System.out.printf("%s room %s%n", name, room.getName());
         System.out.printf("%s EPlayerState %s%n", name, state);
         System.out.printf("%s itemList", name);
         for (var item : itemList) {
             System.out.printf(" %s", item.getName());
         }
-        System.out.printf("%n");
+        System.out.printf("%n"); */
     }
 
     @Override

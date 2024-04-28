@@ -56,6 +56,8 @@ public class TestRunner {
     }
 
     private void interpretCmd(CommandData cd) {
+        if(cd.type == null)
+            return;
         switch (cd.type) {
             case CREATE:
                 cmdCreate(cd.subject);
@@ -269,8 +271,8 @@ public class TestRunner {
                     item.getValue().setState(args);
             }
             for (var item : rooms.entrySet()) {
-                //if (item.getKey().equals(args.get(0)))
-                    //item.getValue().setState(args.get(1));
+                if (item.getKey().equals(args.get(0)))
+                    item.getValue().addEffect((args.get(1)));
             }
         }
 
