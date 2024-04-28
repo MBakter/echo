@@ -296,7 +296,30 @@ public class TestRunner {
     }
 
     private void cmdControl(ArrayList<String> args) {
+        if (args.size() == 2 ){
 
+            // The timer
+            if (args.get(0) == "timer"){
+                // On off or time integer
+                if (args.size() == 2){
+                    if (args.get(1) == "on"){} else
+                    if (args.get(1) == "of"){} else {
+    
+                        int number = Integer.parseInt(args.get(1));
+    
+                        // Run time for a turn each time, for number times
+                        for (int i = 0; i < number; i++) {
+                            testTimer.iterateTime();
+                        }
+                    }
+                }
+            }
+            if (args.get(0) == "random"){
+    
+            }
+        } else {
+            throw new IllegalArgumentException("Control needs two aruments to work as intended!");
+        }
     }
 
     private void cmdSave(ArrayList<String> args) {
