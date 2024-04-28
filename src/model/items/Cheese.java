@@ -1,5 +1,7 @@
 package model.items;
 
+import java.util.ArrayList;
+
 import controller.TimedObject;
 import controller.Timer;
 import model.ERoomEffects;
@@ -133,4 +135,6 @@ public class Cheese implements IItem, ITimer, IPrintStat {
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
+        @Override
+    public void setState(ArrayList<String> args){}
 }

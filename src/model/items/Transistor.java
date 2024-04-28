@@ -1,6 +1,8 @@
 
 package model.items;
 
+import java.util.ArrayList;
+
 import model.ERoomEffects;
 import model.Room;
 import model.player.Player;
@@ -141,4 +143,6 @@ public class Transistor implements IItem , IPrintStat{
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
+        @Override
+    public void setState(ArrayList<String> args){}
 }

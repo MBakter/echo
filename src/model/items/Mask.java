@@ -1,5 +1,7 @@
 package model.items;
 
+import java.util.ArrayList;
+
 import controller.TimedObject;
 import controller.Timer;
 import model.ITimer;
@@ -141,4 +143,6 @@ public class Mask implements IItem, ITimer, IPrintStat {
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
+        @Override
+    public void setState(ArrayList<String> args){}
 }

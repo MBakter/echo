@@ -7,20 +7,22 @@ import java.util.List;
 
 import model.items.IItem;
 import model.player.Cleaner;
+import model.player.EPlayerState;
 import model.player.Student;
 import model.player.Teacher;
 import test.IPrintStat;
 
 public class Room implements IRoomManager, IPrintStat {
-    public Room(String s){
-        name = s;
-    }
+
     public String toString(){
         return "Room@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
     private String name;
     public String getName(){
         return name;
+    }
+    public Room(String s){
+        name = s;
     }
     private int maxPlayer;
     private List<ERoomEffects> effects = new ArrayList<>();
@@ -208,6 +210,20 @@ public class Room implements IRoomManager, IPrintStat {
     public void addEffect(ERoomEffects e) {
         effects.add(e);
         ////System.out.println("\t"+this+": Effects after addition: "+effects);
+        if(e == ERoomEffects.POISONED){
+            for (Student s : studentList) {
+                s.RoomPoisoned();
+            }
+            for (Teacher t : teacherList) {
+                t.RoomPoisoned();
+            }
+        }
+    }
+    public void addEffect(String eS) {
+        ERoomEffects e = ERoomEffects.valueOf(eS);
+
+        //effects.add();
+
         if(e == ERoomEffects.POISONED){
             for (Student s : studentList) {
                 s.RoomPoisoned();

@@ -1,5 +1,7 @@
 package model.items;
 
+import java.util.ArrayList;
+
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
@@ -89,4 +91,6 @@ public class TVSZ implements IItem, IPrintStat {
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
+    @Override
+    public void setState(ArrayList<String> args){}
 }

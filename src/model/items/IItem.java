@@ -1,5 +1,7 @@
 package model.items;
 
+import java.util.ArrayList;
+
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
@@ -9,6 +11,7 @@ public interface IItem{
     // Tudom hogy ez csúnya.
     public void printStat(String name);
     public void statesOptions();
+    public void setState(ArrayList<String> args);
     /*
      * A tárgy használata.
      * Paraméterként kap egy Player-t

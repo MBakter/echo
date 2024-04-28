@@ -210,6 +210,10 @@ public class TestRunner {
                 rooms.get(source).addNeighbour(rooms.get(target));
                 System.out.printf("%s connected to %s%n", source, target);
             }
+            if (getType(target) == Type.PLAYER) {
+                players.get(target).move(rooms.get(source));
+                System.out.printf("%s moved to %s%n", target, source);
+            }
         }
         if (getType(source) == Type.PLAYER) {
             if (getType(target) == Type.ROOM) {
@@ -221,6 +225,10 @@ public class TestRunner {
                     System.out.printf("%s moved to %s%n", source, target);
                 }
 
+            }
+            if (getType(target) == Type.ITEM) {
+                players.get(source).addItem(items.get(target));
+                System.out.printf("%s added to %s%n", target, source);
             }
         }
         if (getType(source) == Type.ITEM) {
@@ -237,7 +245,7 @@ public class TestRunner {
     }
 
     private void cmdState(ArrayList<String> args) {
-        if(args.size()<2){
+        if (args.size() < 2) {
             for (var item : players.entrySet()) {
                 if (item.getKey().equals(args.get(0)))
                     item.getValue().statesOptions();
@@ -250,18 +258,19 @@ public class TestRunner {
                 if (item.getKey().equals(args.get(0)))
                     item.getValue().statesOptions();
             }
-        }else{
+        } else {
             for (var item : players.entrySet()) {
-                if (item.getKey().equals(args.get(0))){}
-                    item.getValue().setState(args.get(1));
+                if (item.getKey().equals(args.get(0))) {
+                        item.getValue().setState(args.get(1));
+                }
             }
             for (var item : items.entrySet()) {
                 if (item.getKey().equals(args.get(0)))
-                    item.getValue().statesOptions();
+                    item.getValue().setState(args);
             }
             for (var item : rooms.entrySet()) {
-                if (item.getKey().equals(args.get(0)))
-                    item.getValue().statesOptions();
+                //if (item.getKey().equals(args.get(0)))
+                    //item.getValue().setState(args.get(1));
             }
         }
 

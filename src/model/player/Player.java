@@ -37,11 +37,7 @@ public abstract class Player implements ITimer, IPrintStat {
             timer.startTimer(this, 2); */
     }
     public void setState(String s) {
-        //state = s;
-        ////System.out.println("\t"+this + ": state set to "+ state);
-        
-        /* if(state == EPlayerState.UNCONSCIOUS)
-            timer.startTimer(this, 2); */
+            state = EPlayerState.valueOf(s);
     }
     public Room getRoom() { return room; }
     public void setRoom(Room r) { 
