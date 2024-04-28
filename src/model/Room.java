@@ -12,6 +12,7 @@ import model.player.Teacher;
 public class Room implements ICRoom, IVRoom {
     private int maxPlayer;
     private int stickyCounter = 5;
+    private String name;
     private List<ERoomEffects> effects = new ArrayList<>();
     private List<IItem> itemList = new ArrayList<>();
     private List<Student> studentList = new ArrayList<>();
@@ -19,9 +20,10 @@ public class Room implements ICRoom, IVRoom {
     private List<Cleaner> cleanerList = new ArrayList<>();
     private List<Room> neighbouringRooms = new ArrayList<>();
 
-    public Room() {
+    public Room(String name) {
         System.out.println("<<create>> \"" + this + "\"");
         maxPlayer = 5;
+        this.name = name;
     }
 
     public Room(int maxPlayer) {
@@ -30,7 +32,17 @@ public class Room implements ICRoom, IVRoom {
     }
 
     /**
+     * Visszaadja a szoba nevét
+     *
+     * @return A szoba neve
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Visszaadja a szobában lévő oktatokat
+     *
      * @return A szobában lévő oktatók listája
      */
     public List<Teacher> getTeachers() {
@@ -116,10 +128,9 @@ public class Room implements ICRoom, IVRoom {
             return false;
         cleanerList.add(c);
         c.getRoom().remove(c);
-        while (effects.contains(ERoomEffects.POISONED)) {
-            addEffect(ERoomEffects.STICKY);
-            removeEffect(ERoomEffects.POISONED);
-        }
+        if (effects.contains(ERoomEffects.POISONED))
+            effects.add(ERoomEffects.STICKY);
+        purifyRoom();
         for (Player p : getPlayers()) {
             p.getOut();
         }
@@ -270,6 +281,19 @@ public class Room implements ICRoom, IVRoom {
             }
     }
 
+    public void purifyRoom() {
+        while (effects.contains(ERoomEffects.POISONED)) {
+            removeEffect(ERoomEffects.POISONED);
+        }
+        for (Player p : getPlayers()) {
+            p.RoomCleanFromPoison();
+        }
+    }
+
+    public boolean equals(Room r) {
+        return this.hashCode() == r.hashCode();
+    }
+
     /**
      * Visszaadja a szobában lévő játékosok számát
      *
@@ -321,10 +345,6 @@ public class Room implements ICRoom, IVRoom {
         }
 
         return true;
-    }
-
-    public boolean equals(Room r) {
-        return this.hashCode() == r.hashCode();
     }
 
 }
