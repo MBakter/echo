@@ -40,20 +40,20 @@ public class FileHandling {
         Scanner scan =new Scanner(System.in);
         boolean exit = false;
         TestRunner tr = new TestRunner();
-        while(!exit){
-            String input = scan.nextLine();
-            tr.addCommand((fh.interpreteLine(input.split(" "))));
-            if(input.equals("exit"))
-                exit = true;
-        }
-        scan.close();
+        // while(!exit){
+        //     String input = scan.nextLine();
+        //     tr.addCommand((fh.interpreteLine(input.split(" "))));
+        //     if(input.equals("exit"))
+        //         exit = true;
+        // }
+        // scan.close();
         
         // File file = new File(currentDir, path);
-/*         var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
-        fh.WriteTestResult(list.get(0).subject, "src/test/test_txt/test_output/test1_outtttt.txt");
+        var list = fh.ReadTest(args[0]);
+        fh.WriteTestResult(list.get(0).subject, args[1]);
 
         TestRunner tr2 = new TestRunner(list);
-        tr2.evaluateAll(); */
+        tr2.evaluateAll();
     }
 
     // Writing out the resulting lines of String to the designated File.
