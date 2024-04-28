@@ -24,5 +24,4 @@ public class Cleaner extends Player {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'pickUp'");
     }
-    
 }

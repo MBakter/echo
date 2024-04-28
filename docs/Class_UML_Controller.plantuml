@@ -3,10 +3,20 @@
 title Logarlec Class Diagram of Controller
 
 class Labyrinth {
-    + roomList : List<Room>
+    + roomList : List<IRoom>
 
     + generateFromFile(File) : void
     + randomMove() : void
+}
+Labyrinth "1"*--"0,..." IRoom
+interface IRoom {
+    + split() : Room
+    + merge(Room) : bool
+    + addNeighbour(Room) : void
+}
+
+interface ITimedEntity {
+    + timerEnd() : void
 }
 
 class TimedObject {
@@ -22,6 +32,7 @@ class TimedObject {
     + pause() : void
     + iterateTime() : boolean
 }
+TimedObject .-> ITimedEntity
 
 interface ITimer {
     + startTimer(ITimedEntity, int) : void
@@ -36,14 +47,16 @@ class Timer implements ITimer {
     + getList() : List<TimedObject>
     + addItem(ITimedEntity) : void
     + iterateTime() : void
-    + startTimer(ITimer, int) : void
-    + pauseTimer(ITimer) : void
+    + startTimer(ITimedEntity, int) : void
+    + pauseTimer(ITimedEntity) : void
 }
 Timer "1"*--"0,..." TimedObject
+Timer .-> ITimedEntity
 
 class Controller {
     + players : static List<Player>
     + endOfGame : static boolean
+    + Map : static Labyrinth
     + mapDirectoryPath : static final String
     
     + main(String[]) : static void
@@ -56,3 +69,4 @@ class Controller {
     + endGame(boolean) : static void
 }
 Controller .-> Timer
+Controller "1"*--"1" Labyrinth

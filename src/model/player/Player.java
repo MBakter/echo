@@ -65,6 +65,10 @@ public abstract class Player implements ITimer {
         room.addItem(i);
     }
 
+    public void useItem(IItem i) {
+        return;
+    }
+
     @Override
     public void timerEnd() {
         state = EPlayerState.ALIVE;
