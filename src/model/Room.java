@@ -30,6 +30,14 @@ public class Room implements ICRoom, IVRoom {
     }
 
     /**
+     * Visszaadja a szobában lévő oktatokat
+     * @return A szobában lévő oktatók listája
+     */
+    public List<Teacher> getTeachers() {
+        return teacherList;
+    }
+
+    /**
      * Hallgato hozzaadasa a szobahoz
      *
      * @param s Hallgato
@@ -241,12 +249,8 @@ public class Room implements ICRoom, IVRoom {
             return false;
         List<Room> nb = r.getNeighbours();
         List<IItem> items = r.itemList;
-        for (Room n : nb) {
+        for (Room n : nb)
             addNeighbour(n);
-            n.removeNeighbour(r);
-            if (!n.neighbouringRooms.contains(r))
-                n.addNeighbour(r);
-        }
         for (IItem i : items)
             addItem(i);
         return true;
@@ -317,6 +321,10 @@ public class Room implements ICRoom, IVRoom {
         }
 
         return true;
+    }
+
+    public boolean equals(Room r) {
+        return this.hashCode() == r.hashCode();
     }
 
 }
