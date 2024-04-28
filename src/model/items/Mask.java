@@ -3,17 +3,17 @@ package model.items;
 import java.util.ArrayList;
 
 import controller.TimedObject;
-import controller.Timer;
-import model.ITimer;
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import java.util.Random;
+
+import model.*;
+import model.player.*;
 import test.IPrintStat;
 
-public class Mask implements IItem, ITimer, IPrintStat {
-    private controller.Timer timer;
-    private boolean functional;
+public class Mask implements IItem, ITimedEntity, IPrintStat {
+    private ITimer timer;
+    private static int TIME = 4;
     private boolean fake;
+    private boolean functional;
     private Student wearer;
     private String name;
 
@@ -42,6 +42,8 @@ public class Mask implements IItem, ITimer, IPrintStat {
         timer = t;
         t.addItem(this);
         functional = true;
+        Random rand = new Random();
+        fake = rand.nextDouble() <= 0.2 ? true : false;
     }
 
     /*
@@ -49,7 +51,6 @@ public class Mask implements IItem, ITimer, IPrintStat {
      */
     public void setWearer(Student s) {
         wearer = s;
-        // System.out.println("Mask : setWearer -> " + wearer.toString());
     }
 
     @Override
@@ -61,27 +62,24 @@ public class Mask implements IItem, ITimer, IPrintStat {
     @Override
     public void pickUp(Student s) {
         wearer = s;
-
-        // System.out.println("Mask : addItem( " + this.toString() + ") -> " +
-        // s.toString());
+    
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        // System.out.println("Mask : addItem( " + this.toString() + ") -> " +
-        // t.toString());
         t.addItem(this);
     }
 
     @Override
-    public void dropItem(Player p) {
-        // System.out.println("\t"+"Mask : pauseTimer(" + this.toString() + ") -> " +
-        // timer.toString());
-        timer.pauseTimer(this);
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
 
-        // System.out.println("\t"+"Mask : removeItem( " + this.toString() + ") -> " +
-        // p.toString());
+    @Override
+    public void dropItem(Player p) {
+        timer.pauseTimer(this);
+        
         p.removeItem(this);
     }
 
@@ -94,22 +92,15 @@ public class Mask implements IItem, ITimer, IPrintStat {
     @Override
     public boolean RoomPoisoned(Student s) {
 
-        // System.out.println("Mask : functional: " + (functional == true ? "true" :
-        // "false"));
-
-        if (!functional)
+        if(!functional || fake)
             return false;
 
-        // System.out.println("Mask : startTimer(" + this.toString() + ", 2) -> " +
-        // timer.toString());
-        timer.startTimer(this, 2);
+        timer.startTimer(this, TIME);
         return true;
     }
 
     @Override
     public void RoomCleanFromPoison(Student s) {
-        // System.out.println("Mask : pauseTimer(" + this.toString() + ") -> " +
-        // timer.toString());
         timer.pauseTimer(this);
     }
 
@@ -122,8 +113,6 @@ public class Mask implements IItem, ITimer, IPrintStat {
     @Override
     public void timerEnd() {
         functional = false;
-        // System.out.println("Mask : setFunctional -> " + (functional ? "true" :
-        // "false"));
     }
 
     @Override

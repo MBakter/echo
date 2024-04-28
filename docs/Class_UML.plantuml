@@ -2,12 +2,13 @@
 
 title Logarlec Class Diagram of Model
 
-interface IRoomManager {
+interface IRoom {
     + split() : Room
     + merge(Room) : bool
+    + addNeighbour(Room) : void
 }
 
-class Room implements IRoomManager {
+class Room implements IRoom {
     + maxPlayer : int
     + effects : ERoomEffects[]
     + itemList : Item[]
@@ -35,7 +36,6 @@ class Room implements IRoomManager {
     + addEffect(ERoomEffects) : void
     + removeEffect(ERoomEffects) : void
     + purifyRoom() : void
-
     + split() : Room
     + merge(Room) : bool
 }
@@ -53,7 +53,7 @@ enum EPlayerState {
     DEAD
 }
 
-abstract class Player implements ITimedEntity{
+abstract class Player implements ITimedEntity {
     + room  : Room
     + itemList : IItem[]
     + state : EPlayerState
@@ -72,6 +72,7 @@ abstract class Player implements ITimedEntity{
     + getItemList() : IItem[]
     + pickUp(IItem) : void
     + dropItem(IItem) : void
+    + useItem(IITem) : void
     + timerEnd() : void
 }
 
@@ -101,6 +102,9 @@ class Student extends Player {
     + move(Room) : void
     + getState() : EPlayerState
     + setState(EPlayerState) : void
+    + RoomPoisoned() : void
+    + RoomCleanFromPoison() : void
+    + CleanerEntered() : void
     + TeacherAttacked() : void
 }
 
@@ -134,7 +138,7 @@ class TVSZ implements IItem {
     + TeacherAttacked(Student) : bool
 }
 
-class Transistor implements IItem  {
+class Transistor implements IItem {
     + active : bool
     + room : Room
     + pair: Transistor
@@ -208,7 +212,7 @@ class Purifier implements IItem {
     + useItem(Player) : void
 }
 
-class Logarlec  implements IItem  {
+class Logarlec  implements IItem {
     + fake : bool
 
     + useItem(Student) : void

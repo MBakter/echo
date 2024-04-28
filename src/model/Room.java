@@ -7,136 +7,82 @@ import java.util.List;
 
 import model.items.IItem;
 import model.player.Cleaner;
+import model.player.Player;
+import model.player.Cleaner;
 import model.player.EPlayerState;
 import model.player.Student;
 import model.player.Teacher;
 import test.IPrintStat;
 
-public class Room implements IRoomManager, IPrintStat {
-
-    public String toString() {
-        return "Room@" + Integer.toString(this.hashCode()).substring(0, 4);
-    }
-
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public Room(String s) {
-        name = s;
-    }
-
+public class Room implements ICRoom, IVRoom, IPrintStat {
     private int maxPlayer;
+    private int stickyCounter = 5;
+    private String name;
     private List<ERoomEffects> effects = new ArrayList<>();
     private List<IItem> itemList = new ArrayList<>();
     private List<Student> studentList = new ArrayList<>();
     private List<Teacher> teacherList = new ArrayList<>();
+    private List<Cleaner> cleanerList = new ArrayList<>();
     private List<Room> neighbouringRooms = new ArrayList<>();
 
-    public List<ERoomEffects> getEffects() {
-        return effects;
+    public Room(String name) {
+        System.out.println("<<create>> \"" + this + "\"");
+        maxPlayer = 5;
+        this.name = name;
     }
 
-    public List<IItem> getItems() {
-        return itemList;
-    }
-    // TODO
-    /*
-     * public List<Cleaner> getCleaners(){
-     * return null;
-     * }
-     */
-
-    /**
-     * Teszthez kiírjuk a <<create>>-et és beállítjuk az alap méretet
-     */
-    public Room() {
-        ////// System.out.println("Room created");
-        ////// System.out.println("<<create>> \""+this+"\"");
-        setMax(5);
+    public Room(int maxPlayer) {
+        System.out.println("<<create>> \"" + this + "\"");
+        this.maxPlayer = maxPlayer;
     }
 
     /**
-     * Megpróbálja a jelenlegi szobába mozgatni az adott hallgatót.
-     * 
-     * @param s A hallgató, aki mozogni próbál a jelenlegi szobába
-     * @return Sikerült-e mozogni a szobába
+     * Visszaadja a szoba nevét
+     *
+     * @return A szoba neve
      */
-    public void fAddStudent(Student s) {
-        studentList.add(s);
+    public String getName() {
+        return name;
     }
 
-    public void fAddTeacher(Teacher t) {
-        teacherList.add(t);
+    /**
+     * Visszaadja a szobában lévő oktatokat
+     *
+     * @return A szobában lévő oktatók listája
+     */
+    public List<Teacher> getTeachers() {
+        return teacherList;
     }
 
-    public void fAddCleaner(Cleaner c) {
-
-    }
-
-    public boolean addStudent(Student s) {
-        ////// System.out.println("\t"+this+": addStudent called");
-        int playersInRoom = teacherList.size() + studentList.size();
-
-        // Initialize student's room
-        if (s.getRoom() == null) {
-            studentList.add(s);
-            return true;
-        }
-        // Enter or leave cursed room
-        else if (effects.contains(ERoomEffects.CURSED) || s.getRoom().effects.contains(ERoomEffects.CURSED)
-                || maxPlayer == playersInRoom) {
+    /**
+     * Hallgato hozzaadasa a szobahoz
+     *
+     * @param s Hallgato
+     * @return Sikerult-e a hozzaadas
+     */
+    public boolean add(Student s) {
+        boolean success = tryAdd(s);
+        if (!success)
             return false;
-        }
-        // Leave poisoned room to not poisoned
-        else if (s.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)) {
-            s.getRoom().removeStudent(s);
-            studentList.add(s);
-            s.RoomCleanFromPoison();
-            ;
-            checkAttacks();
-            return true;
-        }
-        // Enter poisoned
-        else if (effects.contains(ERoomEffects.POISONED)) {
-            s.getRoom().removeStudent(s);
-            studentList.add(s);
-            s.RoomPoisoned();
-            checkAttacks();
-            return true;
-        }
-
-        // Both rooms clear of effects
-        s.getRoom().removeStudent(s);
         studentList.add(s);
-        checkAttacks();
-        return true;
-    }
-
-    /**
-     * Megnézzük, hogy egy szobába került-e hallgató és oktató
-     */
-    private void checkAttacks() {
-        if (!studentList.isEmpty() && !teacherList.isEmpty()) {
-            for (Student s : studentList) {
-                s.TeacherAttacked();
-            }
+        s.getRoom().remove(s);
+        for (int i = 0; i < teacherList.size(); i++) {
+            s.TeacherAttacked();
         }
+        return true;
+
     }
 
     /**
      * Hallgató eltávolítása a szoba listájából
-     * 
+     *
      * @param s Keresett hallgató
      * @return Benne volt-e a hallgató a listában
      */
-    public boolean removeStudent(Student s) {
+    public boolean remove(Student s) {
         boolean contains = studentList.contains(s);
         if (contains) {
             studentList.remove(s);
-            //// System.out.println("\t"+this+": "+s+" removed");
         }
 
         return contains;
@@ -144,105 +90,133 @@ public class Room implements IRoomManager, IPrintStat {
 
     /**
      * Megpróbálja a jelenlegi szobába mozgatni az adott oktatót.
-     * 
+     *
      * @param t Az oktató, aki mozogni próbál a jelenlegi szobába
      * @return Sikerült-e mozogni a szobába
      */
-    public boolean addTeacher(Teacher t) {
-
-        int playersInRoom = teacherList.size() + studentList.size();
-
-        // Initialize Teacher's room
-        if (t.getRoom() == null) {
-            teacherList.add(t);
-            return true;
-        }
-        // Enter or leave cursed room
-        else if (effects.contains(ERoomEffects.CURSED) || t.getRoom().effects.contains(ERoomEffects.CURSED)
-                || playersInRoom == maxPlayer) {
+    public boolean add(Teacher t) {
+        boolean success = tryAdd(t);
+        if (!success)
             return false;
-        }
-        // Leave poisoned room to not poisoned
-        else if (t.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED)) {
-            t.getRoom().removeTeacher(t);
-            teacherList.add(t);
-            t.RoomCleanFromPoison();
-            ;
-            checkAttacks();
-            return true;
-        }
-        // Enter poisoned
-        else if (effects.contains(ERoomEffects.POISONED)) {
-            t.getRoom().removeTeacher(t);
-            teacherList.add(t);
-            t.RoomPoisoned();
-            checkAttacks();
-            return true;
-        }
-
-        // Both rooms clear
-        t.getRoom().removeTeacher(t);
         teacherList.add(t);
-        checkAttacks();
+        t.getRoom().remove(t);
+        for (Student s : studentList) {
+            s.TeacherAttacked();
+        }
         return true;
     }
 
     /**
      * Oktató eltávolítása a szoba listájából
-     * 
+     *
      * @param s Keresett oktató
      * @return Benne volt-e az oktató a listában
      */
-    public boolean removeTeacher(Teacher t) {
+    public boolean remove(Teacher t) {
         boolean contains = teacherList.contains(t);
         if (contains) {
             teacherList.remove(t);
-            //// System.out.println("\t"+this+": "+t+" removed");
         }
 
         return contains;
     }
 
-    public List<Student> getStudents() {
-        return studentList;
+    /**
+     * Megpróbálja a jelenlegi szobába mozgatni az adott takaritot.
+     *
+     * @param c A takarito, aki mozogni próbál a jelenlegi szobába
+     * @return Sikerült-e mozogni a szobába
+     */
+    public boolean add(Cleaner c) {
+        boolean success = tryAdd(c);
+        if (!success)
+            return false;
+        cleanerList.add(c);
+        c.getRoom().remove(c);
+        if (effects.contains(ERoomEffects.POISONED))
+            effects.add(ERoomEffects.STICKY);
+        purifyRoom();
+        for (Player p : getPlayers()) {
+            p.getOut();
+        }
+        return true;
     }
 
-    public List<Teacher> getTeachers() {
-        return teacherList;
+    /**
+     * Takarito eltávolítása a szoba listájából
+     *
+     * @param t Keresett takarito
+     * @return Benne volt-e a takarito a listában
+     */
+    public boolean remove(Cleaner c) {
+        boolean contains = cleanerList.contains(c);
+        if (contains) {
+            cleanerList.remove(c);
+        }
+
+        return contains;
     }
 
+    /**
+     * Hozzaadja a szobahoz a megadott szobat szomszednak
+     *
+     * @param r A szomszedos szoba
+     */
     public void addNeighbour(Room r) {
         neighbouringRooms.add(r);
     }
 
+    /**
+     * Eltavolitja a szobat a szomszedok kozul
+     *
+     * @param r A szomszedos szoba
+     */
     public void removeNeighbour(Room r) {
+        neighbouringRooms.remove(r);
     }
 
+    /**
+     * Visszaadja a szobahoz tartozo szomszedos szobakat
+     *
+     * @return A szomszedos szobak listaja
+     */
     public List<Room> getNeighbours() {
         return neighbouringRooms;
     }
 
+    /**
+     * Item hozzaadasa a szobahoz
+     *
+     * @param i Az item
+     */
     public void addItem(IItem i) {
-        //// System.out.println("\t"+this+": Item Added: "+i);
+        itemList.add(i);
     }
 
-    public void removeItem(IItem i) {
+    /**
+     * Item eltavolitasa a szobabol
+     *
+     * @param i Az item
+     * @return Sikerult-e az eltavolitas
+     */
+    public boolean removeItem(IItem i) {
+        if (stickyCounter <= 0)
+            return false;
+        itemList.remove(i);
+        return true;
     }
 
     /**
      * Effektus rakása a szobára, effektus aktiválódása esemény indítása
-     * 
+     *
      * @param e Az effektus, amit a szobára teszünk
      */
     public void addEffect(ERoomEffects e) {
         effects.add(e);
-        //// System.out.println("\t"+this+": Effects after addition: "+effects);
         if (e == ERoomEffects.POISONED) {
-            for (Student s : studentList) {
-                s.RoomPoisoned();
-            }
-            for (Teacher t : teacherList) {
-                t.RoomPoisoned();
+            List<Player> players = getPlayers();
+            for (Player p : players) {
+                p.RoomPoisoned();
             }
         }
     }
@@ -267,32 +241,20 @@ public class Room implements IRoomManager, IPrintStat {
             }   
     }
 
+
     /**
      * Effektus eltávolítása a szobáról, effektus eltávolítása esemény indítása
-     * 
+     *
      * @param e Az effektus, amit a szobáról leveszünk
      */
     public void removeEffect(ERoomEffects e) {
-        //// System.out.println("\t"+this+": Effects before removal: "+effects);
         effects.remove(e);
-        //// System.out.println("\t"+this+": Effects after removal: "+effects);
         if (!effects.contains(ERoomEffects.POISONED)) {
-            for (Student s : studentList) {
-                s.RoomCleanFromPoison();
-            }
-            for (Teacher t : teacherList) {
-                t.RoomCleanFromPoison();
+            List<Player> players = getPlayers();
+            for (Player p : players) {
+                p.RoomCleanFromPoison();
             }
         }
-    }
-
-    public int getMax() {
-        return maxPlayer;
-    }
-
-    public void setMax(int n) {
-        maxPlayer = n;
-        //// System.out.println("\t"+this+": Max size set to: "+n);
     }
 
     /**
@@ -300,24 +262,14 @@ public class Room implements IRoomManager, IPrintStat {
      *
      * @return az új szoba, ha sikerült ketté választani, egyébként null
      */
-    @Override
     public Room split() {
-        if (studentList.size() > 0 || teacherList.size() > 0) {
-            //// System.out.println("\tRoom \"" + this.toString() + "\" cannot split because
-            //// it is not empty");
+        if (getPlayers().size() > 0)
             return null;
-        }
-        if (effects.contains(ERoomEffects.TRANSISTOR_INSIDE)) {
-            //// System.out.println("\tRoom \"" + this.toString() + "\" cannot split because
-            //// transistor is inside");
+        if (effects.contains(ERoomEffects.TRANSISTOR_INSIDE))
             return null;
-        }
-        Room newRoom = new Room();
-        newRoom.maxPlayer = this.maxPlayer;
+        Room newRoom = new Room(maxPlayer);
         newRoom.addNeighbour(this);
         this.addNeighbour(newRoom);
-        //// System.out.println("\tRoom \"" + this.toString() + "\" successfully
-        //// split");
         return newRoom;
     }
 
@@ -327,28 +279,97 @@ public class Room implements IRoomManager, IPrintStat {
      * @param r a másik szoba
      * @return Sikerült-e összevonni a két szobát
      */
-    @Override
     public boolean merge(Room r) {
-        if (studentList.size() > 0 || teacherList.size() > 0 || r.studentList.size() > 0 || r.teacherList.size() > 0) {
-            //// System.out.println("\tRoom \"" + this.toString() + "\" and \"" +
-            //// r.toString() + "\" cannot merge because one is not empty");
+        if (getPlayers().size() > 0 || r.getPlayers().size() > 0)
             return false;
-        }
-        if (effects.contains(ERoomEffects.TRANSISTOR_INSIDE) || r.effects.contains(ERoomEffects.TRANSISTOR_INSIDE)) {
-            //// System.out.println("\tRoom \"" + this.toString() + "\" and \"" +
-            //// r.toString() + "\" cannot merge because transistor is inside");
+        if (effects.contains(ERoomEffects.TRANSISTOR_INSIDE) || r.effects.contains(ERoomEffects.TRANSISTOR_INSIDE))
             return false;
-        }
         List<Room> nb = r.getNeighbours();
-        for (Room n : nb) {
-            addNeighbour(n);
-        }
         List<IItem> items = r.itemList;
-        for (IItem i : items) {
+        for (Room n : nb)
+            addNeighbour(n);
+        for (IItem i : items)
             addItem(i);
+        return true;
+    }
+
+    public String toString() {
+        return "Room@" + Integer.toString(this.hashCode()).substring(0, 4);
+    }
+
+    /**
+     * A szoba léptetése
+     */
+    public void stepRoom() {
+        for (int i = 0; i < teacherList.size(); i++)
+            for (Student s : studentList) {
+                s.TeacherAttacked();
+            }
+    }
+
+    public void purifyRoom() {
+        while (effects.contains(ERoomEffects.POISONED)) {
+            removeEffect(ERoomEffects.POISONED);
         }
-        //// System.out.println("\tRoom \"" + this.toString() + "\" and \"" +
-        //// r.toString() + "\" successfully merged");
+        for (Player p : getPlayers()) {
+            p.RoomCleanFromPoison();
+        }
+    }
+
+    public boolean equals(Room r) {
+        return this.hashCode() == r.hashCode();
+    }
+
+    /**
+     * Visszaadja a szobában lévő játékosok számát
+     *
+     * @return A szobában lévő játékosok száma
+     */
+    private int getPlayersCount() {
+        return studentList.size() + teacherList.size() + cleanerList.size();
+    }
+
+    /**
+     * Visszaadja a szobában lévő összes játékost
+     *
+     * @return A szobában lévő játékosok listája
+     */
+    private List<Player> getPlayers() {
+        List<Player> players = new ArrayList<>();
+        players.addAll(studentList);
+        players.addAll(teacherList);
+        players.addAll(cleanerList);
+        return players;
+    }
+
+    /**
+     * Megpróbálja a jelenlegi szobába mozgatni az adott jatekost.
+     *
+     * @param p A jatekos, aki mozogni próbál a jelenlegi szobába
+     * @return Sikerült-e mozogni a szobába
+     */
+    private boolean tryAdd(Player p) {
+        // TODO Ha tele van, de meg nincs szobaja?
+        if (p.getRoom() == null)
+            return true;
+        // If one of rooms is cursed
+        if (effects.contains(ERoomEffects.CURSED) || p.getRoom().effects.contains(ERoomEffects.CURSED))
+            return false;
+        // If player limit is reached
+        if (maxPlayer > getPlayersCount())
+            return false;
+
+        // If the previous room is not poisoned, but the new one is
+        if (effects.contains(ERoomEffects.POISONED) && !p.getRoom().effects.contains(ERoomEffects.POISONED))
+            p.RoomCleanFromPoison();
+        // If the previous room is poisoned, but the new one is not
+        if (p.getRoom().effects.contains(ERoomEffects.POISONED) && !effects.contains(ERoomEffects.POISONED))
+            p.RoomPoisoned();
+
+        if (effects.contains(ERoomEffects.STICKY) && stickyCounter > 0) {
+            stickyCounter--;
+        }
+
         return true;
     }
 

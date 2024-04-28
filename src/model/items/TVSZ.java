@@ -2,9 +2,9 @@ package model.items;
 
 import java.util.ArrayList;
 
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import java.util.Random;
+
+import model.player.*;
 import test.IPrintStat;
 
 public class TVSZ implements IItem, IPrintStat {
@@ -31,6 +31,8 @@ public class TVSZ implements IItem, IPrintStat {
 
     public TVSZ() {
         hitpoints = 3;
+        Random rand = new Random();
+        fake = rand.nextDouble() <= 0.2 ? true : false;
     }
 
     @Override
@@ -41,31 +43,28 @@ public class TVSZ implements IItem, IPrintStat {
 
     @Override
     public void pickUp(Student s) {
-        // System.out.println("TVSZ : addItem( " + this.toString() + ") -> " +
-        // s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        // System.out.println("TVSZ : addItem( " + this.toString() + ") -> " +
-        // t.toString());
         t.addItem(this);
     }
 
     @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
+
+    @Override
     public void dropItem(Player p) {
-        // System.out.println("TVSZ : removeItem(" + this.toString() + ") -> " +
-        // p.toString());
         p.removeItem(this);
     }
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        if (hitpoints > 0) {
-            // System.out.print("TVSZ : hitpoints => " + hitpoints);
+        if(hitpoints > 0 && !fake) {
             hitpoints--;
-            // System.out.println(" -> " + hitpoints);
             return true;
         }
         return false;

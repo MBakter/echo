@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 import controller.TimedObject;
 import controller.Timer;
-import model.ITimer;
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import model.*;
+import model.player.*;
 import test.IPrintStat;
 
-public class Beer implements IItem, ITimer, IPrintStat {
-    private Timer timer;
+public class Beer implements IItem, ITimedEntity, IPrintStat {
+    private ITimer timer;
     private EBeerState state; // Default: INACTIVE
+    private static int TIME = 5;
     private String name;
 
     public String getName() {
@@ -42,36 +41,30 @@ public class Beer implements IItem, ITimer, IPrintStat {
 
     @Override
     public void useItem(Player p) {
-        // System.out.println("Beer : startTimer(" + this.toString() + ", 2) -> " +
-        // timer.toString());
-        timer.startTimer(this, 2);
+        timer.startTimer(this, TIME);
 
-        state = EBeerState.RUNNING;
-        // System.out.println("Beer : setState -> " + state.toString());
+        state = EBeerState.RUNNING;    
     }
 
     @Override
     public void pickUp(Student s) {
-        // System.out.println("Beer : addItem( " + this.toString() + ") -> " +
-        // s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        // System.out.println("Beer : addItem( " + this.toString() + ") -> " +
-        // t.toString());
         t.addItem(this);
     }
 
     @Override
-    public void dropItem(Player p) {
-        // System.out.println("Beer : pauseTimer(" + this.toString() + ") -> " +
-        // timer.toString());
-        timer.pauseTimer(this);
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
 
-        // System.out.println("Beer : removeItem( " + this.toString() + ") -> " +
-        // p.toString());
+    @Override
+    public void dropItem(Player p) {
+        timer.pauseTimer(this);
+        
         p.removeItem(this);
     }
 
@@ -79,11 +72,8 @@ public class Beer implements IItem, ITimer, IPrintStat {
     public boolean TeacherAttacked(Student s) {
         switch (state) {
             case INACTIVE:
-                // System.out.println("Beer : startTimer(" + this.toString() + ", 2) -> " +
-                // timer.toString());
-                timer.startTimer(this, 2);
+                timer.startTimer(this, TIME);
                 state = EBeerState.RUNNING;
-                // System.out.println("Beer : state -> " + state.toString());
                 return true;
             case RUNNING:
                 return true;
@@ -116,7 +106,6 @@ public class Beer implements IItem, ITimer, IPrintStat {
     @Override
     public void timerEnd() {
         state = EBeerState.DISABLED;
-        // System.out.println("Beer : setState -> " + state.toString());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package model.player;
 
+import model.ITimer;
 import model.Room;
 import model.items.IItem;
 
@@ -9,93 +10,71 @@ public class Student extends Player {
     }
     public Student() {
     }
-    @Override
-    public String toString(){
-        return "Student@"+Integer.toString(this.hashCode()).substring(0, 4);
-    }
-    /**
-     * A hallgató megpróbál az r szobába mozogni
-     * 
-     * @param   r   a szoba ahová mozogni akar a hallgató, ennek hívjuk meg az addStudent függvényét
-     */
-    public void forceMove(Room r){
-        r.fAddStudent(this);
-        room = r;
-    }
-    public void move(Room r) {
-        ////System.out.println("\t"+this+": current room is "+room);
-        ////System.out.println(""+this+": addStudent("+this+") -> "+r);        
-        boolean moveResult = r.addStudent(this);
-        if(moveResult){
-            room = r;
-            ////System.out.println("\t"+this+": moving to "+r+" successful");
-            ////System.out.println("\t"+r+": Students in room: "+r.getStudents());
-        }            
-        else{
-            ////System.out.println("\t"+this+": moving to "+r+" failed");
-        }            
-        ////System.out.println("\t"+this+": current room is "+room);
 
+    public Student(ITimer t) {
+        super(t);
     }
-    /**
-     * A hallgató megpróbálja megmenti magát a méregtől a tárgyaival
-     */
+
+    public boolean move(Room r) {
+        boolean moveResult = r.add(this);
+        if (moveResult) {
+            room = r;
+        }
+        return moveResult;
+    }
+
     @Override
     public void RoomPoisoned() {
-
-        ////System.out.println("\t"+this+": RoomPoisoned called");
-        for (IItem iItem : itemList) 
-            if(iItem.RoomPoisoned(this)) {
-                ////System.out.println("\t"+this+": Saved from poison!");
+        for (IItem iItem : itemList)
+            if (iItem.RoomPoisoned(this))
                 return;
-            }
 
-        state = EPlayerState.UNCONSCIOUS;
-        ////System.out.println("\t"+this+": State set to: "+state);
-      
+        super.RoomPoisoned();
     };
-    /**
-     * A szobáról lekerül a méreg, a hallgató itemei erről értesülnek
-     */
+
     @Override
     public void RoomCleanFromPoison() {
-        ////System.out.println("\t"+this+": RoomCleanFromPoison called");
         for (IItem iItem : itemList) {
             iItem.RoomCleanFromPoison(this);
         }
+        super.RoomCleanFromPoison();
     }
 
-    public void pickUp(IItem i) {
-        ////System.out.println("\t"+this+": pickUp called");
-
-        ////System.out.println(""+this+": pickUp("+this+") -> "+i); 
-        i.pickUp(this);
-        room.removeItem(i);
+    public boolean pickUp(IItem i) {
+        boolean success = room.removeItem(i);
+        if(success) {
+            itemList.add(i);
+            i.pickUp(this);
+        }
+        return success;
     }
-    
+
     public void useItem(IItem i) {
         i.useItem(this);
     }
 
-    /**
-     * A hallgatót megtámadja egy oktató, tárgyaival megpróbálja menteni magát
-     */
     public void TeacherAttacked() {
-        ////System.out.println("\t"+this+": TeacherAttacked called!");
-        for (IItem item : itemList) 
-            if(item.TeacherAttackable(this)) {
-                ////System.out.println(this + ": Survived attack");
-                return;      
+        for (IItem item : itemList)
+            if (item.TeacherAttackable(this)) {
+                return;
             }
 
-        for (IItem item : itemList) 
-            if(item.TeacherAttacked(this)) {
-                ////System.out.println(this + ": Survived attack");
-                return;      
+        for (IItem item : itemList)
+            if (item.TeacherAttacked(this)) {
+                return;
             }
-        
+
         state = EPlayerState.DEAD;
-        ////System.out.println(this + ": setState -> " + state);
+    }
+
+    @Override
+    public void getOut() {
+        for (Room r : room.getNeighbours()) {
+            boolean success = move(r);
+            if (success) {
+                return;
+            }
+        }
     }
 
 }

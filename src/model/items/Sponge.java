@@ -4,16 +4,11 @@ import java.util.ArrayList;
 
 import controller.TimedObject;
 import controller.Timer;
-import model.ITimer;
-import model.Room;
-import model.player.EPlayerState;
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import model.*;
+import model.player.*;
 import test.IPrintStat;
-
-public class Sponge implements IItem, ITimer, IPrintStat {
-    private controller.Timer timer;
+public class Sponge implements IItem, ITimedEntity ,IPrintStat{
+    private ITimer timer;
     private boolean functional;
     private String name;
     public String getName() {
@@ -46,28 +41,27 @@ public class Sponge implements IItem, ITimer, IPrintStat {
 
     @Override
     public void pickUp(Student s) {
-        //System.out.println("Sponge : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
         timer.startTimer(this, 2);
 
         functional = true;
-        //System.out.println("Sponge : setFunctional -> " + (functional ? "true" : "false"));
         
-        //System.out.println("Sponge : addItem(" + this.toString() + ") -> " + s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        //System.out.println("Sponge : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
+    
+    @Override
     public void dropItem(Player p) {
-        //System.out.println("Sponge : addItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
         
-        //System.out.println("Sponge : pauseTimer(" + this.toString() + ") -> " + timer.toString());
         timer.pauseTimer(this);
     }
 
@@ -95,18 +89,15 @@ public class Sponge implements IItem, ITimer, IPrintStat {
             return false;
 
         Room r = s.getRoom();
-        for (Teacher t : r.getTeachers()) {
-            //System.out.println("Sponge : setState(UNCONSCIOUS) -> " + t.toString());
+        for (Teacher t : r.getTeachers()) 
             t.setState(EPlayerState.UNCONSCIOUS);
-        }
-
+        
         return true;
     }
 
     @Override
     public void timerEnd() {
         functional = false;
-        //System.out.println("Sponge : setFunctional -> " + (functional ? "true" : "false"));
     }
 
     @Override

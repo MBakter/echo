@@ -2,85 +2,79 @@ package model.player;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import model.ERoomEffects;
-import model.ITimer;
-import model.Room;
+import model.*;
 import model.items.IItem;
 import test.IPrintStat;
 
-public abstract class Player implements ITimer, IPrintStat {
-    private String name;
-    public String getName(){
-        return name;
-    }
-    protected Player(String s){
-        name = s;
-        ////System.out.println("<<create>> \""+this.toString()+"\"");
-    }
-    protected Player(){
-        ////System.out.println("<<create>> \""+this.toString()+"\"");
-    }
+public abstract class Player implements ITimedEntity IPrintStat{
+
     protected Room room;
     protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
-    protected controller.Timer timer;
-    public List<IItem> getItems(){
-        return this.itemList;
+    protected ITimer timer;
+
+    Player(ITimer t) {
+        state = EPlayerState.ALIVE;
+        t.addItem(this);
     }
-    public EPlayerState getState() { return state; }
+
+    public EPlayerState getState() {
+        return state;
+    }
+
     public void setState(EPlayerState s) {
         state = s;
-        ////System.out.println("\t"+this + ": state set to "+ state);
-        
-        /* if(state == EPlayerState.UNCONSCIOUS)
-            timer.startTimer(this, 2); */
-    }
-    public void setState(String s) {
-            state = EPlayerState.valueOf(s);
-    }
-    public Room getRoom() { return room; }
-    public void setRoom(Room r) { 
-        ////System.out.println("\t"+this+": setRoom called");
-        room = r; 
     }
 
-    public abstract void move(Room r);
-    public abstract void forceMove(Room r);
-    /**
-     * Alap RoomPoisoned függvény, eszméletét veszti a Player
-     */
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room r) {
+        room = r;
+    }
+
+    public abstract void getOut();
+    public abstract boolean move(Room r);
+
+
     public void RoomPoisoned() {
-        ////System.out.println("\t"+this+": RoomPoisoned called");
         state = EPlayerState.UNCONSCIOUS;
-        ////System.out.println("\t"+this+": State set to: "+state);
+        timer.startTimer(this, 3);
+        for (IItem i : itemList) {
+            dropItem(i);
+        }
     };
-    public void RoomCleanFromPoison() {
-        ////System.out.println("\t"+this+": RoomCleanFromPoison called");
-    }
-    public void addItem(IItem i) {
-        ////System.out.println("\t"+this+": addItem called");
-        itemList.add(i);
 
-        ////System.out.println(this.toString() + ": Item added: " + i.toString());
+    public void RoomCleanFromPoison() {
+        if(state == EPlayerState.UNCONSCIOUS) {
+            state = EPlayerState.ALIVE;
+        }
     }
-    public void removeItem(IItem i)  {
-        ////System.out.println(this.toString() + ": Item removed: " + i.toString());
+
+    public void addItem(IItem i) {
+        itemList.add(i);
+    }
+
+    public void removeItem(IItem i) {
         itemList.remove(i);
     }
 
-    public abstract void pickUp(IItem i);
+    public abstract boolean pickUp(IItem i);
 
     public void dropItem(IItem i) {
-        ////System.out.println(this.toString() + ": dropItem(" + this.toString() + ")-> " + i.toString());
         i.dropItem(this);
-        ////System.out.println(this.toString() + ": addItem(" + i.toString() + ")-> " + room.toString());
         room.addItem(i);
+    }
+
+    public void useItem(IItem i) {
+        return;
     }
 
     @Override
     public void timerEnd() {
-        state = EPlayerState.ALIVE;
+        RoomCleanFromPoison();
     }
     
     @Override
@@ -100,5 +94,9 @@ public abstract class Player implements ITimer, IPrintStat {
         for (var e : EPlayerState.values()) {
             System.out.printf("\t%s%n", e);
         }
+    }
+    
+
+
     }
 }

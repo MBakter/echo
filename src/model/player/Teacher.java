@@ -1,53 +1,40 @@
 package model.player;
 
+import model.ITimer;
 import model.Room;
 import model.items.IItem;
 
 public class Teacher extends Player {
-    public Teacher(String s) {
-        super(s);
+
+    public Teacher(ITimer t) {
+        super(t);
     }
 
-    public Teacher() {
+    public boolean move(Room r) {
+        boolean moveResult = r.add(this);
+        if(moveResult){
+            room = r;
+        }
+        return moveResult;
+    }
+
+    public boolean pickUp(IItem i) {
+        boolean success = room.removeItem(i);
+        if(success) {
+            itemList.add(i);
+            i.pickUp(this);
+        }
+        return success;
     }
 
     @Override
-    public String toString() {
-        return "Teacher@" + Integer.toString(this.hashCode()).substring(0, 4);
-    }
-
-    public void forceMove(Room r) {
-        r.fAddTeacher(this);
-        room = r;
-    }
-
-    /**
-     * Az oktató megpróbál az r szobába mozogni
-     * 
-     * @param r a szoba ahová mozogni akar az okató, ennek hívjuk meg az addTeacher
-     *          függvényét
-     */
-    public void move(Room r) {
-        //// System.out.println("\t"+this+": current room is "+room);
-        //// System.out.println(""+this+": addTeacher("+this+") -> "+r);
-        boolean moveResult = r.addTeacher(this);
-        if (moveResult) {
-            room = r;
-            //// System.out.println("\t"+this+": moving to "+r+" successful");
-            //// System.out.println("\t"+r+": Teachers in room: "+r.getTeachers());
-        } else {
-            //// System.out.println("\t"+this+": moving to "+r+" failed");
+    public void getOut() {
+        for (Room r : room.getNeighbours()) {
+            boolean success = move(r);
+            if (success) {
+                return;
+            }
         }
-        //// System.out.println("\t"+this+": current room is "+room);
-
-    }
-
-    public void pickUp(IItem i) {
-        //// System.out.println("\t"+this+": pickUp called");
-
-        //// System.out.println(""+this+": pickUp("+this+") -> "+i);
-        i.pickUp(this);
-        room.removeItem(i);
     }
 
 }

@@ -2,13 +2,15 @@ package model.items;
 
 import java.util.ArrayList;
 
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import java.util.Random;
+
+import model.player.*;
 import test.IPrintStat;
 
 public class Logarlec implements IItem, IPrintStat {
 
+    private boolean fake;
+    
     private boolean fake = false;
     private String name;
     public String getName() {
@@ -26,6 +28,8 @@ public class Logarlec implements IItem, IPrintStat {
         name = s;
     }
     public Logarlec() {
+        Random rand = new Random();
+        fake = rand.nextDouble() <= 0.2 ? true : false;
     }
 
     @Override
@@ -36,20 +40,21 @@ public class Logarlec implements IItem, IPrintStat {
 
     @Override
     public void pickUp(Student s) {
-        //System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
-        //System.out.println("Logarlec : endGame(VICTORY) -> Controller");
     }
 
     @Override
     public void pickUp(Teacher t) {
-        //System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
+    public void pickUp(Cleaner c) {
+        c.addItem(this);
+    }
+
+    @Override
     public void dropItem(Player p) {
-        //System.out.println("Logarlec : removeItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 

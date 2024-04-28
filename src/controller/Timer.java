@@ -3,9 +3,10 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ITimedEntity;
 import model.ITimer;
 
-public class Timer {
+public class Timer implements ITimer {
     private List<TimedObject> list;
 
     public String toString(){
@@ -18,8 +19,9 @@ public class Timer {
 
     public List<TimedObject> getList() { return list; }
 
-    public void addItem(ITimer o) {
-        list.add(new TimedObject(o));
+    @Override
+    public void addItem(ITimedEntity e) {
+        list.add(new TimedObject(e));
     }
 
     public void iterateTime() {
@@ -30,19 +32,20 @@ public class Timer {
         }
     }
 
-    public void startTimer(ITimer o, int time) {
+    @Override
+    public void startTimer(ITimedEntity e, int time) {
         for (TimedObject to : list) {
-            if(to.getObject().equals(o) && to.isPaused()) 
+            if(to.getObject().equals(e) && to.isPaused()) 
                 to.resume();
-            if(to.getObject().equals(o) && !to.isActive()) 
+            if(to.getObject().equals(e) && !to.isActive()) 
                 to.activate(time);
-            
         }
     }
 
-    public void pauseTimer(ITimer o) {
+    @Override
+    public void pauseTimer(ITimedEntity e) {
         for (TimedObject to : list) {
-            if(to.getObject().equals(o)) {
+            if(to.getObject().equals(e)) {
                 to.pause();
             }
         }
