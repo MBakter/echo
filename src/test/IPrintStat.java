@@ -1,5 +1,6 @@
 package test;
 
 public interface IPrintStat {
-    public void PrintStat(String name);
+    public void printStat(String name);
+    public void statesOptions();
 }

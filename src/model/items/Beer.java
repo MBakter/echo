@@ -118,7 +118,7 @@ public class Beer implements IItem, ITimer, IPrintStat {
     }
 
     @Override
-    public void PrintStat(String name) {
+    public void printStat(String name) {
         int myTime = 0;
         for (TimedObject to : timer.getList()) {
             if (to.getObject().equals(this)) {
@@ -127,5 +127,9 @@ public class Beer implements IItem, ITimer, IPrintStat {
         }
         System.out.printf("%s timer %d%n", name, myTime);
         System.out.printf("%s state %s%n", name, state);
+    }
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tSTATES");
     }
 }

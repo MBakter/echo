@@ -125,7 +125,7 @@ public class Mask implements IItem, ITimer, IPrintStat {
     }
 
     @Override
-    public void PrintStat(String name) {
+    public void printStat(String name) {
         int myTime = 0;
         for (TimedObject to : timer.getList()) {
             if (to.getObject().equals(this)) {
@@ -136,5 +136,9 @@ public class Mask implements IItem, ITimer, IPrintStat {
         System.out.printf("%s functional %s%n", name, functional);
         System.out.printf("%s student %s%n", name, wearer);
         System.out.printf("%s fake %s%n", name, fake);
+    }
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tSTATES");
     }
 }

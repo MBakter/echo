@@ -32,14 +32,12 @@ public class FileHandling {
         }
         return lineList;
     }
-    public void processInput(){
 
-    }
 
     // Main runner For testing 
     public static void main(String[] args) throws IOException {
         FileHandling fh = new FileHandling();
-        Scanner scan=new Scanner(System.in);
+        Scanner scan =new Scanner(System.in);
         boolean exit = false;
         TestRunner tr = new TestRunner();
         while(!exit){
@@ -48,14 +46,14 @@ public class FileHandling {
             if(input.equals("exit"))
                 exit = true;
         }
+        scan.close();
         
-        
-        //File file = new File(currentDir, path);
-        var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
+        // File file = new File(currentDir, path);
+/*         var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
         fh.WriteTestResult(list.get(0).subject, "src/test/test_txt/test_output/test1_outtttt.txt");
 
-        //TestRunner tr2 = new TestRunner(list);
-        //tr.evaluate();
+        TestRunner tr2 = new TestRunner(list);
+        tr2.evaluateAll(); */
     }
 
     // Writing out the resulting lines of String to the designated File.
@@ -149,6 +147,8 @@ public class FileHandling {
             case "control": command.type = ECommand.CONTROL; break;
             case "interact": command.type = ECommand.INTERACT; break;
             case "stat": command.type = ECommand.STAT; break;
+            case "save": command.type = ECommand.SAVE; break;
+            case "load": command.type = ECommand.LOAD; break;
             //default: throw new IOException("Wrong string at start of line, wrong command naming \"" + split[0] + "\"");
             default: System.out.println("Unrecognized command");
         }

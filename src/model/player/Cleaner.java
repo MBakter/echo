@@ -13,6 +13,11 @@ public class Cleaner extends Player {
     public String toString(){
         return "Cleaner@"+Integer.toString(this.hashCode()).substring(0, 4);
     }
+    public void forceMove(Room r) {
+        r.fAddCleaner(this);
+        room = r;
+    }
+
 
         /**
      * Az oktató megpróbál az r szobába mozogni

@@ -132,9 +132,13 @@ public class Transistor implements IItem , IPrintStat{
     }
 
     @Override
-    public void PrintStat(String gasdgag) {
+    public void printStat(String gasdgag) {
         System.out.printf("%s pair %s", name, pair.getName());
         System.out.printf("%s active %s",name, active);
         System.out.printf("%s room %s", name, room.getName());
+    }
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tSTATES");
     }
 }

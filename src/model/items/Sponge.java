@@ -108,7 +108,7 @@ public class Sponge implements IItem, ITimer, IPrintStat {
     }
 
     @Override
-    public void PrintStat(String name) {
+    public void printStat(String name) {
                 int myTime = 0;
         for (TimedObject to : timer.getList()) {
             if (to.getObject().equals(this)) {
@@ -118,5 +118,9 @@ public class Sponge implements IItem, ITimer, IPrintStat {
         System.out.printf("%s timer %d%n", name, myTime);
         System.out.printf("%s functional %s%n", name, functional);
 
+    }
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tSTATES");
     }
 }

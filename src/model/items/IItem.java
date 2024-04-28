@@ -7,8 +7,8 @@ import model.player.Teacher;
 public interface IItem{
     public String getName();
     // Tudom hogy ez csúnya.
-    public void PrintStat(String name);
-
+    public void printStat(String name);
+    public void statesOptions();
     /*
      * A tárgy használata.
      * Paraméterként kap egy Player-t

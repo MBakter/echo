@@ -117,7 +117,7 @@ public class Cheese implements IItem, ITimer, IPrintStat {
     }
     
     @Override
-    public void PrintStat(String name) {
+    public void printStat(String name) {
         int myTime = 0;
         for (TimedObject to : timer.getList()) {
             if(to.getObject().equals(this)){
@@ -128,5 +128,9 @@ public class Cheese implements IItem, ITimer, IPrintStat {
         System.out.printf("%s isUsed %s%n",name, isUsed);
         room = new Room("NOT IMPLEMENTED");
         System.out.printf("%s room %s%n",name,room.getName());
+    }
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tSTATES");
     }
 }

@@ -18,7 +18,10 @@ public class Student extends Player {
      * 
      * @param   r   a szoba ahová mozogni akar a hallgató, ennek hívjuk meg az addStudent függvényét
      */
-
+    public void forceMove(Room r){
+        r.fAddStudent(this);
+        room = r;
+    }
     public void move(Room r) {
         ////System.out.println("\t"+this+": current room is "+room);
         ////System.out.println(""+this+": addStudent("+this+") -> "+r);        

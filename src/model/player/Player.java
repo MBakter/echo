@@ -3,6 +3,7 @@ package model.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ERoomEffects;
 import model.ITimer;
 import model.Room;
 import model.items.IItem;
@@ -35,6 +36,13 @@ public abstract class Player implements ITimer, IPrintStat {
         /* if(state == EPlayerState.UNCONSCIOUS)
             timer.startTimer(this, 2); */
     }
+    public void setState(String s) {
+        //state = s;
+        ////System.out.println("\t"+this + ": state set to "+ state);
+        
+        /* if(state == EPlayerState.UNCONSCIOUS)
+            timer.startTimer(this, 2); */
+    }
     public Room getRoom() { return room; }
     public void setRoom(Room r) { 
         ////System.out.println("\t"+this+": setRoom called");
@@ -42,7 +50,7 @@ public abstract class Player implements ITimer, IPrintStat {
     }
 
     public abstract void move(Room r);
-
+    public abstract void forceMove(Room r);
     /**
      * Alap RoomPoisoned függvény, eszméletét veszti a Player
      */
@@ -80,7 +88,7 @@ public abstract class Player implements ITimer, IPrintStat {
     }
     
     @Override
-    public void PrintStat(String fasz) {
+    public void printStat(String fasz) {
         //System.out.printf("%s room %\n", this.toString());
         System.out.printf("%s room %s%n", name, room.getName());
         System.out.printf("%s EPlayerState %s%n", name, state);
@@ -89,5 +97,12 @@ public abstract class Player implements ITimer, IPrintStat {
             System.out.printf(" %s", item.getName());
         }
         System.out.printf("%n");
+    }
+
+    @Override
+    public void statesOptions() {
+        for (var e : EPlayerState.values()) {
+            System.out.printf("\t%s%n", e);
+        }
     }
 }

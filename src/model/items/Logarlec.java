@@ -76,7 +76,11 @@ public class Logarlec implements IItem, IPrintStat {
     }
     
     @Override
-    public void PrintStat(String name) {
+    public void printStat(String name) {
         System.out.printf("%s fake %s%n", name, fake);
+    }
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tSTATES");
     }
 }

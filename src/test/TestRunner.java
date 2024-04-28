@@ -1,5 +1,6 @@
 package test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,16 +37,22 @@ public class TestRunner {
     public TestRunner() {
         commands = new ArrayList<>();
     }
+
     public void addCommand(CommandData c) {
-        if (!c.subject.isEmpty()) {
+        if (c.type != null) {
             commands.add(c);
-            evaluate();
+            evaluateLast();
         }
     }
-    public void evaluate() {
+
+    public void evaluateAll() {
         for (CommandData cd : commands) {
             interpretCmd(cd);
         }
+    }
+
+    public void evaluateLast() {
+        interpretCmd(commands.get(commands.size() - 1));
     }
 
     private void interpretCmd(CommandData cd) {
@@ -189,26 +196,74 @@ public class TestRunner {
     }
 
     private void cmdLink(ArrayList<String> args) {
-        Type arg1 = getType(args.get(0));
-        if (arg1 == Type.ROOM) {
-            if (getType(args.get(1)) == Type.ROOM) {
-                rooms.get(args.get(0)).addNeighbour(rooms.get(args.get(1)));
-                System.out.printf("%s connected to %s%n", args.get(0), args.get(1));
-            }
+        String source = args.get(0);
+        String target = args.get(1);
+        boolean force = false;
+        if (args.get(0).equals("-f")) {
+            source = args.get(1);
+            target = args.get(2);
+            force = true;
         }
-        if (arg1 == Type.PLAYER) {
-            if (getType(args.get(1)) == Type.ROOM) {
-                players.get(args.get(0)).move(rooms.get(args.get(1)));
-                System.out.printf("%s moved to %s%n", args.get(0), args.get(1));
-            }
-        }
-        if (arg1 == Type.ITEM) {
 
+        if (getType(source) == Type.ROOM) {
+            if (getType(target) == Type.ROOM) {
+                rooms.get(source).addNeighbour(rooms.get(target));
+                System.out.printf("%s connected to %s%n", source, target);
+            }
+        }
+        if (getType(source) == Type.PLAYER) {
+            if (getType(target) == Type.ROOM) {
+                if (force) {
+                    players.get(source).forceMove((rooms.get(target)));
+                    System.out.printf("%s moved to %s%n", source, target);
+                } else {
+                    players.get(source).move(rooms.get(target));
+                    System.out.printf("%s moved to %s%n", source, target);
+                }
+
+            }
+        }
+        if (getType(source) == Type.ITEM) {
+            if (getType(target) == Type.ROOM) {
+                rooms.get(target).addItem(items.get(source));
+                System.out.printf("%s added to %s%n", source, target);
+            }
+            if (getType(target) == Type.PLAYER) {
+                players.get(target).addItem(items.get(source));
+                System.out.printf("%s added to %s%n", source, target);
+            }
         }
 
     }
 
     private void cmdState(ArrayList<String> args) {
+        if(args.size()<2){
+            for (var item : players.entrySet()) {
+                if (item.getKey().equals(args.get(0)))
+                    item.getValue().statesOptions();
+            }
+            for (var item : items.entrySet()) {
+                if (item.getKey().equals(args.get(0)))
+                    item.getValue().statesOptions();
+            }
+            for (var item : rooms.entrySet()) {
+                if (item.getKey().equals(args.get(0)))
+                    item.getValue().statesOptions();
+            }
+        }else{
+            for (var item : players.entrySet()) {
+                if (item.getKey().equals(args.get(0))){}
+                    item.getValue().setState(args.get(1));
+            }
+            for (var item : items.entrySet()) {
+                if (item.getKey().equals(args.get(0)))
+                    item.getValue().statesOptions();
+            }
+            for (var item : rooms.entrySet()) {
+                if (item.getKey().equals(args.get(0)))
+                    item.getValue().statesOptions();
+            }
+        }
 
     }
 
@@ -219,73 +274,15 @@ public class TestRunner {
     private void cmdStat(ArrayList<String> args) {
         System.out.println("stat:");
         for (var item : players.entrySet()) {
-            /*
-             * System.out.printf("%s room %s%n", item.getKey(),
-             * roomsReverse.get(item.getValue().getRoom()));
-             * System.out.printf("%s EPlayerState %s%n", item.getKey(),
-             * item.getValue().getState());
-             * System.out.printf("%s itemList", item.getKey());
-             * for (var playersItem : item.getValue().getItems()) {
-             * System.out.printf(" %s", itemsReverse.get(playersItem));
-             * }
-             * System.out.printf("%n");
-             */
-            item.getValue().PrintStat(item.getKey());
+            item.getValue().printStat(item.getKey());
         }
         for (var item : items.entrySet()) {
-            item.getValue().PrintStat(item.getKey());
+            item.getValue().printStat(item.getKey());
         }
         ArrayList<String> tmpRoomNames = new ArrayList<>(rooms.keySet());
         Collections.sort(tmpRoomNames);
         for (var item : tmpRoomNames) {
-            rooms.get(item).PrintStat("need to remove");
-            // item.getValue().PrintStat(item.getKey());
-            /*
-             * String name = item.getKey();
-             * Room r = item.getValue();
-             * System.out.printf("%s effects",name);
-             * for (var effect : r.getEffects()) {
-             * System.out.printf(" %s", effect);
-             * }
-             * System.out.printf("%n");
-             * 
-             * System.out.printf("%s itemList",name);
-             * for (var roomItem : r.getItems()) {
-             * System.out.printf(" %s", itemsReverse.get(roomItem));
-             * }
-             * System.out.printf("%n");
-             * 
-             * System.out.printf("%s studentList",name);
-             * for (var student : r.getStudents()) {
-             * System.out.printf(" %s", playersReverse.get(student));
-             * }
-             * System.out.printf("%n");
-             * 
-             * System.out.printf("%s teacherList",name);
-             * for (var teacher : r.getTeachers()) {
-             * System.out.printf(" %s", playersReverse.get(teacher));
-             * }
-             * System.out.printf("%n");
-             * 
-             * // TODO klíner
-             * System.out.printf("%s cleanerList",name);
-             * for (var teacher : r.getTeachers()) {
-             * System.out.printf(" %s", playersReverse.get(teacher));
-             * }
-             * System.out.printf("%n");
-             * 
-             * System.out.printf("%s neighbouringRooms",name);
-             * for (var neighbour : r.getNeighbours()) {
-             * System.out.printf(" %s", roomsReverse.get(neighbour));
-             * }
-             * System.out.printf("%n");
-             * 
-             * System.out.printf("%s sticky %s%n",name,false);
-             * System.out.printf("%s cleaned %s%n",name,false);
-             * // TODO kieg
-             * int numOfVisitors = r.getStudents().size() + r.getTeachers().size();
-             * System.out.printf("%s numOfVisitors %d%n",name, numOfVisitors);
-             */
+            rooms.get(item).printStat("need to remove");
         }
     }
 
@@ -298,6 +295,15 @@ public class TestRunner {
     }
 
     private void cmdLoad(ArrayList<String> args) {
-
+        System.out.println("FASDZADFASFAS");
+        FileHandling fh = new FileHandling();
+        var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
+        try {
+            fh.WriteTestResult(list.get(0).subject, "src/test/test_txt/test_output/test1_outtttt.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        commands = list;
+        evaluateAll();
     }
 }

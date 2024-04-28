@@ -1,10 +1,12 @@
 package model;
 
+import java.lang.ref.Cleaner.Cleanable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import model.items.IItem;
+import model.player.Cleaner;
 import model.player.Student;
 import model.player.Teacher;
 import test.IPrintStat;
@@ -54,6 +56,15 @@ public class Room implements IRoomManager, IPrintStat {
      * @param s A hallgató, aki mozogni próbál a jelenlegi szobába
      * @return  Sikerült-e mozogni a szobába
      */
+    public void fAddStudent(Student s){
+        studentList.add(s);
+    }
+    public void fAddTeacher(Teacher t){
+        teacherList.add(t);
+    }
+    public void fAddCleaner(Cleaner c){
+        
+    }
     public boolean addStudent(Student s) { 
         //////System.out.println("\t"+this+": addStudent called");
         int playersInRoom = teacherList.size()+studentList.size();
@@ -283,7 +294,7 @@ public class Room implements IRoomManager, IPrintStat {
     }
 
     @Override
-    public void PrintStat(String faszom) {
+    public void printStat(String faszom) {
         System.out.printf("%s effects",name);
         for (var effect : effects) {
             System.out.printf(" %s", effect);
@@ -326,6 +337,12 @@ public class Room implements IRoomManager, IPrintStat {
         // TODO kieg
         int numOfVisitors = teacherList.size()+studentList.size() + 0;
         System.out.printf("%s numOfVisitors %d%n",name, numOfVisitors);
+    }
+    @Override
+    public void statesOptions() {
+        for (var e : ERoomEffects.values()) {
+            System.out.printf("\t%s%n", e);
+        }
     }
 
 }
