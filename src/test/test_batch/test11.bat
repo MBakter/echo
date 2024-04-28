@@ -7,7 +7,7 @@ set "outFile=../test_txt/test_output/test11_out.txt"
 set "expectedFile=../test_txt/test_expected/test11_exp.txt"
 
 echo teszt futtatása...
-java -jar ../../../projlab.jar  "%inFile%" "%outFile%"
+java -jar ../../../projlab.jar  "%inFile%" > "%outFile%"
 git diff --output="%diffFile%" --no-index "%outFile%" "%expectedFile%"
 
 call :CheckEmpty "%diffFile%"
