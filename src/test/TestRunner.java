@@ -279,7 +279,22 @@ public class TestRunner {
     }
 
     private void cmdInteract(ArrayList<String> args) {
-
+        if(args.get(0).equals("pickup")){
+            players.get(args.get(1)).addItem(items.get(args.get(2)));
+            System.out.printf("interact pickup %s %s ok%n", args.get(1),args.get(2) );
+        }
+        if(args.get(0).equals("drop")){
+            players.get(args.get(1)).removeItem((items.get(args.get(2))));
+            System.out.printf("interact activate %s %s ok%n", args.get(1),args.get(2) );
+        }
+        if(args.get(0).equals("activate")){
+            ((Transistor) items.get(args.get(2))).ActivateTransistor();
+            System.out.printf("interact activate %s %s %s ok%n", args.get(0),args.get(1),args.get(2) );
+        }
+        if(args.get(0).equals("pair")){
+            ((Transistor) items.get(args.get(2))).PairTransistor((Transistor)items.get(args.get(3)));
+            System.out.printf("interact pair %s %s %s ok%n", args.get(0),args.get(1),args.get(2) );
+        }
     }
 
     private void cmdStat(ArrayList<String> args) {

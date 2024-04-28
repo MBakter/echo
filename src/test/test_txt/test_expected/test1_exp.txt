@@ -25,8 +25,8 @@ tvsz tvsz1 created
 st hitPoint set to 1
 room r8 created
 r7 connected to r8
-te moved to r2
-interact pickup te m ok
+t moved to r2
+interact pickup t m ok
 st moved to r2
 st moved to r3
 interact st pickup l ok

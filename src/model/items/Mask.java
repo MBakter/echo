@@ -144,5 +144,12 @@ public class Mask implements IItem, ITimer, IPrintStat {
         System.out.printf("\tSTATES");
     }
         @Override
-    public void setState(ArrayList<String> args){}
+    public void setState(ArrayList<String> args){
+        if (args.get(1).equals("fake")) {
+            if (args.get(2).equals("true"))
+                fake = true;
+            if (args.get(2).equals("false"))
+                fake = false;
+        }
+    }
 }

@@ -27,8 +27,8 @@ state tvsz1 hitPoint 1
 link tvsz1 st
 create room r8
 link r7 r8
-link te r2
-interact pickup te m
+link t r2
+interact pickup t m
 link st r2
 link st r3
 interact st pickup l

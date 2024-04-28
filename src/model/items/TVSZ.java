@@ -102,6 +102,9 @@ public class TVSZ implements IItem, IPrintStat {
 
     @Override
     public void setState(ArrayList<String> args) {
+        if (args.get(1).equals("hitPoint")) {
+            hitpoints = Integer.parseInt(args.get(2));
+        }
         if (args.get(1).equals("fake")) {
             if (args.get(2).equals("true"))
                 fake = true;
