@@ -5,11 +5,12 @@ import java.util.List;
 import model.*;
 import model.items.IItem;
 
-public abstract class Player implements ITimer {
+public abstract class Player implements ITimedEntity {
+
     protected Room room;
     protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
-    protected controller.Timer timer;
+    protected ITimer timer;
 
     Player(ITimer t) {
         state = EPlayerState.ALIVE;
@@ -63,6 +64,10 @@ public abstract class Player implements ITimer {
     public void dropItem(IItem i) {
         i.dropItem(this);
         room.addItem(i);
+    }
+
+    public void useItem(IItem i) {
+        return;
     }
 
     @Override

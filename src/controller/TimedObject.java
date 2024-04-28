@@ -1,21 +1,21 @@
 package controller;
 
-import model.ITimer;
+import model.ITimedEntity;
 
 public class TimedObject {
     private int time;
-    private ITimer object;
+    private ITimedEntity entity;
     private boolean active;
     private boolean paused;
 
-    public TimedObject(ITimer o) {
+    public TimedObject(ITimedEntity e) {
         time = -1;
-        object = o;
+        entity = e;
         active = false;
         paused = false;
     }
     
-    public ITimer getObject() { return object; }
+    public ITimedEntity getObject() { return entity; }
     public int getTime() { return time; }
     public boolean isActive() {return active; }
     public boolean isPaused() {return paused; }

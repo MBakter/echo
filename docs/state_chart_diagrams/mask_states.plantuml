@@ -1,12 +1,8 @@
 @startuml mask_states
 
 [*] --> Mask
-state Timer {
-    state entryR <<entryPoint>>
-    state entryP <<entryPoint>>
-    entryP --> PAUSED
-    entryR --> TICKING
-}
+state Timer
+
 state Mask {
     state entry <<entryPoint>>
     [*] --> INACTIVE
@@ -17,11 +13,11 @@ state Mask {
     entry -> DISABLED
     INACTIVE --> RUNNING : RoomPoisonous()
     RUNNING --> INACTIVE : RoomCleanFromPoison()
-    RUNNING --> entryR : startTimer()
-    INACTIVE -> entryP : pauseTimer()
+    RUNNING --> Timer : startTimer()
+    INACTIVE -> Timer : pauseTimer()
 }
 
-TICKING --> entry : timerEnd()
+Timer --> entry : timerEnd()
 
 
 @enduml

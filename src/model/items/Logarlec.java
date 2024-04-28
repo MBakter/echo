@@ -1,11 +1,13 @@
 package model.items;
 
-import model.player.Player;
-import model.player.Student;
-import model.player.Teacher;
+import java.util.Random;
+
+import model.player.*;
 
 public class Logarlec implements IItem {
 
+    private boolean fake;
+    
     @Override
     public String toString(){
         return "Logarlec@"+Integer.toString(this.hashCode()).substring(0, 4);
@@ -15,7 +17,8 @@ public class Logarlec implements IItem {
      * Konstruktor
      */
     public Logarlec() {
-        System.out.println("<<create>> " + this.toString());
+        Random rand = new Random();
+        fake = rand.nextDouble() <= 0.2 ? true : false;
     }
 
     @Override
@@ -26,20 +29,16 @@ public class Logarlec implements IItem {
 
     @Override
     public void pickUp(Student s) {
-        System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
-        System.out.println("Logarlec : endGame(VICTORY) -> Controller");
     }
 
     @Override
     public void pickUp(Teacher t) {
-        System.out.println("Logarlec : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("Logarlec : removeItem(" + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 

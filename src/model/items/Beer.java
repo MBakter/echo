@@ -1,14 +1,15 @@
 package model.items;
 
 import controller.Timer;
-import model.ITimer;
+import model.*;
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
 
-public class Beer implements IItem, ITimer {
-    private Timer timer;
+public class Beer implements IItem, ITimedEntity {
+    private ITimer timer;
     private EBeerState state; //Default: INACTIVE
+    private static int TIME = 5;
 
     @Override
     public String toString(){
@@ -20,39 +21,32 @@ public class Beer implements IItem, ITimer {
      * Paraméterként kapja a Timer osztályt amit a kontroller kezel
      * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
      */
-    public Beer(Timer t) {
-        System.out.println("<<create>> " + this.toString());
+    public Beer(ITimer t) {
         timer = t;
         t.addItem(this);
     }
 
     @Override
     public void useItem(Player p) {
-        System.out.println("Beer : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
-        timer.startTimer(this, 2);
+        timer.startTimer(this, TIME);
 
-        state = EBeerState.RUNNING;
-        System.out.println("Beer : setState -> " + state.toString());        
+        state = EBeerState.RUNNING;    
     }
 
     @Override
     public void pickUp(Student s) {
-        System.out.println("Beer : addItem( " + this.toString() + ") -> " + s.toString());
         s.addItem(this);
     }
 
     @Override
     public void pickUp(Teacher t) {
-        System.out.println("Beer : addItem( " + this.toString() + ") -> " + t.toString());
         t.addItem(this);
     }
 
     @Override
     public void dropItem(Player p) {
-        System.out.println("Beer : pauseTimer(" + this.toString() + ") -> " + timer.toString());
         timer.pauseTimer(this);
         
-        System.out.println("Beer : removeItem( " + this.toString() + ") -> " + p.toString());
         p.removeItem(this);
     }
 
@@ -60,10 +54,8 @@ public class Beer implements IItem, ITimer {
     public boolean TeacherAttacked(Student s) {
         switch (state) {
             case INACTIVE:
-                System.out.println("Beer : startTimer(" + this.toString() + ", 2) -> " + timer.toString());
-                timer.startTimer(this, 2);
+                timer.startTimer(this, TIME);
                 state = EBeerState.RUNNING;
-                System.out.println("Beer : state -> " + state.toString());
                 return true;
             case RUNNING:
                 return true;
@@ -96,7 +88,6 @@ public class Beer implements IItem, ITimer {
     @Override
     public void timerEnd() {
         state = EBeerState.DISABLED;
-        System.out.println("Beer : setState -> " + state.toString());
     }
     
 

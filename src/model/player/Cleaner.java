@@ -34,5 +34,4 @@ public class Cleaner extends Player {
             }
         }
     }
-
 }

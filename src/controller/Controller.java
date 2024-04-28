@@ -8,6 +8,7 @@ public class Controller {
     private static List<Player> players;
     private static Labyrinth Map;
     private static boolean endOfGame = false;
+    private static final String mapDirectoryPath = "maps";
 
     private static void initGame() {
         System.out.println("Üdvözöllek a mátrixban");
@@ -19,7 +20,8 @@ public class Controller {
     }
 
     public static void endGame(boolean victory) {
-
+        endOfGame = true;
+        System.out.println(victory == true ? "*VICTORY!*" : "-DEFEAT!-");
     }
 
     private static void StudentMove(Student s) {
