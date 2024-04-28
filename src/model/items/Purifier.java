@@ -1,33 +1,23 @@
 package model.items;
 
-import java.util.Random;
-
 import model.player.Player;
 import model.player.Student;
 import model.player.Teacher;
 
-public class TVSZ implements IItem {
-    private int hitpoints;
-    private boolean fake;
+public class Purifier implements IItem{
+    
+    private boolean isUsed;
 
-    @Override
-    public String toString(){
-        return "TVSZ@"+Integer.toString(this.hashCode()).substring(0, 4);
-    }
+    public Purifier() {
 
-    /*
-     * Konstruktor
-     */
-    public TVSZ() {
-        hitpoints = 3;
-        Random rand = new Random();
-        fake = rand.nextDouble() <= 0.2 ? true : false;
     }
 
     @Override
     public void useItem(Player p) {
-        /* Do nothing */
-        return;
+        if(isUsed)
+            return;
+        p.getRoom().purifyRoom();
+        isUsed = true;
     }
 
     @Override
@@ -47,10 +37,7 @@ public class TVSZ implements IItem {
 
     @Override
     public boolean TeacherAttacked(Student s) {
-        if(hitpoints > 0 && !fake) {
-            hitpoints--;
-            return true;
-        }
+        /* Do nothing */
         return false;
     }
 
@@ -71,6 +58,5 @@ public class TVSZ implements IItem {
         /* Do nothing */
         return false;
     }
-
-
+    
 }

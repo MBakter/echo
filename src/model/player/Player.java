@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ITimer;
+import model.ITimedEntity;
 import model.Room;
 import model.items.IItem;
 
-public abstract class Player implements ITimer {
+public abstract class Player implements ITimedEntity {
 
     Player(){
         System.out.println("<<create>> \""+this.toString()+"\"");
@@ -16,7 +17,7 @@ public abstract class Player implements ITimer {
     protected Room room;
     protected List<IItem> itemList = new ArrayList<>();
     protected EPlayerState state;
-    protected controller.Timer timer;
+    protected ITimer timer;
 
     public EPlayerState getState() { return state; }
     public void setState(EPlayerState s) {
