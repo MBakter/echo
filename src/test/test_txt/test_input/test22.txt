@@ -1,0 +1,9 @@
+control timer off
+create room r1
+create student s
+link s c
+stat
+state r1 effects POISONED
+stat
+timer 50
+stat

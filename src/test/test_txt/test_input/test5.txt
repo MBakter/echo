@@ -1,0 +1,10 @@
+create student s
+create transistor t1
+create transistor t2
+link s t1
+link s t2
+interact activate s t1
+stat
+interact pair s t1 t2
+interact activate s t1
+stat

@@ -1,0 +1,7 @@
+create room r1
+create student s
+create cheese c
+link r1 s
+link s c
+interact use s c
+stat

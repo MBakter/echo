@@ -1,0 +1,11 @@
+create room r1
+create room r2
+link r1 r2
+create student s
+create mask m
+state r2 POISONED
+link r1 s
+link s m
+link r2 s
+controller timer 2
+stat

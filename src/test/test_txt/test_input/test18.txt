@@ -1,0 +1,10 @@
+create room r1
+create student s
+create logarlec L1
+create logarlec L2
+link r1 s
+link r1 L1
+link r1 L2
+control random off
+interact split r1
+stat

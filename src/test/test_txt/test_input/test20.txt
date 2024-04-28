@@ -1,0 +1,11 @@
+create room r1
+create room r2
+link r1 r2
+create student s
+create teacher t
+link r1 s
+link r2 t
+state r1 CURSED
+link r1 t
+link r2 s
+stat

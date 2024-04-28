@@ -1,0 +1,7 @@
+create room r1
+create student s
+create logarlec l
+state l fake true
+link r1 s
+link s l
+stat

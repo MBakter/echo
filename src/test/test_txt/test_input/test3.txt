@@ -1,0 +1,13 @@
+create room r1
+create room r2
+create student s
+create transistor t1
+create transistor t2
+link r1 s
+link s t1
+link s t2
+interact pair s t1 t2
+interact drop s t1
+link -f r2 s
+interact drop s t2
+stat

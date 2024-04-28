@@ -1,0 +1,105 @@
+create teacher te1
+create room r1
+link r1 te1
+
+create cheese ch1
+link ch1 r1
+interact pickup te1 ch1
+interact drop te1 ch1
+create transistor t1
+link t1 r1
+interact pickup te1 t1
+interact drop te1 t1
+create logar l1
+link l1 r1
+interact pickup te1 l1
+interact drop te1 l1
+create logar l1f
+state l1f fake true
+link l1f r1
+interact pickup te1 l1f
+interact drop te1 l1f
+create tvsz tvsz1
+link tvsz1 r1
+interact pickup te1 tvsz1
+interact drop te1 tvsz1
+create tvsz tvsz1f
+state tvsz1f fake true
+link tvsz1f r1
+interact pickup te1 tvsz1f
+interact drop te1 tvsz1f
+create purifier p1
+link p1 r1
+interact pickup te1 p1
+interact drop te1 p1
+create beer b1
+link b1 r1
+interact pickup te1 b1
+interact drop te1 b1
+create sponge sp1
+link sp1 r1
+interact pickup te1 sp1
+interact drop te1 sp1
+create mask m1
+link m1 r1
+interact pickup te1 m1
+interact drop te1 m1
+create mask m1f
+state m1f fake true
+link m1f r2
+interact pickup te1 m1f
+interact drop te1 m1f
+
+create student s1
+create room r2
+link r2 s1
+
+create cheese ch2
+link ch2 r2
+interact pickup st1 ch2
+interact drop st1 ch2
+create transistor t2
+link t2 r2
+interact pickup st1 t2
+interact drop st1 t2
+create logar l2
+link l2 r2
+interact pickup st1 l2
+interact drop st1 l2
+create logar l2f
+state l2f fake true
+link l2f r2
+interact pickup st1 l2f
+interact drop st1 l2f
+create tvsz tvsz2
+link tvsz2 r2
+interact pickup st1 tvsz2
+interact drop st1 tvsz2
+create tvsz tvsz2f
+state tvsz2f fake true
+link tvsz2f r2
+interact pickup st1 tvsz2f
+interact drop st1 tvsz2f
+create purifier p2
+link p2 r2
+interact pickup st1 p2
+interact drop st1 p2
+create beer b2
+link b2 r2
+interact pickup st1 b2
+interact drop st1 b2
+create sponge sp2
+link sp2 r2
+interact pickup st1 sp2
+interact drop st1 sp2
+
+create mask m2
+link m2 r2
+interact pickup st1 m2
+interact drop st1 m2
+create mask m2f
+state m2f fake true
+link m2f r2
+interact pickup st1 m2f
+interact drop st1 m2f
+stat

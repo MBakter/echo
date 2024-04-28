@@ -1,0 +1,17 @@
+create room r1
+create room r2
+create room r3
+create room r4
+link r1 r4
+link r2 r4
+link r3 r4
+create student s
+create teacher t
+create cleaner c
+link r1 s
+link r2 t
+link r3 c
+link r4 s
+link r4 t
+link r4 c
+stat
