@@ -3,8 +3,9 @@ package model.items;
 import java.util.ArrayList;
 
 import model.player.*;
+import test.IPrintStat;
 
-public class Purifier implements IItem{
+public class Purifier implements IItem, IPrintStat{
     private String name;
     private boolean isUsed;
 

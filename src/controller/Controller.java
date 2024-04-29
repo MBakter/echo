@@ -1,12 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.player.*;
 
 public class Controller {
-    private static List<Player> players;
-    private static Labyrinth Map;
+    private static List<Player> players = new ArrayList<Player>();
+    private static Labyrinth Map = new Labyrinth();
     private static boolean endOfGame = false;
     private static final String mapDirectoryPath = "maps";
     private static final Timer t = new Timer();
@@ -16,7 +17,7 @@ public class Controller {
         players.add(new Student("s",t));
         players.add(new Teacher("t",t));
         players.add(new Cleaner("c",t));
-        Map.generateFromFile("map1.txt");
+        //Map.generateFromFile("map1.txt");
     }
 
     public static void endGame(boolean victory) {
