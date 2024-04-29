@@ -1,0 +1,21 @@
+room r1 created
+student s created
+cheese c created
+s moved to r1
+c added to s
+stat:
+s room r1
+s EPlayerState ALIVE
+s itemList c c
+c timer 2
+c isUsed false
+c room NOT IMPLEMENTED
+r1 effects
+r1 itemList
+r1 studentList s
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 1
