@@ -1,0 +1,136 @@
+diff --git a/../test_txt/test_output/test12_out.txt b/../test_txt/test_expected/test12_exp.txt
+index dcf0b2a..269dcb7 100644
+--- a/../test_txt/test_output/test12_out.txt
++++ b/../test_txt/test_expected/test12_exp.txt
+@@ -1,35 +1,113 @@
+-Unrecognized command
+ room r1 created
++teacher t created 
++t moved to r1
+ room r2 created
+ r1 connected to r2
+-student s created
+ mask m created
+-s moved to r1
+-m added to s
+-s moved to r2
++m added to r2
++room r3 created
++r3 connected to r2
++logar l created
++l added to r3
++room r4 created
++r3 connected to r4
++room r5 created
++r4 connected to r5
++r2 connected to r5
++room r6 created
++r5 connected to r6
++r4 connected to r6
++r2 connected to r6
++room r7 created
++student st created
++st added to r7
++tvsz tvsz1 created
++st hitPoint set to 1
++room r8 created
++r7 connected to r8
++te moved to r2
++interact pickup t m ok
++st moved to r2
++st moved to r3
++interact st pickup l ok
+ stat:
+-s room r1
+-s EPlayerState ALIVE
+-s itemList m m
+-m timer 4
++st room r3
++st EPlayerState ALIVE
++st itemList tvsz m l
+ m functional true
+-m student model.player.Student@7e6cbb7a
+ m fake false
++l fake false
++tvsz1 hitPoint 0
++tvsz1 fake false
+ r1 effects
+-r1 itemList
+-r1 studentList s
++r1 itemList 
++r1 studentList
+ r1 teacherList
+ r1 cleanerList
+ r1 neighbouringRooms r2
+ r1 sticky false
+ r1 cleaned false
+ r1 numOfVisitors 1
+-r2 effects POISONED
+-r2 itemList
++r2 effects
++r2 itemList 
+ r2 studentList
+-r2 teacherList
++r2 teacherList te
+ r2 cleanerList
+-r2 neighbouringRooms
++r2 neighbouringRooms r1 r3 r5 r6 r7
+ r2 sticky false
+ r2 cleaned false
+-r2 numOfVisitors 0
++r2 numOfVisitors 2
++r3 effects
++r3 itemList 
++r3 studentList st
++r3 teacherList
++r3 cleanerList
++r3 neighbouringRooms r2 r4
++r3 sticky false
++r3 cleaned false
++r3 numOfVisitors 1
++r4 effects
++r4 itemList 
++r4 studentList 
++r4 teacherList
++r4 cleanerList
++r4 neighbouringRooms r3 r5 r6
++r4 sticky false
++r4 cleaned false
++r4 numOfVisitors 0
++r5 effects
++r5 itemList 
++r5 studentList 
++r5 teacherList
++r5 cleanerList
++r5 neighbouringRooms r2 r4 r6
++r5 sticky false
++r5 cleaned false
++r5 numOfVisitors 0
++r6 effects
++r6 itemList 
++r6 studentList 
++r6 teacherList
++r6 cleanerList
++r6 neighbouringRooms r2 r4 r5
++r6 sticky false
++r6 cleaned false
++r6 numOfVisitors 0
++r7 effects
++r7 itemList 
++r7 studentList 
++r7 teacherList
++r7 cleanerList
++r7 neighbouringRooms r2 r6 r8
++r7 sticky false
++r7 cleaned false
++r7 numOfVisitors 1
++r8 effects
++r8 itemList 
++r8 studentList 
++r8 teacherList
++r8 cleanerList
++r8 neighbouringRooms r7
++r8 sticky false
++r8 cleaned false
++r8 numOfVisitors 0
+\ No newline at end of file

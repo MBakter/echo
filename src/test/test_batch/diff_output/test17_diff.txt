@@ -1,0 +1,67 @@
+diff --git a/../test_txt/test_output/test17_out.txt b/../test_txt/test_expected/test17_exp.txt
+index ac9c6cb..e69de29 100644
+--- a/../test_txt/test_output/test17_out.txt
++++ b/../test_txt/test_expected/test17_exp.txt
+@@ -1,62 +0,0 @@
+-room r1 created
+-room r2 created
+-room r3 created
+-room r4 created
+-r1 connected to r4
+-r2 connected to r4
+-r3 connected to r4
+-student s created
+-teacher t created
+-cleaner c created
+-s moved to r1
+-t moved to r2
+-c moved to r3
+-s moved to r4
+-t moved to r4
+-c moved to r4
+-stat:
+-s room r1
+-s EPlayerState ALIVE
+-s itemList
+-c room r3
+-c EPlayerState ALIVE
+-c itemList
+-t room r2
+-t EPlayerState ALIVE
+-t itemList
+-r1 effects
+-r1 itemList
+-r1 studentList s
+-r1 teacherList
+-r1 cleanerList
+-r1 neighbouringRooms r4
+-r1 sticky false
+-r1 cleaned false
+-r1 numOfVisitors 1
+-r2 effects
+-r2 itemList
+-r2 studentList
+-r2 teacherList t
+-r2 cleanerList t
+-r2 neighbouringRooms r4
+-r2 sticky false
+-r2 cleaned false
+-r2 numOfVisitors 1
+-r3 effects
+-r3 itemList
+-r3 studentList
+-r3 teacherList
+-r3 cleanerList
+-r3 neighbouringRooms r4
+-r3 sticky false
+-r3 cleaned false
+-r3 numOfVisitors 0
+-r4 effects
+-r4 itemList
+-r4 studentList
+-r4 teacherList
+-r4 cleanerList
+-r4 neighbouringRooms
+-r4 sticky false
+-r4 cleaned false
+-r4 numOfVisitors 0

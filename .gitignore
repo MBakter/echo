@@ -1,3 +1,2 @@
 projlab.jar
-src/test/test_txt/test_output/*.txt
-src/test/test_batch/diff_output/*.txt
+echo.jar

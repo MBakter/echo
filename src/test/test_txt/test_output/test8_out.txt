@@ -1,0 +1,37 @@
+room r1 created
+room r2 created
+r1 connected to r2
+student s created
+teacher t created
+beer b created
+s moved to r1
+t moved to r2
+b added to s
+s moved to r2
+stat:
+s room r1
+s EPlayerState ALIVE
+s itemList b b
+t room r2
+t EPlayerState ALIVE
+t itemList
+b timer 5
+b state null
+r1 effects
+r1 itemList
+r1 studentList s
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms r2
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 1
+r2 effects
+r2 itemList
+r2 studentList
+r2 teacherList t
+r2 cleanerList t
+r2 neighbouringRooms
+r2 sticky false
+r2 cleaned false
+r2 numOfVisitors 1

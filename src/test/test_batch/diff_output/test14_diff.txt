@@ -1,0 +1,38 @@
+diff --git a/../test_txt/test_output/test14_out.txt b/../test_txt/test_expected/test14_exp.txt
+index 6659f5a..e69de29 100644
+--- a/../test_txt/test_output/test14_out.txt
++++ b/../test_txt/test_expected/test14_exp.txt
+@@ -1,33 +0,0 @@
+-room r1 created
+-room r2 created
+-r1 connected to r2
+-student st created
+-teacher t created
+-st moved to r1
+-t moved to r2
+-t moved to r1
+-stat:
+-st room r1
+-st EPlayerState ALIVE
+-st itemList
+-t room r2
+-t EPlayerState ALIVE
+-t itemList
+-r1 effects
+-r1 itemList
+-r1 studentList st
+-r1 teacherList
+-r1 cleanerList
+-r1 neighbouringRooms r2
+-r1 sticky false
+-r1 cleaned false
+-r1 numOfVisitors 1
+-r2 effects
+-r2 itemList
+-r2 studentList
+-r2 teacherList t
+-r2 cleanerList t
+-r2 neighbouringRooms
+-r2 sticky false
+-r2 cleaned false
+-r2 numOfVisitors 1

@@ -1,0 +1,166 @@
+diff --git a/../test_txt/test_output/test23_out.txt b/../test_txt/test_expected/test23_exp.txt
+index b08e2ad..e69de29 100644
+--- a/../test_txt/test_output/test23_out.txt
++++ b/../test_txt/test_expected/test23_exp.txt
+@@ -1,161 +0,0 @@
+-teacher te1 created
+-room r1 created
+-te1 moved to r1
+-cheese ch1 created
+-ch1 added to r1
+-interact pickup te1 ch1 ok
+-interact activate te1 ch1 ok
+-transistor t1 created
+-t1 added to r1
+-interact pickup te1 t1 ok
+-interact activate te1 t1 ok
+-logar l1 created
+-l1 added to r1
+-interact pickup te1 l1 ok
+-interact activate te1 l1 ok
+-logar l1f created
+-l1f added to r1
+-interact pickup te1 l1f ok
+-interact activate te1 l1f ok
+-tvsz tvsz1 created
+-tvsz1 added to r1
+-interact pickup te1 tvsz1 ok
+-interact activate te1 tvsz1 ok
+-tvsz tvsz1f created
+-tvsz1f added to r1
+-interact pickup te1 tvsz1f ok
+-interact activate te1 tvsz1f ok
+-logarlec p1 created
+-p1 added to r1
+-interact pickup te1 p1 ok
+-interact activate te1 p1 ok
+-beer b1 created
+-b1 added to r1
+-interact pickup te1 b1 ok
+-interact activate te1 b1 ok
+-sponge sp1 created
+-sp1 added to r1
+-interact pickup te1 sp1 ok
+-interact activate te1 sp1 ok
+-mask m1 created
+-m1 added to r1
+-interact pickup te1 m1 ok
+-interact activate te1 m1 ok
+-mask m1f created
+-interact pickup te1 m1f ok
+-interact activate te1 m1f ok
+-student st1 created
+-room r2 created
+-cheese ch2 created
+-ch2 added to r2
+-interact pickup st1 ch2 ok
+-interact activate st1 ch2 ok
+-transistor t2 created
+-t2 added to r2
+-interact pickup st1 t2 ok
+-interact activate st1 t2 ok
+-logar l2 created
+-l2 added to r2
+-interact pickup st1 l2 ok
+-interact activate st1 l2 ok
+-logar l2f created
+-l2f added to r2
+-interact pickup st1 l2f ok
+-interact activate st1 l2f ok
+-tvsz tvsz2 created
+-tvsz2 added to r2
+-interact pickup st1 tvsz2 ok
+-interact activate st1 tvsz2 ok
+-tvsz tvsz2f created
+-tvsz2f added to r2
+-interact pickup st1 tvsz2f ok
+-interact activate st1 tvsz2f ok
+-logarlec p2 created
+-p2 added to r2
+-interact pickup st1 p2 ok
+-interact activate st1 p2 ok
+-beer b2 created
+-b2 added to r2
+-interact pickup st1 b2 ok
+-interact activate st1 b2 ok
+-sponge sp2 created
+-sp2 added to r2
+-interact pickup st1 sp2 ok
+-interact activate st1 sp2 ok
+-mask m2 created
+-m2 added to r2
+-interact pickup st1 m2 ok
+-interact activate st1 m2 ok
+-mask m2f created
+-m2f added to r2
+-interact pickup st1 m2f ok
+-interact activate st1 m2f ok
+-stat:
+-te1 room r1
+-te1 EPlayerState ALIVE
+-te1 itemList ch1 t1 l1 l1f tvsz1 tvsz1f p1 b1 sp1 m1 m1f
+-st1 room 
+-st1 EPlayerState ALIVE
+-st1 itemList ch2 ch2 t2 t2 l2 l2 l2f l2f tvsz2 tvsz2 tvsz2f tvsz2f p2 p2 b2 b2 sp2 sp2 m2 m2 m2f m2f
+-l1f fake true
+-m2f timer 4
+-m2f functional true
+-m2f student model.player.Student@5910e440
+-m2f fake true
+-p1 isUsed false
+-l2f fake true
+-p2 isUsed false
+-m1f timer 4
+-m1f functional true
+-m1f student null
+-m1f fake true
+-m1 timer 4
+-m1 functional true
+-m1 student null
+-m1 fake false
+-l1 fake false
+-m2 timer 4
+-m2 functional true
+-m2 student model.player.Student@5910e440
+-m2 fake false
+-l2 fake false
+-ch2 timer 2
+-ch2 isUsed false
+-ch2 room NOT IMPLEMENTED
+-ch1 timer 2
+-ch1 isUsed false
+-ch1 room NOT IMPLEMENTED
+-b1 timer 5
+-b1 state null
+-b2 timer 5
+-b2 state null
+-tvsz1 hitPoint 3
+-tvsz1 fake false
+-tvsz2 hitPoint 3
+-tvsz2 fake false
+-sp2 timer 4
+-sp2 functional true
+-sp1 timer 4
+-sp1 functional false
+-tvsz1f hitPoint 3
+-tvsz1f fake true
+-tvsz2f hitPoint 3
+-tvsz2f fake true
+-t1 pair t1 active falset1 room r1t2 pair t2 active falset2 room r1 effects
+-r1 itemList ch1 t1 l1 l1f tvsz1 tvsz1f p1 b1 sp1 m1 m1f
+-r1 studentList
+-r1 teacherList te1
+-r1 cleanerList te1
+-r1 neighbouringRooms
+-r1 sticky false
+-r1 cleaned false
+-r1 numOfVisitors 1
+-r2 effects
+-r2 itemList ch2 t2 l2 l2f tvsz2 tvsz2f p2 b2 sp2 m2 m2f
+-r2 studentList
+-r2 teacherList
+-r2 cleanerList
+-r2 neighbouringRooms
+-r2 sticky false
+-r2 cleaned false
+-r2 numOfVisitors 0

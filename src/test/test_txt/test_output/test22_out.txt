@@ -1,0 +1,42 @@
+Unrecognized command
+room r1 created
+student s created
+stat:
+s room 
+s EPlayerState ALIVE
+s itemList
+r1 effects
+r1 itemList
+r1 studentList
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 0
+stat:
+s room 
+s EPlayerState ALIVE
+s itemList
+r1 effects
+r1 itemList
+r1 studentList
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 0
+stat:
+s room 
+s EPlayerState ALIVE
+s itemList
+r1 effects
+r1 itemList
+r1 studentList
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 0

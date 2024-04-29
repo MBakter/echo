@@ -1,0 +1,37 @@
+room r1 created
+room r2 created
+r1 connected to r2
+student s created
+mask m created
+logarlec p created
+s moved to r1
+p added to s
+m added to s
+s moved to r2
+stat:
+s room r1
+s EPlayerState ALIVE
+s itemList p p m m
+p isUsed false
+m timer 4
+m functional true
+m student model.player.Student@7e6cbb7a
+m fake false
+r1 effects
+r1 itemList
+r1 studentList s
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms r2
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 1
+r2 effects POISONED
+r2 itemList
+r2 studentList
+r2 teacherList
+r2 cleanerList
+r2 neighbouringRooms
+r2 sticky false
+r2 cleaned false
+r2 numOfVisitors 0

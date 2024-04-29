@@ -1,0 +1,36 @@
+room r1 created
+student s created
+transistor t1 created
+transistor t2 created
+s moved to r1
+t1 added to s
+t2 added to s
+interact activate activate s t1 ok
+stat:
+s room r1
+s EPlayerState ALIVE
+s itemList t1 t1 t2 t2
+t1 pair t1 active truet1 room r1t2 pair t2 active falset2 room r1r1 effects
+r1 itemList
+r1 studentList s
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 1
+interact pair pair s t1 ok
+interact activate activate s t1 ok
+stat:
+s room r1
+s EPlayerState ALIVE
+s itemList t1 t1 t2 t2
+t1 pair t2t1 active truet1 room r1t2 pair t1t2 active falset2 room r1r1 effects
+r1 itemList
+r1 studentList s
+r1 teacherList
+r1 cleanerList
+r1 neighbouringRooms
+r1 sticky false
+r1 cleaned false
+r1 numOfVisitors 1
