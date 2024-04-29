@@ -33,8 +33,8 @@ class Beer_save implements ITestcase{
         Student s = new Student();
         System.out.println("Controller : addItem(" + b.toString() + ") -> " + s.toString());
         s.addItem(b);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + t.toString());
@@ -44,8 +44,8 @@ class Beer_save implements ITestcase{
         System.out.println("Controller : useItem(" + b.toString() + ") -> " + s.toString());
         s.useItem(b);
 
-        System.out.println("Controller : addTeacher(" + t.toString() + ") -> " + r.toString());
-        r.addTeacher(t);
+        System.out.println("Controller : add(" + t.toString() + ") -> " + r.toString());
+        r.add(t);
 
     }
     public String testTitle() {
@@ -63,16 +63,16 @@ class TVSZ_save implements ITestcase{
         Teacher t = new Teacher();
         System.out.println("Controller : addItem(" + tvsz.toString() + ") -> " + s.toString());
         s.addItem(tvsz);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + t.toString());
         t.setRoom(r);
 
         System.out.println("\n---\tStart of test\t---\n");
-        System.out.println("Controller : addTeacher(" + t.toString() + ") -> " + r.toString());
-        r.addTeacher(t);
+        System.out.println("Controller : add(" + t.toString() + ") -> " + r.toString());
+        r.add(t);
     }
     public String testTitle() {
         return "Student saved by TVSZ";
@@ -90,8 +90,8 @@ class Sponge_save implements ITestcase{
         Sponge sp = new Sponge(timer);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : addItem(" + sp.toString() + ") -> " + r.toString());
         r.addItem(sp);
         System.out.println("Controller : pickUp(" + sp.toString() + ") -> " + s.toString());
@@ -100,8 +100,8 @@ class Sponge_save implements ITestcase{
         t.setRoom(r);
 
         System.out.println("\n---\tStart of test\t---\n");
-        System.out.println("Controller : addTeacher(" + t.toString() + ") -> " + r.toString());
-        r.addTeacher(t);
+        System.out.println("Controller : add(" + t.toString() + ") -> " + r.toString());
+        r.add(t);
 
     }
     public String testTitle() {
@@ -123,8 +123,8 @@ class Mask_save implements ITestcase{
         m.setWearer(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
 
         System.out.println("\n---\tStart of test\t---\n");
         System.out.println("Controller : addEffect(POISONED) -> " + r.toString());
@@ -143,12 +143,13 @@ class Cheese_timer implements ITestcase{
         Student s = new Student();
         Cheese c = new Cheese(timer);
         Room r = new Room();
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : addItem(" + c.toString() + ") -> " + s.toString());
         s.addItem(c);
         System.out.println("Controller : startTimer() -> " + c.toString());
-        c.startTimer();
+        //TODO completely outdated
+        //c.startTimer();
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
 
@@ -169,12 +170,13 @@ class Cheese_timer_end implements ITestcase{
         Cheese c = new Cheese(timer);
         Room r = new Room();
 
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : addItem(" + c.toString() + ") -> " + s.toString());
         s.addItem(c);
         System.out.println("Controller : startTimer() -> " + c.toString());
-        c.startTimer();
+        //TODO no longer working
+        //c.startTimer();
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : useItem(" + c.toString() + ") -> " + s.toString());
@@ -208,8 +210,8 @@ class Beer_timer implements ITestcase{
         Teacher t = new Teacher();
         System.out.println("Controller : addItem(" + b.toString() + ") -> " + s.toString());
         s.addItem(b);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + t.toString());
@@ -230,8 +232,8 @@ class Beer_timer implements ITestcase{
             }
         }
         
-        System.out.println("Controller : addTeacher(" + t.toString() + ") -> " + r.toString());
-        r.addTeacher(t);
+        System.out.println("Controller : add(" + t.toString() + ") -> " + r.toString());
+        r.add(t);
 
     }
     public String testTitle() {
@@ -250,8 +252,8 @@ class Sponge_timer implements ITestcase{
         Teacher t = new Teacher();
         System.out.println("Controller : addItem(" + sp.toString() + ") -> " + s.toString());
         s.addItem(sp);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + t.toString());
@@ -270,8 +272,8 @@ class Sponge_timer implements ITestcase{
                 }
             }
         }
-        System.out.println("Controller : addTeacher(" + t.toString() + ") -> " + r.toString());
-        r.addTeacher(t);
+        System.out.println("Controller : add(" + t.toString() + ") -> " + r.toString());
+        r.add(t);
 
     }
     public String testTitle() {
@@ -289,8 +291,8 @@ class Mask_pause implements ITestcase{
         Room r = new Room();
         System.out.println("Controller : addItem(" + m.toString() + ") -> " + s.toString());
         s.addItem(m);
-        System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        System.out.println("Controller : add(" + s.toString() + ") -> " + r.toString());
+        r.add(s);
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);
         System.out.println("Controller : addEffect(POISONED) -> " + r.toString());

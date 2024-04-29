@@ -56,7 +56,7 @@ public class TestRunner {
     }
 
     private void interpretCmd(CommandData cd) {
-        if(cd.type == null)
+        if (cd.type == null)
             return;
         switch (cd.type) {
             case CREATE:
@@ -101,21 +101,21 @@ public class TestRunner {
                 System.out.printf("room %s created%n", args.get(1));
                 break;
             case "student":
-                Student st = new Student(name);
+                Student st = new Student(name, testTimer);
                 st.setState(EPlayerState.ALIVE);
                 players.put(args.get(1), st);
                 playersReverse.put(st, args.get(1));
                 System.out.printf("student %s created%n", args.get(1));
                 break;
             case "teacher":
-                Teacher t = new Teacher(name);
+                Teacher t = new Teacher(name, testTimer);
                 t.setState(EPlayerState.ALIVE);
                 players.put(args.get(1), t);
                 playersReverse.put(t, args.get(1));
                 System.out.printf("teacher %s created%n", args.get(1));
                 break;
             case "cleaner":
-                Cleaner cl = new Cleaner(name);
+                Cleaner cl = new Cleaner(name, testTimer);
                 cl.setState(EPlayerState.ALIVE);
                 players.put(args.get(1), cl);
                 playersReverse.put(cl, args.get(1));
@@ -145,13 +145,13 @@ public class TestRunner {
                 itemsReverse.put(tvsz, args.get(1));
                 System.out.printf("tvsz %s created%n", args.get(1));
                 break;
-            // TODO : Not yet implemented in model
-            /*
-             * case "purifier":
-             * items.put(args.get(1), new Purifier());
-             * System.out.printf("logarlec %s created%n", args.get(1));
-             * break;
-             */
+
+            case "purifier":
+                Purifier pf = new Purifier(name);
+                items.put(args.get(1), pf);
+                System.out.printf("logarlec %s created%n", args.get(1));
+                break;
+
             case "beer":
                 Beer br = new Beer(name, testTimer);
                 items.put(args.get(1), br);
@@ -229,7 +229,7 @@ public class TestRunner {
 
             }
             if (getType(target) == Type.ITEM) {
-                players.get(source).addItem(items.get(target));
+                players.get(source).pickUp(items.get(target));
                 System.out.printf("%s added to %s%n", target, source);
             }
         }
@@ -239,7 +239,7 @@ public class TestRunner {
                 System.out.printf("%s added to %s%n", source, target);
             }
             if (getType(target) == Type.PLAYER) {
-                players.get(target).addItem(items.get(source));
+                players.get(target).pickUp(items.get(source));
                 System.out.printf("%s added to %s%n", source, target);
             }
         }
@@ -263,7 +263,7 @@ public class TestRunner {
         } else {
             for (var item : players.entrySet()) {
                 if (item.getKey().equals(args.get(0))) {
-                        item.getValue().setState(args.get(1));
+                    item.getValue().setState(args.get(1));
                 }
             }
             for (var item : items.entrySet()) {
@@ -279,21 +279,21 @@ public class TestRunner {
     }
 
     private void cmdInteract(ArrayList<String> args) {
-        if(args.get(0).equals("pickup")){
-            players.get(args.get(1)).addItem(items.get(args.get(2)));
-            System.out.printf("interact pickup %s %s ok%n", args.get(1),args.get(2) );
+        if (args.get(0).equals("pickup")) {
+            players.get(args.get(1)).pickUp((items.get(args.get(2))));
+            System.out.printf("interact pickup %s %s ok%n", args.get(1), args.get(2));
         }
-        if(args.get(0).equals("drop")){
-            players.get(args.get(1)).removeItem((items.get(args.get(2))));
-            System.out.printf("interact activate %s %s ok%n", args.get(1),args.get(2) );
+        if (args.get(0).equals("drop")) {
+            players.get(args.get(1)).dropItem(((items.get(args.get(2)))));
+            System.out.printf("interact activate %s %s ok%n", args.get(1), args.get(2));
         }
-        if(args.get(0).equals("activate")){
+        if (args.get(0).equals("activate")) {
             ((Transistor) items.get(args.get(2))).ActivateTransistor();
-            System.out.printf("interact activate %s %s %s ok%n", args.get(0),args.get(1),args.get(2) );
+            System.out.printf("interact activate %s %s %s ok%n", args.get(0), args.get(1), args.get(2));
         }
-        if(args.get(0).equals("pair")){
-            ((Transistor) items.get(args.get(2))).PairTransistor((Transistor)items.get(args.get(3)));
-            System.out.printf("interact pair %s %s %s ok%n", args.get(0),args.get(1),args.get(2) );
+        if (args.get(0).equals("pair")) {
+            ((Transistor) items.get(args.get(2))).PairTransistor((Transistor) items.get(args.get(3)));
+            System.out.printf("interact pair %s %s %s ok%n", args.get(0), args.get(1), args.get(2));
         }
     }
 
@@ -313,17 +313,18 @@ public class TestRunner {
     }
 
     private void cmdControl(ArrayList<String> args) {
-        if (args.size() == 2 ){
+        if (args.size() == 2) {
 
             // The timer
-            if (args.get(0) == "timer"){
+            if (args.get(0) == "timer") {
                 // On off or time integer
-                if (args.size() == 2){
-                    if (args.get(1) == "on"){} else
-                    if (args.get(1) == "of"){} else {
-    
+                if (args.size() == 2) {
+                    if (args.get(1) == "on") {
+                    } else if (args.get(1) == "of") {
+                    } else {
+
                         int number = Integer.parseInt(args.get(1));
-    
+
                         // Run time for a turn each time, for number times
                         for (int i = 0; i < number; i++) {
                             testTimer.iterateTime();
@@ -331,8 +332,8 @@ public class TestRunner {
                     }
                 }
             }
-            if (args.get(0) == "random"){
-    
+            if (args.get(0) == "random") {
+
             }
         } else {
             throw new IllegalArgumentException("Control needs two aruments to work as intended!");

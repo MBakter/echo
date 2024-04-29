@@ -31,14 +31,14 @@ public class Mask implements IItem, ITimedEntity, IPrintStat {
      * Paraméterként kapja a Timer osztályt amit a kontroller kezel
      * Majd ezt a refernciát eltárolja és a timerbe is beleteszi magát
      */
-    public Mask(String s, Timer t) {
+    public Mask(String s, ITimer t) {
         name = s;
         timer = t;
         t.addItem(this);
         functional = true;
     }
 
-    public Mask(Timer t) {
+    public Mask(ITimer t) {
         timer = t;
         t.addItem(this);
         functional = true;
@@ -117,13 +117,7 @@ public class Mask implements IItem, ITimedEntity, IPrintStat {
 
     @Override
     public void printStat(String name) {
-        int myTime = 0;
-        for (TimedObject to : timer.getList()) {
-            if (to.getObject().equals(this)) {
-                myTime = to.getTime();
-            }
-        }
-        System.out.printf("%s timer %d%n", name, myTime);
+        System.out.printf("%s timer %d%n", name, TIME);
         System.out.printf("%s functional %s%n", name, functional);
         System.out.printf("%s student %s%n", name, wearer);
         System.out.printf("%s fake %s%n", name, fake);

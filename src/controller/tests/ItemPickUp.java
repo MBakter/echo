@@ -30,7 +30,7 @@ class StudentPicksMask implements ITestcase{
         r.addItem(m);
 
         System.out.println("Controller : addStudent(" + s + ") -> " + r);
-        r.addStudent(s);
+        r.add(s);
         System.out.println("    Students in room: " + r.getStudents());
 
         System.out.println("Controller : setRoom(" + r + ") -> " + s);
@@ -62,7 +62,7 @@ class StudentPicksSponge implements ITestcase{
         r.addItem(sp);
 
         System.out.println("Controller : addStudent(" + s + ") -> " + r);
-        r.addStudent(s);
+        r.add(s);
         System.out.println("    Students in room: " + r.getStudents());
 
         System.out.println("Controller : setRoom(" + r + ") -> " + s);
@@ -92,7 +92,7 @@ class StudentPicksBeer implements ITestcase{
         r.addItem(b);
 
         System.out.println("Controller : addStudent(" + s + ") -> " + r);
-        r.addStudent(s);
+        r.add(s);
         System.out.println("    Students in room: " + r.getStudents());
 
         System.out.println("Controller : setRoom(" + r + ") -> " + s);
@@ -123,7 +123,7 @@ class StudentPicksCheese implements ITestcase{
         r.addItem(c);
 
         System.out.println("Controller : addStudent(" + s + ") -> " + r);
-        r.addStudent(s);
+        r.add(s);
         System.out.println("    Students in room: " + r.getStudents());
 
         System.out.println("Controller : setRoom(" + r + ") -> " + s);

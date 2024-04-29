@@ -1,13 +1,15 @@
 package model.items;
 
+import java.util.ArrayList;
+
 import model.player.*;
 
 public class Purifier implements IItem{
-    
+    private String name;
     private boolean isUsed;
 
-    public Purifier() {
-
+    public Purifier(String s) {
+        name = s;
     }
 
     @Override
@@ -60,6 +62,29 @@ public class Purifier implements IItem{
     public boolean TeacherAttackable(Student s) {
         /* Do nothing */
         return false;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void printStat(String name) {
+        System.out.printf("%s isUsed %s%n",name, isUsed);
+    }
+
+    @Override
+    public void statesOptions() {
+        System.out.printf("\tisUsed%n");
+    }
+
+    @Override
+    public void setState(ArrayList<String> args) {
+        if(args.get(2).equals("true"))
+            isUsed = true;
+        if(args.get(2).equals("false"))
+            isUsed = false;
     }
     
 }

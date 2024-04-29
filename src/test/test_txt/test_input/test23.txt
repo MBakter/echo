@@ -50,7 +50,7 @@ link m1f r2
 interact pickup te1 m1f
 interact drop te1 m1f
 
-create student s1
+create student st1
 create room r2
 link r2 s1
 

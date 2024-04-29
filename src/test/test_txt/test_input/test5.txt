@@ -1,6 +1,8 @@
+create room r1
 create student s
 create transistor t1
 create transistor t2
+link r1 s
 link s t1
 link s t2
 interact activate s t1

@@ -6,10 +6,10 @@ import model.items.IItem;
 
 public class Teacher extends Player {
 
-    public Teacher(ITimer t) {
-        super(t);
+    public Teacher(String s, ITimer t) {
+        super(s,t);
     }
-
+    public Teacher(){super();}
     public boolean move(Room r) {
         boolean moveResult = r.add(this);
         if(moveResult){
@@ -17,8 +17,16 @@ public class Teacher extends Player {
         }
         return moveResult;
     }
-
+    public void forceMove(Room r){
+        room = r;
+        r.fAdd(this);
+    }
     public boolean pickUp(IItem i) {
+        if(room == null){
+            itemList.add(i);
+            i.pickUp(this);
+            return true;
+        }
         boolean success = room.removeItem(i);
         if(success) {
             itemList.add(i);

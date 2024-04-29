@@ -1,6 +1,6 @@
 create room r1
 create teacher t
-link r1 te
+link r1 t
 create room r2
 link r1 r2
 create mask m

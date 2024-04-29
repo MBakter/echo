@@ -89,7 +89,7 @@ class room_merge_not_empty implements ITestcase {
     s.move(r1);
 
     System.out.println("Student : addStudent("+s+") -> "+r1);
-    r1.addStudent(s);
+    r1.add(s);
 
     System.out.println("\n---\tStart of test\t---\n");
 
@@ -173,7 +173,7 @@ class room_split_not_empty implements ITestcase {
     s.move(r1);
 
     System.out.println("Student : addStudent("+s+") -> "+r1);
-    r1.addStudent(s);
+    r1.add(s);
 
     System.out.println("\n---\tStart of test\t---\n");
 

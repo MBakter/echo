@@ -9,13 +9,13 @@ public class Controller {
     private static Labyrinth Map;
     private static boolean endOfGame = false;
     private static final String mapDirectoryPath = "maps";
-
+    private static final Timer t = new Timer();
     private static void initGame() {
         System.out.println("Üdvözöllek a mátrixban");
         System.out.println("Mennyi a játékos, mekkora a map? ");
-        players.add(new Student());
-        players.add(new Teacher());
-        players.add(new Cleaner());
+        players.add(new Student("s",t));
+        players.add(new Teacher("t",t));
+        players.add(new Cleaner("c",t));
         Map.generateFromFile("map1.txt");
     }
 

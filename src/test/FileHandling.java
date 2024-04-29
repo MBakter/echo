@@ -50,7 +50,7 @@ public class FileHandling {
         
         // File file = new File(currentDir, path);
         var list = fh.ReadTest(args[0]);
-        fh.WriteTestResult(list.get(0).subject, args[1]);
+        //fh.WriteTestResult(list.get(0).subject, args[1]);
 
         TestRunner tr2 = new TestRunner(list);
         tr2.evaluateAll();

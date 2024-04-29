@@ -5,22 +5,20 @@ import model.Room;
 import model.items.IItem;
 
 public class Student extends Player {
-    public Student(String s) {
-        super(s);
+    public Student(String s, ITimer t) {
+        super(s,t);
     }
-    public Student() {
-    }
-
-    public Student(ITimer t) {
-        super(t);
-    }
-
+    public Student(){super();}
     public boolean move(Room r) {
         boolean moveResult = r.add(this);
         if (moveResult) {
             room = r;
         }
         return moveResult;
+    }
+    public void forceMove(Room r){
+        room = r;
+        r.fAdd(this);
     }
 
     @Override
@@ -41,6 +39,11 @@ public class Student extends Player {
     }
 
     public boolean pickUp(IItem i) {
+        if(room == null){
+            itemList.add(i);
+            i.pickUp(this);
+            return true;
+        }
         boolean success = room.removeItem(i);
         if(success) {
             itemList.add(i);

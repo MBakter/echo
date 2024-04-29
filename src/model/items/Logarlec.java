@@ -10,8 +10,6 @@ import test.IPrintStat;
 public class Logarlec implements IItem, IPrintStat {
 
     private boolean fake;
-    
-    private boolean fake = false;
     private String name;
     public String getName() {
         return name;

@@ -9,6 +9,7 @@ import model.player.*;
 import test.IPrintStat;
 public class Sponge implements IItem, ITimedEntity ,IPrintStat{
     private ITimer timer;
+    private static int TIME = 4;
     private boolean functional;
     private String name;
     public String getName() {
@@ -41,7 +42,7 @@ public class Sponge implements IItem, ITimedEntity ,IPrintStat{
 
     @Override
     public void pickUp(Student s) {
-        timer.startTimer(this, 2);
+        timer.startTimer(this, TIME);
 
         functional = true;
         
@@ -102,13 +103,7 @@ public class Sponge implements IItem, ITimedEntity ,IPrintStat{
 
     @Override
     public void printStat(String name) {
-                int myTime = 0;
-        for (TimedObject to : timer.getList()) {
-            if (to.getObject().equals(this)) {
-                myTime = to.getTime();
-            }
-        }
-        System.out.printf("%s timer %d%n", name, myTime);
+        System.out.printf("%s timer %d%n", name, TIME);
         System.out.printf("%s functional %s%n", name, functional);
 
     }

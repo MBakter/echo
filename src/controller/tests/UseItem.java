@@ -121,7 +121,7 @@ class student_uses_cheese implements ITestcase{
         s.addItem(c);
 
         System.out.println("Controller : addStudent(" + s.toString() + ") -> " + r.toString());
-        r.addStudent(s);
+        r.add(s);
 
         System.out.println("Controller : setRoom(" + r.toString() + ") -> " + s.toString());
         s.setRoom(r);

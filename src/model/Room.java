@@ -25,14 +25,20 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
     private List<Cleaner> cleanerList = new ArrayList<>();
     private List<Room> neighbouringRooms = new ArrayList<>();
 
+    public Room() {
+
+    }
+
     public Room(String name) {
-        System.out.println("<<create>> \"" + this + "\"");
         maxPlayer = 5;
         this.name = name;
     }
 
+    public void setMax(int n) {
+        maxPlayer = n;
+    }
+
     public Room(int maxPlayer) {
-        System.out.println("<<create>> \"" + this + "\"");
         this.maxPlayer = maxPlayer;
     }
 
@@ -55,6 +61,24 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
     }
 
     /**
+     * Visszaadja a szobában lévő hallgatókat
+     *
+     * @return A szobában lévő oktatók listája
+     */
+    public List<Student> getStudents() {
+        return studentList;
+    }
+
+    /**
+     * Visszaadja a szobában lévő tisztítókat
+     *
+     * @return A szobában lévő oktatók listája
+     */
+    public List<Cleaner> getCleaners() {
+        return cleanerList;
+    }
+
+    /**
      * Hallgato hozzaadasa a szobahoz
      *
      * @param s Hallgato
@@ -65,12 +89,20 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
         if (!success)
             return false;
         studentList.add(s);
-        s.getRoom().remove(s);
+        if(s.getRoom() != null)
+            s.getRoom().remove(s);
         for (int i = 0; i < teacherList.size(); i++) {
             s.TeacherAttacked();
         }
         return true;
 
+    }
+
+    // Forced
+    public void fAdd(Student s) {
+        studentList.add(s);
+        if(s.getRoom() != null)
+            s.getRoom().remove(s);
     }
 
     /**
@@ -99,11 +131,19 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
         if (!success)
             return false;
         teacherList.add(t);
-        t.getRoom().remove(t);
+        if(t.getRoom() != null)
+            t.getRoom().remove(t);
         for (Student s : studentList) {
             s.TeacherAttacked();
         }
         return true;
+    }
+
+    // forced
+    public void fAdd(Teacher t) {
+        teacherList.add(t);
+        if(t.getRoom() != null)
+            t.getRoom().remove(t);
     }
 
     /**
@@ -132,7 +172,8 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
         if (!success)
             return false;
         cleanerList.add(c);
-        c.getRoom().remove(c);
+        if(c.getRoom() != null)
+            c.getRoom().remove(c);
         if (effects.contains(ERoomEffects.POISONED))
             effects.add(ERoomEffects.STICKY);
         purifyRoom();
@@ -140,6 +181,13 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
             p.getOut();
         }
         return true;
+    }
+
+    // Forced
+    public void fAdd(Cleaner c) {
+        cleanerList.add(c);
+        if(c.getRoom() != null)
+            c.getRoom().remove(c);
     }
 
     /**
@@ -222,25 +270,24 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
     }
 
     public void addEffect(String eS) {
-        if(eS.equals("TRANSISTOR_IN"))
+        if (eS.equals("TRANSISTOR_IN"))
             eS = "TRANSISTOR_INSIDE";
-            ERoomEffects e;
-            try {
-                e = ERoomEffects.valueOf(eS);
-                effects.add(e);
-                if(e == ERoomEffects.POISONED){
-                    for (Student s : studentList) {
-                        s.RoomPoisoned();
-                    }
-                    for (Teacher t : teacherList) {
-                        t.RoomPoisoned();
-                    }
+        ERoomEffects e;
+        try {
+            e = ERoomEffects.valueOf(eS);
+            effects.add(e);
+            if (e == ERoomEffects.POISONED) {
+                for (Student s : studentList) {
+                    s.RoomPoisoned();
                 }
-            } catch (Exception ex) {
-                
-            }   
-    }
+                for (Teacher t : teacherList) {
+                    t.RoomPoisoned();
+                }
+            }
+        } catch (Exception ex) {
 
+        }
+    }
 
     /**
      * Effektus eltávolítása a szobáról, effektus eltávolítása esemény indítása
