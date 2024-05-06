@@ -1,0 +1,66 @@
+@startuml student_enter_student
+title Door Button Clicked
+
+actor User as c
+participant "vr : VRoom" as vr
+participant "c : Commands" as com
+participant "r : Room" as r
+participant "s : Student" as s
+
+participant "mw : MainWindow" as mw
+participant "ctrl : Controller" as ctrl
+collections "rooms: IVroom" as rooms
+collections "items: IVItems" as items
+collections "st: IVStudnet" as students
+collections "te: IVTeacher" as teachers
+collections "cl: IVCleaner" as cleaners
+participant "mItem : IVMItem" as mItem
+participant "mSt : IVMStudent" as mSt
+participant "mTe : IVMTeacher" as mTe
+participant "mCl : IVMCleaner" as mCl
+participant "vs : VStudent" as vs
+participant "cp : IVStudent" as cp
+'participants
+
+c -> vr ++: Click button
+
+    vr -> vr ++: actionPerformed(e)
+        vr -> com ++ : interact(ENTER, vs, vr)
+
+            com -> s : move(vr)
+                Activate s
+                s -> r : addStudent(s)
+                Activate r
+                r --> s 
+                Deactivate r
+            com <-- s --
+
+            com -> mw ++: RefreshView()
+
+                mw -> ctrl ++ : getCP()
+                mw <-- ctrl --
+                mw -> rooms ++ : draw()
+                mw <-- rooms --
+                mw -> items ++ : draw()
+                    items -> mItem ++ : getModelItem()
+                    items <-- mItem --
+                mw <-- items --
+                mw -> students ++ : draw()
+                    students -> mSt ++ : getModelStudnet()
+                    students <-- mSt --
+                mw <-- students --
+                mw -> teachers ++ : draw()
+                    teachers -> mTe ++ : getModelTeacher()
+                    teachers <-- mTe --
+                mw <-- teachers --
+                mw -> cleaners ++ : draw()
+                    cleaners -> mCl ++ : getModelCleaner()
+                    cleaners <-- mCl --
+                mw <-- cleaners --
+            com <-- mw --
+
+        vr <-- com --
+
+    deactivate vr
+deactivate c
+@enduml

@@ -1,0 +1,73 @@
+@startuml student_enter_student
+title Door Button Clicked
+
+actor User as c
+participant "ivi : IVItem" as ivi
+participant "c : Commands" as com
+participant "r : Room" as r
+participant "s : Student" as s
+participant "i : Cheese" as i
+
+participant "mw : MainWindow" as mw
+participant "ctrl : Controller" as ctrl
+collections "rooms: Iivioom" as rooms
+collections "items: IVItems" as items
+collections "st: IVStudnet" as students
+collections "te: IVTeacher" as teachers
+collections "cl: IVCleaner" as cleaners
+participant "mItem : IVMItem" as mItem
+participant "mSt : IVMStudent" as mSt
+participant "mTe : IVMTeacher" as mTe
+participant "mCl : IVMCleaner" as mCl
+participant "vs : VStudent" as vs
+participant "cp : IVStudent" as cp
+'participants
+
+c -> ivi ++: Click button
+
+    ivi -> ivi ++: actionPerformed(e)
+        ivi -> com ++ : interact(PICKUP, vs, ivi)
+
+            com -> s : move(vr)
+                activate s
+                s -> i : pickUp(s)
+
+                activate i
+                i -> s : addItem(i)
+                deactivate i
+
+                s -> r : removeItem(i)
+                activate r
+                r --> s 
+                deactivate r
+            com <-- s --
+
+            com -> mw ++: RefreshView()
+
+                mw -> ctrl ++ : getCP()
+                mw <-- ctrl --
+                mw -> rooms ++ : draw()
+                mw <-- rooms --
+                mw -> items ++ : draw()
+                    items -> mItem ++ : getModelItem()
+                    items <-- mItem --
+                mw <-- items --
+                mw -> students ++ : draw()
+                    students -> mSt ++ : getModelStudnet()
+                    students <-- mSt --
+                mw <-- students --
+                mw -> teachers ++ : draw()
+                    teachers -> mTe ++ : getModelTeacher()
+                    teachers <-- mTe --
+                mw <-- teachers --
+                mw -> cleaners ++ : draw()
+                    cleaners -> mCl ++ : getModelCleaner()
+                    cleaners <-- mCl --
+                mw <-- cleaners --
+            com <-- mw --
+
+        ivi <-- com --
+
+    deactivate ivi
+deactivate c
+@enduml
