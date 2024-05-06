@@ -1,0 +1,53 @@
+@startuml menu
+Title Item Pickup
+
+actor "User" as user
+
+participant "c : Controller" as c
+participant "m : MainWindow" as m
+
+collections "VItemsOfCP : IVItems" as vi
+participant "currentVRoom : IVRoom" as cvr
+participant "currentVPlayer : IVStudent" as cvp
+
+participant "cmd : ICommands" as cmd
+participant "s : Student" as s
+
+c -> m : RefreshView()
+
+alt foreach IVItem in VItemsOfCP
+m -> vi : draw()
+activate m
+activate vi
+vi --> m
+deactivate vi
+deactivate m
+end
+
+m -> cvr : draw()
+activate m
+activate cvr
+cvr --> m
+deactivate cvr
+deactivate m
+
+m -> cvp : draw()
+activate m
+activate cvp
+cvp --> m
+deactivate cvp
+deactivate m
+
+
+
+user -> m : Click pickup button
+activate m
+m -> cmd : interact(PICKUP, curPlayer, item)
+activate cmd
+cmd -> s : pickUp(modelItem)
+deactivate cmd
+m -> m : RefreshView()
+deactivate m
+
+ 
+@enduml
