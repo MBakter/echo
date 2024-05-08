@@ -1,0 +1,52 @@
+@startuml cp
+
+title Initialize MainWindow
+
+actor User
+participant "c : Controller" as c
+participant "mw : MainWindow" as mw
+participant "cp : curPlayer" as cp
+participant "ms : ModelStudent" as ms
+participant "cr : currentRoom" as cr
+participant "mr : ModelRoom" as mr
+
+activate c
+    c -> mw : InitWindow()
+    activate mw
+        mw -> mw : drawMenu()
+        mw --> c
+    deactivate mw
+deactivate c
+
+User -> mw : startGame()
+activate mw
+    mw -> c : startGame()
+    activate c
+    c --> mw
+        mw -> c : getCP()
+        c --> mw : cp : IVStudent
+        mw -> c : getVItemsOfCP
+        c --> mw : IVItems[]
+        mw -> cp : getModelStudent
+        activate cp
+            cp --> mw : ms
+        deactivate cp
+        mw -> ms : getRoom()
+        activate ms
+            ms --> mw : new VRoom(IVMRoom)
+        deactivate ms
+        mw -> mw : setCurrentRoom
+        mw -> cr : getModelRoom()
+        cr --> mw : mr
+        mw -> mr : getStudentList()
+        mr --> mw : new IVStudent[](IVMStudent)
+        mw -> mr : getTeacherList()
+        mr --> mw : new IVTeacher[](IVMTeacher)
+        mw -> mr : getItemList()
+        mr --> mw : new IVItem[](IVMItem)
+        mw -> mr : getNeighbourList()
+        mr --> mw : new IVRoom[](IVMRoom)
+
+        mw --> c
+    deactivate c
+deactivate mw

@@ -1,0 +1,206 @@
+@startuml cuv
+
+package "Model" <<Rectangle>> #FFEEE0 {
+    
+    interface IVMRoom {
+        + getStudentList() : IVStudent[]
+        + getTeacherList() : IVTeacher[]
+        + getCleanerList() : IVCleaner[]
+        + getNeighbourList() : IVRoom[]
+        + getRoomStates() : ERoomState[]
+    }
+
+    interface IVMTeacher{
+        + getPlayerState(): PlayerState
+        + getItems() : VItem[]
+        + getTime() : int
+    }
+
+    interface IVMCleaner{
+        + getPlayerState(): PlayerState
+    }
+
+    interface IVMStudent{
+        + getItemList() : IVItem[]
+        + getPlayerState() : VPlayerState
+        + getRoom() : IVRoom
+        + getTime() : int
+    }
+    
+}
+
+package "View" <<Rectangle>> #DDDDED {
+
+    interface IMainWindow{
+        + RefreshView() : void
+        + InitWindow() : void
+    }
+
+    class MainWindow extends JFrame implements IMainWindow {
+        + command : ICommands
+        + controller : IVController
+        + menu : MainMenu
+
+        + VItemsOfCP : IVItem[] 
+        + currentVPlayer : IVStudent 
+        + currentVRoom : IVRoom
+        + itemsInRoom : IVItem[]
+        + neighbouringRooms : IVRoom[]
+        + cleanersInRoom : IVCleaner[]
+        + teachersInRoom : IVTeacher[]
+        + studentsInRoom : IVStudent[]
+
+        + MainWindow(IController c, ICommands cm)
+        + InitWindow() : void
+        + RefreshView() : void
+        + startGame() : void
+        + drawMenu() : void
+        + drawHelp() : void
+    }
+    MainWindow *-- IVStudent
+    MainWindow *-- IVTeacher
+    MainWindow *-- IVCleaner
+    MainWindow *-- IVRoom
+    MainWindow *-- IVItems
+
+    note left of MainWindow::"MainWindow(IController c, ICommands cm)"
+        Itt feltöltünk mindent a CP alapján
+        Külön vannak választva az egyszerűbb
+        kezelhetőség miatt
+    end note
+
+
+    interface IVItems {
+        + getModelItem() : IVMItem
+        + draw(IVStudent currentPlayer)
+    }
+
+    class VTVSZ implements IVItems { 
+       + modelTVSZ : IVMTVSZ
+       + VTVSZ()
+       + VTVSZ(IVMTVSZ tvsz)
+       + draw(IVStudent currentPlayer)
+    }
+
+    class VMask implements IVItems {
+       + modelMask : IVMMask
+       + VMask()
+       + VMask(IVMMask m)
+       + draw(IVStudent currentPlayer)
+    }
+
+    /' class VCheese implements IVItems {
+       + modelMask : IVMCheese
+       + draw(IVStudent currentPlayer)
+    }
+
+    class VTransistor implements IVItems {
+       + modelMask : IVMTransistor
+       + draw(IVStudent currentPlayer)
+    }
+
+    class VLogarlec implements IVItems {
+       + modelMask : IVMLogarlec
+       + draw(IVStudent currentPlayer)
+    }
+
+    class VPurifier implements IVItems {
+       + modelMask : IVMPurifier
+       + draw(IVStudent currentPlayer)
+    }
+
+    class VBeer implements IVItems {
+       + modelMask : IVMBeer
+       + draw(IVStudent currentPlayer)
+    }
+
+    class VSponge implements IVItems {
+       + modelMask : IVMSponge
+       + draw(IVStudent currentPlayer)
+    } '/ 
+
+    interface IVTeacher {
+        + getModelTeacher() : IVMTeacher
+        + draw(IVStudent currentPlayer)
+    }
+    class VTeacher implements IVTeacher {
+        + modelTeacher : IVMTeacher
+        + VTeacher()
+        + VTeacher(IVMTeacher t)
+        + draw(IVStudent currentPlayer)
+    }
+    VTeacher *-- IVMTeacher
+
+    interface IVStudent {
+        + getModelStudent() : IVMStudent
+        + draw(IVStudent currentPlayer)
+    }
+    class VStudent implements IVStudent {
+        + modelStudent : IVMStudent 
+        + VStudent()
+        + VStudent(IVMStudent s)
+        + draw(IVStudent currentPlayer)   
+    }
+    VStudent *-- IVMStudent
+
+    interface IVCleaner {
+        + getmodelCleaner() : IVMCleaner
+        + draw(IVStudent currentPlayer)
+    }
+    class VCleaner implements IVCleaner {
+        + modelCleaner : IVMCleaner
+        + VCleaner()
+        + VCleaner(IVMCleaner c)
+        + draw(IVStudent currentPlayer) 
+    }
+    VCleaner *-- IVMCleaner
+
+    interface IVRoom {
+        + getModelRoom() : IVMRoom
+        + draw(IVStudent currentPlayer)
+    }
+
+    class VRoom implements IVRoom {
+        + modelRoom : IVMRoom
+        + VRoom()
+        + VRoom(IVMRoom r)
+        + draw(IVStudent currentPlayer)
+    }
+    VRoom *-- IVMRoom
+
+}
+
+package "Controller" <<Rectangle>> #FFFFF0 {
+
+    interface IVController {
+        + getCP() : IVStudent
+        + getVItemsOfCP() : IVItems[] 
+        + startGame() : void
+        + getMapList() : List<String>
+        + setParameters(int players, int teachers, int cleaners, string map)
+    }
+    IVController --* MainWindow
+
+    class Controller implements IVController {
+        + currentVPlayer : IVStudent
+        + currentPlayer : IStudent
+        + VItemsOfCP : IVItem[]
+        + ItemsOfCP : IItem[] 
+        + view : IMainWindow
+
+        + ReloadPlayer(Student currentPlayer) : void
+    }
+    Controller --> IMainWindow
+
+    interface ICommands {
+        +interact(EInteract option, IVStudent curPlayer, VItem item) : void
+        +interact(EInteractTransistor option, IVStudent curPlayer, VTransistor item) : void
+        +egyéb commandok...()
+    }
+    ICommands --* MainWindow
+
+    class Commands implements ICommands {
+        + controller : Controller
+    }
+    Commands *-- Controller
+}

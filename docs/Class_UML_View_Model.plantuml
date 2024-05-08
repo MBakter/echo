@@ -1,0 +1,71 @@
+@startuml
+
+package "Model" <<Rectangle>> #FFEEE0 {
+    
+    interface IVMItem {
+        
+    }
+
+    interface IVMMask implements IVMItem {
+        + getTime() : int
+        + isFunctional() : bool
+        + isFake() : bool
+    }
+    class Mask implements IVMMask {
+        + getVType() : IVMask
+    }
+
+    interface IVMTVSZ implements IVMItem {
+        + getHitpoints() : int
+        + isFake() : bool
+    }
+    class TVSZ implements IVMTVSZ {
+        + getVType() : IVTVSZ
+    }
+
+    interface IVMCheese implements IVMItem {
+        + getTime() : int
+        + isUsed() : bool
+    }
+    class Cheese implements IVMCheese {
+        + getVType() : IVCheese
+    }
+
+    interface IVMTransistor implements IVMItem {
+        + isActive() : bool
+        + getPair() : IVTransistor
+    }
+    class Transistor implements IVMTransistor {
+        + getVType() : IVTransistor
+    }
+
+    interface IVMLogarlec implements IVMItem {
+        + isFake() : bool
+    }
+    class Logarlec implements IVMLogarlec {
+        + getVType() : IVLogarlec
+    }
+    
+    interface IVMPurifier implements IVMItem {
+        + isUsed() : bool
+    }
+    class Purifier implements IVMPurifier {
+        + getVType() : IVPurifier
+    }
+
+    interface IVMBeer implements IVMItem {
+        + getTime() : int
+        + getState() : EBeerState
+    }
+    class Beer implements IVMBeer {
+        + getVType() : IVBeer
+    }
+
+    interface IVMSponge implements IVMItem {
+        + getTime() : int
+        + isFunctional() : bool
+    }
+    class Sponge implements IVMSponge {
+        + getVType() : IVSponge
+    }
+}

@@ -14,9 +14,7 @@ public class Controller {
     private static void initGame() {
         System.out.println("Üdvözöllek a mátrixban");
         System.out.println("Mennyi a játékos, mekkora a map? ");
-        players.add(new Student("s",t));
-        players.add(new Teacher("t",t));
-        players.add(new Cleaner("c",t));
+        
         //Map.generateFromFile("map1.txt");
     }
 
