@@ -12,7 +12,7 @@ import model.items.*;
 
 public class MainWindow extends JFrame {
 
-    private JPanel mainPanel;
+    private BackgoundPanel mainPanel;
     private JButton addItemButton;
     private JPanel itemPanel;
 
@@ -20,48 +20,86 @@ public class MainWindow extends JFrame {
     private JLabel[] itemLabels;
 
     private void createGridBag() {
-        mainPanel.setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
 
-        JButton button;
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
-        button = new JButton("Button 1");
-        c.weightx = 0.5;
+        JPanel roomPanel = new JPanel();
+        roomPanel.setLayout(new GridBagLayout());
+        roomPanel.setOpaque(false);
         c.gridx = 0;
         c.gridy = 0;
-        mainPanel.add(button, c);
+        c.insets = new Insets(0, 85, 0, 0);
+        c.ipady = 60;
 
-        button = new JButton("Button 2");
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 4; i++) {
+                JButton b = new JButton("room");
+                GridBagConstraints c2 = new GridBagConstraints();
+                b.setPreferredSize(new Dimension(75, 150));
+                c2.gridx = i;
+                c2.gridy = j;
+                roomPanel.add(b, c2);
+            }
+        }
+        mainPanel.add(roomPanel, c);
+
+        JPanel teacherPanel = new JPanel();
+        c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 1;
-        c.gridy = 2;
-        mainPanel.add(button, c);
+        c.gridy = 1;
+        c.weighty = 2;
+        c.ipadx = 500;
+        c.ipady = 30;
 
-        button = new JButton("Button 3");
+        teacherPanel.add(new JLabel("teach"));
+        mainPanel.add(teacherPanel, c);
+
+        JPanel cleanerPanel = new JPanel();
+        c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 2;
         c.gridy = 0;
-        mainPanel.add(button, c);
+        c.weightx = 1;
+        c.ipadx = 300;
+        c.ipady = 0;
 
-        button = new JButton("Long-Named Button 4");
-        c.ipady = 40;      //make this component tall
-        c.weightx = 0.0;
-        c.gridwidth = 3;
-        c.gridx = 0;
-        c.gridy = 1;
-        mainPanel.add(button, c);
+        cleanerPanel.add(new JLabel("clean"));
+        mainPanel.add(cleanerPanel, c);
 
-        button = new JButton("5");
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,100);  //top padding
-        c.gridx = 1;       //aligned with button 2
-        c.gridwidth = 2;   //2 columns wide
-        c.gridy = 2;       //third row
-        mainPanel.add(button, c);
-        
+        JPanel roomItemPanel = new JPanel();
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 1;
+        c.gridy = 2;
+        c.weightx = 1;
+        c.ipadx = 40;
+        c.ipady = 60;
+
+        roomItemPanel.add(new JLabel("roomItem"));
+        mainPanel.add(roomItemPanel, c);
+
+        JPanel studentPanel = new JPanel();
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 2;
+        c.gridy = 3;
+        c.weighty = 1;
+        c.ipadx = 0;
+        c.ipady = 30;
+
+        studentPanel.add(new JLabel("study"));
+        mainPanel.add(studentPanel, c);
+
+        JPanel itemPanel = new JPanel();
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 1;
+        c.gridy = 4;
+        c.weighty = 1;
+        c.ipadx = 0;
+        c.ipady = 30;
+
+        itemPanel.add(new JLabel("use"));
+        mainPanel.add(itemPanel, c);
+
         /* addItemButton = new JButton();
         addItemButton.setSize(10, 10);
         addItemButton.setText("PickUp Logarlec");
@@ -78,8 +116,7 @@ public class MainWindow extends JFrame {
 
             @Override
             public void keyTyped(KeyEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+                
             }
 
             @Override
@@ -107,8 +144,7 @@ public class MainWindow extends JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+                
             }
             
         });
@@ -116,13 +152,13 @@ public class MainWindow extends JFrame {
 
     public MainWindow(String title) {
         super(title);
-
+    
         // Set default close operation
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setResizable(false);
         AddPopupMenu();
 
-        mainPanel = new JPanel();
+        mainPanel = new BackgoundPanel("textures" + File.separator + "Background.png");
 
         createGridBag();
 
@@ -160,6 +196,12 @@ public class MainWindow extends JFrame {
     }
 
     public static void main(String[] args) {
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {}
+
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        
         MainWindow window = new MainWindow("`(*>﹏<*)′");
         window.setVisible(true);
     }
