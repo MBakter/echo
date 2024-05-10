@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 1;
-        c.gridheight = 1;
+        c.gridheight = 3;
         c.insets = new Insets(0, 5, 0, 0);
         c.ipady = 0;
         c.weightx = 0;
@@ -55,7 +55,7 @@ public class MainWindow extends JFrame {
         c.insets = new Insets(180, 0, 5, 5);
         c.gridx = 1;
         c.gridy = 0;
-        c.gridwidth = 1;
+        c.gridwidth = 2;
         c.gridheight = 1;
         c.weighty = 2;
         c.ipadx = 110;
@@ -74,11 +74,11 @@ public class MainWindow extends JFrame {
         JPanel cleanerPanel = new JPanel();
         c.insets = new Insets(0, 5, 5, 5);
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 3;
         c.gridwidth = 2;
         c.gridheight = 1;
         c.weightx = 1;
-        c.weighty = 0;
+        c.weighty = 1;
         c.ipadx = 80;
         c.ipady = 0;
 
@@ -95,8 +95,8 @@ public class MainWindow extends JFrame {
         JPanel roomItemPanel = new JPanel();
         c.insets = new Insets(0, 5, 5, 5);
         c.gridx = 2;
-        c.gridy = 1;
-        c.gridwidth = 1;
+        c.gridy = 3;
+        c.gridwidth = 2;
         c.gridheight = 1;
         c.weightx = 1;
         c.ipadx = 40;
@@ -114,9 +114,9 @@ public class MainWindow extends JFrame {
     private JPanel createStudentPanel(GridBagConstraints c) {
         JPanel studentPanel = new JPanel();
         c.insets = new Insets(5, 5, 5, 5);
-        c.gridx = 2;
-        c.gridy = 3;
-        c.gridwidth = 5;
+        c.gridx = 1;
+        c.gridy = 4;
+        c.gridwidth = 4;
         c.gridheight = 1;
         c.weighty = 3;
         c.ipadx = 200;
@@ -135,8 +135,8 @@ public class MainWindow extends JFrame {
         JPanel itemPanel = new JPanel();
         c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 1;
-        c.gridy = 4;
-        c.gridwidth = 1;
+        c.gridy = 5;
+        c.gridwidth = 4;
         c.gridheight = 1;
         c.weighty = 1;
         c.ipadx = 0;
