@@ -51,19 +51,19 @@ public class MainWindow extends JFrame {
 
     private JPanel createTeacherPanel(GridBagConstraints c) {
         JPanel teacherPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-        c.insets = new Insets(30, 0, 5, 15);
+        c.insets = new Insets(43, 0, 5, 0);
         teacherPanel.setOpaque(false);
         c.gridx = 1;
         c.gridy = 2;
         c.gridwidth = 2;
         c.gridheight = 2;
-        c.weighty = 2;
-        c.ipadx = 110;
-        c.ipady = 60;
+        c.weighty = 1;
+        c.ipadx = 00;
+        c.ipady = 00;
 
-        for (int i = 0; i < 12; i++) {
-            JLabel teacher = new JLabel("tanar");
-            teacher.setPreferredSize(new Dimension(35, 40));
+        for (int i = 0; i < 10; i++) {
+            JButton teacher = new JButton("tanar");
+            teacher.setPreferredSize(new Dimension(55, 100));
             teacherPanel.add(teacher);
         }
 
@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
     private JPanel createCleanerPanel(GridBagConstraints c) {
         JPanel cleanerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         cleanerPanel.setOpaque(false);
-        c.insets = new Insets(80, 0, 0, 0);
+        c.insets = new Insets(0, 0, 0, 0);
         c.gridx = 0;
         c.gridy = 3;
         c.gridwidth = 2;
@@ -81,12 +81,12 @@ public class MainWindow extends JFrame {
         c.weightx = 1;
         c.weighty = 1;
         c.ipadx = 60;
-        c.ipady = 40;
+        c.ipady = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
 
-        for (int i = 0; i < 12; i++) {
-            JLabel cleaner = new JLabel("takaritsa");
-            cleaner.setPreferredSize(new Dimension(55, 100));
+        for (int i = 0; i < 10; i++) {
+            JButton cleaner = new JButton("takaritsa");
+            cleaner.setPreferredSize(new Dimension(65, 100));
             cleanerPanel.add(cleaner);
         }
 
@@ -105,9 +105,9 @@ public class MainWindow extends JFrame {
         c.ipadx = 60;
         c.ipady = 40;
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 10; i++) {
             JButton item = new JButton("veddfo");
-            item.setPreferredSize(new Dimension(55, 100));
+            item.setPreferredSize(new Dimension(70, 100));
             roomItemPanel.add(item);
         }
 
@@ -115,7 +115,7 @@ public class MainWindow extends JFrame {
     }
 
     private JPanel createStudentPanel(GridBagConstraints c) {
-        JPanel studentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 80, 0));
+        JPanel studentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         studentPanel.setOpaque(false);
         c.insets = new Insets(0/*95*/, 0, 0, 0);
         c.gridx = 0;
@@ -123,13 +123,13 @@ public class MainWindow extends JFrame {
         c.gridwidth = 4;
         c.gridheight = 1;
         c.weighty = 3;
-        c.ipadx = 250;
-        c.ipady = 55;
+        c.ipadx = 0;
+        c.ipady = 15;
         
 
-        for (int i = 0; i < 12; i++) {
-            JLabel student = new JLabel("tanulja");
-            student.setPreferredSize(new Dimension(50, 100));
+        for (int i = 0; i < 10; i++) {
+            JButton student = new JButton("tanulja");
+            student.setPreferredSize(new Dimension(150, 170));
             studentPanel.add(student);
         }
 
@@ -139,20 +139,22 @@ public class MainWindow extends JFrame {
     private JPanel createItemPanel(GridBagConstraints c) {
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         itemPanel.setOpaque(false);
-        c.insets = new Insets(10, 0, 0, 0);
+        c.insets = new Insets(0, 0, 0, 0);
         c.gridx = 0;
         c.gridy = 5;
         c.gridwidth = 4;
         c.gridheight = 1;
-        c.weighty = 1;
+        c.weightx = 1;
+        c.weighty = 2;
         c.ipadx = 1;
-        c.ipady = 50;
+        c.ipady = 15;
+        c.anchor = GridBagConstraints.SOUTH;
 
-        for (int i = 0; i < 12; i++) {
-            JButton student = new JButton("hasznald");
-            //student.setContentAreaFilled(false);
-            student.setPreferredSize(new Dimension(100, 140));
-            itemPanel.add(student);
+        for (int i = 0; i < 10; i++) {
+            JButton item = new JButton("hasznald");
+            //item.setContentAreaFilled(false);
+            item.setPreferredSize(new Dimension(120, 150));
+            itemPanel.add(item);
         }
 
         return itemPanel;
