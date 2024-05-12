@@ -38,7 +38,7 @@ public class MainWindow extends JFrame {
 
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4; i++) {
-                JButton door = new JButton("room");
+                JButton door = new JButton();
                 GridBagConstraints c2 = new GridBagConstraints();
                 door.setPreferredSize(new Dimension(75, 150));
                 c2.gridx = i;
@@ -62,7 +62,9 @@ public class MainWindow extends JFrame {
         c.ipady = 00;
 
         for (int i = 0; i < 10; i++) {
-            JButton teacher = new JButton("tanar");
+            JButton teacher = new JButton();
+            //teacher.setContentAreaFilled(false);
+            //teacher.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
             teacher.setPreferredSize(new Dimension(55, 100));
             teacherPanel.add(teacher);
         }
@@ -85,7 +87,9 @@ public class MainWindow extends JFrame {
         c.fill = GridBagConstraints.HORIZONTAL;
 
         for (int i = 0; i < 10; i++) {
-            JButton cleaner = new JButton("takaritsa");
+            JButton cleaner = new JButton();
+            cleaner.setContentAreaFilled(false);
+            cleaner.setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png"));
             cleaner.setPreferredSize(new Dimension(65, 100));
             cleanerPanel.add(cleaner);
         }
@@ -106,7 +110,7 @@ public class MainWindow extends JFrame {
         c.ipady = 40;
 
         for (int i = 0; i < 10; i++) {
-            JButton item = new JButton("veddfo");
+            JButton item = new JButton();
             item.setPreferredSize(new Dimension(70, 100));
             roomItemPanel.add(item);
         }
@@ -128,7 +132,7 @@ public class MainWindow extends JFrame {
         
 
         for (int i = 0; i < 10; i++) {
-            JButton student = new JButton("tanulja");
+            JButton student = new JButton();
             student.setPreferredSize(new Dimension(150, 170));
             studentPanel.add(student);
         }
@@ -151,8 +155,37 @@ public class MainWindow extends JFrame {
         c.anchor = GridBagConstraints.SOUTH;
 
         for (int i = 0; i < 10; i++) {
-            JButton item = new JButton("hasznald");
-            //item.setContentAreaFilled(false);
+            JButton item = new JButton();
+            item.setContentAreaFilled(false);
+            switch (i) {
+                case 0:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Beer.png"));
+                    break;
+                case 1:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
+                    break;
+                case 2:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
+                    break;
+                case 3:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
+                    break;
+                case 4:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Purifier.png"));
+                    break;
+                case 5:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Transistor.png"));
+                    break;
+                case 6:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
+                    break;
+                case 7:
+                    item.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
+                    break;
+            
+                default:
+                    break;
+            }
             item.setPreferredSize(new Dimension(120, 150));
             itemPanel.add(item);
         }
@@ -238,7 +271,7 @@ public class MainWindow extends JFrame {
     
         // Set default close operation
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setResizable(false);
+        setResizable(false);
         AddPopupMenu();
 
         mainPanel = new BackgoundPanel("textures" + File.separator + "Background.png");
