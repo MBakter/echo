@@ -5,24 +5,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-import model.items.*;
-
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements IMainWindow {
 
     private BackgoundPanel mainPanel;
-    private JButton addItemButton;
     private JPanel roomPanel;
     private JPanel teacherPanel;
     private JPanel cleanerPanel;
     private JPanel roomItemPanel;
     private JPanel studentPanel;
     private JPanel itemPanel;
-
-    private List<IItem> itemList = new ArrayList<IItem>();
-    private JLabel[] itemLabels;
 
     private JPanel createRoomGrid(GridBagConstraints c) {
         JPanel roomPanel = new JPanel(new GridBagLayout());
@@ -216,15 +208,6 @@ public class MainWindow extends JFrame {
         itemPanel = createItemPanel(c);
         mainPanel.add(itemPanel, c);
 
-        /* addItemButton = new JButton();
-        addItemButton.setSize(10, 10);
-        addItemButton.setText("PickUp Logarlec");
-        addItemButton.setOpaque(false);
-        addItemButton.setContentAreaFilled(false);
-        // addItemButton.setBorderPainted(false); 
-        addItemButton.addActionListener(e -> { addItem(new Logarlec()); });
-        mainPanel.add(addItemButton); */
-
     }
 
     private void AddPopupMenu() {
@@ -269,7 +252,6 @@ public class MainWindow extends JFrame {
     public MainWindow(String title) {
         super(title);
     
-        // Set default close operation
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         AddPopupMenu();
@@ -280,34 +262,15 @@ public class MainWindow extends JFrame {
 
         getContentPane().add(mainPanel, BorderLayout.CENTER);
 
-        itemPanel = new JPanel();
-        itemLabels = new JLabel[10];
-        for (int i = 0; i < 10; i++) {
-            itemLabels[i] = new JLabel();
-            itemLabels[i].setBackground(Color.BLUE);
-            itemPanel.add(itemLabels[i]);
-        }
-        getContentPane().add(itemPanel, BorderLayout.SOUTH);
-
-        // Set window size (optional)
         setPreferredSize(new Dimension(1920, 1130));
 
-        // Pack components to fit preferred size
         pack();
     }
 
-    public void addItem(IItem i) {
-        if(itemList.size() >= 10)
-            return;
-        itemList.add(i);
-        itemLabels[itemList.size()-1].setIcon(new ImageIcon("textures" + File.separator + "logarlec.png"));; 
-    }
-
-    // This method would be called by the model to update the view (replace with your logic)
-    public void updateView(String message) {
-        mainPanel.removeAll();
-        JLabel label = new JLabel(message);
-        mainPanel.add(label);
+    
+    @Override
+    public void RefreshView() {
+        //TODO:
         mainPanel.revalidate();
     }
 
@@ -320,5 +283,10 @@ public class MainWindow extends JFrame {
         
         MainWindow window = new MainWindow("`(*>﹏<*)′");
         window.setVisible(true);
+    }
+
+    @Override
+    public void InitWindow() {
+        //TODO:
     }
 }
