@@ -34,13 +34,13 @@ public class Mask implements IItem, ITimedEntity, IPrintStat {
     public Mask(String s, ITimer t) {
         name = s;
         timer = t;
-        t.addItem(this);
+        t.addEntity(this);
         functional = true;
     }
 
     public Mask(ITimer t) {
         timer = t;
-        t.addItem(this);
+        t.addEntity(this);
         functional = true;
         Random rand = new Random();
         fake = rand.nextDouble() <= 0.2 ? true : false;

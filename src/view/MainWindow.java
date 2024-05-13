@@ -1,12 +1,19 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
+import controller.IController;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.IOException;
 
 public class MainWindow extends JFrame implements IMainWindow {
+
+    IController controller;
 
     private BackgoundPanel mainPanel;
     private JPanel roomPanel;
@@ -15,6 +22,8 @@ public class MainWindow extends JFrame implements IMainWindow {
     private JPanel roomItemPanel;
     private JPanel studentPanel;
     private JPanel itemPanel;
+
+    private String mapName;
 
     private JPanel createRoomGrid(GridBagConstraints c) {
         JPanel roomPanel = new JPanel(new GridBagLayout());
@@ -249,14 +258,23 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
     }
 
-    public MainWindow(String title) {
+    public MainWindow(IController controller, String title) {
         super(title);
-    
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {}
+
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        
+        this.controller = controller;
+        mapName = controller.getMapName();
+    }
+
+    private void startGame() {
+        
         AddPopupMenu();
 
-        mainPanel = new BackgoundPanel("textures" + File.separator + "Background.png");
+        mainPanel = new BackgoundPanel("textures" + File.separator + "BackgroundEdited.png");
 
         createGridBag();
 
@@ -266,27 +284,193 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         pack();
     }
-
     
+    private void drawMenu() {
+        
+        mainPanel = new BackgoundPanel("textures" + File.separator + "BackgroundBlurred.png");
+        mainPanel.setLayout(new GridBagLayout());
+        
+        JPanel menuPanel = new JPanel(new GridLayout(3, 1, 0, 50));
+        menuPanel.setPreferredSize(new Dimension(500, 500));
+        menuPanel.setOpaque(false);
+
+        JButton startButton = new JButton("Start Game");
+        startButton.addActionListener(e -> {  mainPanel.removeAll(); startGame();    });
+        startButton.setContentAreaFilled(false);
+        startButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        startButton.setFont(new Font("Courier New", Font.PLAIN, 50));
+        menuPanel.add(startButton);
+        
+        JButton optionsButton = new JButton("Options");
+        optionsButton.addActionListener(e -> {  mainPanel.removeAll(); drawOptions();  });
+        optionsButton.setContentAreaFilled(false);
+        optionsButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        optionsButton.setFont(new Font("Courier New", Font.PLAIN, 50));
+        menuPanel.add(optionsButton);
+
+        JButton exitButton = new JButton("Exit to desktop");
+        exitButton.addActionListener(e -> {    exitGame();  });
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        exitButton.setFont(new Font("Courier New", Font.PLAIN, 50));
+        menuPanel.add(exitButton);
+
+        mainPanel.add(menuPanel);
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
+
+        setPreferredSize(new Dimension(1920, 1130));
+        pack();
+
+    }
+
+    private JLabel mapNameL;
+
+    private void drawOptions() {
+        mainPanel = new BackgoundPanel("textures" + File.separator + "BackgroundBlurred.png");
+        mainPanel.setLayout(new GridBagLayout());
+        JPanel optionsPanel = new JPanel(new GridBagLayout());
+        optionsPanel.setOpaque(false);
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel studentText = new JLabel("Enter the number of students");
+        studentText.setPreferredSize(new Dimension(550, 60));
+        studentText.setFont(new Font("Courier New", Font.PLAIN, 25));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        optionsPanel.add(studentText, c);
+
+        JLabel teacherText = new JLabel("Enter the number of teachers");
+        teacherText.setPreferredSize(new Dimension(550, 60));
+        teacherText.setFont(new Font("Courier New", Font.PLAIN, 25));
+        c.gridx = 0;
+        c.gridy = 1;
+        optionsPanel.add(teacherText, c);
+
+        JLabel cleanerText = new JLabel("Enter the number of cleaners");
+        cleanerText.setPreferredSize(new Dimension(550, 60));
+        cleanerText.setFont(new Font("Courier New", Font.PLAIN, 25));
+        c.gridx = 0;
+        c.gridy = 2;
+        optionsPanel.add(cleanerText, c);
+
+        JButton mapButton = new JButton("Select labyrinth");
+        mapButton.setPreferredSize(new Dimension(550, 60));
+        mapButton.setContentAreaFilled(false);
+        mapButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        mapButton.setFont(new Font("Courier New", Font.PLAIN, 25));
+        mapButton.addActionListener(e -> { mapSelect(); });
+        c.gridx = 0;
+        c.gridy = 3;
+        optionsPanel.add(mapButton, c); 
+
+        SpinnerModel studentSelect = new SpinnerNumberModel(controller.getStudentNum(),1,10,1);
+        c.gridx = 2;
+        c.gridy = 0;
+        c.ipadx = 10;
+        c.ipady = 10;
+        c.insets = new Insets(0, 30, 0, 0);
+        optionsPanel.add(new JSpinner(studentSelect), c);
+
+        SpinnerModel teacherSelect = new SpinnerNumberModel(controller.getTeacherNum(), 1, 10, 1);
+        c.gridx = 2;
+        c.gridy = 1;
+        c.ipadx = 10;
+        c.ipady = 10;
+        optionsPanel.add(new JSpinner(teacherSelect), c);
+
+        SpinnerModel cleanerSelect = new SpinnerNumberModel(controller.getCleanerNum(), 0, 10, 1);
+        c.gridx = 2;
+        c.gridy = 2;
+        c.ipadx = 10;
+        c.ipady = 10;
+        optionsPanel.add(new JSpinner(cleanerSelect), c);
+
+        mapNameL = new JLabel(controller.getMapName().replace(".txt", ""));
+        mapNameL.setFont(new Font("Courier New", Font.PLAIN, 25));
+        c.gridx = 2;
+        c.gridy = 3;
+        c.ipadx = 10;
+        c.ipady = 10;
+        optionsPanel.add(mapNameL, c);
+
+        JButton save = new JButton("Save options");
+        save.setContentAreaFilled(false);
+        save.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        save.setFont(new Font("Courier New", Font.PLAIN, 25));
+        save.addActionListener(e -> { 
+            saveOptions(studentSelect.getValue(), teacherSelect.getValue(), cleanerSelect.getValue(), mapName);
+            mainPanel.removeAll(); 
+            drawMenu(); 
+        });
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 1;
+        c.ipadx = 40;
+        c.ipady = 20;
+        c.insets = new Insets(40, 0, 0, 0);
+        optionsPanel.add(save, c);
+
+        JButton back = new JButton("Return");
+        back.setContentAreaFilled(false);
+        back.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        back.setFont(new Font("Courier New", Font.PLAIN, 25));
+        back.addActionListener(e -> { 
+            mainPanel.removeAll(); 
+            drawMenu(); 
+        });
+        c.gridx = 1;
+        c.gridy = 4;
+        c.ipadx = 60;
+        c.ipady = 10;
+        c.insets = new Insets(40, 70, 0, 0);
+        optionsPanel.add(back, c);
+
+        mainPanel.add(optionsPanel);
+
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
+
+        setPreferredSize(new Dimension(1920, 1130));
+
+        pack();
+    }
+
+    private void mapSelect() {
+        File mapLocation = new File(controller.getMapFolderLocation());
+        if(!mapLocation.exists())
+            mapLocation.mkdir();
+        JFileChooser fc = new JFileChooser(mapLocation);
+
+        if(fc.showDialog(this, "Select map") == JFileChooser.APPROVE_OPTION) {            
+            mapName = fc.getSelectedFile().getName();
+            mapNameL.setText(mapName.replace(".txt", ""));
+        }
+
+    }
+
+    private void saveOptions(Object sVal, Object tVal, Object cVal, Object mVal) {
+        controller.setParameters((int)sVal, (int)tVal, (int)cVal, (String)mVal);
+    }
+
+    private void exitGame() {
+        System.exit(0);
+    }
+
     @Override
     public void RefreshView() {
         //TODO:
         mainPanel.revalidate();
     }
 
-    public static void main(String[] args) {
-        try{
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(Exception e) {}
-
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        
-        MainWindow window = new MainWindow("`(*>﹏<*)′");
-        window.setVisible(true);
+    @Override
+    public void InitWindow() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        drawMenu();
     }
 
     @Override
-    public void InitWindow() {
-        //TODO:
+    public void showError(String title) {
+        JOptionPane.showMessageDialog(this, title);
     }
 }

@@ -20,7 +20,7 @@ public class Timer implements ITimer {
     public List<TimedObject> getList() { return list; }
 
     @Override
-    public void addItem(ITimedEntity e) {
+    public void addEntity(ITimedEntity e) {
         list.add(new TimedObject(e));
     }
 

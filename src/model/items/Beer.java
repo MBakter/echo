@@ -31,12 +31,12 @@ public class Beer implements IItem, ITimedEntity, IPrintStat {
     public Beer(String s, Timer t) {
         name = s;
         timer = t;
-        t.addItem(this);
+        t.addEntity(this);
     }
 
     public Beer(Timer t) {
         timer = t;
-        t.addItem(this);
+        t.addEntity(this);
     }
 
     @Override

@@ -4,18 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.player.*;
+import view.IMainWindow;
 
-public class Controller {
-    private static List<Player> players = new ArrayList<Player>();
+public class Controller implements IController {
+    private static List<Student> students = new ArrayList<>();
+    private static List<Teacher> teachers = new ArrayList<>();
+    private static List<Cleaner> cleaners = new ArrayList<>();
+
     private static Labyrinth Map = new Labyrinth();
     private static boolean endOfGame = false;
-    private static final String mapDirectoryPath = "maps";
-    private static final Timer t = new Timer();
-    private static void initGame() {
-        System.out.println("Üdvözöllek a mátrixban");
-        System.out.println("Mennyi a játékos, mekkora a map? ");
-        
-        //Map.generateFromFile("map1.txt");
+    private final String mapDirectoryPath;
+    private String mapName;
+    private static final Timer timer = new Timer();
+    private IMainWindow View;
+
+    public Controller(String mapDirectoryPath) {
+        this.mapDirectoryPath = mapDirectoryPath; 
+        mapName = "default.txt";
+        students.add(new Student("s0", timer));
+        teachers.add(new Teacher("t0", timer));
+    }
+
+    public void startGameWithGUI(IMainWindow viewInterface) {
+        View = viewInterface;
+        //Map.generateFromFile(mapDirectoryPath);
+        View.InitWindow();
+
     }
 
     public static void endGame(boolean victory) {
@@ -38,7 +52,8 @@ public class Controller {
     private static void GameCycle() {
 
         while(true) {
-            for (Player curPlayer : players) {
+            //TODO: Separate list moves
+            /* for (Player curPlayer : players) {
                 if(curPlayer instanceof Student) 
                     StudentMove((Student)curPlayer);
                 if(curPlayer instanceof Teacher)
@@ -46,14 +61,66 @@ public class Controller {
                 if(curPlayer instanceof Cleaner)
                     CleanerMove((Cleaner)curPlayer);
                 Map.randomMove();
-            }
+            } */
             if(endOfGame)
                 break;
         }
     }
 
-    public static void main(String[] args) {
-        initGame();
+    private boolean isGameSet() {
+        if(students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
+            return false;
+        return true;
+    }
+
+    @Override
+    public void startGame() {
+        if(!isGameSet()) {
+            View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
+        }
         GameCycle();
-    } 
+    }
+
+    @Override
+    public void setParameters(int studentNum, int teacherNum, int cleanerNum, String mapName) {
+        students.clear();
+        teachers.clear();
+        cleaners.clear();
+        for (int i = 0; i < studentNum; i++) 
+            students.add(new Student("s" + i, timer));
+
+        for (int i = 0; i < teacherNum; i++) 
+            teachers.add(new Teacher("s" + i, timer));
+
+        for (int i = 0; i < cleanerNum; i++) 
+            cleaners.add(new Cleaner("s" + i, timer));
+
+        this.mapName = mapName;
+    }
+
+    @Override
+    public int getStudentNum() {
+        return students.size();    
+    }
+
+    @Override
+    public int getTeacherNum() {
+        return teachers.size();    
+    }
+
+    @Override
+    public int getCleanerNum() {
+        return cleaners.size();        
+    }
+
+    @Override
+    public String getMapName() {
+        return mapName;    
+    }
+
+    @Override
+    public String getMapFolderLocation() {
+        return mapDirectoryPath;
+    }
+
 }

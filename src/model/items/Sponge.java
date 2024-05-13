@@ -28,11 +28,11 @@ public class Sponge implements IItem, ITimedEntity ,IPrintStat{
     public Sponge(String s, Timer t) {
         name = s;
         timer = t;
-        t.addItem(this);
+        t.addEntity(this);
     }
     public Sponge(Timer t) {
         timer = t;
-        t.addItem(this);
+        t.addEntity(this);
     }
     @Override
     public void useItem(Player p) {
