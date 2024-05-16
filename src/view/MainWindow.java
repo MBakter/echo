@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
 
 public class MainWindow extends JFrame implements IMainWindow {
 
@@ -141,6 +140,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         return studentPanel;
     }
 
+    //TODO: ActionListenerek a commandokhoz
     private JPanel createItemPanel(GridBagConstraints c) {
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         itemPanel.setOpaque(false);
@@ -283,6 +283,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         setPreferredSize(new Dimension(1920, 1130));
 
         pack();
+
     }
     
     private void drawMenu() {
@@ -295,7 +296,11 @@ public class MainWindow extends JFrame implements IMainWindow {
         menuPanel.setOpaque(false);
 
         JButton startButton = new JButton("Start Game");
-        startButton.addActionListener(e -> {  mainPanel.removeAll(); startGame();    });
+        startButton.addActionListener(e -> {  
+            mainPanel.removeAll(); 
+            startGame();  
+            controller.startGame();
+        });
         startButton.setContentAreaFilled(false);
         startButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         startButton.setFont(new Font("Courier New", Font.PLAIN, 50));

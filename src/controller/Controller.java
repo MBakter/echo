@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class Controller implements IController {
 
     private static void GameCycle() {
 
-        while(true) {
+        //while(true) {
             //TODO: Separate list moves
             /* for (Player curPlayer : players) {
                 if(curPlayer instanceof Student) 
@@ -62,9 +63,9 @@ public class Controller implements IController {
                     CleanerMove((Cleaner)curPlayer);
                 Map.randomMove();
             } */
-            if(endOfGame)
-                break;
-        }
+           // if(endOfGame)
+            //    break;
+        //}
     }
 
     private boolean isGameSet() {
@@ -78,6 +79,10 @@ public class Controller implements IController {
         if(!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
+        if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
+            View.showError("University has not been built yet! Please select a valid map");
+        }
+
         GameCycle();
     }
 
