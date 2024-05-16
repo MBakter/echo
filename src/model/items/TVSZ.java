@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 import java.util.Random;
 
+import model.items.view_model_items.IVMTVSZ;
 import model.player.*;
 import test.IPrintStat;
 
-public class TVSZ implements IItem, IPrintStat {
+public class TVSZ implements IItem, IPrintStat, IVMTVSZ {
     private int hitpoints;
     private boolean fake;
     private String name;
@@ -110,5 +111,15 @@ public class TVSZ implements IItem, IPrintStat {
             if (args.get(2).equals("false"))
                 fake = false;
         }
+    }
+
+    @Override
+    public Integer getHitpoint() {
+        return hitpoints;
+    }
+
+    @Override
+    public boolean getFake() {
+        return fake;
     }
 }

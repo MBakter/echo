@@ -6,15 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 
 import model.items.IItem;
+import model.items.view_model_items.IVMItem;
 import model.player.Cleaner;
 import model.player.Player;
 import model.player.Cleaner;
 import model.player.EPlayerState;
 import model.player.Student;
 import model.player.Teacher;
+import model.player.veiw_model_players.IVMCleaner;
+import model.player.veiw_model_players.IVMStudent;
+import model.player.veiw_model_players.IVMTeacher;
 import test.IPrintStat;
 
-public class Room implements ICRoom, IVRoom, IPrintStat {
+public class Room implements ICRoom, IVRoom, IPrintStat, IVMRoom {
     private int maxPlayer;
     private int stickyCounter = 5;
     private String name;
@@ -471,6 +475,47 @@ public class Room implements ICRoom, IVRoom, IPrintStat {
         for (var e : ERoomEffects.values()) {
             System.out.printf("\t%s%n", e);
         }
+    }
+
+    @Override
+    public ArrayList<IVMStudent> getStudnetList() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStudnetList'");
+    }
+
+    @Override
+    public ArrayList<IVMTeacher> getTeacherList() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTeacherList'");
+    }
+
+    @Override
+    public ArrayList<IVMCleaner> getCleanerList() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCleanerList'");
+    }
+
+    @Override
+    public List<IVMRoom> getNeighbourList() {
+        ArrayList<IVMRoom> returnList = new ArrayList<>();
+        for (Room room : neighbouringRooms) {
+           returnList.add(room) ;
+        }
+        return returnList;
+    }
+
+    @Override
+    public List<ERoomEffects> getRoomState() {
+        return effects;
+        }
+
+    @Override
+    public List<IVMItem> getRoomItems() {
+        ArrayList<IVMItem> returnItemList = new ArrayList<>();
+        for (IVMItem ivmItem : itemList) {
+            returnItemList.add(ivmItem);
+        }
+        return returnItemList;
     }
 
 }

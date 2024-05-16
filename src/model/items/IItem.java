@@ -2,11 +2,10 @@ package model.items;
 
 import java.util.ArrayList;
 
-
-
+import model.items.view_model_items.IVMItem;
 import model.player.*;
 
-public interface IItem{
+public interface IItem extends IVMItem{
     public String getName();
     // Tudom hogy ez csúnya.
     public void printStat(String name);

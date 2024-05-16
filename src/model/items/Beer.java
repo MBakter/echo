@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import controller.TimedObject;
 import controller.Timer;
 import model.*;
+import model.items.view_model_items.IVMBeer;
 import model.player.*;
 import test.IPrintStat;
 
-public class Beer implements IItem, ITimedEntity, IPrintStat {
+public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
     private ITimer timer;
     private EBeerState state; // Default: INACTIVE
     private static int TIME = 5;
@@ -119,4 +120,14 @@ public class Beer implements IItem, ITimedEntity, IPrintStat {
     }
         @Override
     public void setState(ArrayList<String> args){}
+
+        @Override
+        public Integer getTime() {
+            return TIME;
+        }
+
+        @Override
+        public EBeerState getState() {
+            return state;
+        }
 }
