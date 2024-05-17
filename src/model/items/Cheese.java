@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import controller.TimedObject;
 import controller.Timer;
 import model.*;
+import model.items.view_model_items.IVMCheese;
 import model.player.*;
 import test.IPrintStat;
 
-public class Cheese implements IItem, ITimedEntity, IPrintStat {
+public class Cheese implements IItem, ITimedEntity, IPrintStat, IVMCheese{
     private ITimer timer;
     private boolean isUsed;
     private Room room;
@@ -113,4 +114,14 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat {
     }
         @Override
     public void setState(ArrayList<String> args){}
+
+        @Override
+        public boolean getIsUsed() {
+            return isUsed;
+        }
+
+        @Override
+        public Integer getTime() {
+            return TIME;
+        }
 }

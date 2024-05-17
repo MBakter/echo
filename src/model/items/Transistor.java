@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import model.ERoomEffects;
 import model.Room;
+import model.items.view_model_items.IVMTransistor;
 import model.player.*;
 import test.IPrintStat;
 
-public class Transistor implements IItem, IPrintStat {
+public class Transistor implements IItem, IPrintStat, IVMTransistor{
     private boolean active;
     private Room room;
     private Transistor pair;
@@ -153,4 +154,15 @@ public class Transistor implements IItem, IPrintStat {
     @Override
     public void setState(ArrayList<String> args) {
     }
+
+    @Override
+    public boolean getActive() {
+        return active;
+    }
+
+    @Override
+    public IVMTransistor getPair() {
+        return pair;
+    }
+
 }

@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import controller.TimedObject;
 import controller.Timer;
 import model.*;
+import model.items.view_model_items.IVMSponge;
 import model.player.*;
 import test.IPrintStat;
-public class Sponge implements IItem, ITimedEntity ,IPrintStat{
+public class Sponge implements IItem, ITimedEntity ,IPrintStat, IVMSponge{
     private ITimer timer;
     private static int TIME = 4;
     private boolean functional;
@@ -113,4 +114,12 @@ public class Sponge implements IItem, ITimedEntity ,IPrintStat{
     }
         @Override
     public void setState(ArrayList<String> args){}
+        @Override
+        public Integer getIime() {
+            return TIME;
+        }
+        @Override
+        public boolean getFunctional() {
+            return functional;
+        }
 }
