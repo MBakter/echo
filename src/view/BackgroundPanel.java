@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class BackgoundPanel extends JPanel {
+public class BackgroundPanel extends JPanel {
 
     String path;
 
-    public BackgoundPanel(String path) {
+    public BackgroundPanel(String path) {
         this.path = path;
     }
 

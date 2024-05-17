@@ -9,13 +9,14 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
 
 public class MainWindow extends JFrame implements IMainWindow {
 
     IController controller;
 
-    private BackgoundPanel mainPanel;
+    private BackgroundPanel mainPanel;
+    private BackgroundPanel optionPanel;
+    private BackgroundPanel gamePanel;
     private JPanel roomPanel;
     private JPanel teacherPanel;
     private JPanel cleanerPanel;
@@ -196,26 +197,26 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     private void createGridBag() {
 
-        mainPanel.setLayout(new GridBagLayout());
+        gamePanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         roomPanel = createRoomGrid(c);
-        mainPanel.add(roomPanel, c);
+        gamePanel.add(roomPanel, c);
 
         teacherPanel = createTeacherPanel(c);
-        mainPanel.add(teacherPanel, c);
+        gamePanel.add(teacherPanel, c);
 
         cleanerPanel = createCleanerPanel(c);
-        mainPanel.add(cleanerPanel, c);
+        gamePanel.add(cleanerPanel, c);
 
         roomItemPanel = createRoomItemPanel(c);
-        mainPanel.add(roomItemPanel, c);
+        gamePanel.add(roomItemPanel, c);
 
         studentPanel = createStudentPanel(c);
-        mainPanel.add(studentPanel, c);
+        gamePanel.add(studentPanel, c);
 
         itemPanel = createItemPanel(c);
-        mainPanel.add(itemPanel, c);
+        gamePanel.add(itemPanel, c);
 
     }
 
@@ -223,9 +224,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         addKeyListener(new KeyListener() {
 
             @Override
-            public void keyTyped(KeyEvent e) {
-                
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -251,9 +250,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-                
-            }
+            public void keyReleased(KeyEvent e) {}
             
         });
     }
@@ -274,11 +271,11 @@ public class MainWindow extends JFrame implements IMainWindow {
         
         AddPopupMenu();
 
-        mainPanel = new BackgoundPanel("textures" + File.separator + "BackgroundEdited.png");
+        gamePanel = new BackgroundPanel("textures" + File.separator + "BackgroundEdited.png");
 
         createGridBag();
 
-        getContentPane().add(mainPanel, BorderLayout.CENTER);
+        getContentPane().add(gamePanel, BorderLayout.CENTER);
 
         setPreferredSize(new Dimension(1920, 1130));
 
@@ -287,7 +284,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     
     private void drawMenu() {
         
-        mainPanel = new BackgoundPanel("textures" + File.separator + "BackgroundBlurred.png");
+        mainPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
         mainPanel.setLayout(new GridBagLayout());
         
         JPanel menuPanel = new JPanel(new GridLayout(3, 1, 0, 50));
@@ -295,14 +292,20 @@ public class MainWindow extends JFrame implements IMainWindow {
         menuPanel.setOpaque(false);
 
         JButton startButton = new JButton("Start Game");
-        startButton.addActionListener(e -> {  mainPanel.removeAll(); startGame();    });
+        startButton.addActionListener(e -> {  
+            getContentPane().remove(mainPanel);
+            startGame();    
+        });
         startButton.setContentAreaFilled(false);
         startButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         startButton.setFont(new Font("Courier New", Font.PLAIN, 50));
         menuPanel.add(startButton);
         
         JButton optionsButton = new JButton("Options");
-        optionsButton.addActionListener(e -> {  mainPanel.removeAll(); drawOptions();  });
+        optionsButton.addActionListener(e -> {  
+            getContentPane().remove(mainPanel);
+            drawOptions();  
+        });
         optionsButton.setContentAreaFilled(false);
         optionsButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         optionsButton.setFont(new Font("Courier New", Font.PLAIN, 50));
@@ -326,8 +329,9 @@ public class MainWindow extends JFrame implements IMainWindow {
     private JLabel mapNameL;
 
     private void drawOptions() {
-        mainPanel = new BackgoundPanel("textures" + File.separator + "BackgroundBlurred.png");
-        mainPanel.setLayout(new GridBagLayout());
+
+        optionPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
+        optionPanel.setLayout(new GridBagLayout());
         JPanel optionsPanel = new JPanel(new GridBagLayout());
         optionsPanel.setOpaque(false);
         GridBagConstraints c = new GridBagConstraints();
@@ -400,7 +404,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         save.setFont(new Font("Courier New", Font.PLAIN, 25));
         save.addActionListener(e -> { 
             saveOptions(studentSelect.getValue(), teacherSelect.getValue(), cleanerSelect.getValue(), mapName);
-            mainPanel.removeAll(); 
+            getContentPane().remove(optionPanel);
             drawMenu(); 
         });
         c.gridx = 0;
@@ -416,7 +420,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         back.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         back.setFont(new Font("Courier New", Font.PLAIN, 25));
         back.addActionListener(e -> { 
-            mainPanel.removeAll(); 
+            getContentPane().remove(optionPanel);
             drawMenu(); 
         });
         c.gridx = 1;
@@ -426,9 +430,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.insets = new Insets(40, 70, 0, 0);
         optionsPanel.add(back, c);
 
-        mainPanel.add(optionsPanel);
+        optionPanel.add(optionsPanel);
 
-        getContentPane().add(mainPanel, BorderLayout.CENTER);
+        getContentPane().add(optionPanel, BorderLayout.CENTER);
 
         setPreferredSize(new Dimension(1920, 1130));
 
