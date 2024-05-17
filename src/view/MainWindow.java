@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import controller.ICommands;
 import controller.IController;
 
 import java.awt.*;
@@ -12,7 +13,10 @@ import java.io.File;
 
 public class MainWindow extends JFrame implements IMainWindow {
 
+    final int wHeight = 1130, wWidth = 1920;
+
     IController controller;
+    ICommands commands;
 
     private BackgroundPanel mainPanel;
     private BackgroundPanel optionPanel;
@@ -278,7 +282,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         getContentPane().add(gamePanel, BorderLayout.CENTER);
 
-        setPreferredSize(new Dimension(1920, 1130));
+        setPreferredSize(new Dimension(wWidth, wHeight));
 
         pack();
 
