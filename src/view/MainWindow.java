@@ -142,6 +142,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         return studentPanel;
     }
 
+    //TODO: ActionListenerek a commandokhoz
     private JPanel createItemPanel(GridBagConstraints c) {
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         itemPanel.setOpaque(false);
@@ -280,6 +281,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         setPreferredSize(new Dimension(1920, 1130));
 
         pack();
+
     }
     
     private void drawMenu() {
@@ -294,7 +296,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         JButton startButton = new JButton("Start Game");
         startButton.addActionListener(e -> {  
             getContentPane().remove(mainPanel);
-            startGame();    
+            startGame();  
+            controller.startGame();
         });
         startButton.setContentAreaFilled(false);
         startButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +60,13 @@ public class Labyrinth {
         }
     }
     
-    public void generateFromFile(String filename) {
-        try (Scanner scanner = new Scanner(filename)) {
+    public boolean generateFromFile(String filename) {
+        
+        File file = new File(filename);
+        if(!file.exists())
+            return false;
+
+        try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] parts = line.split(" ");
@@ -102,6 +108,7 @@ public class Labyrinth {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return true;
     }
     
 }
