@@ -491,6 +491,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         VItemsOfCP = controller.getVItemsOfCP();
         currentVPlayer = controller.getCP();
         currentVRoom = currentVPlayer.getModelStudent().getVRoom();
+        itemsInRoom = currentVRoom.
     }
 
     @Override

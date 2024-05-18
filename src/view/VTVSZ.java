@@ -1,5 +1,5 @@
 package view;
 
-public class VTVSZ {
+public class VTVSZ implements IVItems{
     
 }

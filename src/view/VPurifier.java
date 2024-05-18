@@ -1,5 +1,5 @@
 package view;
 
-public class VPurifier {
+public class VPurifier implements IVItems{
     
 }

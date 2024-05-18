@@ -1,5 +1,10 @@
 package view;
 
-public class VCleaner {
+import model.player.*;;
+
+public class VCleaner implements IVCleaner{
+    public VCleaner(Cleaner c){
+
+    }
     
 }

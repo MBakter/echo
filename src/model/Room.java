@@ -13,6 +13,15 @@ import model.player.EPlayerState;
 import model.player.Student;
 import model.player.Teacher;
 import test.IPrintStat;
+import view.IVCleaner;
+import view.IVItems;
+import view.IVRoom;
+import view.IVStudent;
+import view.IVTeacher;
+import view.VCleaner;
+import view.VRoom;
+import view.VStudent;
+import view.VTeacher;
 
 public class Room implements ICRoom, IVRoom, IPrintStat, IVMRoom {
     private int maxPlayer;
@@ -471,6 +480,56 @@ public class Room implements ICRoom, IVRoom, IPrintStat, IVMRoom {
         for (var e : ERoomEffects.values()) {
             System.out.printf("\t%s%n", e);
         }
+    }
+
+    @Override
+    public ArrayList<IVStudent> getStudentList() {
+        ArrayList<IVStudent> l = new ArrayList<>();
+        for (Student s : studentList) {
+            l.add(new VStudent(s));
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<IVTeacher> getTeacherList() {
+        ArrayList<IVTeacher> l = new ArrayList<>();
+        for (Teacher t : teacherList) {
+            l.add(new VTeacher(t));
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<IVCleaner> getCleanerList() {
+        ArrayList<IVCleaner> l = new ArrayList<>();
+        for (Cleaner c : cleanerList) {
+            l.add(new VCleaner(c));
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<IVRoom> getNeighBourList() {
+        ArrayList<IVRoom> l = new ArrayList<>();
+        for (Room r : neighbouringRooms) {
+            l.add(new VRoom(r));
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<ERoomEffects> getRoomState() {
+        return new ArrayList<>(effects);
+    }
+
+    @Override
+    public ArrayList<IVItems> getRoomItems() {
+        ArrayList<IVItems> l = new ArrayList<>();
+        for (IItem item : itemList) {
+            l.add(item.acceptView(l));
+        }
+        return l;
     }
 
 }

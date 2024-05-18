@@ -1,5 +1,5 @@
 package view;
 
-public class VMask {
+public class VMask implements IVItems{
     
 }

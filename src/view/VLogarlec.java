@@ -1,5 +1,5 @@
 package view;
 
-public class VLogarlec {
+public class VLogarlec implements IVItems{
     
 }

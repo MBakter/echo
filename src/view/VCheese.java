@@ -1,5 +1,5 @@
 package view;
 
-public class VCheese {
+public class VCheese implements IVItems{
     
 }

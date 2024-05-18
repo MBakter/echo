@@ -1,5 +1,5 @@
 package view;
 
-public class VBeer {
+public class VBeer implements IVItems{
     
 }

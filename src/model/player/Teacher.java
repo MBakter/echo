@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.ITimer;
 import model.Room;
 import model.items.IItem;
-import view.VItem;
+import view.IVItems;
 
 public class Teacher extends Player implements IVMTeacher {
 
@@ -53,7 +53,7 @@ public class Teacher extends Player implements IVMTeacher {
         throw new UnsupportedOperationException("Unimplemented method 'getPlayerState'");
     }
     @Override
-    public ArrayList<VItem> getItems() {
+    public ArrayList<IVItems> getItems() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getItems'");
     }

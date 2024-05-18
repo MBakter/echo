@@ -2,10 +2,10 @@ package model.player;
 
 import java.util.ArrayList;
 
-import view.VItem;
+import view.IVItems;
 
 public interface IVMTeacher {
     public EPlayerState getPlayerState();
-    public ArrayList<VItem> getItems();
+    public ArrayList<IVItems> getItems();
     public int getTime();
 }

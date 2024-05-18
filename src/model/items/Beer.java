@@ -7,6 +7,8 @@ import controller.Timer;
 import model.*;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VBeer;
 
 public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
     private ITimer timer;
@@ -131,5 +133,10 @@ public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
     @Override
     public EBeerState getState() {
         return state;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VBeer(this));
     }
 }
