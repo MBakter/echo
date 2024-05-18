@@ -7,6 +7,8 @@ import model.ERoomEffects;
 import model.Room;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VTransistor;
 
 public class Transistor implements IItem, IPrintStat, IVMTransistor {
     private boolean active;
@@ -157,5 +159,10 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
     @Override
     public boolean isActive() {
         return active;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VTransistor(this));
     }
 }

@@ -527,7 +527,7 @@ public class Room implements ICRoom, IVRoom, IPrintStat, IVMRoom {
     public ArrayList<IVItems> getRoomItems() {
         ArrayList<IVItems> l = new ArrayList<>();
         for (IItem item : itemList) {
-            l.add(item.acceptView(l));
+            item.acceptView(l);
         }
         return l;
     }

@@ -6,6 +6,8 @@ import java.util.Random;
 
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VLogarlec;
 
 public class Logarlec implements IItem, IPrintStat, IVMLogarlec {
 
@@ -106,6 +108,11 @@ public class Logarlec implements IItem, IPrintStat, IVMLogarlec {
     @Override
     public boolean isFake() {
         return fake;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VLogarlec(this));
     }
 
 }

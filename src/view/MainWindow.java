@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
 
 import controller.ICommands;
 import controller.IController;
@@ -20,8 +21,8 @@ public class MainWindow extends JFrame implements IMainWindow {
     ICommands commands;
 
     ArrayList<IVItems> VItemsOfCP;
-    IVStudent currentVPlayer;
-    IVRoom currentVRoom;
+    VStudent currentVPlayer;
+    VRoom currentVRoom;
     ArrayList<IVItems> itemsInRoom;
     ArrayList<IVRoom> neighbouringRooms;
     ArrayList<IVCleaner> cleanersInRoom;
@@ -62,6 +63,8 @@ public class MainWindow extends JFrame implements IMainWindow {
                 roomPanel.add(door, c2);
             }
         }
+
+        
         return roomPanel;
     }
 
@@ -214,6 +217,18 @@ public class MainWindow extends JFrame implements IMainWindow {
         gamePanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        gamePanel.add(currentVRoom.draw(currentVPlayer, c));
+
+        gamePanel.add(currentVPlayer.draw(currentVPlayer, c));
+
+        for (IVItems ivItems : VItemsOfCP) {
+            gamePanel.add(ivItems.draw(currentVPlayer, c));
+        }
+
+        for (IVTeacher item : currentVRoom.modelRoom.getTeacherList()) {
+            gamePanel.add(item.draw(currentVPlayer, c));
+        }
+/* 
         roomPanel = createRoomGrid(c);
         gamePanel.add(roomPanel, c);
 
@@ -230,7 +245,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         gamePanel.add(studentPanel, c);
 
         itemPanel = createItemPanel(c);
-        gamePanel.add(itemPanel, c);
+        gamePanel.add(itemPanel, c); */
 
     }
 
@@ -314,8 +329,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         JButton startButton = new JButton("Start Game");
         startButton.addActionListener(e -> {
             getContentPane().remove(mainPanel);
-            startGame();
             controller.startGame();
+            //startGame();
         });
         startButton.setContentAreaFilled(false);
         startButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
@@ -344,7 +359,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         mainPanel.add(menuPanel);
         getContentPane().add(mainPanel, BorderLayout.CENTER);
 
-        setPreferredSize(new Dimension(1920, 1130));
+        setPreferredSize(new Dimension(wWidth, wHeight));
         pack();
 
     }
@@ -486,12 +501,19 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     @Override
-    public void RefreshView() {
-        mainPanel.revalidate();
+    public void RefreshView() {        
         VItemsOfCP = controller.getVItemsOfCP();
-        currentVPlayer = controller.getCP();
-        currentVRoom = currentVPlayer.getModelStudent().getVRoom();
-        itemsInRoom = currentVRoom.
+        currentVPlayer = (VStudent) controller.getCP();
+        currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
+        itemsInRoom = currentVRoom.modelRoom.getRoomItems();
+        neighbouringRooms = currentVRoom.modelRoom.getNeighBourList();
+        cleanersInRoom = currentVRoom.modelRoom.getCleanerList();
+        teachersInRoom = currentVRoom.modelRoom.getTeacherList();
+        studentsInRoom = currentVRoom.modelRoom.getStudentList();
+
+        startGame();
+
+        mainPanel.revalidate();
     }
 
     @Override

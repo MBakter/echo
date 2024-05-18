@@ -8,6 +8,8 @@ import java.util.Random;
 import model.*;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VMask;
 
 public class Mask implements IItem, ITimedEntity, IPrintStat, IVMMask {
     private ITimer timer;
@@ -149,5 +151,10 @@ public class Mask implements IItem, ITimedEntity, IPrintStat, IVMMask {
         @Override
         public boolean isFake() {
             return fake;
+        }
+
+        @Override
+        public void acceptView(ArrayList<IVItems> l) {
+            l.add(new VMask(this));
         }
 }

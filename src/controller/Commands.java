@@ -1,7 +1,7 @@
 package controller;
 
+import view.IVItems;
 import view.IVStudent;
-import view.VItem;
 import view.VTransistor;
 
 public class Commands implements ICommands{
@@ -13,7 +13,7 @@ public class Commands implements ICommands{
     }
 
     @Override
-    public void interact(EInteract option, IVStudent curPlayer, VItem item) {
+    public void interact(EInteract option, IVStudent curPlayer, IVItems item) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }

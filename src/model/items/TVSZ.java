@@ -6,6 +6,8 @@ import java.util.Random;
 
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VTVSZ;
 
 public class TVSZ implements IItem, IPrintStat, IVMTVSZ {
     private int hitpoints;
@@ -120,5 +122,10 @@ public class TVSZ implements IItem, IPrintStat, IVMTVSZ {
     @Override
     public boolean isFake() {
         return fake;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VTVSZ(this));
     }
 }

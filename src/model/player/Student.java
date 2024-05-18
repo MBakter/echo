@@ -10,6 +10,7 @@ import view.IVRoom;
 import view.VRoom;
 
 public class Student extends Player implements IVMStudent{
+    private static int TIME = 4;
     public Student(String s, ITimer t) {
         super(s,t);
     }
@@ -88,23 +89,21 @@ public class Student extends Player implements IVMStudent{
     public ArrayList<IVItems> getItemList() {
         ArrayList<IVItems> vItemList = new ArrayList<>();
         for (IItem item : itemList) {
-            
+            item.acceptView(vItemList);
         }
-        return null;
+        return vItemList;
     }
     @Override
     public EPlayerState getPlayerState() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayerState'");
+        return state;
     }
     @Override
     public int getTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTime'");
+        return TIME;
     }
     @Override
     public IVRoom getVRoom(){
-            return null;
+            return new VRoom(room);
     }
 
 }

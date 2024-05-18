@@ -1,8 +1,12 @@
 package view;
 
+import java.awt.GridBagConstraints;
+
+import javax.swing.JPanel;
+
 import model.player.IVMStudent;
 
 public interface IVStudent {
     public IVMStudent getModelStudent();
-    public void draw(IVStudent currentPlayer);
+    public JPanel draw(IVStudent currentPlayer, GridBagConstraints c);
 }

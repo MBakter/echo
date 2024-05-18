@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VPurifier;
 
 public class Purifier implements IItem, IPrintStat, IVMPurifier{
     private String name;
@@ -91,6 +93,11 @@ public class Purifier implements IItem, IPrintStat, IVMPurifier{
     @Override
     public boolean isUsed() {
         return isUsed;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VPurifier(this));
     }
     
 }

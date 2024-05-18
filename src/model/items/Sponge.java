@@ -6,6 +6,8 @@ import controller.Timer;
 import model.*;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VSponge;
 
 public class Sponge implements IItem, ITimedEntity, IPrintStat, IVMSponge {
     private ITimer timer;
@@ -129,6 +131,11 @@ public class Sponge implements IItem, ITimedEntity, IPrintStat, IVMSponge {
     @Override
     public boolean isFunctional() {
         return functional;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VSponge(this));
     }
 
     

@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.items.IItem;
 import model.player.*;
@@ -21,6 +22,8 @@ public class Controller implements IController {
     private static IMainWindow View;
     
     private static Student curPlayer = null;
+
+    private static boolean gameOver = false;
 
     public Controller(String mapDirectoryPath) {
         this.mapDirectoryPath = mapDirectoryPath; 
@@ -43,31 +46,30 @@ public class Controller implements IController {
 
     private static void StudentMove(Student s) {
         //List all options
+        curPlayer = s;
+        View.RefreshView();
     }
 
     private static void TeacherMove(Teacher t) {
-
+        View.RefreshView();
     }
 
     private static void CleanerMove(Cleaner c) {
-
+        View.RefreshView();
     }
 
     private static void GameCycle() {
-        while(true){
             for (Student s : students) {
-                curPlayer = s;
-                View.RefreshView();
+                StudentMove(s);                
             }
     
             for (Teacher t : teachers) {
-                
+                TeacherMove(t);
             }
     
             for (Cleaner c : cleaners) {
-                
+                CleanerMove(c);
             }
-        }
 
         //while(true) {
             //TODO: Separate list moves
@@ -98,9 +100,20 @@ public class Controller implements IController {
         }
         if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
             View.showError("University has not been built yet! Please select a valid map");
+        }   
+        Random r = new Random();
+        for (Student s : students) {
+            s.forceMove(Map.roomList.get(0));
+        }
+        for (Teacher t : teachers) {
+            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+        }
+        for (Cleaner c : cleaners) {
+            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
         }
 
         GameCycle();
+        View.RefreshView();
     }
 
     @Override
@@ -153,9 +166,6 @@ public class Controller implements IController {
 
     @Override
     public ArrayList<IVItems> getVItemsOfCP() {
-        for (IItem item : curPlaye) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'getVItemsOfCP'");
-        }
+        return curPlayer.getItemList();
     }
 }

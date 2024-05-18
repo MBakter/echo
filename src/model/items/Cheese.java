@@ -7,6 +7,8 @@ import controller.Timer;
 import model.*;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VCheese;
 
 public class Cheese implements IItem, ITimedEntity, IPrintStat, IVMCheese {
     private ITimer timer;
@@ -127,5 +129,10 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat, IVMCheese {
     @Override
     public boolean isUsed() {
         return isUsed;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VCheese(this));
     }
 }
