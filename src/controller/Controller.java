@@ -18,7 +18,7 @@ public class Controller implements IController {
     private final String mapDirectoryPath;
     private String mapName;
     private static final Timer timer = new Timer();
-    private IMainWindow View;
+    private static IMainWindow View;
     
     private static Student curPlayer = null;
 
@@ -54,18 +54,21 @@ public class Controller implements IController {
     }
 
     private static void GameCycle() {
-
-        for (Student s : students) {
-            curPlayer = s;
+        while(true){
+            for (Student s : students) {
+                curPlayer = s;
+                View.RefreshView();
+            }
+    
+            for (Teacher t : teachers) {
+                
+            }
+    
+            for (Cleaner c : cleaners) {
+                
+            }
         }
 
-        for (Teacher t : teachers) {
-            
-        }
-
-        for (Cleaner c : cleaners) {
-            
-        }
         //while(true) {
             //TODO: Separate list moves
             /* for (Player curPlayer : players) {

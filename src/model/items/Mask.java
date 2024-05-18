@@ -9,7 +9,7 @@ import model.*;
 import model.player.*;
 import test.IPrintStat;
 
-public class Mask implements IItem, ITimedEntity, IPrintStat {
+public class Mask implements IItem, ITimedEntity, IPrintStat, IVMMask {
     private ITimer timer;
     private static int TIME = 4;
     private boolean fake;
@@ -135,4 +135,19 @@ public class Mask implements IItem, ITimedEntity, IPrintStat {
                 fake = false;
         }
     }
+
+        @Override
+        public int getTime() {
+            return TIME;
+        }
+
+        @Override
+        public boolean isFunctional() {
+            return functional;
+        }
+
+        @Override
+        public boolean isFake() {
+            return fake;
+        }
 }

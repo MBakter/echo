@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.player.*;
 import test.IPrintStat;
 
-public class Purifier implements IItem, IPrintStat{
+public class Purifier implements IItem, IPrintStat, IVMPurifier{
     private String name;
     private boolean isUsed;
 
@@ -86,6 +86,11 @@ public class Purifier implements IItem, IPrintStat{
             isUsed = true;
         if(args.get(2).equals("false"))
             isUsed = false;
+    }
+
+    @Override
+    public boolean isUsed() {
+        return isUsed;
     }
     
 }

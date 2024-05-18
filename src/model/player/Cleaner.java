@@ -44,4 +44,8 @@ public class Cleaner extends Player implements IVMCleaner{
             }
         }
     }
+    @Override
+    public EPlayerState getPlayerState() {
+        return state;
+    }
 }

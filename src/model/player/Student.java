@@ -6,6 +6,8 @@ import model.ITimer;
 import model.Room;
 import model.items.IItem;
 import view.IVItems;
+import view.IVRoom;
+import view.VRoom;
 
 public class Student extends Player implements IVMStudent{
     public Student(String s, ITimer t) {
@@ -88,6 +90,7 @@ public class Student extends Player implements IVMStudent{
         for (IItem item : itemList) {
             
         }
+        return null;
     }
     @Override
     public EPlayerState getPlayerState() {
@@ -98,6 +101,10 @@ public class Student extends Player implements IVMStudent{
     public int getTime() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTime'");
+    }
+    @Override
+    public IVRoom getVRoom(){
+            return null;
     }
 
 }

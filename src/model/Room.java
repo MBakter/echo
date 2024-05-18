@@ -14,7 +14,7 @@ import model.player.Student;
 import model.player.Teacher;
 import test.IPrintStat;
 
-public class Room implements ICRoom, IVRoom, IPrintStat {
+public class Room implements ICRoom, IVRoom, IPrintStat, IVMRoom {
     private int maxPlayer;
     private int stickyCounter = 5;
     private String name;

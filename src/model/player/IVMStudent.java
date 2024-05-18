@@ -8,6 +8,6 @@ import view.IVRoom;
 public interface IVMStudent {
     public ArrayList<IVItems> getItemList();
     public EPlayerState getPlayerState();
-    public IVRoom getRoom();
+    public IVRoom getVRoom();
     public int getTime();
 }

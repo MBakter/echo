@@ -1,5 +1,9 @@
 package view;
 
-public class VRoom {
-    
+import model.Room;
+
+public class VRoom implements IVRoom{
+    public VRoom(Room r){
+
+    }
 }

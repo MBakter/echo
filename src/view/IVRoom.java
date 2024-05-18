@@ -1,5 +1,5 @@
 package view;
 
-public class IVRoom {
+public interface IVRoom {
     
 }

@@ -7,16 +7,18 @@ import java.util.Random;
 import model.player.*;
 import test.IPrintStat;
 
-public class Logarlec implements IItem, IPrintStat {
+public class Logarlec implements IItem, IPrintStat, IVMLogarlec {
 
     private boolean fake;
     private String name;
+
     public String getName() {
         return name;
     }
+
     @Override
-    public String toString(){
-        return "Logarlec@"+Integer.toString(this.hashCode()).substring(0, 4);
+    public String toString() {
+        return "Logarlec@" + Integer.toString(this.hashCode()).substring(0, 4);
     }
 
     /*
@@ -25,6 +27,7 @@ public class Logarlec implements IItem, IPrintStat {
     public Logarlec(String s) {
         name = s;
     }
+
     public Logarlec() {
         Random rand = new Random();
         fake = rand.nextDouble() <= 0.2 ? true : false;
@@ -79,17 +82,19 @@ public class Logarlec implements IItem, IPrintStat {
         /* Do nothing */
         return false;
     }
-    
+
     @Override
     public void printStat(String name) {
         System.out.printf("%s fake %s%n", name, fake);
     }
+
     @Override
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
-        @Override
-    public void setState(ArrayList<String> args){
+
+    @Override
+    public void setState(ArrayList<String> args) {
         if (args.get(1).equals("fake")) {
             if (args.get(2).equals("true"))
                 fake = true;
@@ -97,4 +102,10 @@ public class Logarlec implements IItem, IPrintStat {
                 fake = false;
         }
     }
+
+    @Override
+    public boolean isFake() {
+        return fake;
+    }
+
 }

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements IMainWindow {
 
@@ -17,6 +18,15 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     IController controller;
     ICommands commands;
+
+    ArrayList<IVItems> VItemsOfCP;
+    IVStudent currentVPlayer;
+    IVRoom currentVRoom;
+    ArrayList<IVItems> itemsInRoom;
+    ArrayList<IVRoom> neighbouringRooms;
+    ArrayList<IVCleaner> cleanersInRoom;
+    ArrayList<IVTeacher> teachersInRoom;
+    ArrayList<IVStudent> studentsInRoom;
 
     private BackgroundPanel mainPanel;
     private BackgroundPanel optionPanel;
@@ -69,8 +79,8 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         for (int i = 0; i < 10; i++) {
             JButton teacher = new JButton();
-            //teacher.setContentAreaFilled(false);
-            //teacher.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
+            // teacher.setContentAreaFilled(false);
+            // teacher.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
             teacher.setPreferredSize(new Dimension(55, 100));
             teacherPanel.add(teacher);
         }
@@ -127,7 +137,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private JPanel createStudentPanel(GridBagConstraints c) {
         JPanel studentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         studentPanel.setOpaque(false);
-        c.insets = new Insets(0/*95*/, 0, 0, 0);
+        c.insets = new Insets(0/* 95 */, 0, 0, 0);
         c.gridx = 0;
         c.gridy = 4;
         c.gridwidth = 4;
@@ -135,7 +145,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.weighty = 3;
         c.ipadx = 0;
         c.ipady = 15;
-        
 
         for (int i = 0; i < 10; i++) {
             JButton student = new JButton();
@@ -146,7 +155,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         return studentPanel;
     }
 
-    //TODO: ActionListenerek a commandokhoz
+    // TODO: ActionListenerek a commandokhoz
     private JPanel createItemPanel(GridBagConstraints c) {
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         itemPanel.setOpaque(false);
@@ -189,7 +198,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 case 7:
                     item.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
                     break;
-            
+
                 default:
                     break;
             }
@@ -229,51 +238,56 @@ public class MainWindow extends JFrame implements IMainWindow {
         addKeyListener(new KeyListener() {
 
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println("ITT VAGYOK!!!!! : " + e.getKeyCode());
-                if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 
-                    //The menu Dialog
+                    // The menu Dialog
                     JDialog menuDialog = new JDialog();
                     menuDialog.setLayout(new FlowLayout());
                     menuDialog.add(new JLabel("Game paused"));
 
-                    //Resume Button
+                    // Resume Button
                     JButton resumeButton = new JButton("Resume");
-                    resumeButton.addActionListener(al -> { menuDialog.setVisible(false); });
+                    resumeButton.addActionListener(al -> {
+                        menuDialog.setVisible(false);
+                    });
                     menuDialog.add(resumeButton);
 
-                    //Exit Button
+                    // Exit Button
                     JButton exitButton = new JButton("Return to Main menu");
                     menuDialog.add(exitButton);
                     menuDialog.pack();
                     menuDialog.setVisible(true);
-                }    
+                }
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {}
-            
+            public void keyReleased(KeyEvent e) {
+            }
+
         });
     }
 
     public MainWindow(IController controller, String title) {
         super(title);
-        try{
+        try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(Exception e) {}
+        } catch (Exception e) {
+        }
 
         JFrame.setDefaultLookAndFeelDecorated(true);
-        
+
         this.controller = controller;
         mapName = controller.getMapName();
     }
 
     private void startGame() {
-        
+
         AddPopupMenu();
 
         gamePanel = new BackgroundPanel("textures" + File.separator + "BackgroundEdited.png");
@@ -287,31 +301,31 @@ public class MainWindow extends JFrame implements IMainWindow {
         pack();
 
     }
-    
+
     private void drawMenu() {
-        
+
         mainPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
         mainPanel.setLayout(new GridBagLayout());
-        
+
         JPanel menuPanel = new JPanel(new GridLayout(3, 1, 0, 50));
         menuPanel.setPreferredSize(new Dimension(500, 500));
         menuPanel.setOpaque(false);
 
         JButton startButton = new JButton("Start Game");
-        startButton.addActionListener(e -> {  
+        startButton.addActionListener(e -> {
             getContentPane().remove(mainPanel);
-            startGame();  
+            startGame();
             controller.startGame();
         });
         startButton.setContentAreaFilled(false);
         startButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         startButton.setFont(new Font("Courier New", Font.PLAIN, 50));
         menuPanel.add(startButton);
-        
+
         JButton optionsButton = new JButton("Options");
-        optionsButton.addActionListener(e -> {  
+        optionsButton.addActionListener(e -> {
             getContentPane().remove(mainPanel);
-            drawOptions();  
+            drawOptions();
         });
         optionsButton.setContentAreaFilled(false);
         optionsButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
@@ -319,7 +333,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         menuPanel.add(optionsButton);
 
         JButton exitButton = new JButton("Exit to desktop");
-        exitButton.addActionListener(e -> {    exitGame();  });
+        exitButton.addActionListener(e -> {
+            exitGame();
+        });
         exitButton.setContentAreaFilled(false);
         exitButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         exitButton.setFont(new Font("Courier New", Font.PLAIN, 50));
@@ -370,12 +386,14 @@ public class MainWindow extends JFrame implements IMainWindow {
         mapButton.setContentAreaFilled(false);
         mapButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         mapButton.setFont(new Font("Courier New", Font.PLAIN, 25));
-        mapButton.addActionListener(e -> { mapSelect(); });
+        mapButton.addActionListener(e -> {
+            mapSelect();
+        });
         c.gridx = 0;
         c.gridy = 3;
-        optionsPanel.add(mapButton, c); 
+        optionsPanel.add(mapButton, c);
 
-        SpinnerModel studentSelect = new SpinnerNumberModel(controller.getStudentNum(),1,10,1);
+        SpinnerModel studentSelect = new SpinnerNumberModel(controller.getStudentNum(), 1, 10, 1);
         c.gridx = 2;
         c.gridy = 0;
         c.ipadx = 10;
@@ -409,10 +427,10 @@ public class MainWindow extends JFrame implements IMainWindow {
         save.setContentAreaFilled(false);
         save.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         save.setFont(new Font("Courier New", Font.PLAIN, 25));
-        save.addActionListener(e -> { 
+        save.addActionListener(e -> {
             saveOptions(studentSelect.getValue(), teacherSelect.getValue(), cleanerSelect.getValue(), mapName);
             getContentPane().remove(optionPanel);
-            drawMenu(); 
+            drawMenu();
         });
         c.gridx = 0;
         c.gridy = 4;
@@ -426,9 +444,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         back.setContentAreaFilled(false);
         back.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         back.setFont(new Font("Courier New", Font.PLAIN, 25));
-        back.addActionListener(e -> { 
+        back.addActionListener(e -> {
             getContentPane().remove(optionPanel);
-            drawMenu(); 
+            drawMenu();
         });
         c.gridx = 1;
         c.gridy = 4;
@@ -448,11 +466,11 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     private void mapSelect() {
         File mapLocation = new File(controller.getMapFolderLocation());
-        if(!mapLocation.exists())
+        if (!mapLocation.exists())
             mapLocation.mkdir();
         JFileChooser fc = new JFileChooser(mapLocation);
 
-        if(fc.showDialog(this, "Select map") == JFileChooser.APPROVE_OPTION) {            
+        if (fc.showDialog(this, "Select map") == JFileChooser.APPROVE_OPTION) {
             mapName = fc.getSelectedFile().getName();
             mapNameL.setText(mapName.replace(".txt", ""));
         }
@@ -460,7 +478,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     private void saveOptions(Object sVal, Object tVal, Object cVal, Object mVal) {
-        controller.setParameters((int)sVal, (int)tVal, (int)cVal, (String)mVal);
+        controller.setParameters((int) sVal, (int) tVal, (int) cVal, (String) mVal);
     }
 
     private void exitGame() {
@@ -469,8 +487,10 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     @Override
     public void RefreshView() {
-        //TODO:
         mainPanel.revalidate();
+        VItemsOfCP = controller.getVItemsOfCP();
+        currentVPlayer = controller.getCP();
+        currentVRoom = currentVPlayer.getModelStudent().getVRoom();
     }
 
     @Override

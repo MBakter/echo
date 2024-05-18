@@ -8,7 +8,7 @@ import model.Room;
 import model.player.*;
 import test.IPrintStat;
 
-public class Transistor implements IItem, IPrintStat {
+public class Transistor implements IItem, IPrintStat, IVMTransistor {
     private boolean active;
     private Room room;
     private Transistor pair;
@@ -152,5 +152,10 @@ public class Transistor implements IItem, IPrintStat {
 
     @Override
     public void setState(ArrayList<String> args) {
+    }
+
+    @Override
+    public boolean isActive() {
+        return active;
     }
 }

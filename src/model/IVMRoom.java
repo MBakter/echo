@@ -6,8 +6,9 @@ import view.*;
 
 public interface IVMRoom {
     public ArrayList<IVStudent> getStudentList();
-    public ArrayList<IVStudent> getTeacherList();
-    public ArrayList<IVStudent> getCleanerList();
-    public ArrayList<IVStudent> getNeighBourList();
-    public ArrayList<IVStudent> getRoomState();
+    public ArrayList<IVTeacher> getTeacherList();
+    public ArrayList<IVCleaner> getCleanerList();
+    public ArrayList<IVRoom> getNeighBourList();
+    public ArrayList<ERoomEffects> getRoomState();
+    public ArrayList<IVItems> getRoomItems();
 }
