@@ -4,8 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.items.IItem;
 import model.player.*;
-import view.IMainWindow;
+import view.*;
 
 public class Controller implements IController {
     private static List<Student> students = new ArrayList<>();
@@ -18,6 +19,8 @@ public class Controller implements IController {
     private String mapName;
     private static final Timer timer = new Timer();
     private IMainWindow View;
+    
+    private static Student curPlayer = null;
 
     public Controller(String mapDirectoryPath) {
         this.mapDirectoryPath = mapDirectoryPath; 
@@ -52,6 +55,17 @@ public class Controller implements IController {
 
     private static void GameCycle() {
 
+        for (Student s : students) {
+            curPlayer = s;
+        }
+
+        for (Teacher t : teachers) {
+            
+        }
+
+        for (Cleaner c : cleaners) {
+            
+        }
         //while(true) {
             //TODO: Separate list moves
             /* for (Player curPlayer : players) {
@@ -128,4 +142,17 @@ public class Controller implements IController {
         return mapDirectoryPath;
     }
 
+    @Override
+    public IVStudent getCP() {
+        IVStudent s = new VStudent(curPlayer);
+        return s;
+    }
+
+    @Override
+    public ArrayList<IVItems> getVItemsOfCP() {
+        for (IItem item : curPlaye) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'getVItemsOfCP'");
+        }
+    }
 }

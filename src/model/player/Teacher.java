@@ -4,7 +4,7 @@ import model.ITimer;
 import model.Room;
 import model.items.IItem;
 
-public class Teacher extends Player {
+public class Teacher extends Player implements IVMTeacher {
 
     public Teacher(String s, ITimer t) {
         super(s,t);

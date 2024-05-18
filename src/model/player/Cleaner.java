@@ -3,7 +3,7 @@ package model.player;
 import model.*;
 import model.items.IItem;
 
-public class Cleaner extends Player {
+public class Cleaner extends Player implements IVMCleaner{
     public Cleaner(String s, ITimer t) {
         super(s, t);
     }
