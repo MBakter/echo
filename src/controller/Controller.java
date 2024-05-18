@@ -4,12 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.FileHandler;
 
 import model.items.IItem;
 import model.player.*;
+import test.FileHandling;
+import test.TestRunner;
 import view.*;
 
 public class Controller implements IController {
+
+    TestRunner tr;
+
     private static List<Student> students = new ArrayList<>();
     private static List<Teacher> teachers = new ArrayList<>();
     private static List<Cleaner> cleaners = new ArrayList<>();
@@ -98,9 +104,13 @@ public class Controller implements IController {
         if(!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
-        if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
+        FileHandling fh = new FileHandling();
+        tr = new TestRunner(fh.ReadTest(mapDirectoryPath + File.separator + mapName));
+/*         if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
             View.showError("University has not been built yet! Please select a valid map");
-        }   
+        }    */
+
+        
         Random r = new Random();
         for (Student s : students) {
             s.forceMove(Map.roomList.get(0));

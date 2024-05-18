@@ -13,6 +13,7 @@ public class Labyrinth {
 
     public List<Room> roomList;
 
+
     private Room findRoom(String roomName) {
         for (Room room : roomList) {
             if (room.getName().equals(roomName)) {
@@ -37,6 +38,10 @@ public class Labyrinth {
 
     public Labyrinth() {
         roomList = new ArrayList<Room>();
+    }
+
+    public void randomMap(){
+        
     }
 
     public void randomMove() {

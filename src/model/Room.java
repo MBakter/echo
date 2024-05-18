@@ -1,15 +1,11 @@
 package model;
 
-import java.lang.ref.Cleaner.Cleanable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import model.items.IItem;
 import model.player.Cleaner;
 import model.player.Player;
-import model.player.Cleaner;
-import model.player.EPlayerState;
 import model.player.Student;
 import model.player.Teacher;
 import test.IPrintStat;
@@ -23,7 +19,7 @@ import view.VRoom;
 import view.VStudent;
 import view.VTeacher;
 
-public class Room implements ICRoom, IVRoom, IPrintStat, IVMRoom {
+public class Room implements ICRoom, IPrintStat, IVMRoom {
     private int maxPlayer;
     private int stickyCounter = 5;
     private String name;

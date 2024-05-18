@@ -21,14 +21,14 @@ public class TestRunner {
         ROOM
     }
 
-    private Timer testTimer = new Timer();
-    private ArrayList<CommandData> commands;
-    private HashMap<String, IItem> items = new HashMap<>();
-    private HashMap<IItem, String> itemsReverse = new HashMap<>();
-    private HashMap<String, Player> players = new HashMap<>();
-    private HashMap<Player, String> playersReverse = new HashMap<>();
-    private HashMap<String, Room> rooms = new HashMap<>();
-    private HashMap<Room, String> roomsReverse = new HashMap<>();
+    public Timer testTimer = new Timer();
+    public ArrayList<CommandData> commands;
+    public HashMap<String, IItem> items = new HashMap<>();
+    public HashMap<IItem, String> itemsReverse = new HashMap<>();
+    public HashMap<String, Player> players = new HashMap<>();
+    public HashMap<Player, String> playersReverse = new HashMap<>();
+    public HashMap<String, Room> rooms = new HashMap<>();
+    public HashMap<Room, String> roomsReverse = new HashMap<>();
 
     public TestRunner(ArrayList<CommandData> l) {
         commands = l;

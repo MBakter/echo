@@ -302,7 +302,8 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     private void startGame() {
-
+        mainPanel.revalidate();
+        mainPanel.repaint();
         AddPopupMenu();
 
         gamePanel = new BackgroundPanel("textures" + File.separator + "BackgroundEdited.png");
