@@ -11,18 +11,28 @@ import java.awt.event.KeyListener;
 import java.io.File;
 
 public class MainWindow extends JFrame implements IMainWindow {
-
+    
+    //Kontroller
     IController controller;
 
+    //Panelek
     private BackgroundPanel mainPanel;
     private BackgroundPanel optionPanel;
     private BackgroundPanel gamePanel;
-    private JPanel roomPanel;
+    /* private JPanel roomPanel;
     private JPanel teacherPanel;
     private JPanel cleanerPanel;
     private JPanel roomItemPanel;
     private JPanel studentPanel;
-    private JPanel itemPanel;
+    private JPanel itemPanel; */
+
+    //Játékbeli objektumok
+    private JButton[] doors;
+    private JLabel[] teachers;
+    private JLabel[] cleaners;
+    private JButton[] roomItems;
+    private JLabel[] students;
+    private JLabel[] items;
 
     private String mapName;
 
@@ -37,15 +47,17 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipady = 0;
         c.weightx = 0;
         c.weighty = 0;
+        
+        doors = new JButton[12];
 
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4; i++) {
-                JButton door = new JButton();
+                doors[i + j*4] = new JButton();
                 GridBagConstraints c2 = new GridBagConstraints();
-                door.setPreferredSize(new Dimension(75, 150));
+                doors[i + j*4].setPreferredSize(new Dimension(75, 150));
                 c2.gridx = i;
                 c2.gridy = j;
-                roomPanel.add(door, c2);
+                roomPanel.add(doors[i + j*4], c2);
             }
         }
         return roomPanel;
@@ -63,12 +75,12 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipadx = 00;
         c.ipady = 00;
 
+        teachers = new JLabel[10];
         for (int i = 0; i < 10; i++) {
-            JButton teacher = new JButton();
+            teachers[i] = new JLabel();
             //teacher.setContentAreaFilled(false);
-            //teacher.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
-            teacher.setPreferredSize(new Dimension(55, 100));
-            teacherPanel.add(teacher);
+            teachers[i].setPreferredSize(new Dimension(55, 100));
+            teacherPanel.add(teachers[i]);
         }
 
         return teacherPanel;
@@ -88,12 +100,11 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipady = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
 
+        cleaners = new JLabel[10];
         for (int i = 0; i < 10; i++) {
-            JButton cleaner = new JButton();
-            cleaner.setContentAreaFilled(false);
-            cleaner.setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png"));
-            cleaner.setPreferredSize(new Dimension(65, 100));
-            cleanerPanel.add(cleaner);
+            cleaners[i] = new JLabel();
+            cleaners[i].setPreferredSize(new Dimension(65, 100));
+            cleanerPanel.add(cleaners[i]);
         }
 
         return cleanerPanel;
@@ -111,10 +122,12 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipadx = 60;
         c.ipady = 40;
 
+        roomItems = new JButton[10];
         for (int i = 0; i < 10; i++) {
-            JButton item = new JButton();
-            item.setPreferredSize(new Dimension(70, 100));
-            roomItemPanel.add(item);
+            roomItems[i] = new JButton();
+            roomItems[i].setContentAreaFilled(false);
+            roomItems[i].setPreferredSize(new Dimension(70, 100));
+            roomItemPanel.add(roomItems[i]);
         }
 
         return roomItemPanel;
@@ -132,11 +145,11 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipadx = 0;
         c.ipady = 15;
         
-
+        students = new JLabel[10];
         for (int i = 0; i < 10; i++) {
-            JButton student = new JButton();
-            student.setPreferredSize(new Dimension(150, 170));
-            studentPanel.add(student);
+            students[i] = new JLabel();
+            students[i].setPreferredSize(new Dimension(150, 170));
+            studentPanel.add(students[i]);
         }
 
         return studentPanel;
@@ -157,40 +170,11 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipady = 15;
         c.anchor = GridBagConstraints.SOUTH;
 
+        items = new JLabel[10];
         for (int i = 0; i < 10; i++) {
-            JButton item = new JButton();
-            item.setContentAreaFilled(false);
-            switch (i) {
-                case 0:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Beer.png"));
-                    break;
-                case 1:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
-                    break;
-                case 2:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
-                    break;
-                case 3:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
-                    break;
-                case 4:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Purifier.png"));
-                    break;
-                case 5:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Transistor.png"));
-                    break;
-                case 6:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
-                    break;
-                case 7:
-                    item.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
-                    break;
-            
-                default:
-                    break;
-            }
-            item.setPreferredSize(new Dimension(120, 150));
-            itemPanel.add(item);
+            items[i] = new JLabel();            
+            items[i].setPreferredSize(new Dimension(120, 150));
+            itemPanel.add(items[i]);
         }
 
         return itemPanel;
@@ -201,23 +185,12 @@ public class MainWindow extends JFrame implements IMainWindow {
         gamePanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        roomPanel = createRoomGrid(c);
-        gamePanel.add(roomPanel, c);
-
-        teacherPanel = createTeacherPanel(c);
-        gamePanel.add(teacherPanel, c);
-
-        cleanerPanel = createCleanerPanel(c);
-        gamePanel.add(cleanerPanel, c);
-
-        roomItemPanel = createRoomItemPanel(c);
-        gamePanel.add(roomItemPanel, c);
-
-        studentPanel = createStudentPanel(c);
-        gamePanel.add(studentPanel, c);
-
-        itemPanel = createItemPanel(c);
-        gamePanel.add(itemPanel, c);
+        gamePanel.add(createRoomGrid(c), c);
+        gamePanel.add(createTeacherPanel(c), c);
+        gamePanel.add(createCleanerPanel(c), c);
+        gamePanel.add(createRoomItemPanel(c), c);
+        gamePanel.add(createStudentPanel(c), c);
+        gamePanel.add(createItemPanel(c), c);
 
     }
 
