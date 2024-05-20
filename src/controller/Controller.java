@@ -25,12 +25,12 @@ public class Controller implements IController {
     private static IMainWindow View;
 
     static Student curPlayer = null;
-    private static int actionCounter = 2; 
+    private static int actionCounter = 2;
     private static int studentMoveCounter = 0;
     public static Commands commands = new Commands();
 
     public Controller(String mapDirectoryPath) {
-        this.mapDirectoryPath = mapDirectoryPath; 
+        this.mapDirectoryPath = mapDirectoryPath;
         mapName = "Mosquito.txt";
         students.add(new Student("s0", timer));
         teachers.add(new Teacher("t0", timer));
@@ -38,7 +38,7 @@ public class Controller implements IController {
 
     public void startGameWithGUI(IMainWindow viewInterface) {
         View = viewInterface;
-        //Map.generateFromFile(mapDirectoryPath);
+        // Map.generateFromFile(mapDirectoryPath);
         View.InitWindow();
 
     }
@@ -50,25 +50,28 @@ public class Controller implements IController {
 
     private static void StudentMove(Student s) {
         curPlayer = s;
-        actionCounter = 2;
+        if (curPlayer.getState().equals(EPlayerState.UNCONSCIOUS))
+            actionCounter = 0;
+        else
+            actionCounter = 2;
         View.RefreshView();
     }
 
     private static void TeacherMove(Teacher t) {
         Random r = new Random();
-        if (t.getRoom().getNeighbours().size()>=2)
-        t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size()-1)));
-        else if(t.getRoom().getNeighbours().size()==1)
-        t.move(t.getRoom().getNeighbours().get(0));
+        if (t.getRoom().getNeighbours().size() >= 2)
+            t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size() - 1)));
+        else if (t.getRoom().getNeighbours().size() == 1)
+            t.move(t.getRoom().getNeighbours().get(0));
         View.RefreshView();
     }
 
     private static void CleanerMove(Cleaner c) {
         Random r = new Random();
-        if (c.getRoom().getNeighbours().size()>=2)
-        c.move(c.getRoom().getNeighbours().get(r.nextInt(c.getRoom().getNeighbours().size()-1)));
-        else if(c.getRoom().getNeighbours().size()==1)
-        c.move(c.getRoom().getNeighbours().get(0));
+        if (c.getRoom().getNeighbours().size() >= 2)
+            c.move(c.getRoom().getNeighbours().get(r.nextInt(c.getRoom().getNeighbours().size() - 1)));
+        else if (c.getRoom().getNeighbours().size() == 1)
+            c.move(c.getRoom().getNeighbours().get(0));
         View.RefreshView();
     }
 
@@ -78,7 +81,7 @@ public class Controller implements IController {
     }
 
     public static boolean CanPlayerMove() {
-        if(actionCounter == 0) {
+        if (actionCounter == 0) {
             View.showError("You ran out of moves!");
             return false;
         }
@@ -88,8 +91,8 @@ public class Controller implements IController {
     @Override
     public void EndTurn() {
         studentMoveCounter++;
-        
-        if(studentMoveCounter == students.size()) {
+
+        if (studentMoveCounter == students.size()) {
             for (Teacher teacher : teachers) {
                 TeacherMove(teacher);
             }
@@ -103,30 +106,32 @@ public class Controller implements IController {
         StudentMove(students.get(studentMoveCounter));
     }
 
-    /* private static void GameCycle() {
-        for (Student student : students) {
-            StudentMove(student);
-        }
-        for (Teacher teacher : teachers) {
-            TeacherMove(teacher);
-        }
-        for (Cleaner cleaner : cleaners) {
-            CleanerMove(cleaner);
-        }
-    } */
+    /*
+     * private static void GameCycle() {
+     * for (Student student : students) {
+     * StudentMove(student);
+     * }
+     * for (Teacher teacher : teachers) {
+     * TeacherMove(teacher);
+     * }
+     * for (Cleaner cleaner : cleaners) {
+     * CleanerMove(cleaner);
+     * }
+     * }
+     */
 
     private boolean isGameSet() {
-        if(students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
+        if (students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
             return false;
         return true;
     }
 
     @Override
     public void startGame() {
-        if(!isGameSet()) {
+        if (!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
-        if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
+        if (!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
             View.showError("University has not been built yet! Please select a valid map");
         }
 
@@ -137,35 +142,37 @@ public class Controller implements IController {
             s.forceMove(Map.roomList.get(0));
         }
         for (Teacher t : teachers) {
-            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
         }
         for (Cleaner c : cleaners) {
-            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
         }
 
         StudentMove(students.get(0));
 
-/*         //TESZT***************************************
-        Student s = new Student();
-        Room r = new Room();
-        Room r2 = new Room();
-        Room r3 = new Room();
-        r.addNeighbour(r2);
-        r.addNeighbour(r3);
-        r2.addNeighbour(r);
-        r3.addNeighbour(r2);
-        r.addItem(new TVSZ());
-        r.addItem(new Purifier("Purifi"));
-        r2.addItem(new Logarlec());
-        s.setRoom(r);
-        System.out.println("Room " + r.toString() + " created");
-        System.out.println("Room " + r2.toString() + " created");
-        System.out.println("Room " + r3.toString() + " created");
-        System.out.println("Student " + s.toString() + " created");
-
-        curPlayer = s;
-
-        View.RefreshView(); */
+        /*
+         * //TESZT***************************************
+         * Student s = new Student();
+         * Room r = new Room();
+         * Room r2 = new Room();
+         * Room r3 = new Room();
+         * r.addNeighbour(r2);
+         * r.addNeighbour(r3);
+         * r2.addNeighbour(r);
+         * r3.addNeighbour(r2);
+         * r.addItem(new TVSZ());
+         * r.addItem(new Purifier("Purifi"));
+         * r2.addItem(new Logarlec());
+         * s.setRoom(r);
+         * System.out.println("Room " + r.toString() + " created");
+         * System.out.println("Room " + r2.toString() + " created");
+         * System.out.println("Room " + r3.toString() + " created");
+         * System.out.println("Student " + s.toString() + " created");
+         * 
+         * curPlayer = s;
+         * 
+         * View.RefreshView();
+         */
 
     }
 
@@ -174,13 +181,13 @@ public class Controller implements IController {
         students.clear();
         teachers.clear();
         cleaners.clear();
-        for (int i = 0; i < studentNum; i++) 
+        for (int i = 0; i < studentNum; i++)
             students.add(new Student("S" + i, timer));
 
-        for (int i = 0; i < teacherNum; i++) 
+        for (int i = 0; i < teacherNum; i++)
             teachers.add(new Teacher("T" + i, timer));
 
-        for (int i = 0; i < cleanerNum; i++) 
+        for (int i = 0; i < cleanerNum; i++)
             cleaners.add(new Cleaner("C" + i, timer));
 
         this.mapName = mapName;
@@ -188,22 +195,22 @@ public class Controller implements IController {
 
     @Override
     public int getStudentNum() {
-        return students.size();    
+        return students.size();
     }
 
     @Override
     public int getTeacherNum() {
-        return teachers.size();    
+        return teachers.size();
     }
 
     @Override
     public int getCleanerNum() {
-        return cleaners.size();        
+        return cleaners.size();
     }
 
     @Override
     public String getMapName() {
-        return mapName;    
+        return mapName;
     }
 
     @Override
