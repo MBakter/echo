@@ -216,6 +216,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         
         JButton turnEndButton = new JButton("Finish Turn");
+        turnEndButton.addActionListener(e -> { controller.EndTurn(); });
         
         turnEndButton.setPreferredSize(new Dimension(400, 100));
 

@@ -9,7 +9,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import controller.IController;
-import model.items.IItem;
 import model.items.IVMMask;
 import model.items.Mask;
 

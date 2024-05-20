@@ -10,7 +10,6 @@ import javax.swing.JPopupMenu;
 
 import controller.IController;
 import model.items.Beer;
-import model.items.IItem;
 import model.items.IVMBeer;
 
 public class VBeer implements IVItems{

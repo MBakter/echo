@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.*;
-import model.items.Logarlec;
-import model.items.Purifier;
-import model.items.TVSZ;
 import model.player.*;
 import view.IMainWindow;
 import view.IVItems;
@@ -29,6 +25,7 @@ public class Controller implements IController {
 
     static Student curPlayer = null;
     private static int actionCounter = 2; 
+    private static int studentMoveCounter = 0;
     public static Commands commands = new Commands();
 
     public Controller(String mapDirectoryPath) {
@@ -77,7 +74,23 @@ public class Controller implements IController {
         return true;
     }
 
-    private static void GameCycle() {
+    @Override
+    public void EndTurn() {
+        studentMoveCounter++;
+        
+        if(studentMoveCounter == students.size()) {
+            for (Teacher teacher : teachers) {
+                TeacherMove(teacher);
+            }
+            for (Cleaner cleaner : cleaners) {
+                CleanerMove(cleaner);
+            }
+            studentMoveCounter = 0;
+        }
+        StudentMove(students.get(studentMoveCounter));
+    }
+
+    /* private static void GameCycle() {
         for (Student student : students) {
             StudentMove(student);
         }
@@ -87,7 +100,7 @@ public class Controller implements IController {
         for (Cleaner cleaner : cleaners) {
             CleanerMove(cleaner);
         }
-    }
+    } */
 
     private boolean isGameSet() {
         if(students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
@@ -117,7 +130,7 @@ public class Controller implements IController {
             c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
         }
 
-        GameCycle();
+        StudentMove(students.get(0));
 
 /*         //TESZT***************************************
         Student s = new Student();
