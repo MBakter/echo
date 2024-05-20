@@ -96,8 +96,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         teachers = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             teachers[i] = new JLabel();
-            teachers[i].setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
-            //teacher.setContentAreaFilled(false);
+            /* teachers[i].setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png")); */
             teachers[i].setPreferredSize(new Dimension(55, 100));
             teacherPanel.add(teachers[i]);
         }
@@ -122,7 +121,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         cleaners = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             cleaners[i] = new JLabel();
-            cleaners[i].setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png"));
+            /* cleaners[i].setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png")); */
             cleaners[i].setPreferredSize(new Dimension(65, 100));
             cleanerPanel.add(cleaners[i]);
         }
@@ -145,7 +144,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         roomItems = new JButton[10];
         for (int i = 0; i < 10; i++) {
             roomItems[i] = new JButton();
-            roomItems[i].setIcon(new ImageIcon("textures" + File.separator + "TVSZRoom.png"));
+            /* roomItems[i].setIcon(new ImageIcon("textures" + File.separator + "TVSZRoom.png")); */
             roomItems[i].setContentAreaFilled(false);
             roomItems[i].setPreferredSize(new Dimension(70, 100));
             roomItemPanel.add(roomItems[i]);
@@ -169,7 +168,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         students = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             students[i] = new JLabel();
-            students[i].setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
+            /* students[i].setIcon(new ImageIcon("textures" + File.separator + "Student.png")); */
             students[i].setPreferredSize(new Dimension(150, 170));
             studentPanel.add(students[i]);
         }
@@ -194,7 +193,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         items = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             items[i] = new JLabel();
-            items[i].setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));      
+            /* items[i].setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));   */    
             items[i].setPreferredSize(new Dimension(120, 120));
             itemPanel.add(items[i]);
         }
