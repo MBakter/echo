@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import controller.IController;
-import model.Room;
 import model.items.IItem;
 import model.items.IVMPurifier;
 import model.items.Purifier;

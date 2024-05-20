@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.*;
 import model.items.Logarlec;
@@ -77,22 +78,15 @@ public class Controller implements IController {
     }
 
     private static void GameCycle() {
-
-
-        //while(true) {
-            //TODO: Separate list moves
-            /* for (Player curPlayer : players) {
-                if(curPlayer instanceof Student) 
-                    StudentMove((Student)curPlayer);
-                if(curPlayer instanceof Teacher)
-                    TeacherMove((Teacher)curPlayer);
-                if(curPlayer instanceof Cleaner)
-                    CleanerMove((Cleaner)curPlayer);
-                Map.randomMove();
-            } */
-           // if(endOfGame)
-            //    break;
-        //}
+        for (Student student : students) {
+            StudentMove(student);
+        }
+        for (Teacher teacher : teachers) {
+            TeacherMove(teacher);
+        }
+        for (Cleaner cleaner : cleaners) {
+            CleanerMove(cleaner);
+        }
     }
 
     private boolean isGameSet() {
@@ -112,9 +106,20 @@ public class Controller implements IController {
 
         Map.placeItems(timer);
 
+        Random r = new Random();
+        for (Student s : students) {
+            s.forceMove(Map.roomList.get(0));
+        }
+        for (Teacher t : teachers) {
+            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+        }
+        for (Cleaner c : cleaners) {
+            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+        }
+
         GameCycle();
 
-        //TESZT***************************************
+/*         //TESZT***************************************
         Student s = new Student();
         Room r = new Room();
         Room r2 = new Room();
@@ -134,7 +139,7 @@ public class Controller implements IController {
 
         curPlayer = s;
 
-        View.RefreshView();
+        View.RefreshView(); */
 
     }
 

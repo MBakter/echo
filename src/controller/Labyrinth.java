@@ -12,7 +12,7 @@ import model.items.*;
 
 public class Labyrinth {
 
-    private List<Room> roomList;
+    List<Room> roomList;
 
     private Room findRoom(String roomName) {
         for (Room room : roomList) {
