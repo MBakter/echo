@@ -56,6 +56,10 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return name;
     }
 
+    public List<IItem> getItemList(){
+        return itemList;
+    }
+
     /**
      * Visszaadja a szobában lévő oktatokat
      *

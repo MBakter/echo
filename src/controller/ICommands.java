@@ -1,11 +1,11 @@
 package controller;
 
-import view.*;
-
 public interface ICommands {
-    public void interact(EInteract option, IVStudent curPlayer, IVItems item);
-    
-    public void interact(EInteractTransistor option, IVStudent curPlayer, VTransistor item);
+    public void pickUpItem(int index);
+    public void dropItem(int index);
+    public void useItem(int index);
+    public void activateTransistor(int index);
+    public void pairTransistor(int index1, int index2);
+    public void enterRoom(int index);
 
-    //TODO egyéb commandok
 }

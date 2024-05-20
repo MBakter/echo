@@ -8,6 +8,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 import model.Room;
+import model.items.Beer;
+import model.items.Cheese;
+import model.items.IItem;
+import model.items.Logarlec;
+import model.items.Mask;
+import model.items.Purifier;
+import model.items.Sponge;
+import model.items.TVSZ;
+import model.items.Transistor;
 
 public class Labyrinth {
 
@@ -65,6 +74,49 @@ public class Labyrinth {
         }
     }
     
+    public void placeItems(Timer t){
+        ArrayList<IItem> items = new ArrayList<>();
+
+        Cheese c1 = new Cheese("c1",t);
+        Cheese c2 = new Cheese("c2",t);
+        Transistor t1 = new Transistor("t1");
+        Transistor t2 = new Transistor("t2");
+        Transistor t3 = new Transistor("t3");
+        Logarlec l1 = new Logarlec("l1");
+        TVSZ tvsz1 = new TVSZ("tvsz1");
+        TVSZ tvsz2 = new TVSZ("tvsz2");
+        Purifier p1 = new Purifier("p1");
+        Purifier p2 = new Purifier("p2");
+        Beer b1 = new Beer(t);
+        Beer b2 = new Beer(t);
+        Sponge s1 = new Sponge(t);
+        Mask m1 = new Mask(t);
+        Mask m2 = new Mask(t);
+
+        items.add(c1);
+        items.add(c2);
+        items.add(t1);
+        items.add(t2);
+        items.add(t3);
+        items.add(l1);
+        items.add(tvsz1);
+        items.add(tvsz2);
+        items.add(p1);
+        items.add(p2);
+        items.add(b1);
+        items.add(b2);
+        items.add(s1);
+        items.add(m1);
+        items.add(m2);
+
+        Random r = new Random();
+
+        for (IItem iItem : items) {
+            int randomNum = r.nextInt(roomList.size()-1);
+            roomList.get(randomNum).addItem(iItem);
+        }
+    }
+
     public boolean generateFromFile(String filename) {
         
         File file = new File(filename);

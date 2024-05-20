@@ -27,7 +27,7 @@ public class Controller implements IController {
     private static final Timer timer = new Timer();
     private static IMainWindow View;
     
-    private static Student curPlayer = null;
+    static Student curPlayer = null;
 
     private static boolean gameOver = false;
 
@@ -104,13 +104,12 @@ public class Controller implements IController {
         if(!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
-        FileHandling fh = new FileHandling();
-        tr = new TestRunner(fh.ReadTest(mapDirectoryPath + File.separator + mapName));
-/*         if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
+         if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
             View.showError("University has not been built yet! Please select a valid map");
-        }    */
+        }    
 
-        
+        Map.placeItems(timer);
+
         Random r = new Random();
         for (Student s : students) {
             s.forceMove(Map.roomList.get(0));

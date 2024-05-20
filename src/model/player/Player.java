@@ -24,6 +24,10 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     Player() {
     }
 
+    public List<IItem> getItems(){
+        return itemList;
+    }
+
     public String getName() {
         return name;
     }
