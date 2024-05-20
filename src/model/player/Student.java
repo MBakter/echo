@@ -1,10 +1,16 @@
 package model.player;
 
+import java.util.ArrayList;
+
 import model.ITimer;
 import model.Room;
 import model.items.IItem;
+import view.IVItems;
+import view.IVRoom;
+import view.VRoom;
 
-public class Student extends Player {
+public class Student extends Player implements IVMStudent{
+    private static int TIME = 4;
     public Student(String s, ITimer t) {
         super(s,t);
     }
@@ -78,6 +84,26 @@ public class Student extends Player {
                 return;
             }
         }
+    }
+    @Override
+    public ArrayList<IVItems> getItemList() {
+        ArrayList<IVItems> vItemList = new ArrayList<>();
+        for (IItem item : itemList) {
+            item.acceptView(vItemList);
+        }
+        return vItemList;
+    }
+    @Override
+    public EPlayerState getPlayerState() {
+        return state;
+    }
+    @Override
+    public int getTime() {
+        return TIME;
+    }
+    @Override
+    public IVRoom getVRoom(){
+            return new VRoom(room);
     }
 
 }

@@ -7,8 +7,10 @@ import controller.Timer;
 import model.*;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VBeer;
 
-public class Beer implements IItem, ITimedEntity, IPrintStat {
+public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
     private ITimer timer;
     private EBeerState state; // Default: INACTIVE
     private static int TIME = 5;
@@ -43,7 +45,7 @@ public class Beer implements IItem, ITimedEntity, IPrintStat {
     public void useItem(Player p) {
         timer.startTimer(this, TIME);
 
-        state = EBeerState.RUNNING;    
+        state = EBeerState.RUNNING;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class Beer implements IItem, ITimedEntity, IPrintStat {
     @Override
     public void dropItem(Player p) {
         timer.pauseTimer(this);
-        
+
         p.removeItem(this);
     }
 
@@ -113,10 +115,28 @@ public class Beer implements IItem, ITimedEntity, IPrintStat {
         System.out.printf("%s timer %d%n", name, TIME);
         System.out.printf("%s state %s%n", name, state);
     }
+
     @Override
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
-        @Override
-    public void setState(ArrayList<String> args){}
+
+    @Override
+    public void setState(ArrayList<String> args) {
+    }
+
+    @Override
+    public int getTime() {
+        return TIME;
+    }
+
+    @Override
+    public EBeerState getState() {
+        return state;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VBeer(this));
+    }
 }

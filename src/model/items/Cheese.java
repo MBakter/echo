@@ -7,20 +7,23 @@ import controller.Timer;
 import model.*;
 import model.player.*;
 import test.IPrintStat;
+import view.IVItems;
+import view.VCheese;
 
-public class Cheese implements IItem, ITimedEntity, IPrintStat {
+public class Cheese implements IItem, ITimedEntity, IPrintStat, IVMCheese {
     private ITimer timer;
     private boolean isUsed;
     private Room room;
     private static int TIME = 2;
     private String name;
+
     public String getName() {
         return name;
     }
 
     @Override
-    public String toString(){
-        return "Cheese@"+Integer.toString(this.hashCode()).substring(0, 4);
+    public String toString() {
+        return "Cheese@" + Integer.toString(this.hashCode()).substring(0, 4);
     }
 
     /*
@@ -33,6 +36,7 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat {
         timer = t;
         t.addEntity(this);
     }
+
     public Cheese(Timer t) {
         timer = t;
         t.addEntity(this);
@@ -40,9 +44,9 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat {
 
     @Override
     public void useItem(Player p) {
-        if(isUsed) 
+        if (isUsed)
             return;
-        
+
         timer.startTimer(this, TIME);
         room = p.getRoom();
 
@@ -99,18 +103,36 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat {
     public void timerEnd() {
         room.removeEffect(ERoomEffects.POISONED);
     }
-    
+
     @Override
     public void printStat(String name) {
-        System.out.printf("%s timer %d%n",name, TIME);
-        System.out.printf("%s isUsed %s%n",name, isUsed);
+        System.out.printf("%s timer %d%n", name, TIME);
+        System.out.printf("%s isUsed %s%n", name, isUsed);
         room = new Room("NOT IMPLEMENTED");
-        System.out.printf("%s room %s%n",name,room.getName());
+        System.out.printf("%s room %s%n", name, room.getName());
     }
+
     @Override
     public void statesOptions() {
         System.out.printf("\tSTATES");
     }
-        @Override
-    public void setState(ArrayList<String> args){}
+
+    @Override
+    public void setState(ArrayList<String> args) {
+    }
+
+    @Override
+    public int getTime() {
+        return TIME;
+    }
+
+    @Override
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    @Override
+    public void acceptView(ArrayList<IVItems> l) {
+        l.add(new VCheese(this));
+    }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 import model.player.*;
+import view.IVItems;
 
 public interface IItem{
     public String getName();
@@ -79,4 +80,9 @@ public interface IItem{
      * Egyébként false a visszatérési értéke
      */
     public boolean TeacherAttackable(Student s);
+
+    /*
+     * Visitor design pattern view-beli megfelelő létrehozásához
+     */
+    public void acceptView(ArrayList<IVItems> l);
 }

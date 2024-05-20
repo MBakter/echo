@@ -1,10 +1,13 @@
 package model.player;
 
+import java.util.ArrayList;
+
 import model.ITimer;
 import model.Room;
 import model.items.IItem;
+import view.IVItems;
 
-public class Teacher extends Player {
+public class Teacher extends Player implements IVMTeacher {
 
     public Teacher(String s, ITimer t) {
         super(s,t);
@@ -43,6 +46,21 @@ public class Teacher extends Player {
                 return;
             }
         }
+    }
+    @Override
+    public EPlayerState getPlayerState() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayerState'");
+    }
+    @Override
+    public ArrayList<IVItems> getItems() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getItems'");
+    }
+    @Override
+    public int getTime() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTime'");
     }
 
 }
