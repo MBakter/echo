@@ -193,7 +193,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         items = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             items[i] = new JLabel();
-            /* items[i].setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));   */    
+            /* items[i].setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));   */ 
+               
             items[i].setPreferredSize(new Dimension(120, 120));
             itemPanel.add(items[i]);
         }
@@ -492,8 +493,34 @@ public class MainWindow extends JFrame implements IMainWindow {
         currentVPlayer = (VStudent) controller.getCP();
         currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
 
+        //Doors
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {
-            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[11- i], controller);
+            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[9- i], controller);
+        }
+
+        //Player's items
+        for (int i = 0; i < currentVPlayer.getModelStudent().getItemList().size(); i++) {
+            currentVPlayer.getModelStudent().getItemList().get(i).draw(currentVPlayer, items[9-i], controller);
+        }
+
+        //Items on the floor
+        for (int i = 0; i < currentVRoom.getModelRoom().getRoomItems().size(); i++) {
+            currentVRoom.getModelRoom().getRoomItems().get(i).draw(currentVPlayer, roomItems[9- i], controller);
+        }
+
+        //Teachers
+        for (int i = 0; i < currentVRoom.getModelRoom().getTeacherList().size(); i++) {
+            currentVRoom.getModelRoom().getTeacherList().get(i).draw(currentVPlayer, teachers[9- i], controller);
+        }
+
+        //Cleaners
+        for (int i = 0; i < currentVRoom.getModelRoom().getCleanerList().size(); i++) {
+            currentVRoom.getModelRoom().getCleanerList().get(i).draw(currentVPlayer, cleaners[9- i], controller);
+        }
+
+        //Students
+        for (int i = 0; i < currentVRoom.getModelRoom().getStudentList().size(); i++) {
+            currentVRoom.getModelRoom().getStudentList().get(i).draw(currentVPlayer, students[9- i], controller);
         }
     }
 

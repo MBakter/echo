@@ -22,10 +22,10 @@ public class VStudent implements IVStudent{
     }
 
     @Override
-    public void draw(IVStudent curPlayer, JButton btn, IController c) {
+    public void draw(IVStudent curPlayer, JLabel label, IController c) {
         System.out.println("VSTUDENT DRAW");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
+        label.setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
     }
 
 

@@ -21,10 +21,10 @@ public class VCleaner implements IVCleaner{
     }
 
     @Override
-    public void draw(IVStudent curPlayer, JButton btn, IController c) {
+    public void draw(IVStudent curPlayer, JLabel label, IController c) {
         System.out.println("VCLEANER DRAW");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png"));
+        label.setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png"));
     }
     
 }

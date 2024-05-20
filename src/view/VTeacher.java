@@ -22,10 +22,10 @@ public class VTeacher implements IVTeacher {
     }
 
     @Override
-    public void draw(IVStudent curPlayer, JButton btn, IController c) {
+    public void draw(IVStudent curPlayer, JLabel label, IController c) {
         System.out.println("VTEACHER DRAW");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
+        label.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
     }
 
  
