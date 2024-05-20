@@ -1,13 +1,10 @@
 package view;
 
-import java.awt.*;
-import java.awt.Insets;
 import java.io.File;
 
 import javax.swing.*;
 
 import controller.IController;
-import model.items.IItem;
 import model.player.IVMStudent;
 import model.player.Student;
 
