@@ -6,7 +6,7 @@ import view.IVItems;
 import view.IVRoom;
 
 public interface IVMStudent {
-    public ArrayList<IVItems> getItemList();
+    public ArrayList<IVItems> getVItemList();
     public EPlayerState getPlayerState();
     public IVRoom getVRoom();
     public int getTime();

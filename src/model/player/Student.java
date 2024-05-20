@@ -86,7 +86,7 @@ public class Student extends Player implements IVMStudent{
         }
     }
     @Override
-    public ArrayList<IVItems> getItemList() {
+    public ArrayList<IVItems> getVItemList() {
         ArrayList<IVItems> vItemList = new ArrayList<>();
         for (IItem item : itemList) {
             item.acceptView(vItemList);

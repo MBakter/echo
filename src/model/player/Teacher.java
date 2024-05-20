@@ -53,7 +53,7 @@ public class Teacher extends Player implements IVMTeacher {
         throw new UnsupportedOperationException("Unimplemented method 'getPlayerState'");
     }
     @Override
-    public ArrayList<IVItems> getItems() {
+    public ArrayList<IVItems> getVItems() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getItems'");
     }

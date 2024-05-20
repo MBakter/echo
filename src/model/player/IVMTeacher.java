@@ -6,6 +6,6 @@ import view.IVItems;
 
 public interface IVMTeacher {
     public EPlayerState getPlayerState();
-    public ArrayList<IVItems> getItems();
+    public ArrayList<IVItems> getVItems();
     public int getTime();
 }
