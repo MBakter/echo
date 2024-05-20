@@ -21,6 +21,8 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         timer = t;
     }
 
+
+
     public String getName() {
         return name;
     }
