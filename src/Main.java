@@ -1,3 +1,4 @@
+
 import controller.Controller;
 import view.MainWindow;
 
@@ -11,6 +12,7 @@ public class Main {
         view.setVisible(true);
 
         controller.startGameWithGUI(view);
-
+        
+        
     } 
 }

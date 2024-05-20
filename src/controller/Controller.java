@@ -4,8 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.*;
+import model.items.Logarlec;
+import model.items.Purifier;
+import model.items.TVSZ;
 import model.player.*;
 import view.IMainWindow;
+import view.IVItems;
+import view.IVStudent;
+import view.VStudent;
 
 public class Controller implements IController {
     private static List<Student> students = new ArrayList<>();
@@ -18,6 +25,9 @@ public class Controller implements IController {
     private String mapName;
     private static final Timer timer = new Timer();
     private IMainWindow View;
+
+    private static Student curPlayer = null;
+    private static int turn = 0;
 
     public Controller(String mapDirectoryPath) {
         this.mapDirectoryPath = mapDirectoryPath; 
@@ -39,7 +49,7 @@ public class Controller implements IController {
     }
 
     private static void StudentMove(Student s) {
-        //List all options
+
     }
 
     private static void TeacherMove(Teacher t) {
@@ -51,6 +61,7 @@ public class Controller implements IController {
     }
 
     private static void GameCycle() {
+
 
         //while(true) {
             //TODO: Separate list moves
@@ -84,6 +95,27 @@ public class Controller implements IController {
         }
 
         GameCycle();
+
+        //TESZT***************************************
+        Student s = new Student();
+        Room r = new Room();
+        Room r2 = new Room();
+        Room r3 = new Room();
+        r.addNeighbour(r2);
+        r.addNeighbour(r3);
+        r.addItem(new TVSZ());
+        r.addItem(new Purifier("Purifi"));
+        r2.addItem(new Logarlec());
+        s.setRoom(r);
+        System.out.println("Room " + r.toString() + " created");
+        System.out.println("Room " + r2.toString() + " created");
+        System.out.println("Room " + r3.toString() + " created");
+        System.out.println("Student " + s.toString() + " created");
+
+        curPlayer = s;
+
+        View.RefreshView();
+
     }
 
     @Override
@@ -126,6 +158,17 @@ public class Controller implements IController {
     @Override
     public String getMapFolderLocation() {
         return mapDirectoryPath;
+    }
+
+    @Override
+    public IVStudent getCP() {
+        IVStudent s = new VStudent(curPlayer);
+        return s;
+    }
+
+    @Override
+    public ArrayList<IVItems> getVItemsOfCP() {
+        return curPlayer.getItemList();
     }
 
 }

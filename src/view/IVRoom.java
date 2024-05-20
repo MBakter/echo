@@ -1,14 +1,12 @@
 package view;
 
-import java.awt.GridBagConstraints;
-
-import javax.swing.JPanel;
+import javax.swing.JButton;
 
 import model.IVMRoom;
 
 public interface IVRoom {
     IVMRoom getModelRoom();
-    JPanel draw(IVStudent curPlayer, GridBagConstraints c);
+    void draw(IVStudent curPlayer, JButton c);
     //Ezeket az Alex írta valami Observer minta megvalósításához, elvileg nem fog kelleni
 /*     public boolean add(Student s);
 

@@ -8,14 +8,16 @@ import controller.IController;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Console;
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements IMainWindow {
     
-    //Kontroller
+    //Kontroller************
     IController controller;
 
-    //Panelek
+    //Panelek****************
     private BackgroundPanel mainPanel;
     private BackgroundPanel optionPanel;
     private BackgroundPanel gamePanel;
@@ -26,13 +28,23 @@ public class MainWindow extends JFrame implements IMainWindow {
     private JPanel studentPanel;
     private JPanel itemPanel; */
 
-    //Játékbeli objektumok
+    //Játékbeli objektumok helye*******
     private JButton[] doors;
     private JLabel[] teachers;
     private JLabel[] cleaners;
     private JButton[] roomItems;
     private JLabel[] students;
     private JLabel[] items;
+
+    //Játékbeli objektumok listája*****
+    ArrayList<IVItems> VItemsOfCP;
+    VStudent currentVPlayer;
+    VRoom currentVRoom;
+    ArrayList<IVItems> itemsInRoom;
+    ArrayList<IVRoom> neighbouringRooms;
+    ArrayList<IVCleaner> cleanersInRoom;
+    ArrayList<IVTeacher> teachersInRoom;
+    ArrayList<IVStudent> studentsInRoom;
 
     private String mapName;
 
@@ -53,7 +65,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4; i++) {
                 doors[i + j*4] = new JButton();
-                doors[i + j*4].setIcon(new ImageIcon("textures" + File.separator + "Door.png"));
+                //doors[i + j*4].setIcon(new ImageIcon("textures" + File.separator + "Door.png"));
                 GridBagConstraints c2 = new GridBagConstraints();
                 doors[i + j*4].setPreferredSize(new Dimension(75, 150));
                 c2.gridx = i;
@@ -443,8 +455,14 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     @Override
     public void RefreshView() {
-        //TODO:
-        mainPanel.revalidate();
+        //doors[0].setIcon(new ImageIcon("textures" + File.separator + "Door.png"));
+        
+        currentVPlayer = (VStudent) controller.getCP();
+        currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
+
+        for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {
+            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[11- i]);
+        }
     }
 
     @Override
