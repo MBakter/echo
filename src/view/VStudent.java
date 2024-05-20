@@ -2,10 +2,12 @@ package view;
 
 import java.awt.*;
 import java.awt.Insets;
+import java.io.File;
 
 import javax.swing.*;
 
 import controller.IController;
+import model.items.IItem;
 import model.player.IVMStudent;
 import model.player.Student;
 
@@ -23,9 +25,10 @@ public class VStudent implements IVStudent{
     }
 
     @Override
-    public JPanel draw(IVStudent curPlayer, JButton btn, IController c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+    public void draw(IVStudent curPlayer, JButton btn, IController c) {
+        System.out.println("VSTUDENT DRAW");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
     }
 
 

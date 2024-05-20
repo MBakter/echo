@@ -23,8 +23,9 @@ public class VCleaner implements IVCleaner{
 
     @Override
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+        System.out.println("VCLEANER DRAW");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Cleaner.png"));
     }
     
 }

@@ -1,21 +1,28 @@
 package view;
 
 import java.awt.GridBagConstraints;
+import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.IController;
 import model.items.Beer;
+import model.items.IItem;
+import model.items.IVMBeer;
 
 public class VBeer implements IVItems{
+    IVMBeer modelBeer;
     public VBeer(Beer b){
-
+        modelBeer = b;
     }
 
     @Override
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+        System.out.println("VBEER DRAW");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
+        btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelBeer); });
     }
 }

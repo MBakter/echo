@@ -24,8 +24,9 @@ public class VTeacher implements IVTeacher {
 
     @Override
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+        System.out.println("VTEACHER DRAW");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
     }
 
  
