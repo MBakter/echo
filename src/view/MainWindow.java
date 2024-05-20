@@ -506,11 +506,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         currentVPlayer = (VStudent) controller.getCP();
         currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
 
-        for (ERoomEffects re : currentVRoom.getModelRoom().getRoomState()) {
-            if(re == ERoomEffects.POISONED) {
-                gamePanel.setBackground("textures" + File.separator + "BackgroundBlurred.png");
-            }
-        }
+        if(currentVRoom.getModelRoom().isPoisonous()) 
+            gamePanel.setBackground("textures" + File.separator + "BackgroundBlurred.png");
 
         //Doors
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {

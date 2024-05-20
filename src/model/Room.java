@@ -528,4 +528,12 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return l;
     }
 
+    @Override
+    public boolean isPoisonous() {
+        for (ERoomEffects e : effects) 
+            if(e == ERoomEffects.POISONED)
+                return true;
+        return false;
+    }
+
 }
