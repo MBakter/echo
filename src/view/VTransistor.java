@@ -24,7 +24,7 @@ public class VTransistor implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VTRANSISTOR DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Transistor.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "TransistorRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelTransistor); });
     }
     @Override

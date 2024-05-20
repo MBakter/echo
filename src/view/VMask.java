@@ -22,7 +22,7 @@ public class VMask implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VMASK DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "MaskRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelMask); });
     }
 

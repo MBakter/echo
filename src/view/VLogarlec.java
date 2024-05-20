@@ -22,7 +22,7 @@ public class VLogarlec implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VLOGARLEC DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "LogarlecRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelLogarlec); });
     }
 

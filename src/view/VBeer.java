@@ -22,7 +22,7 @@ public class VBeer implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VBEER DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Beer.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "BeerRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelBeer); });
     }
 

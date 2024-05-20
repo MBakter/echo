@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -485,6 +486,23 @@ public class MainWindow extends JFrame implements IMainWindow {
                 doors[i].removeActionListener(al);   
         }
 
+        for (int i = 0; i < 10; i++) {
+            students[i].setIcon(null);
+            
+            teachers[i].setIcon(null);
+
+            cleaners[i].setIcon(null);
+
+            items[i].setIcon(null);
+            for (MouseListener ml : items[i].getMouseListeners()) 
+                items[i].removeMouseListener(ml);
+
+            roomItems[i].setIcon(null);
+            for (ActionListener al : roomItems[i].getActionListeners()) 
+                roomItems[i].removeActionListener(al);
+            
+        }
+
     }
 
     @Override
@@ -496,32 +514,32 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         //Doors
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {
-            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[9- i], controller);
+            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[11- i], controller);
         }
 
         //Player's items
         for (int i = 0; i < currentVPlayer.getModelStudent().getItemList().size(); i++) {
-            currentVPlayer.getModelStudent().getItemList().get(i).draw(currentVPlayer, items[9-i], controller);
+            currentVPlayer.getModelStudent().getItemList().get(i).draw(currentVPlayer, items[i], controller);
         }
 
         //Items on the floor
         for (int i = 0; i < currentVRoom.getModelRoom().getRoomItems().size(); i++) {
-            currentVRoom.getModelRoom().getRoomItems().get(i).draw(currentVPlayer, roomItems[9- i], controller);
+            currentVRoom.getModelRoom().getRoomItems().get(i).draw(currentVPlayer, roomItems[i], controller);
         }
 
         //Teachers
         for (int i = 0; i < currentVRoom.getModelRoom().getTeacherList().size(); i++) {
-            currentVRoom.getModelRoom().getTeacherList().get(i).draw(currentVPlayer, teachers[9- i], controller);
+            currentVRoom.getModelRoom().getTeacherList().get(i).draw(currentVPlayer, teachers[i], controller);
         }
 
         //Cleaners
         for (int i = 0; i < currentVRoom.getModelRoom().getCleanerList().size(); i++) {
-            currentVRoom.getModelRoom().getCleanerList().get(i).draw(currentVPlayer, cleaners[9- i], controller);
+            currentVRoom.getModelRoom().getCleanerList().get(i).draw(currentVPlayer, cleaners[i], controller);
         }
 
         //Students
         for (int i = 0; i < currentVRoom.getModelRoom().getStudentList().size(); i++) {
-            currentVRoom.getModelRoom().getStudentList().get(i).draw(currentVPlayer, students[9- i], controller);
+            currentVRoom.getModelRoom().getStudentList().get(i).draw(currentVPlayer, students[i], controller);
         }
     }
 

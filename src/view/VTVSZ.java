@@ -23,7 +23,7 @@ public class VTVSZ implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VTVSZ DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "TVSZRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelTVSZ); });
     }
 

@@ -23,7 +23,7 @@ public class VPurifier implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VPURIFIER DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Purifier.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "PurifierRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelPurifier); });
     }
 

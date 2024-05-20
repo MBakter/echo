@@ -23,7 +23,7 @@ public class VSponge implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VSPONGE DRAWG");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "SpongeRoom.png"));
         btn.addActionListener(e -> { c.getCommands().pickUpItem(modelSponge); });
     }
 
