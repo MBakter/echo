@@ -37,6 +37,14 @@ public class Mask implements IItem, ITimedEntity, IPrintStat, IVMMask {
         timer = t;
         t.addEntity(this);
         functional = true;
+        fake = false;
+    }
+    public Mask(String s, ITimer t, boolean fake) {
+        name = s;
+        timer = t;
+        t.addEntity(this);
+        functional = true;
+        this.fake = fake;
     }
 
     public Mask(ITimer t) {

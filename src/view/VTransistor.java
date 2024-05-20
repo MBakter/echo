@@ -64,7 +64,7 @@ public class VTransistor implements IVItems{
                 });
                 jp.add(subMenu);
                 jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
             }
         });
     }

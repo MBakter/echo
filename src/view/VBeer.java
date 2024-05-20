@@ -42,7 +42,7 @@ public class VBeer implements IVItems{
                 jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelBeer);});
             
                 jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
             }
         });
 

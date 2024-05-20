@@ -28,8 +28,12 @@ public class Logarlec implements IItem, IPrintStat, IVMLogarlec {
      */
     public Logarlec(String s) {
         name = s;
+        fake = false;
     }
-
+    public Logarlec(String s, boolean fake) {
+        name = s;
+        this.fake = fake;
+    }
     public Logarlec() {
         Random rand = new Random();
         fake = rand.nextDouble() <= 0.2 ? true : false;

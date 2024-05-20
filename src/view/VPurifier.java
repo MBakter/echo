@@ -45,7 +45,7 @@ public class VPurifier implements IVItems{
                 });
 
                 jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
             }
         });
     }

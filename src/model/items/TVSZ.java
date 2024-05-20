@@ -29,6 +29,12 @@ public class TVSZ implements IItem, IPrintStat, IVMTVSZ {
     public TVSZ(String s) {
         name = s;
         hitpoints = 3;
+        fake = false;
+    }
+    public TVSZ(String s, boolean fake) {
+        name = s;
+        hitpoints = 3;
+        this.fake = fake;
     }
 
     public TVSZ() {

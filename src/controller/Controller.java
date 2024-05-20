@@ -54,10 +54,20 @@ public class Controller implements IController {
     }
 
     private static void TeacherMove(Teacher t) {
+        Random r = new Random();
+        if (t.getRoom().getNeighbours().size()>=2)
+        t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size()-1)));
+        else if(t.getRoom().getNeighbours().size()==1)
+        t.move(t.getRoom().getNeighbours().get(0));
         View.RefreshView();
     }
 
     private static void CleanerMove(Cleaner c) {
+        Random r = new Random();
+        if (c.getRoom().getNeighbours().size()>=2)
+        c.move(c.getRoom().getNeighbours().get(r.nextInt(c.getRoom().getNeighbours().size()-1)));
+        else if(c.getRoom().getNeighbours().size()==1)
+        c.move(c.getRoom().getNeighbours().get(0));
         View.RefreshView();
     }
 

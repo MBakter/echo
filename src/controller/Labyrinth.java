@@ -70,15 +70,18 @@ public class Labyrinth {
         Transistor t2 = new Transistor("t2");
         Transistor t3 = new Transistor("t3");
         Logarlec l1 = new Logarlec("l1");
+        Logarlec l2 = new Logarlec("l1", true);
         TVSZ tvsz1 = new TVSZ("tvsz1");
         TVSZ tvsz2 = new TVSZ("tvsz2");
+        TVSZ tvsz3 = new TVSZ("tvsz3", true);
         Purifier p1 = new Purifier("p1");
         Purifier p2 = new Purifier("p2");
         Beer b1 = new Beer(t);
         Beer b2 = new Beer(t);
         Sponge s1 = new Sponge(t);
-        Mask m1 = new Mask(t);
-        Mask m2 = new Mask(t);
+        Mask m1 = new Mask("m1", t);
+        Mask m2 = new Mask("m2", t);
+        Mask m3 = new Mask("m3", t, true);
 
         items.add(c1);
         items.add(c2);
@@ -86,8 +89,10 @@ public class Labyrinth {
         items.add(t2);
         items.add(t3);
         items.add(l1);
+        items.add(l2);
         items.add(tvsz1);
         items.add(tvsz2);
+        items.add(tvsz3);
         items.add(p1);
         items.add(p2);
         items.add(b1);
@@ -95,6 +100,7 @@ public class Labyrinth {
         items.add(s1);
         items.add(m1);
         items.add(m2);
+        items.add(m3);
 
         Random r = new Random();
 
