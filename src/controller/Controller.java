@@ -110,6 +110,8 @@ public class Controller implements IController {
             View.showError("University has not been built yet! Please select a valid map");
         }
 
+        Map.placeItems(timer);
+
         GameCycle();
 
         //TESZT***************************************
