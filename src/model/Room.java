@@ -408,7 +408,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         if (effects.contains(ERoomEffects.CURSED) || p.getRoom().effects.contains(ERoomEffects.CURSED))
             return false;
         // If player limit is reached
-        if (maxPlayer > getPlayersCount())
+        if (maxPlayer <= getPlayersCount())
             return false;
 
         // If the previous room is not poisoned, but the new one is
