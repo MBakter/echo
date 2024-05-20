@@ -20,8 +20,15 @@ public class VLogarlec implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VLOGARLEC DRAW");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
         btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelLogarlec); });
     }
 
+    @Override
+    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
+        System.out.println("VLOGARLEC DRAWG");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
+        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelLogarlec); });
+    }
 }

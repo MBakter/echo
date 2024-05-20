@@ -20,8 +20,16 @@ public class VCheese implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VCHEESE DRAW");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
         btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelCheese); });
+    }
+
+    @Override
+    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
+        System.out.println("VCHEESE DRAWG");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
+        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelCheese); });
     }
 
 }

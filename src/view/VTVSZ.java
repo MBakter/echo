@@ -20,8 +20,16 @@ public class VTVSZ implements IVItems{
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VTVSZ DRAW");
 
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
+        btn.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
         btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelTVSZ); });
+    }
+
+    @Override
+    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
+        System.out.println("VTVSZ DRAWG");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
+        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelTVSZ); });
     }
   
 }
