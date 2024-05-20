@@ -83,15 +83,15 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     private JPanel createTeacherPanel(GridBagConstraints c) {
         JPanel teacherPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-        c.insets = new Insets(77, 0, 5, 0);
+        c.insets = new Insets(0, 0, 73, 0);
         teacherPanel.setOpaque(false);
         c.gridx = 1;
         c.gridy = 2;
         c.gridwidth = 2;
-        c.gridheight = 2;
+        c.gridheight = 1;
         c.weighty = 1;
-        c.ipadx = 00;
-        c.ipady = 00;
+        c.ipadx = 0;
+        c.ipady = 0;
 
         teachers = new JLabel[10];
         for (int i = 0; i < 10; i++) {
@@ -194,12 +194,33 @@ public class MainWindow extends JFrame implements IMainWindow {
         items = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             items[i] = new JLabel();
-            items[i].setIcon(new ImageIcon("textures" + File.separator + "Beer.png"));      
+            items[i].setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));      
             items[i].setPreferredSize(new Dimension(120, 120));
             itemPanel.add(items[i]);
         }
 
         return itemPanel;
+    }
+
+    private JPanel createBoard(GridBagConstraints c) {
+        JPanel boardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        c.insets = new Insets(170, 0, 5, 0);
+        boardPanel.setOpaque(false);
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        c.gridheight = 1;
+        c.weighty = 3;
+        c.ipadx = 0;
+        c.ipady = 0;
+
+        
+        JButton turnEndButton = new JButton("Finish Turn");
+        
+        turnEndButton.setPreferredSize(new Dimension(400, 100));
+
+        boardPanel.add(turnEndButton);
+        return boardPanel;
     }
 
     private void createGridBag() {
@@ -208,6 +229,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         GridBagConstraints c = new GridBagConstraints();
 
         gamePanel.add(createRoomGrid(c), c);
+        gamePanel.add(createBoard(c), c);
         gamePanel.add(createTeacherPanel(c), c);
         gamePanel.add(createCleanerPanel(c), c);
         gamePanel.add(createRoomItemPanel(c), c);
