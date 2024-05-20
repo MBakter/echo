@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import controller.IController;
+import model.ERoomEffects;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -25,12 +26,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     private BackgroundPanel mainPanel;
     private BackgroundPanel optionPanel;
     private BackgroundPanel gamePanel;
-    /* private JPanel roomPanel;
-    private JPanel teacherPanel;
-    private JPanel cleanerPanel;
-    private JPanel roomItemPanel;
-    private JPanel studentPanel;
-    private JPanel itemPanel; */
 
     //Játékbeli objektumok helye*******
     private JButton[] doors;
@@ -510,6 +505,12 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         currentVPlayer = (VStudent) controller.getCP();
         currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
+
+        for (ERoomEffects re : currentVRoom.getModelRoom().getRoomState()) {
+            if(re == ERoomEffects.POISONED) {
+                gamePanel.setBackground("textures" + File.separator + "BackgroundBlurred.png");
+            }
+        }
 
         //Doors
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {

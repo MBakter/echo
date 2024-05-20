@@ -4,10 +4,11 @@ import model.*;
 import model.items.IItem;
 
 public class Cleaner extends Player implements IVMCleaner{
+
     public Cleaner(String s, ITimer t) {
         super(s, t);
     }
-    public Cleaner(){super();}
+
     public boolean move(Room r) {
         boolean moveResult = r.add(this);
         if(moveResult){
@@ -15,10 +16,12 @@ public class Cleaner extends Player implements IVMCleaner{
         }
         return moveResult;
     }
+
     public void forceMove(Room r){
         room = r;
         r.fAdd(this);
     }
+    
     public boolean pickUp(IItem i) {
         if(room == null){
             i.pickUp(this);

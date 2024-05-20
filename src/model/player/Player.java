@@ -18,9 +18,7 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         name = s;
         state = EPlayerState.ALIVE;
         t.addEntity(this);
-    }
-
-    Player() {
+        timer = t;
     }
 
     public String getName() {

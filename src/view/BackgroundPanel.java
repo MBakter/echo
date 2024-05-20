@@ -18,4 +18,9 @@ public class BackgroundPanel extends JPanel {
         
         g.drawImage(image.getImage(), 0, 0, 1920, 1080, null);
     }
+
+    public void setBackground(String path) {
+        this.path = path;
+        repaint();
+    }
 }
