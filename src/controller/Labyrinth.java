@@ -99,7 +99,7 @@ public class Labyrinth {
         Random r = new Random();
 
         for (IItem iItem : items) {
-            int randomNum = r.nextInt(roomList.size()-1);
+            int randomNum = r.nextInt(roomList.size()-2);
             roomList.get(randomNum).addItem(iItem);
         }
     }
