@@ -90,9 +90,6 @@ public class Controller implements IController {
             studentMoveCounter = 0;
         }
 
-        //TESZT**************
-        curPlayer.getRoom().addEffect(ERoomEffects.POISONED);
-
         StudentMove(students.get(studentMoveCounter));
     }
 
