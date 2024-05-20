@@ -488,7 +488,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         for (int i = 0; i < 10; i++) {
             students[i].setIcon(null);
-            
+
             teachers[i].setIcon(null);
 
             cleaners[i].setIcon(null);
@@ -502,7 +502,6 @@ public class MainWindow extends JFrame implements IMainWindow {
                 roomItems[i].removeActionListener(al);
             
         }
-
     }
 
     @Override
