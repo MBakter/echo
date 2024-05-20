@@ -1,6 +1,5 @@
 package controller;
 
-import model.IVMRoom;
 import model.Room;
 import model.items.IItem;
 import model.items.Transistor;

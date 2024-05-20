@@ -1,11 +1,8 @@
 package view;
 
-import java.awt.GridBagConstraints;
-import java.io.File;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import java.io.File;
 
 import controller.IController;
 import model.items.IItem;
