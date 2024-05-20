@@ -131,8 +131,8 @@ public class Labyrinth {
 
                 } else if (line.startsWith("link")) 
                 {
-                    String room1Name = parts[2];
-                    String room2Name = parts[3];
+                    String room1Name = parts[1];
+                    String room2Name = parts[2];
 
                     if (room1Name == null || room2Name == null) 
                         throw new IOException("Hiba a fájl beolvasása során: Szobák neve nem található");
