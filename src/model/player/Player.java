@@ -18,10 +18,10 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         name = s;
         state = EPlayerState.ALIVE;
         t.addEntity(this);
+        timer = t;
     }
 
-    Player() {
-    }
+
 
     public String getName() {
         return name;

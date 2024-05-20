@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.ERoomEffects;
 import model.player.*;
 import view.IMainWindow;
 import view.IVItems;
@@ -30,7 +31,7 @@ public class Controller implements IController {
 
     public Controller(String mapDirectoryPath) {
         this.mapDirectoryPath = mapDirectoryPath; 
-        mapName = "default.txt";
+        mapName = "Mosquito.txt";
         students.add(new Student("s0", timer));
         teachers.add(new Teacher("t0", timer));
     }
@@ -95,8 +96,10 @@ public class Controller implements IController {
             for (Cleaner cleaner : cleaners) {
                 CleanerMove(cleaner);
             }
+            Map.randomMove();
             studentMoveCounter = 0;
         }
+
         StudentMove(students.get(studentMoveCounter));
     }
 
@@ -172,13 +175,13 @@ public class Controller implements IController {
         teachers.clear();
         cleaners.clear();
         for (int i = 0; i < studentNum; i++) 
-            students.add(new Student("s" + i, timer));
+            students.add(new Student("S" + i, timer));
 
         for (int i = 0; i < teacherNum; i++) 
-            teachers.add(new Teacher("s" + i, timer));
+            teachers.add(new Teacher("T" + i, timer));
 
         for (int i = 0; i < cleanerNum; i++) 
-            cleaners.add(new Cleaner("s" + i, timer));
+            cleaners.add(new Cleaner("C" + i, timer));
 
         this.mapName = mapName;
     }

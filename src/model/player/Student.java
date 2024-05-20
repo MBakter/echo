@@ -10,11 +10,13 @@ import view.IVRoom;
 import view.VRoom;
 
 public class Student extends Player implements IVMStudent{
+
     private static int TIME = 4;
+
     public Student(String s, ITimer t) {
         super(s,t);
     }
-    public Student(){super();}
+
     public boolean move(Room r) {
         boolean moveResult = r.add(this);
         if (moveResult) {
@@ -22,6 +24,7 @@ public class Student extends Player implements IVMStudent{
         }
         return moveResult;
     }
+    
     public void forceMove(Room r){
         room = r;
         r.fAdd(this);

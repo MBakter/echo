@@ -7,7 +7,6 @@ public class Cleaner extends Player implements IVMCleaner{
     public Cleaner(String s, ITimer t) {
         super(s, t);
     }
-    public Cleaner(){super();}
     public boolean move(Room r) {
         boolean moveResult = r.add(this);
         if(moveResult){

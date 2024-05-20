@@ -24,6 +24,9 @@ public class VStudent implements IVStudent{
     @Override
     public void draw(IVStudent curPlayer, JLabel label, IController c) {
         System.out.println("VSTUDENT DRAW");
+        
+        if(modelStudent.equals(curPlayer.getModelStudent()))
+            return;
 
         label.setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
     }
