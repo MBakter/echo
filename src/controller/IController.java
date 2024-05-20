@@ -16,4 +16,5 @@ public interface IController {
 
     IVStudent getCP();
     ArrayList<IVItems> getVItemsOfCP();
+    ICommands getCommands();
 }

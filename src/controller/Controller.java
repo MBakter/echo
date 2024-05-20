@@ -24,10 +24,11 @@ public class Controller implements IController {
     private final String mapDirectoryPath;
     private String mapName;
     private static final Timer timer = new Timer();
-    private IMainWindow View;
+    private static IMainWindow View;
 
-    private static Student curPlayer = null;
-    private static int turn = 0;
+    static Student curPlayer = null;
+    private static int actionCounter = 2; 
+    public static Commands commands = new Commands();
 
     public Controller(String mapDirectoryPath) {
         this.mapDirectoryPath = mapDirectoryPath; 
@@ -49,15 +50,30 @@ public class Controller implements IController {
     }
 
     private static void StudentMove(Student s) {
-
+        curPlayer = s;
+        actionCounter = 2;
+        View.RefreshView();
     }
 
     private static void TeacherMove(Teacher t) {
-
+        View.RefreshView();
     }
 
     private static void CleanerMove(Cleaner c) {
+        View.RefreshView();
+    }
 
+    public static void PlayerMoved() {
+        actionCounter--;
+        View.RefreshView();
+    }
+
+    public static boolean CanPlayerMove() {
+        if(actionCounter == 0) {
+            View.showError("You ran out of moves!");
+            return false;
+        }
+        return true;
     }
 
     private static void GameCycle() {
@@ -103,6 +119,8 @@ public class Controller implements IController {
         Room r3 = new Room();
         r.addNeighbour(r2);
         r.addNeighbour(r3);
+        r2.addNeighbour(r);
+        r3.addNeighbour(r2);
         r.addItem(new TVSZ());
         r.addItem(new Purifier("Purifi"));
         r2.addItem(new Logarlec());
@@ -169,6 +187,11 @@ public class Controller implements IController {
     @Override
     public ArrayList<IVItems> getVItemsOfCP() {
         return curPlayer.getItemList();
+    }
+
+    @Override
+    public ICommands getCommands() {
+        return commands;
     }
 
 }

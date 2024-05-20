@@ -6,6 +6,7 @@ import javax.swing.border.LineBorder;
 import controller.IController;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.Console;
@@ -259,19 +260,15 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     private void startGame() {
-        
         AddPopupMenu();
 
         gamePanel = new BackgroundPanel("textures" + File.separator + "BackgroundEdited.png");
 
         createGridBag();
-
         getContentPane().add(gamePanel, BorderLayout.CENTER);
-
         setPreferredSize(new Dimension(1920, 1130));
 
         pack();
-
     }
     
     private void drawMenu() {
@@ -453,15 +450,25 @@ public class MainWindow extends JFrame implements IMainWindow {
         System.exit(0);
     }
 
+    private void RefreshComponents() {
+
+        for (int i = 0; i < 12; i++) {
+            doors[i].setIcon(null);
+            for (ActionListener al : doors[i].getActionListeners()) 
+                doors[i].removeActionListener(al);   
+        }
+
+    }
+
     @Override
     public void RefreshView() {
-        //doors[0].setIcon(new ImageIcon("textures" + File.separator + "Door.png"));
-        
+        RefreshComponents();
+
         currentVPlayer = (VStudent) controller.getCP();
         currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
 
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {
-            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[11- i]);
+            currentVRoom.getModelRoom().getNeighBourList().get(i).draw(currentVPlayer, doors[11- i], controller);
         }
     }
 
@@ -476,4 +483,5 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void showError(String title) {
         JOptionPane.showMessageDialog(this, title);
     }
+
 }

@@ -2,11 +2,12 @@ package view;
 
 import javax.swing.JButton;
 
+import controller.IController;
 import model.IVMRoom;
 
 public interface IVRoom {
     IVMRoom getModelRoom();
-    void draw(IVStudent curPlayer, JButton c);
+    void draw(IVStudent curPlayer, JButton door, IController c);
     //Ezeket az Alex írta valami Observer minta megvalósításához, elvileg nem fog kelleni
 /*     public boolean add(Student s);
 
