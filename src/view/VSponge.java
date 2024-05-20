@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import java.awt.event.*;
 import controller.IController;
 import model.items.IItem;
 import model.items.IVMSponge;
@@ -33,9 +34,18 @@ public class VSponge implements IVItems{
 
         label.setIcon(new ImageIcon("textures" + File.separator + "Sponge.png"));
         //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelSponge); });
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                    c.getCommands().useItem(modelSponge);
+                });
 
-        JPopupMenu jp = new JPopupMenu("Choose action");
-        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelSponge);});
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
     }
 
     @Override

@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import java.awt.event.*;
+
 import controller.IController;
 import model.items.IVMLogarlec;
 import model.items.Logarlec;
@@ -33,8 +35,18 @@ public class VLogarlec implements IVItems{
         label.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
         //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelLogarlec); })
         
-        JPopupMenu jp = new JPopupMenu("Choose action");
-        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelLogarlec);});
+
+
+                label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent){
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelLogarlec);});
+            
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -33,8 +35,18 @@ public class VBeer implements IVItems{
         label.setIcon(new ImageIcon("textures" + File.separator + "Beer.png"));
         //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelBeer); });
 
-        JPopupMenu jp = new JPopupMenu("Choose action");
-        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelBeer);});
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent){
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelBeer);});
+            
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
+
+
     }
 
     @Override

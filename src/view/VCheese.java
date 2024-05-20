@@ -2,6 +2,8 @@ package view;
 
 import java.io.File;
 
+import java.awt.event.*;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -34,8 +36,16 @@ public class VCheese implements IVItems{
         label.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
         //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelCheese); });
 
-        JPopupMenu jp = new JPopupMenu("Choose action");
-        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelCheese);});
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent){
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelCheese);});
+            
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
     }
 
     @Override
