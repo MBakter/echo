@@ -1,6 +1,6 @@
 package model.items;
 
-public interface IVMSponge {
+public interface IVMSponge extends IVMItems {
     int getTime();
     boolean isFunctional();
 }

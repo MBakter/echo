@@ -4,6 +4,9 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import controller.IController;
 import model.items.Cheese;
@@ -18,18 +21,26 @@ public class VCheese implements IVItems{
 
     @Override
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
-        System.out.println("VCHEESE DRAW");
-
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
-        btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelCheese); });
-    }
-
-    @Override
-    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VCHEESE DRAWG");
 
         btn.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
-        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelCheese); });
+        btn.addActionListener(e -> { c.getCommands().pickUpItem(modelCheese); });
+    }
+
+    @Override
+    public void draw(IVStudent curPlayer, JLabel label, IController c) {
+        System.out.println("VCHEESE DRAW");
+
+        label.setIcon(new ImageIcon("textures" + File.separator + "Cheese.png"));
+        //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelCheese); });
+
+        JPopupMenu jp = new JPopupMenu("Choose action");
+        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelCheese);});
+    }
+
+    @Override
+    public boolean isPairable() {
+        return false;
     }
 
 }

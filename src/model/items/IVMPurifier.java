@@ -1,5 +1,5 @@
 package model.items;
 
-public interface IVMPurifier {
+public interface IVMPurifier extends IVMItems{
     boolean isUsed();
 }

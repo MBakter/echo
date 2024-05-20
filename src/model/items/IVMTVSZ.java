@@ -1,6 +1,6 @@
 package model.items;
 
-public interface IVMTVSZ {
+public interface IVMTVSZ extends IVMItems{
         int getHitpoints();
         boolean isFake();
 }

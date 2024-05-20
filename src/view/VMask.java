@@ -4,6 +4,9 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import controller.IController;
 import model.items.IItem;
@@ -18,17 +21,25 @@ public class VMask implements IVItems{
 
     @Override
     public void draw(IVStudent curPlayer, JButton btn, IController c) {
-        System.out.println("VMASK DRAW");
-
-        btn.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
-        btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelMask); });
-    }
-
-    @Override
-    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
         System.out.println("VMASK DRAWG");
 
         btn.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
-        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelMask); });
+        btn.addActionListener(e -> { c.getCommands().pickUpItem(modelMask); });
+    }
+
+    @Override
+    public void draw(IVStudent curPlayer, JLabel label, IController c) {
+        System.out.println("VMASK DRAW");
+
+        label.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
+        //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelMask); })
+
+        JPopupMenu jp = new JPopupMenu("Choose action");
+        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelMask);});
+    }
+
+    @Override
+    public boolean isPairable() {
+        return false;
     }
 }

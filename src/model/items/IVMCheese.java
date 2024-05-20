@@ -1,6 +1,6 @@
 package model.items;
 
-public interface IVMCheese {
+public interface IVMCheese extends IVMItems {
     int getTime();
     boolean isUsed();
 }

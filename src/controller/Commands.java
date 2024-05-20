@@ -1,5 +1,6 @@
 package controller;
 
+import model.IVMRoom;
 import model.Room;
 import model.items.*;
 
@@ -68,32 +69,39 @@ public class Commands implements ICommands{
     } */
 
     @Override
-    public void pickUpItem(IItem item) {
+    public void pickUpItem(IVMItems ivmi) {
+        IItem item = (IItem) ivmi;
         Controller.curPlayer.pickUp(item);
     }
 
     @Override
-    public void dropItem(IItem item) {
+    public void dropItem(IVMItems ivmi) {
+        IItem item = (IItem) ivmi;
         Controller.curPlayer.dropItem(item);
     }
 
     @Override
-    public void useItem(IItem item) {
+    public void useItem(IVMItems ivmi) {
+        IItem item = (IItem) ivmi;
         Controller.curPlayer.useItem(item);
     }
 
     @Override
-    public void activateTransistor(Transistor t) {
+    public void activateTransistor(IVMTransistor ivmt) {
+        Transistor t =  (Transistor) ivmt;
         t.ActivateTransistor();
     }
 
     @Override
-    public void pairTransistor(Transistor t1, Transistor t2) {
+    public void pairTransistor(IVMTransistor ivmt1, IVMTransistor ivmt2) {
+        Transistor t1 =  (Transistor) ivmt1;
+        Transistor t2 =  (Transistor) ivmt2;
         t1.PairTransistor(t2);
     }
 
     @Override
-    public void enterRoom(Room r) {
+    public void enterRoom(IVMRoom ivmr) {
+        Room r = (Room) ivmr;
         if(!Controller.CanPlayerMove())
             return;
         

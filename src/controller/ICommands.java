@@ -1,16 +1,17 @@
 package controller;
 
-import model.Room;
-import model.items.IItem;
-import model.items.Transistor;
+import model.IVMRoom;
+import model.items.IVMItems;
+import model.items.IVMTransistor;
+
 
 public interface ICommands {
-    public void pickUpItem(IItem item);
-    public void dropItem(IItem item);
-    public void useItem(IItem item);
-    public void activateTransistor(Transistor t);
-    public void pairTransistor(Transistor t1, Transistor t2);
-    public void enterRoom(Room r);
+    public void pickUpItem(IVMItems item);
+    public void dropItem(IVMItems item);
+    public void useItem(IVMItems item);
+    public void activateTransistor(IVMTransistor t);
+    public void pairTransistor(IVMTransistor t1, IVMTransistor t2);
+    public void enterRoom(IVMRoom r);
     //public void enterRoom(IVMRoom r);
 
 }

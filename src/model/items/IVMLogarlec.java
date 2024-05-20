@@ -1,5 +1,5 @@
 package model.items;
 
-public interface IVMLogarlec {
+public interface IVMLogarlec extends IVMItems{
     boolean isFake();
 }
