@@ -56,6 +56,9 @@ public class Labyrinth {
             int i2 = random.nextInt(roomList.size() - 1);
             while (i2 == i) {
                 i2 = random.nextInt(roomList.size() - 1);
+                System.out.println(i2);
+                if(i2 ==0)
+                break;
             }
             initMerge(room, roomList.get(i2));
         }
