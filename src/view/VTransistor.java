@@ -7,6 +7,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import java.awt.event.*;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public class VTransistor implements IVItems{
         ArrayList<IVMTransistor> transistors = new ArrayList<>();
         for (IVItems item : curPlayer.getModelStudent().getItemList()) {
             if(item.isPairable() && !item.equals(this)){
-                transistors.add((IVMTransistor)item);
+                transistors.add((((VTransistor)item).modelTransistor));
             }
         }
 
@@ -48,8 +50,23 @@ public class VTransistor implements IVItems{
             final int idx = i;
             subMenu.add(new JMenuItem("Transistor " + i)).addActionListener(e -> { c.getCommands().pairTransistor(modelTransistor, transistors.get(idx));});
         }
-        jp.add(new JMenuItem("Activate")).addActionListener(e -> {c.getCommands().useItem(modelTransistor);});
-        jp.add(subMenu);
+        //jp.add(new JMenuItem("Activate")).addActionListener(e -> {c.getCommands().useItem(modelTransistor);});
+        //jp.add(subMenu);
+
+        jp.show(label, 100, 100);
+
+                label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                    c.getCommands().activateTransistor(modelTransistor);
+                });
+                jp.add(subMenu);
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
     }
 
     @Override

@@ -8,13 +8,16 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import java.awt.event.*;
+
 import controller.IController;
 import model.items.IVMMask;
 import model.items.Mask;
 
-public class VMask implements IVItems{
+public class VMask implements IVItems {
     IVMMask modelMask;
-    public VMask(Mask m){
+
+    public VMask(Mask m) {
         modelMask = m;
     }
 
@@ -23,7 +26,9 @@ public class VMask implements IVItems{
         System.out.println("VMASK DRAWG");
 
         btn.setIcon(new ImageIcon("textures" + File.separator + "MaskRoom.png"));
-        btn.addActionListener(e -> { c.getCommands().pickUpItem(modelMask); });
+        btn.addActionListener(e -> {
+            c.getCommands().pickUpItem(modelMask);
+        });
     }
 
     @Override
@@ -31,10 +36,20 @@ public class VMask implements IVItems{
         System.out.println("VMASK DRAW");
 
         label.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
-        //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelMask); })
+        // btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelMask); })
 
-        JPopupMenu jp = new JPopupMenu("Choose action");
-        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelMask);});
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                    c.getCommands().useItem(modelMask);
+                });
+
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
     }
 
     @Override

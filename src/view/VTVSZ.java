@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import java.awt.event.*;
+
 import controller.IController;
 import model.items.IItem;
 import model.items.IVMTVSZ;
@@ -35,7 +37,20 @@ public class VTVSZ implements IVItems{
         //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelTVSZ); });
 
         JPopupMenu jp = new JPopupMenu("Choose action");
-        jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelTVSZ);});
+
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JPopupMenu jp = new JPopupMenu("Choose action");
+                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                    c.getCommands().useItem(modelTVSZ);
+                });
+
+                jp.show(label, 100, 100);
+                jp.setLocation(mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
+
     }
 
     @Override
