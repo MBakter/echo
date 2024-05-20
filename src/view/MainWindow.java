@@ -14,6 +14,9 @@ import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements IMainWindow {
     
+    private final int WIDTH = 1920;
+    private final int HEIGHT = 1080;
+
     //Kontroller************
     IController controller;
 
@@ -55,7 +58,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.gridy = 0;
         c.gridwidth = 1;
         c.gridheight = 3;
-        c.insets = new Insets(58, 85, 0, 0);
+        c.insets = new Insets(62, 85, 0, 0);
         c.ipady = 0;
         c.weightx = 0;
         c.weighty = 0;
@@ -68,6 +71,8 @@ public class MainWindow extends JFrame implements IMainWindow {
                 //doors[i + j*4].setIcon(new ImageIcon("textures" + File.separator + "Door.png"));
                 GridBagConstraints c2 = new GridBagConstraints();
                 doors[i + j*4].setPreferredSize(new Dimension(75, 150));
+                doors[i + j*4].setContentAreaFilled(false);
+                
                 c2.gridx = i;
                 c2.gridy = j;
                 roomPanel.add(doors[i + j*4], c2);
@@ -78,7 +83,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     private JPanel createTeacherPanel(GridBagConstraints c) {
         JPanel teacherPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-        c.insets = new Insets(43, 0, 5, 0);
+        c.insets = new Insets(77, 0, 5, 0);
         teacherPanel.setOpaque(false);
         c.gridx = 1;
         c.gridy = 2;
@@ -135,7 +140,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.gridheight = 1;
         c.weightx = 1;
         c.ipadx = 60;
-        c.ipady = 40;
+        c.ipady = 1;
 
         roomItems = new JButton[10];
         for (int i = 0; i < 10; i++) {
@@ -152,7 +157,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private JPanel createStudentPanel(GridBagConstraints c) {
         JPanel studentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         studentPanel.setOpaque(false);
-        c.insets = new Insets(0/*95*/, 0, 0, 0);
+        c.insets = new Insets(35/*95*/, 0, 2, 0);
         c.gridx = 0;
         c.gridy = 4;
         c.gridwidth = 4;
@@ -172,7 +177,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         return studentPanel;
     }
 
-    //TODO: ActionListenerek a commandokhoz
     private JPanel createItemPanel(GridBagConstraints c) {
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         itemPanel.setOpaque(false);
@@ -184,13 +188,14 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.weightx = 1;
         c.weighty = 2;
         c.ipadx = 1;
-        c.ipady = 15;
+        c.ipady = 1;
         c.anchor = GridBagConstraints.SOUTH;
 
         items = new JLabel[10];
         for (int i = 0; i < 10; i++) {
-            items[i] = new JLabel();            
-            items[i].setPreferredSize(new Dimension(120, 150));
+            items[i] = new JLabel();
+            items[i].setIcon(new ImageIcon("textures" + File.separator + "Beer.png"));      
+            items[i].setPreferredSize(new Dimension(120, 120));
             itemPanel.add(items[i]);
         }
 
@@ -265,7 +270,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         createGridBag();
         getContentPane().add(gamePanel, BorderLayout.CENTER);
-        setPreferredSize(new Dimension(1920, 1130));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         pack();
     }
