@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import controller.IController;
-import model.Room;
 import model.items.IItem;
 import model.items.IVMPurifier;
 import model.items.Purifier;
@@ -23,6 +22,14 @@ public class VPurifier implements IVItems{
 
         btn.setIcon(new ImageIcon("textures" + File.separator + "Purifier.png"));
         btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelPurifier); });
+    }
+
+    @Override
+    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
+        System.out.println("VPURIFIER DRAWG");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Purifier.png"));
+        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelPurifier); });
     }
 
 }

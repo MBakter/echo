@@ -24,4 +24,11 @@ public class VMask implements IVItems{
         btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelMask); });
     }
 
+    @Override
+    public void drawOnGround(IVStudent curPlayer, JButton btn, IController c) {
+        System.out.println("VMASK DRAWG");
+
+        btn.setIcon(new ImageIcon("textures" + File.separator + "Mask.png"));
+        btn.addActionListener(e -> { c.getCommands().pickUpItem((IItem)modelMask); });
+    }
 }
