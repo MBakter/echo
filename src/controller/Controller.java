@@ -51,10 +51,13 @@ public class Controller implements IController {
     private static void StudentMove(Student s) {
         curPlayer = s;
         if (curPlayer.getState().equals(EPlayerState.UNCONSCIOUS))
-            actionCounter = 0;
-        else
+            actionCounter = -2;
+        else if (curPlayer.getState().equals(EPlayerState.ALIVE))
             actionCounter = 2;
+        else if (curPlayer.getState().equals(EPlayerState.DEAD))
+            actionCounter = -1;
         View.RefreshView();
+
     }
 
     private static void TeacherMove(Teacher t) {
@@ -84,6 +87,12 @@ public class Controller implements IController {
         if (actionCounter == 0) {
             View.showError("You ran out of moves!");
             return false;
+        }else if(actionCounter == -1){
+            View.showError("You are dead!");
+            return false;
+        }else if(actionCounter == -2){
+            View.showError("You are unconscoius!");
+            return false;
         }
         return true;
     }
@@ -94,13 +103,14 @@ public class Controller implements IController {
 
         if (studentMoveCounter == students.size()) {
             for (Teacher teacher : teachers) {
-                TeacherMove(teacher);
+                TeacherMove(teacher);                
             }
             for (Cleaner cleaner : cleaners) {
                 CleanerMove(cleaner);
             }
             Map.randomMove();
             studentMoveCounter = 0;
+            timer.iterateTime();
         }
 
         StudentMove(students.get(studentMoveCounter));
