@@ -28,7 +28,7 @@ public class VRoom implements IVRoom {
 
         door.setIcon(new ImageIcon("textures" + File.separator + "Door.png"));
         //door.addActionListener(e -> { System.out.println("Move " + curPlayer.getModelStudent().toString() + " To " + modelRoom.toString() ); });
-        door.addActionListener(e -> { c.getCommands().enterRoom(modelRoom); });
+        door.addActionListener(e -> { c.getCommands().enterRoom((Room)modelRoom); });
     }
 
 }

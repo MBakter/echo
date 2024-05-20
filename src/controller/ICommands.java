@@ -1,15 +1,17 @@
 package controller;
 
 import model.IVMRoom;
-import model.player.IVMStudent;
+import model.Room;
+import model.items.IItem;
+import model.items.Transistor;
 
 public interface ICommands {
-    public void pickUpItem(int index);
-    public void dropItem(int index);
-    public void useItem(int index);
-    public void activateTransistor(int index);
-    public void pairTransistor(int index1, int index2);
-    public void enterRoom(int index);
-    public void enterRoom(IVMRoom r);
+    public void pickUpItem(IItem item);
+    public void dropItem(IItem item);
+    public void useItem(IItem item);
+    public void activateTransistor(Transistor t);
+    public void pairTransistor(Transistor t1, Transistor t2);
+    public void enterRoom(Room r);
+    //public void enterRoom(IVMRoom r);
 
 }

@@ -2,8 +2,10 @@ package view;
 
 import java.awt.GridBagConstraints;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.IController;
 import model.items.Sponge;
 
 public class VSponge implements IVItems{
@@ -12,8 +14,9 @@ public class VSponge implements IVItems{
     }
 
     @Override
-    public JPanel draw(IVStudent curPlayer, GridBagConstraints c) {
+    public void draw(IVStudent curPlayer, JButton btn, IController c) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'draw'");
     }
+
 }

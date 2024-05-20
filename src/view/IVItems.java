@@ -2,8 +2,11 @@ package view;
 
 import java.awt.GridBagConstraints;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.IController;
+
 public interface IVItems {
-    JPanel draw(IVStudent curPlayer, GridBagConstraints c);
+    void draw(IVStudent curPlayer, JButton btn, IController c);
 }

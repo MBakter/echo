@@ -10,7 +10,7 @@ import model.player.IVMStudent;
 
 public class Commands implements ICommands{
 
-    //public Controller controller;
+/*     //public Controller controller;
 
     public Commands(Controller c){
         //controller = c;
@@ -70,6 +70,41 @@ public class Commands implements ICommands{
         Controller.curPlayer.move((Room)r);
         System.out.println("After move: " + Controller.curPlayer.getRoom().toString());
         Controller.PlayerMoved();
+    } */
+
+    @Override
+    public void pickUpItem(IItem item) {
+        Controller.curPlayer.pickUp(item);
     }
 
+    @Override
+    public void dropItem(IItem item) {
+        Controller.curPlayer.dropItem(item);
+    }
+
+    @Override
+    public void useItem(IItem item) {
+        Controller.curPlayer.useItem(item);
+    }
+
+    @Override
+    public void activateTransistor(Transistor t) {
+        t.ActivateTransistor();
+    }
+
+    @Override
+    public void pairTransistor(Transistor t1, Transistor t2) {
+        t1.PairTransistor(t2);
+    }
+
+    @Override
+    public void enterRoom(Room r) {
+        if(!Controller.CanPlayerMove())
+            return;
+        
+        System.out.println("Before move: " + Controller.curPlayer.getRoom().toString());
+        Controller.curPlayer.move(r);
+        System.out.println("After move: " + Controller.curPlayer.getRoom().toString());
+        Controller.PlayerMoved();
+    }
 }
