@@ -21,13 +21,11 @@ public class Cleaner extends Player implements IVMCleaner{
     }
     public boolean pickUp(IItem i) {
         if(room == null){
-            itemList.add(i);
             i.pickUp(this);
             return true;
         }
         boolean success = room.removeItem(i);
         if(success) {
-            itemList.add(i);
             i.pickUp(this);
         }
         return success;
