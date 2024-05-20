@@ -1,12 +1,7 @@
 package controller;
 
-import view.IVItems;
-import view.IVStudent;
-import view.VTransistor;
-import model.IVMRoom;
 import model.Room;
 import model.items.*;
-import model.player.IVMStudent;
 
 public class Commands implements ICommands{
 

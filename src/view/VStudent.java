@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.*;
-import java.awt.Insets;
-
 import javax.swing.*;
 
 import controller.IController;
@@ -23,7 +20,7 @@ public class VStudent implements IVStudent{
     }
 
     @Override
-    public JPanel draw(IVStudent curPlayer, JButton btn, IController c) {
+    public void draw(IVStudent curPlayer, JButton btn, IController c) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'draw'");
     }

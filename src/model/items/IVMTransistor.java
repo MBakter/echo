@@ -1,5 +1,4 @@
 package model.items;
-import view.*;
 
 public interface IVMTransistor {
     boolean isActive();

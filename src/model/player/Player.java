@@ -2,7 +2,6 @@ package model.player;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.ERoomEffects;
 import model.*;
 import model.items.IItem;
 import test.IPrintStat;

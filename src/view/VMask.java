@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.GridBagConstraints;
-
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import controller.IController;
 import model.items.Mask;

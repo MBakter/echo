@@ -2,7 +2,6 @@ package model.items;
 
 import java.util.ArrayList;
 
-import controller.TimedObject;
 import java.util.Random;
 
 import model.*;
