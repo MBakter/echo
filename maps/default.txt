@@ -1,4 +1,4 @@
-create room r1
+create room r1 c
 create room r2
 create room r3
 create room r4
