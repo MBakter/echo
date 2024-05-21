@@ -513,6 +513,8 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         if(currentVRoom.getModelRoom().isPoisonous()) 
             gamePanel.setBackground("textures" + File.separator + "BackgroundBlurred.png");
+        else    
+            gamePanel.setBackground("textures" + File.separator + "BackgroundEdited.png");
 
         //Doors
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {
