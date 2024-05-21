@@ -39,7 +39,8 @@ public class VTransistor implements IVItems{
 
         ArrayList<IVMTransistor> transistors = new ArrayList<>();
         for (IVItems item : curPlayer.getModelStudent().getItemList()) {
-            if(item.isPairable() && !item.equals(this)){
+            if(item.isPairable() && !modelTransistor.equals(((VTransistor)item).modelTransistor) ){
+                
                 transistors.add((((VTransistor)item).modelTransistor));
             }
         }
@@ -48,7 +49,7 @@ public class VTransistor implements IVItems{
         JMenu subMenu = new JMenu("Pair with...");
         for(int i = 0; i < transistors.size(); i++){
             final int idx = i;
-            subMenu.add(new JMenuItem("Transistor " + i)).addActionListener(e -> { c.getCommands().pairTransistor(modelTransistor, transistors.get(idx));});
+            subMenu.add(new JMenuItem(transistors.get(i).getName())).addActionListener(e -> { c.getCommands().pairTransistor(modelTransistor, transistors.get(idx));});
         }
         //jp.add(new JMenuItem("Activate")).addActionListener(e -> {c.getCommands().useItem(modelTransistor);});
         //jp.add(subMenu);
@@ -73,7 +74,7 @@ public class VTransistor implements IVItems{
                 if(mouseEvent.getButton() == MouseEvent.BUTTON3){
                     JPopupMenu jp = new JPopupMenu("Stats");
                     jp.add(new JMenuItem("Active: "+ modelTransistor.isActive()));
-
+                    jp.add(new JMenuItem("Name: "+ modelTransistor.getName()));
                     jp.add(new JMenuItem("Pair: "+ modelTransistor.getPairName()));
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
