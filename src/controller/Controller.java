@@ -25,7 +25,7 @@ public class Controller implements IController {
     private static IMainWindow View;
 
     static Student curPlayer = null;
-    private static int actionCounter = 2; 
+    private static int actionCounter = 2;
     private static int studentMoveCounter = 0;
     public static Commands commands = new Commands();
 
@@ -44,7 +44,7 @@ public class Controller implements IController {
 
     public void startGameWithGUI(IMainWindow viewInterface) {
         View = viewInterface;
-        //Map.generateFromFile(mapDirectoryPath);
+        // Map.generateFromFile(mapDirectoryPath);
         View.InitWindow();
 
     }
@@ -112,16 +112,22 @@ public class Controller implements IController {
 
     private static void StudentMove(Student s) {
         curPlayer = s;
-        actionCounter = 2;
+        if (curPlayer.getState().equals(EPlayerState.UNCONSCIOUS))
+            actionCounter = -2;
+        else if (curPlayer.getState().equals(EPlayerState.ALIVE))
+            actionCounter = 2;
+        else if (curPlayer.getState().equals(EPlayerState.DEAD))
+            actionCounter = -1;
         View.RefreshView();
+
     }
 
     private static void TeacherMove(Teacher t) {
         Random r = new Random();
-        if (t.getRoom().getNeighbours().size()>=2)
-        t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size()-1)));
-        else if(t.getRoom().getNeighbours().size()==1)
-        t.move(t.getRoom().getNeighbours().get(0));
+        if (t.getRoom().getNeighbours().size() >= 2)
+            t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size() - 1)));
+        else if (t.getRoom().getNeighbours().size() == 1)
+            t.move(t.getRoom().getNeighbours().get(0));
         View.RefreshView();
 
         checkDeadPlayers();
@@ -129,10 +135,10 @@ public class Controller implements IController {
 
     private static void CleanerMove(Cleaner c) {
         Random r = new Random();
-        if (c.getRoom().getNeighbours().size()>=2)
-        c.move(c.getRoom().getNeighbours().get(r.nextInt(c.getRoom().getNeighbours().size()-1)));
-        else if(c.getRoom().getNeighbours().size()==1)
-        c.move(c.getRoom().getNeighbours().get(0));
+        if (c.getRoom().getNeighbours().size() >= 2)
+            c.move(c.getRoom().getNeighbours().get(r.nextInt(c.getRoom().getNeighbours().size() - 1)));
+        else if (c.getRoom().getNeighbours().size() == 1)
+            c.move(c.getRoom().getNeighbours().get(0));
         View.RefreshView();
     }
 
@@ -144,8 +150,14 @@ public class Controller implements IController {
     }
 
     public static boolean CanPlayerMove() {
-        if(actionCounter == 0) {
+        if (actionCounter == 0) {
             View.showError("You ran out of moves!");
+            return false;
+        }else if(actionCounter == -1){
+            View.showError("You are dead!");
+            return false;
+        }else if(actionCounter == -2){
+            View.showError("You are unconscoius!");
             return false;
         }
         return true;
@@ -160,13 +172,14 @@ public class Controller implements IController {
         
         if(studentMoveCounter >= students.size()) {
             for (Teacher teacher : teachers) {
-                TeacherMove(teacher);
+                TeacherMove(teacher);                
             }
             for (Cleaner cleaner : cleaners) {
                 CleanerMove(cleaner);
             }
             Map.randomMove();
             studentMoveCounter = 0;
+            timer.iterateTime();
         }
 
         if(students.size() > 0)
@@ -174,17 +187,17 @@ public class Controller implements IController {
     }
 
     private boolean isGameSet() {
-        if(students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
+        if (students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
             return false;
         return true;
     }
 
     @Override
     public void startGame() {
-        if(!isGameSet()) {
+        if (!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
-        if(!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
+        if (!Map.generateFromFile(mapDirectoryPath + File.separator + mapName)) {
             View.showError("University has not been built yet! Please select a valid map");
         }
 
@@ -195,10 +208,10 @@ public class Controller implements IController {
             s.forceMove(Map.roomList.get(0));
         }
         for (Teacher t : teachers) {
-            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
         }
         for (Cleaner c : cleaners) {
-            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size()-2) + 1));
+            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
         }
 
         StudentMove(students.get(0));
@@ -223,13 +236,13 @@ public class Controller implements IController {
         students.clear();
         teachers.clear();
         cleaners.clear();
-        for (int i = 0; i < studentNum; i++) 
+        for (int i = 0; i < studentNum; i++)
             students.add(new Student("S" + i, timer));
 
-        for (int i = 0; i < teacherNum; i++) 
+        for (int i = 0; i < teacherNum; i++)
             teachers.add(new Teacher("T" + i, timer));
 
-        for (int i = 0; i < cleanerNum; i++) 
+        for (int i = 0; i < cleanerNum; i++)
             cleaners.add(new Cleaner("C" + i, timer));
 
         this.mapName = mapName;
@@ -237,22 +250,22 @@ public class Controller implements IController {
 
     @Override
     public int getStudentNum() {
-        return students.size();    
+        return students.size();
     }
 
     @Override
     public int getTeacherNum() {
-        return teachers.size();    
+        return teachers.size();
     }
 
     @Override
     public int getCleanerNum() {
-        return cleaners.size();        
+        return cleaners.size();
     }
 
     @Override
     public String getMapName() {
-        return mapName;    
+        return mapName;
     }
 
     @Override

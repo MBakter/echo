@@ -332,6 +332,9 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
      * @return Sikerült-e összevonni a két szobát
      */
     public boolean merge(Room r) {
+        if(r.equals(this))
+            return false;
+
         if (getPlayers().size() > 0 || r.getPlayers().size() > 0)
             return false;
         if (effects.contains(ERoomEffects.TRANSISTOR_INSIDE) || r.effects.contains(ERoomEffects.TRANSISTOR_INSIDE))
