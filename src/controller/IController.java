@@ -7,6 +7,7 @@ import view.IVStudent;
 
 public interface IController {
     void startGame();
+    void endGame();
     void setParameters(int studentNum, int teacherNum, int cleanerNum, String mapName);
     String getMapFolderLocation();
     int getStudentNum();

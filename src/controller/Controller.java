@@ -55,6 +55,12 @@ public class Controller implements IController {
         View.endGame(victory);
     }
 
+    @Override
+    public void endGame() {
+        endOfGame = true;
+        View.endGame(false);
+    }
+
     //Return true if that was the last player and the game is over
     //To be used after current player performed an action, checks if CP is dead
     private static boolean checkPlayerDead() {
@@ -215,6 +221,8 @@ public class Controller implements IController {
     @Override
     public void startGame() {
         endOfGame = false;
+        curPlayer = null;
+        
         if (!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
@@ -242,14 +250,13 @@ public class Controller implements IController {
     @Override
     public void resetGame() {
         if(endOfGame) {
-            students.clear();
-            teachers.clear();
-            cleaners.clear();
-            Map.clear();
+            students = new ArrayList<>();
+            teachers = new ArrayList<>();
+            cleaners = new ArrayList<>();
+            timer = new Timer();
             Map = new Labyrinth();
             actionCounter = 2;
             studentMoveCounter = 0;
-            timer = new Timer();
         }
     }
 

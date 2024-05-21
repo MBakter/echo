@@ -222,6 +222,29 @@ public class MainWindow extends JFrame implements IMainWindow {
         return boardPanel;
     }
 
+    private JPanel createExitDoor(GridBagConstraints c) {
+        JPanel endPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        c.insets = new Insets(10, 0, 5, 0);
+        endPanel.setOpaque(false);
+        c.gridx = 3;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.weighty = 1;
+        c.ipadx = 0;
+        c.ipady = 0;
+        
+        JButton endButton = new JButton("End game");
+        endButton.addActionListener(e -> { 
+            controller.endGame();
+         });
+        
+        endButton.setPreferredSize(new Dimension(75, 150));
+
+        endPanel.add(endButton);
+        return endPanel;
+    }
+
     private void createGridBag() {
 
         gamePanel.setLayout(new GridBagLayout());
@@ -234,6 +257,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         gamePanel.add(createRoomItemPanel(c), c);
         gamePanel.add(createStudentPanel(c), c);
         gamePanel.add(createItemPanel(c), c);
+        gamePanel.add(createExitDoor(c), c);
 
     }
 
