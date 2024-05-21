@@ -45,13 +45,12 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat, IVMCheese {
     public void useItem(Player p) {
         if (isUsed)
             return;
-
+            
+        isUsed = true;
         timer.startTimer(this, TIME);
         room = p.getRoom();
 
         room.addEffect(ERoomEffects.POISONED);
-        p.removeItem(this);
-        room.addItem(this);
     }
 
     @Override
