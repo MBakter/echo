@@ -30,17 +30,12 @@ public class Cleaner extends Player implements IVMCleaner{
         return success;
     }
 
+    /*
+     * Magát ne tessékelje ki...
+     */
     @Override
     public void getOut() {
         return;
-/*         if(room == null)
-        return;
-        for (Room r : room.getNeighbours()) {
-            boolean success = move(r);
-            if (success) {
-                return;
-            }
-        } */
     }
     @Override
     public EPlayerState getPlayerState() {

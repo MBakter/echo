@@ -49,6 +49,9 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     private String mapName;
 
+    /*
+     * Ajtók panelje
+     */
     private JPanel createRoomGrid(GridBagConstraints c) {
         JPanel roomPanel = new JPanel(new GridBagLayout());
         roomPanel.setOpaque(false);
@@ -79,6 +82,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return roomPanel;
     }
 
+    /*
+     * Oktatók panelje
+     */
     private JPanel createTeacherPanel(GridBagConstraints c) {
         JPanel teacherPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
         c.insets = new Insets(0, 0, 73, 0);
@@ -102,6 +108,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return teacherPanel;
     }
 
+    /*
+     * Tisztítók panelje
+     */
     private JPanel createCleanerPanel(GridBagConstraints c) {
         JPanel cleanerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         cleanerPanel.setOpaque(false);
@@ -127,6 +136,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return cleanerPanel;
     }
 
+    /*
+     * Földön lévő itemek panelje
+     */
     private JPanel createRoomItemPanel(GridBagConstraints c) {
         JPanel roomItemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         roomItemPanel.setOpaque(false);
@@ -151,6 +163,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return roomItemPanel;
     }
 
+    /*
+     * Hallgatók panelje
+     */
     private JPanel createStudentPanel(GridBagConstraints c) {
         JPanel studentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         studentPanel.setOpaque(false);
@@ -174,6 +189,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return studentPanel;
     }
 
+    /*
+     * Inventoryban lévő itemek panelje
+     */
     private JPanel createItemPanel(GridBagConstraints c) {
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         itemPanel.setOpaque(false);
@@ -200,6 +218,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return itemPanel;
     }
 
+    /*
+     * Finish turn gomb ("tábla")
+     */
     private JPanel createBoard(GridBagConstraints c) {
         JPanel boardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         c.insets = new Insets(170, 0, 5, 0);
@@ -222,6 +243,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return boardPanel;
     }
 
+    /*
+     * Kilépés gomb
+     */
     private JPanel createExitDoor(GridBagConstraints c) {
         JPanel endPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         c.insets = new Insets(10, 0, 5, 0);
@@ -245,6 +269,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return endPanel;
     }
 
+    /*
+     * Layout a megjelenítéshez
+     */
     private void createGridBag() {
 
         gamePanel.setLayout(new GridBagLayout());
@@ -261,6 +288,9 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     }
 
+    /*
+     * Menü, játék közben ezzel kiléphetünk a főmenübe, ESC gombra aktiválódik
+     */
     private void AddPopupMenu() {
         addKeyListener(new KeyListener() {
 
@@ -296,6 +326,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
     }
 
+    /*
+     * GUI létrehozása
+     */
     public MainWindow(IController controller, String title) {
         super(title);
         try{
@@ -308,6 +341,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         mapName = controller.getMapName();
     }
 
+    /*
+     * Kezdeti játékképernyő
+     */
     private void startGame() {
         AddPopupMenu();
 
@@ -320,6 +356,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         pack();
     }
     
+    /*
+     * Főmenü (Játék indítása/Opciók/Kilépés)
+     */
     private void drawMenu() {
         
         mainPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
@@ -364,7 +403,10 @@ public class MainWindow extends JFrame implements IMainWindow {
         pack();
 
     }
-
+    
+    /*
+     * Opciók menüje
+     */
     private void drawOptions() {
 
         optionPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
@@ -476,6 +518,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         pack();
     }
 
+    /*
+     * Pálya kiválasztása fájlok közül
+     */
     private void mapSelect() {
         File mapLocation = new File(controller.getMapFolderLocation());
         if(!mapLocation.exists())
@@ -489,6 +534,9 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     }
 
+    /*
+     * Különböző játékosok számának beállítása
+     */
     private void saveOptions(Object sVal, Object tVal, Object cVal, Object mVal) {
         controller.setParameters((int)sVal, (int)tVal, (int)cVal, (String)mVal);
     }
@@ -497,15 +545,16 @@ public class MainWindow extends JFrame implements IMainWindow {
         System.exit(0);
     }
 
+    /*
+     * Megjelenített objektumok állapotának törlése
+     */
     private void RefreshComponents() {
 
         for (int i = 0; i < 12; i++) {
             doors[i].setIcon(null);
             for (ActionListener al : doors[i].getActionListeners()) 
                 doors[i].removeActionListener(al); 
-            /* for (MouseListener ml : doors[i].getMouseListeners()) {
-                doors[i].removeMouseListener(ml); 
-            } */
+
         }
 
         for (int i = 0; i < 10; i++) {
@@ -526,6 +575,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
 
+    /*
+     * Megjelenített objektumok frissítése
+     */
     @Override
     public void RefreshView() {
         RefreshComponents();
@@ -574,6 +626,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
 
+    /*
+     * Kezdeti képernyő
+     */
     @Override
     public void InitWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -586,6 +641,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         JOptionPane.showMessageDialog(this, title);
     }
 
+    /*
+     * Játék vége kép
+     */
     @Override
     public void endGame(boolean victory) {
         JDialog dialog = new JDialog(this, "gameOver", true);

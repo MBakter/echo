@@ -34,8 +34,6 @@ public class VTransistor implements IVItems{
         System.out.println("VTRANSISTOR DRAW");
 
         label.setIcon(new ImageIcon("textures" + File.separator + "Transistor.png"));
-        //label.addActionListener(e -> { c.getCommands().useItem((IItem)modelTransistor); });
-        //label.addActionListener(e -> {/* TODO popup gomb transistorhoz */});
 
         ArrayList<IVMTransistor> transistors = new ArrayList<>();
         for (IVItems item : curPlayer.getModelStudent().getItemList()) {
@@ -51,8 +49,7 @@ public class VTransistor implements IVItems{
             final int idx = i;
             subMenu.add(new JMenuItem(transistors.get(i).getName())).addActionListener(e -> { c.getCommands().pairTransistor(modelTransistor, transistors.get(idx));});
         }
-        //jp.add(new JMenuItem("Activate")).addActionListener(e -> {c.getCommands().useItem(modelTransistor);});
-        //jp.add(subMenu);
+
 
         jp.show(label, 100, 100);
 

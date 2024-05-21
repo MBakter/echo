@@ -34,11 +34,17 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
 
     }
 
+    /*
+     * Konstruktor név megadásával
+     */
     public Room(String name) {
         maxPlayer = 5;
         this.name = name;
     }
 
+    /*
+     * Maximális játékosok száma a szobában
+     */
     public void setMax(int n) {
         maxPlayer = n;
     }
@@ -103,7 +109,10 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
 
     }
 
-    // Forced
+    /*
+     * Hallgató szobához adása a játékszabályok
+     * figyelembe vétele nélkül
+     */
     public void fAdd(Student s) {
         studentList.add(s);
         if (s.getRoom() != null)
@@ -144,7 +153,10 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return true;
     }
 
-    // forced
+    /*
+     * Oktató szobához adása a játékszabályok
+     * figyelembe vétele nélkül
+     */
     public void fAdd(Teacher t) {
         teacherList.add(t);
         if (t.getRoom() != null)
@@ -188,7 +200,10 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return true;
     }
 
-    // Forced
+    /*
+     * Cleaner szobához adása a játékszabályok
+     * figyelembe vétele nélkül
+     */
     public void fAdd(Cleaner c) {
         cleanerList.add(c);
         if (c.getRoom() != null)
@@ -274,6 +289,9 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         }
     }
 
+    /*
+     * Szobaeffektus hozzáadása
+     */
     public void addEffect(String eS) {
         if (eS.equals("TRANSISTOR_IN"))
             eS = "TRANSISTOR_INSIDE";
@@ -370,6 +388,9 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
             }
     }
 
+    /*
+     * Szoba tisztítása
+     */
     public void purifyRoom() {
         while (effects.contains(ERoomEffects.POISONED)) {
             removeEffect(ERoomEffects.POISONED);
@@ -436,6 +457,9 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return true;
     }
 
+    /*
+     * Tesztekhez összes adat kiírása
+     */
     @Override
     public void printStat(String asd) {
         System.out.printf("%s effects", name);
@@ -482,6 +506,9 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         System.out.printf("%s numOfVisitors %d%n", name, numOfVisitors);
     }
 
+    /*
+     * State opciók listázása
+     */
     @Override
     public void statesOptions() {
         for (var e : ERoomEffects.values()) {
