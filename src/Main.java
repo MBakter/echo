@@ -8,7 +8,7 @@ public class Main {
 
         Controller controller = new Controller("maps");
 
-        MainWindow view = new MainWindow(controller, "`(*>﹏<*)′");
+        MainWindow view = new MainWindow(controller, "A Logarlec");
         view.setVisible(true);
 
         controller.startGameWithGUI(view);

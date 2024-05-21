@@ -362,6 +362,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         } catch(Exception e) {}
 
         JFrame.setDefaultLookAndFeelDecorated(true);
+        setIconImage(new ImageIcon("textures" + File.separator + "TVSZ.png").getImage());
         
         this.controller = controller;
         mapName = controller.getMapName();
@@ -390,8 +391,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         mainPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
         mainPanel.setLayout(new GridBagLayout());
         
-        JPanel menuPanel = new JPanel(new GridLayout(3, 1, 0, 50));
-        menuPanel.setPreferredSize(new Dimension(500, 500));
+        JPanel menuPanel = new JPanel(new GridLayout(4, 1, 0, 50));
+        menuPanel.setPreferredSize(new Dimension(500, 700));
         menuPanel.setOpaque(false);
 
         JButton startButton = new JButton("Start Game");
@@ -414,6 +415,13 @@ public class MainWindow extends JFrame implements IMainWindow {
         optionsButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
         optionsButton.setFont(new Font("Courier New", Font.PLAIN, 50));
         menuPanel.add(optionsButton);
+
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(e -> { drawHelp(); });
+        helpButton.setContentAreaFilled(false);
+        helpButton.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+        helpButton.setFont(new Font("Courier New", Font.PLAIN, 50));
+        menuPanel.add(helpButton);
 
         JButton exitButton = new JButton("Exit to desktop");
         exitButton.addActionListener(e -> {    exitGame();  });
@@ -542,6 +550,66 @@ public class MainWindow extends JFrame implements IMainWindow {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         pack();
+    }
+
+    /*
+     * A játék leírás megjelenítése
+     */
+    private void drawHelp() {
+        JDialog dialog = new JDialog(this, "Help", true);
+        dialog.setSize(700, 900);
+        dialog.setLayout(new BorderLayout());
+
+        // Create the instructions text area
+        JTextArea Text = new JTextArea();
+        Text.setText("\t\t\tÜdv A Logarléc nevű játékban!\r\n" + //
+                        "\r\n" + //
+                        "A játék során egy egyetemi hallgatót fogsz irányítani. Egy előadószobát látsz belsőnézetből,\r\n" + //
+                        "ahol a földön tárgyak lehetnek, a teremben pedig különböző karakterek.\r\n" + //
+                        "\r\n" + //
+                        "A bal felső sarokban ajtókat látsz, ezekre rákattintva tudsz szomszédos szobákba lépni.\r\n" + //
+                        "\r\n" + //
+                        "Jobb oldalt a földön fogsz tárgyakat látni, ha vannak a szobában, bal klikkeléssel lehet őket felvenni.\r\n" + //
+                        "\r\n" + //
+                        "Az előtted lévő asztalon jelennek meg a felvett tárgyak. Ezeknek a tulajdonságait jobb kattintással hívhatod elő.\r\n" + //
+                        "Bal kattintással használhatod vagy eldobhatod a tárgyat.\r\n" + //
+                        "\r\n" + //
+                        "A játék célja a logarléc megtalálása és felvétele.\r\n" + //
+                        "\r\n" + //
+                        "Ha egy oktató elkap és nincs védelmed elveszíted a játékot.\r\n" + //
+                        "\r\n" + //
+                        "A takarítóbotok kitessékelnek a szobádból a saját körükben.\r\n" + //
+                        "\r\n" + //
+                        "A játékosok egymás után sorrendben jönnek.\r\n" + //
+                        "\r\n" + //
+                        "Ha a táblára nyomsz lezárhatod a körödet.\r\n" + //
+                        "\r\n" + //
+                        "A jobb oldali ajtóval kiléphetsz a játékból.\r\n" + //
+                        "\r\n" + //
+                        "Sok sikert kívánunk a játékhoz!");
+        Text.setFont(new Font("Arial", Font.PLAIN, 13));
+        Text.setEditable(false);
+        Text.setLineWrap(true);
+        Text.setWrapStyleWord(true);
+        Text.setMargin(new Insets(10, 10, 10, 10));
+        
+        // Add the text area to a scroll pane
+        JScrollPane scrollPane = new JScrollPane(Text);
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        // Create the close button
+        JPanel buttonPanel = new JPanel();
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(e -> { dialog.dispose(); });
+        buttonPanel.add(closeButton);
+
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Center the dialog on the parent frame
+        dialog.setLocationRelativeTo(this);
+
+        // Make the dialog visible
+        dialog.setVisible(true);
     }
 
     /*
