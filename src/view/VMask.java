@@ -41,13 +41,23 @@ public class VMask implements IVItems {
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                JPopupMenu jp = new JPopupMenu("Choose action");
-                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
-                    c.getCommands().useItem(modelMask);
-                });
+                if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                        c.getCommands().useItem(modelMask);
+                    });
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
+                if(mouseEvent.getButton() == MouseEvent.BUTTON3){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Functional: " + modelMask.isFunctional()));
+                    jp.add(new JMenuItem("Time: " + modelMask.getTime()));
+                    jp.add(new JMenuItem("Fake: " + modelMask.isFake()));
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
 
-                jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
             }
         });
     }

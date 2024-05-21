@@ -39,13 +39,22 @@ public class VPurifier implements IVItems{
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                JPopupMenu jp = new JPopupMenu("Choose action");
-                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
-                    c.getCommands().useItem(modelPurifier);
-                });
-
-                jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                        c.getCommands().useItem(modelPurifier);
+                    });
+    
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
+                if(mouseEvent.getButton() == MouseEvent.BUTTON3){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Used: +" + modelPurifier.isUsed()));
+    
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
             }
         });
     }

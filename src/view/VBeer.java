@@ -52,8 +52,8 @@ public class VBeer implements IVItems{
 
                 if(SwingUtilities.isRightMouseButton(mouseEvent)) {
                     JPopupMenu jp = new JPopupMenu("Stats");
-                    jp.add(new JLabel(Integer.toString(modelBeer.getTime())));
-                    jp.add(new JLabel(EBeerState.convertToString(modelBeer.getState())));
+                    jp.add(new JLabel("Time: "+Integer.toString(modelBeer.getTime())));
+                    jp.add(new JLabel("State: "+ EBeerState.convertToString(modelBeer.getState())));
 
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
