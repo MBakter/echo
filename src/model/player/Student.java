@@ -64,6 +64,7 @@ public class Student extends Player implements IVMStudent{
     }
 
     public void TeacherAttacked() {
+        System.out.println("\nCALLED\n");
         for (IItem item : itemList)
             if (item.TeacherAttackable(this)) {
                 return;
@@ -73,7 +74,6 @@ public class Student extends Player implements IVMStudent{
             if (item.TeacherAttacked(this)) {
                 return;
             }
-
         state = EPlayerState.DEAD;
     }
 

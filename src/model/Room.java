@@ -94,7 +94,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         if (!success)
             return false;
         studentList.add(s);
-        if(s.getRoom() != null)
+        if (s.getRoom() != null)
             s.getRoom().remove(s);
         for (int i = 0; i < teacherList.size(); i++) {
             s.TeacherAttacked();
@@ -106,7 +106,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
     // Forced
     public void fAdd(Student s) {
         studentList.add(s);
-        if(s.getRoom() != null)
+        if (s.getRoom() != null)
             s.getRoom().remove(s);
     }
 
@@ -136,7 +136,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         if (!success)
             return false;
         teacherList.add(t);
-        if(t.getRoom() != null)
+        if (t.getRoom() != null)
             t.getRoom().remove(t);
         for (Student s : studentList) {
             s.TeacherAttacked();
@@ -147,7 +147,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
     // forced
     public void fAdd(Teacher t) {
         teacherList.add(t);
-        if(t.getRoom() != null)
+        if (t.getRoom() != null)
             t.getRoom().remove(t);
     }
 
@@ -177,7 +177,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         if (!success)
             return false;
         cleanerList.add(c);
-        if(c.getRoom() != null)
+        if (c.getRoom() != null)
             c.getRoom().remove(c);
         if (effects.contains(ERoomEffects.POISONED))
             effects.add(ERoomEffects.STICKY);
@@ -191,7 +191,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
     // Forced
     public void fAdd(Cleaner c) {
         cleanerList.add(c);
-        if(c.getRoom() != null)
+        if (c.getRoom() != null)
             c.getRoom().remove(c);
     }
 
@@ -319,6 +319,8 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
             return null;
         if (effects.contains(ERoomEffects.TRANSISTOR_INSIDE))
             return null;
+        if (neighbouringRooms.size() >= 12)
+            return null;
         Room newRoom = new Room(maxPlayer);
         newRoom.addNeighbour(this);
         this.addNeighbour(newRoom);
@@ -332,7 +334,11 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
      * @return Sikerült-e összevonni a két szobát
      */
     public boolean merge(Room r) {
-        if(r.equals(this))
+        if (r.equals(this))
+            return false;
+        if (neighbouringRooms.size() >= 12)
+            return false;
+        if (neighbouringRooms.size() + r.neighbouringRooms.size()  >=12)
             return false;
 
         if (getPlayers().size() > 0 || r.getPlayers().size() > 0)
@@ -533,8 +539,8 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
 
     @Override
     public boolean isPoisonous() {
-        for (ERoomEffects e : effects) 
-            if(e == ERoomEffects.POISONED)
+        for (ERoomEffects e : effects)
+            if (e == ERoomEffects.POISONED)
                 return true;
         return false;
     }

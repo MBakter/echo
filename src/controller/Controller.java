@@ -225,13 +225,13 @@ public class Controller implements IController {
 
         Random r = new Random();
         for (Student s : students) {
-            s.forceMove(Map.roomList.get(0));
+            s.move(Map.roomList.get(0));
         }
         for (Teacher t : teachers) {
-            t.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
+            t.move(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
         }
         for (Cleaner c : cleaners) {
-            c.forceMove(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
+            c.move(Map.roomList.get(r.nextInt(Map.roomList.size() - 2) + 1));
         }
 
         StudentMove(students.get(0));
