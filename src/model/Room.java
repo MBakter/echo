@@ -338,7 +338,9 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
             return false;
         if (neighbouringRooms.size() >= 12)
             return false;
-        if (neighbouringRooms.size() + r.neighbouringRooms.size()  >=12)
+        if (neighbouringRooms.size() + r.neighbouringRooms.size() >= 12)
+            return false;
+        if (itemList.size() + r.itemList.size() > 10)
             return false;
 
         if (getPlayers().size() > 0 || r.getPlayers().size() > 0)

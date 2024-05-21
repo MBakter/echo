@@ -12,7 +12,7 @@ public class Teacher extends Player implements IVMTeacher {
     public Teacher(String s, ITimer t) {
         super(s,t);
     }
-
+public Teacher(){};
     public boolean move(Room r) {
         boolean moveResult = r.add(this);
         if(moveResult){

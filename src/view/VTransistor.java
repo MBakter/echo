@@ -58,13 +58,27 @@ public class VTransistor implements IVItems{
                 label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                JPopupMenu jp = new JPopupMenu("Choose action");
-                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
-                    c.getCommands().activateTransistor(modelTransistor);
-                });
-                jp.add(subMenu);
-                jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Use item")).addActionListener(e -> {
+                        c.getCommands().activateTransistor(modelTransistor);
+                    });
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelTransistor);
+                    });
+                    jp.add(subMenu);
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
+                if(mouseEvent.getButton() == MouseEvent.BUTTON3){
+                    JPopupMenu jp = new JPopupMenu("Stats");
+                    jp.add(new JMenuItem("Active: "+ modelTransistor.isActive()));
+
+                    jp.add(new JMenuItem("Pair: "+ modelTransistor.getPairName()));
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
+
             }
         });
     }

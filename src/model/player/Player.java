@@ -13,7 +13,9 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     protected EPlayerState state;
     protected ITimer timer;
     private String name;
+    public Player(){
 
+    }
     Player(String s, ITimer t) {
         name = s;
         state = EPlayerState.ALIVE;
@@ -56,7 +58,8 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     public void RoomPoisoned() {
         state = EPlayerState.UNCONSCIOUS;
         timer.startTimer(this, 3);
-        ArrayList<IItem> myItems = (ArrayList<IItem>) itemList;
+        ArrayList<IItem> myItems = new ArrayList<>();
+        myItems.addAll(itemList);
         for (IItem i : myItems) {
             dropItem(i);
         }
@@ -79,7 +82,7 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     public abstract boolean pickUp(IItem i);
 
     public void dropItem(IItem i) {
-        if (room == null)
+        if (room == null || room.getRoomItems().size() >= 10)
             return;
         i.dropItem(this);
         room.addItem(i);

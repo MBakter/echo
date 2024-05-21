@@ -12,6 +12,7 @@ import view.VRoom;
 public class Student extends Player implements IVMStudent{
 
     private static int TIME = 4;
+    public Student(){};
 
     public Student(String s, ITimer t) {
         super(s,t);
