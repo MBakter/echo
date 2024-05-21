@@ -179,6 +179,11 @@ public class Controller implements IController {
 
     @Override
     public void EndTurn() {     
+        checkPlayerDead();
+        
+        if(endOfGame)
+            return;
+
         studentMoveCounter++;
         
         if(studentMoveCounter >= students.size()) {
@@ -190,6 +195,8 @@ public class Controller implements IController {
             for (Cleaner cleaner : cleaners) {
                 CleanerMove(cleaner);
             }
+            if(endOfGame)
+                return;
             Map.randomMove();
             studentMoveCounter = 0;
             timer.iterateTime();

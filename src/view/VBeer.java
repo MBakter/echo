@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.MenuItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -9,9 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 import controller.IController;
 import model.items.Beer;
+import model.items.EBeerState;
 import model.items.IVMBeer;
 
 public class VBeer implements IVItems{
@@ -38,11 +41,23 @@ public class VBeer implements IVItems{
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent){
-                JPopupMenu jp = new JPopupMenu("Choose action");
-                jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelBeer);});
-            
-                jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                if(SwingUtilities.isLeftMouseButton(mouseEvent)) { 
+
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelBeer);});
+                    
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
+
+                if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+                    JPopupMenu jp = new JPopupMenu("Stats");
+                    jp.add(new JLabel(Integer.toString(modelBeer.getTime())));
+                    jp.add(new JLabel(EBeerState.convertToString(modelBeer.getState())));
+
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
             }
         });
 
