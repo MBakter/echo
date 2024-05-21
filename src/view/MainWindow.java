@@ -274,6 +274,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return endPanel;
     }
 
+    /*
+     * A szoba nevét megjelenítő panel
+     */
     private JPanel createRoomSign(GridBagConstraints c) {
         JPanel roomSignPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         c.insets = new Insets(10, 80, 5, 0);
@@ -586,7 +589,10 @@ public class MainWindow extends JFrame implements IMainWindow {
                         "\r\n" + //
                         "A jobb oldali ajtóval kiléphetsz a játékból.\r\n" + //
                         "\r\n" + //
-                        "Sok sikert kívánunk a játékhoz!");
+                        "Sok sikert kívánunk a játékhoz!\r\n" +
+                        "\r\n" + 
+                        "\t- Team Echo");
+
         Text.setFont(new Font("Arial", Font.PLAIN, 13));
         Text.setEditable(false);
         Text.setLineWrap(true);
@@ -735,6 +741,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         drawMenu();
     }
 
+    /*
+     * Egy error üzenetet dob a kijelzőre title névvel
+     */
     @Override
     public void showError(String title) {
         JOptionPane.showMessageDialog(this, title);

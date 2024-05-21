@@ -51,7 +51,7 @@ public class VPurifier implements IVItems{
                 }
                 if(mouseEvent.getButton() == MouseEvent.BUTTON3){
                     JPopupMenu jp = new JPopupMenu("Choose action");
-                    jp.add(new JLabel("Used: +" + modelPurifier.isUsed()));
+                    jp.add(new JLabel("Used: " + modelPurifier.isUsed()));
     
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
