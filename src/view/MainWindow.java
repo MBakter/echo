@@ -88,7 +88,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     private JPanel createTeacherPanel(GridBagConstraints c) {
         JPanel teacherPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-        c.insets = new Insets(0, 0, 73, 0);
+        c.insets = new Insets(15, 0, 73, 0);
         teacherPanel.setOpaque(false);
         c.gridx = 1;
         c.gridy = 2;
@@ -224,7 +224,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     private JPanel createBoard(GridBagConstraints c) {
         JPanel boardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        c.insets = new Insets(170, 0, 5, 0);
+        c.insets = new Insets(190, 0, 5, 0);
         boardPanel.setOpaque(false);
         c.gridx = 1;
         c.gridy = 1;
@@ -235,7 +235,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipady = 0;
 
         
-        JButton turnEndButton = new JButton("Finish Turn");
+        JButton turnEndButton = new JButton();
+        turnEndButton.setIcon(new ImageIcon("textures" + File.separator + "endTurnSign.png"));
+        turnEndButton.setContentAreaFilled(false);
         turnEndButton.addActionListener(e -> { controller.EndTurn(); });
         
         turnEndButton.setPreferredSize(new Dimension(400, 100));
@@ -249,7 +251,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     private JPanel createExitDoor(GridBagConstraints c) {
         JPanel endPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        c.insets = new Insets(10, 0, 5, 0);
+        c.insets = new Insets(13, 0, 5, 0);
         endPanel.setOpaque(false);
         c.gridx = 3;
         c.gridy = 2;
@@ -259,12 +261,14 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.ipadx = 0;
         c.ipady = 0;
 
-        JButton endButton = new JButton("End game");
+        JButton endButton = new JButton();
+        endButton.setIcon(new ImageIcon("textures" + File.separator + "exitDoor.png"));
+        endButton.setContentAreaFilled(false);
         endButton.addActionListener(e -> { 
             controller.endGame();
          });
         
-        endButton.setPreferredSize(new Dimension(75, 150));
+        endButton.setPreferredSize(new Dimension(75, 180));
 
         endPanel.add(endButton);
         return endPanel;
