@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Random;
 
+import controller.Controller;
 import model.player.*;
 import test.IPrintStat;
 import view.IVItems;
@@ -48,6 +49,8 @@ public class Logarlec implements IItem, IPrintStat, IVMLogarlec {
     @Override
     public void pickUp(Student s) {
         s.addItem(this);
+        if(!isFake())
+            Controller.endGame(true);
     }
 
     @Override
