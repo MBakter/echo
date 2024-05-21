@@ -125,7 +125,7 @@ public class Sponge implements IItem, ITimedEntity, IPrintStat, IVMSponge {
 
     @Override
     public int getTime() {
-        return TIME;
+        return timer.getETA(this);
     }
 
     @Override

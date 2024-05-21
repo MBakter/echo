@@ -10,7 +10,6 @@ import javax.swing.JPopupMenu;
 
 import java.awt.event.*;
 import controller.IController;
-import model.items.IItem;
 import model.items.IVMSponge;
 import model.items.Sponge;
 
@@ -54,13 +53,13 @@ public class VSponge implements IVItems {
                 }
                 if (mouseEvent.getButton() == MouseEvent.BUTTON3) {
                     JPopupMenu jp = new JPopupMenu("Stats");
-                    jp.add(new JLabel("Functional: "+modelSponge.isFunctional()));
-                    jp.add(new JLabel("Time: "+modelSponge.getTime()));
+                    jp.add(new JLabel("Functional: " + modelSponge.isFunctional()));
+                    if(modelSponge.getTime() > -1)
+                        jp.add(new JLabel("Time: " + modelSponge.getTime()));
 
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
                 }
-
             }
         });
     }

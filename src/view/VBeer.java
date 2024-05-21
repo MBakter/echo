@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.MenuItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -54,7 +53,8 @@ public class VBeer implements IVItems{
 
                 if(SwingUtilities.isRightMouseButton(mouseEvent)) {
                     JPopupMenu jp = new JPopupMenu("Stats");
-                    jp.add(new JLabel("Time: " + Integer.toString(modelBeer.getTime())));
+                    if(modelBeer.getState() == EBeerState.RUNNING)
+                        jp.add(new JLabel("Time: " + Integer.toString(modelBeer.getTime())));
                     jp.add(new JLabel("State: "+ EBeerState.convertToString(modelBeer.getState())));
 
                     jp.show(label, 100, 100);

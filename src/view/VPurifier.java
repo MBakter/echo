@@ -11,7 +11,6 @@ import javax.swing.JPopupMenu;
 import java.awt.event.*;
 
 import controller.IController;
-import model.items.IItem;
 import model.items.IVMPurifier;
 import model.items.Purifier;
 

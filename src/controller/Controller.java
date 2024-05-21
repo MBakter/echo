@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.ERoomEffects;
 import model.player.*;
 import view.IMainWindow;
 import view.IVItems;

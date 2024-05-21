@@ -5,10 +5,6 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-
-import java.awt.event.*;
 
 import controller.IController;
 import model.items.IVMLogarlec;

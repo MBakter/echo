@@ -128,7 +128,7 @@ public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
 
     @Override
     public int getTime() {
-        return TIME;
+        return timer.getETA(this);
     }
 
     @Override

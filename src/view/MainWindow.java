@@ -5,7 +5,6 @@ import javax.swing.border.LineBorder;
 
 import controller.Controller;
 import controller.IController;
-import model.ERoomEffects;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -14,12 +13,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.ResourceBundle.Control;
 
 public class MainWindow extends JFrame implements IMainWindow {
     
     private final int WIDTH = 1920;
     private final int HEIGHT = 1080;
+
+    private JLabel mapNameL;
 
     //Kontroller************
     IController controller;
@@ -365,8 +365,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     }
 
-    private JLabel mapNameL;
-
     private void drawOptions() {
 
         optionPanel = new BackgroundPanel("textures" + File.separator + "BackgroundBlurred.png");
@@ -504,7 +502,10 @@ public class MainWindow extends JFrame implements IMainWindow {
         for (int i = 0; i < 12; i++) {
             doors[i].setIcon(null);
             for (ActionListener al : doors[i].getActionListeners()) 
-                doors[i].removeActionListener(al);   
+                doors[i].removeActionListener(al); 
+            /* for (MouseListener ml : doors[i].getMouseListeners()) {
+                doors[i].removeMouseListener(ml); 
+            } */
         }
 
         for (int i = 0; i < 10; i++) {

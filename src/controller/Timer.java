@@ -50,4 +50,13 @@ public class Timer implements ITimer {
             }
         }
     }
+
+    @Override
+    public int getETA(ITimedEntity e) {
+        for (TimedObject to : list) {
+            if(to.getObject().equals(e))
+                return to.getTime();
+        }
+        return 0;
+    }
 }

@@ -147,7 +147,7 @@ public class Mask implements IItem, ITimedEntity, IPrintStat, IVMMask {
 
         @Override
         public int getTime() {
-            return TIME;
+            return timer.getETA(this);
         }
 
         @Override

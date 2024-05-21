@@ -121,7 +121,7 @@ public class Cheese implements IItem, ITimedEntity, IPrintStat, IVMCheese {
 
     @Override
     public int getTime() {
-        return TIME;
+        return timer.getETA(this);
     }
 
     @Override
