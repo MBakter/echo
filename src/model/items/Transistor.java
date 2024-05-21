@@ -74,12 +74,13 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
 
     @Override
     public void pickUp(Student s) {
+        room = null;
         if (pair != null) {
-            room.removeEffect(ERoomEffects.TRANSISTOR_INSIDE);
-            room = null;
+            s.getRoom().removeEffect(ERoomEffects.TRANSISTOR_INSIDE);
+            
         }
         s.addItem(this);
-        setRoom(s.getRoom());
+        //setRoom(s.getRoom());
     }
 
     @Override
