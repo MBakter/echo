@@ -27,6 +27,8 @@ public class Controller implements IController {
     static Student curPlayer = null;
     private static int actionCounter = 2;
     private static int studentMoveCounter = 0;
+    private static int mapTurnCounter = 0;
+    private static final int mapTurn = 5;
     public static Commands commands = new Commands();
 
     public static final int minStudentSize = 1;
@@ -86,8 +88,12 @@ public class Controller implements IController {
                 for (Cleaner cleaner : cleaners) {
                     CleanerMove(cleaner);
                 }
-                Map.randomMove();
-                studentMoveCounter = 0;
+
+                if(mapTurnCounter++ == mapTurn)
+                    Map.randomMove();
+                
+                    studentMoveCounter = 0;
+                timer.iterateTime();
             }
 
             StudentMove(students.get(studentMoveCounter));
@@ -137,6 +143,14 @@ public class Controller implements IController {
         if(endOfGame)
             return;
 
+        //TESZT*************************************************
+        boolean asd = t.getState() == EPlayerState.UNCONSCIOUS ? true : false;
+        System.out.println("State: " + asd);
+        //*********************************************************
+        
+        if(t.getState() == EPlayerState.UNCONSCIOUS)
+            return;
+        
         Random r = new Random();
         if (t.getRoom().getNeighbours().size() >= 2)
             t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size() - 1)));
@@ -168,6 +182,9 @@ public class Controller implements IController {
 
     public static boolean CanPlayerMove() {
         if(endOfGame)
+            return false;
+
+        if(curPlayer.getState() == EPlayerState.UNCONSCIOUS || curPlayer.getState() == EPlayerState.DEAD)
             return false;
 
         if (actionCounter == 0) {
@@ -203,7 +220,10 @@ public class Controller implements IController {
             }
             if(endOfGame)
                 return;
-            Map.randomMove();
+            
+            if(mapTurnCounter++ == mapTurn)
+                Map.randomMove();
+            
             studentMoveCounter = 0;
             timer.iterateTime();
         }

@@ -13,6 +13,7 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     protected EPlayerState state;
     protected ITimer timer;
     private String name;
+    private final int TIME = 3;
     public Player(){
 
     }
@@ -22,8 +23,6 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         t.addEntity(this);
         timer = t;
     }
-
-
 
     public String getName() {
         return name;
@@ -35,6 +34,9 @@ public abstract class Player implements ITimedEntity, IPrintStat {
 
     public void setState(EPlayerState s) {
         state = s;
+        if(s == EPlayerState.UNCONSCIOUS) {
+            timer.startTimer(this, TIME);
+        }
     }
 
     public void setState(String s) {
@@ -57,7 +59,7 @@ public abstract class Player implements ITimedEntity, IPrintStat {
 
     public void RoomPoisoned() {
         state = EPlayerState.UNCONSCIOUS;
-        timer.startTimer(this, 3);
+        timer.startTimer(this, TIME);
         ArrayList<IItem> myItems = new ArrayList<>();
         myItems.addAll(itemList);
         for (IItem i : myItems) {
