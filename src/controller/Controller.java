@@ -18,7 +18,7 @@ public class Controller implements IController {
     private static List<Cleaner> cleaners = new ArrayList<>();
 
     private static Labyrinth Map = new Labyrinth();
-    private static boolean endOfGame = false;
+    private static boolean endOfGame = true;
     private final String mapDirectoryPath;
     private String mapName;
     private static Timer timer = new Timer();
@@ -180,7 +180,7 @@ public class Controller implements IController {
     @Override
     public void EndTurn() {     
         checkPlayerDead();
-        
+
         if(endOfGame)
             return;
 
@@ -214,6 +214,7 @@ public class Controller implements IController {
 
     @Override
     public void startGame() {
+        endOfGame = false;
         if (!isGameSet()) {
             View.showError("University will not be funded! Please add at least 1 student and 1 teacher");
         }
@@ -249,7 +250,6 @@ public class Controller implements IController {
             actionCounter = 2;
             studentMoveCounter = 0;
             timer = new Timer();
-            endOfGame = false;
         }
     }
 
