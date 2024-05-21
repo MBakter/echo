@@ -58,7 +58,8 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     public void RoomPoisoned() {
         state = EPlayerState.UNCONSCIOUS;
         timer.startTimer(this, 3);
-        ArrayList<IItem> myItems = (ArrayList<IItem>) itemList;
+        ArrayList<IItem> myItems = new ArrayList<>();
+        myItems.addAll(itemList);
         for (IItem i : myItems) {
             dropItem(i);
         }
