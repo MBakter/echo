@@ -12,7 +12,5 @@ public class Main {
         view.setVisible(true);
 
         controller.startGameWithGUI(view);
-        
-        
     } 
 }

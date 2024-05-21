@@ -147,6 +147,11 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         teacherList.add(t);
         if (t.getRoom() != null)
             t.getRoom().remove(t);
+
+        if(effects.contains(ERoomEffects.POISONED)){
+            t.RoomPoisoned();
+            return true;
+        }
         for (Student s : studentList) {
             s.TeacherAttacked();
         }
