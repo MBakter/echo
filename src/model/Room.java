@@ -547,4 +547,14 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return false;
     }
 
+    @Override
+    public boolean isCursed() {
+        for (ERoomEffects e : effects)
+            if (e == ERoomEffects.CURSED)
+                return true;
+        return false;
+    }
+
+    
+
 }

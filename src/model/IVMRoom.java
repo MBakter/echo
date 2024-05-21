@@ -12,4 +12,5 @@ public interface IVMRoom {
     public ArrayList<ERoomEffects> getRoomState();
     public ArrayList<IVItems> getRoomItems();
     public boolean isPoisonous();
+    public boolean isCursed();
 }

@@ -311,7 +311,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private void startGame() {
         AddPopupMenu();
 
-        gamePanel = new BackgroundPanel("textures" + File.separator + "BackgroundEdited.png");
+        gamePanel = new BackgroundPanel("textures" + File.separator + "Background.png");
 
         createGridBag();
         getContentPane().add(gamePanel, BorderLayout.CENTER);
@@ -536,9 +536,11 @@ public class MainWindow extends JFrame implements IMainWindow {
             return;
 
         if(currentVRoom.getModelRoom().isPoisonous()) 
-            gamePanel.setBackground("textures" + File.separator + "BackgroundBlurred.png");
+            gamePanel.setBackground("textures" + File.separator + "BackgroundPoisoned.png");
+        if(currentVRoom.getModelRoom().isCursed()) 
+            gamePanel.setBackground("textures" + File.separator + "BackgroundCursed.png");
         else    
-            gamePanel.setBackground("textures" + File.separator + "BackgroundEdited.png");
+            gamePanel.setBackground("textures" + File.separator + "Background.png");
 
         //Doors
         for (int i = 0; i < currentVRoom.getModelRoom().getNeighBourList().size(); i++) {
