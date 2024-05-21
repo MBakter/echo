@@ -345,7 +345,6 @@ public class TestRunner {
     }
 
     private void cmdLoad(ArrayList<String> args) {
-        System.out.println("FASDZADFASFAS");
         FileHandling fh = new FileHandling();
         var list = fh.ReadTest("src/test/test_txt/test_input/test1.txt");
         try {

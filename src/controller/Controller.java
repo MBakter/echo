@@ -90,8 +90,8 @@ public class Controller implements IController {
 
                 if(mapTurnCounter++ == mapTurn)
                     Map.randomMove();
-                
-                    studentMoveCounter = 0;
+                Map.randomCurse();
+                studentMoveCounter = 0;
                 timer.iterateTime();
             }
 
@@ -141,11 +141,6 @@ public class Controller implements IController {
     private static void TeacherMove(Teacher t) {
         if(endOfGame)
             return;
-
-        //TESZT*************************************************
-        boolean asd = t.getState() == EPlayerState.UNCONSCIOUS ? true : false;
-        System.out.println("State: " + asd);
-        //*********************************************************
         
         if(t.getState() == EPlayerState.UNCONSCIOUS)
             return;
@@ -223,6 +218,7 @@ public class Controller implements IController {
             if(mapTurnCounter++ == mapTurn)
                 Map.randomMove();
             
+            Map.randomCurse();
             studentMoveCounter = 0;
             timer.iterateTime();
         }

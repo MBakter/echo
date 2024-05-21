@@ -56,7 +56,6 @@ public class Labyrinth {
         } else {
             int i2 = random.nextInt(roomList.size() - 1);
             while (i2 == i) {
-                System.out.println("ASDASD");
                 i2 = random.nextInt(roomList.size() - 1);
                 System.out.println(i2);
                 if(i2 ==0)
@@ -64,6 +63,18 @@ public class Labyrinth {
             }
             initMerge(room, roomList.get(i2));
         }
+    }
+
+    public void randomCurse() {
+        for (Room room : roomList) {
+            room.removeEffect(ERoomEffects.CURSED);
+        }
+        
+        Random random = new Random();
+        int i = random.nextInt(roomList.size() - 1);
+        Room room = roomList.get(i);
+        room.addEffect(ERoomEffects.CURSED);
+
     }
     
     public void placeItems(Timer t){
