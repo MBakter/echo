@@ -49,18 +49,19 @@ public Teacher(){};
     }
     @Override
     public EPlayerState getPlayerState() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayerState'");
+        return state;
     }
     @Override
     public ArrayList<IVItems> getItems() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getItems'");
+        ArrayList<IVItems> vItemList = new ArrayList<>();
+        for (IItem item : itemList) {
+            item.acceptView(vItemList);
+        }
+        return vItemList;
     }
     @Override
     public int getTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTime'");
+        return timer.getETA(this);
     }
 
 }

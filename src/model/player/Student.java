@@ -101,7 +101,7 @@ public class Student extends Player implements IVMStudent{
     }
     @Override
     public int getTime() {
-        return TIME;
+        return timer.getETA(this);
     }
     @Override
     public IVRoom getVRoom(){

@@ -14,9 +14,11 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     protected ITimer timer;
     private String name;
     private final int TIME = 3;
-    public Player(){
+
+    public Player() {
 
     }
+
     Player(String s, ITimer t) {
         name = s;
         state = EPlayerState.ALIVE;
@@ -34,7 +36,7 @@ public abstract class Player implements ITimedEntity, IPrintStat {
 
     public void setState(EPlayerState s) {
         state = s;
-        if(s == EPlayerState.UNCONSCIOUS) {
+        if (s == EPlayerState.UNCONSCIOUS) {
             timer.startTimer(this, TIME);
         }
     }
@@ -51,12 +53,18 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         room = r;
     }
 
+    /*
+     * Cleaner kitessékel
+     */
     public abstract void getOut();
 
     public abstract boolean move(Room r);
 
     public abstract void forceMove(Room r);
 
+    /*
+     * Ha a szoba mérgezett lesz, TIME időre eszméletünket veszítjük
+     */
     public void RoomPoisoned() {
         state = EPlayerState.UNCONSCIOUS;
         timer.startTimer(this, TIME);
@@ -81,8 +89,14 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         itemList.remove(i);
     }
 
+    /*
+     * Item felvétele, visitor
+     */
     public abstract boolean pickUp(IItem i);
 
+    /*
+     * Item eldobása szobában, visitor
+     */
     public void dropItem(IItem i) {
         if (room == null || room.getRoomItems().size() >= 10)
             return;
@@ -90,19 +104,28 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         i.dropItem(this);
     }
 
+    /*
+     * Item használat, visitor
+     */
     public void useItem(IItem i) {
         return;
     }
 
+    /*
+     * Időzítő lejárta esetén hívando
+     */
     @Override
     public void timerEnd() {
         RoomCleanFromPoison();
     }
 
+    /*
+     * Stat lista teszteléshez
+     */
     @Override
     public void printStat(String asd) {
         String roomName = "";
-        if(room != null)
+        if (room != null)
             roomName = room.getName();
         System.out.printf("%s room %s%n", name, roomName);
         System.out.printf("%s EPlayerState %s%n", name, state);
@@ -113,6 +136,9 @@ public abstract class Player implements ITimedEntity, IPrintStat {
         System.out.printf("%n");
     }
 
+    /*
+     * State lista teszteléshez
+     */
     @Override
     public void statesOptions() {
         for (var e : EPlayerState.values()) {

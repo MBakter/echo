@@ -33,7 +33,7 @@ public class VTVSZ implements IVItems{
         System.out.println("VTVSZ DRAW");
 
         label.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
-        //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelTVSZ); });
+
         
         label.addMouseListener(new MouseAdapter() {
             @Override
