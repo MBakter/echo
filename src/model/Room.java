@@ -555,6 +555,12 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
         return false;
     }
 
-    
+    @Override
+    public boolean isClean() {
+        for (ERoomEffects e : effects)
+            if (e == ERoomEffects.CURSED || e == ERoomEffects.POISONED)
+                return false;
+        return true;
+    }
 
 }

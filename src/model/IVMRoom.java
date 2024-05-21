@@ -14,4 +14,5 @@ public interface IVMRoom {
     public String getName();
     public boolean isPoisonous();
     public boolean isCursed();
+    public boolean isClean();
 }

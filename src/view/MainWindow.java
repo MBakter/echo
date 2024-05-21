@@ -539,7 +539,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             gamePanel.setBackground("textures" + File.separator + "BackgroundPoisoned.png");
         if(currentVRoom.getModelRoom().isCursed()) 
             gamePanel.setBackground("textures" + File.separator + "BackgroundCursed.png");
-        else    
+        if(currentVRoom.getModelRoom().isClean())    
             gamePanel.setBackground("textures" + File.separator + "Background.png");
 
         //Doors
