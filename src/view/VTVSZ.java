@@ -48,7 +48,7 @@ public class VTVSZ implements IVItems{
                 }
                 if(mouseEvent.getButton() == (MouseEvent.BUTTON3)){
                     JPopupMenu jp = new JPopupMenu("Stats");
-                    jp.add(new JMenuItem("Health left: " + modelTVSZ.getHitpoints()));
+                    jp.add(new JLabel("Health left: " + modelTVSZ.getHitpoints()));
     
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());

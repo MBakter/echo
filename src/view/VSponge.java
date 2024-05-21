@@ -54,8 +54,8 @@ public class VSponge implements IVItems {
                 }
                 if (mouseEvent.getButton() == MouseEvent.BUTTON3) {
                     JPopupMenu jp = new JPopupMenu("Stats");
-                    jp.add(new JMenuItem("Functional: "+modelSponge.isFunctional()));
-                    jp.add(new JMenuItem("Time: "+modelSponge.getTime()));
+                    jp.add(new JLabel("Functional: "+modelSponge.isFunctional()));
+                    jp.add(new JLabel("Time: "+modelSponge.getTime()));
 
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());

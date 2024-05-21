@@ -72,9 +72,9 @@ public class VTransistor implements IVItems{
                 }
                 if(mouseEvent.getButton() == MouseEvent.BUTTON3){
                     JPopupMenu jp = new JPopupMenu("Stats");
-                    jp.add(new JMenuItem("Active: "+ modelTransistor.isActive()));
+                    jp.add(new JLabel("Active: "+ modelTransistor.isActive()));
 
-                    jp.add(new JMenuItem("Pair: "+ modelTransistor.getPairName()));
+                    jp.add(new JLabel("Pair: "+ modelTransistor.getPairName()));
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
                 }

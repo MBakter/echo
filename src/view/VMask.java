@@ -54,9 +54,9 @@ public class VMask implements IVItems {
                 }
                 if(mouseEvent.getButton() == MouseEvent.BUTTON3){
                     JPopupMenu jp = new JPopupMenu("Choose action");
-                    jp.add(new JMenuItem("Functional: " + modelMask.isFunctional()));
-                    jp.add(new JMenuItem("Time: " + modelMask.getTime()));
-                    jp.add(new JMenuItem("Fake: " + modelMask.isFake()));
+                    jp.add(new JLabel("Functional: " + modelMask.isFunctional()));
+                    jp.add(new JLabel("Time: " + modelMask.getTime()));
+                    jp.add(new JLabel("Fake: " + modelMask.isFake()));
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
                 }

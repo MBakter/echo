@@ -43,6 +43,8 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
     }
 
     public void PairTransistor(Transistor t2) {
+        if(t2.equals(this))
+            return;
         pair = t2;
         t2.setPair(this);
 
