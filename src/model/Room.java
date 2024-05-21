@@ -437,7 +437,7 @@ public class Room implements ICRoom, IPrintStat, IVMRoom {
     }
 
     @Override
-    public void printStat(String faszom) {
+    public void printStat(String asd) {
         System.out.printf("%s effects", name);
         for (var effect : effects) {
             System.out.printf(" %s", effect);

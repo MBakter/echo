@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import model.ERoomEffects;
 import model.Room;
 import model.items.*;
 
@@ -130,7 +131,7 @@ public class Labyrinth {
                 }
 
                 if (line.startsWith("create room")) 
-                {
+                {   
                     if (parts.length < 3) 
                         throw new IOException("Hiba a fájl beolvasása során: Szoba neve nem található");
                     
@@ -138,6 +139,15 @@ public class Labyrinth {
                     String roomName = parts[2];
                     Room room = new Room(roomName);
                     roomList.add(room);
+
+                    if(parts.length == 4){
+                        if(parts[3].equals("p")){
+                            room.addEffect(ERoomEffects.POISONED);
+                        }
+                        if(parts[3].equals("c")){
+                            room.addEffect(ERoomEffects.CURSED);
+                        }
+                    }
 
                 } else if (line.startsWith("link")) 
                 {

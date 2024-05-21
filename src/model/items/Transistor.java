@@ -55,6 +55,8 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
     }
 
     public void UnpairTransistor(Transistor t2) {
+        t2.pair = null;
+        pair = null;
     }
 
     public void setRoom(Room r) {
@@ -72,12 +74,13 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
 
     @Override
     public void pickUp(Student s) {
+        room = null;
         if (pair != null) {
-            room.removeEffect(ERoomEffects.TRANSISTOR_INSIDE);
-            room = null;
+            s.getRoom().removeEffect(ERoomEffects.TRANSISTOR_INSIDE);
+            
         }
         s.addItem(this);
-        setRoom(s.getRoom());
+        //setRoom(s.getRoom());
     }
 
     @Override
@@ -94,18 +97,15 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
 
     @Override
     public void dropItem(Player p) {
+        room = p.getRoom();
+        p.removeItem(this);
 
         if (pair != null) {
             if (pair.room != null && active) {
                 teleport(p);
                 deactivateTransistor(p);
-            }
-
+            }            
         }
-
-        room = p.getRoom();
-        p.removeItem(this);
-
     }
 
     private void teleport(Player p) {

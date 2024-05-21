@@ -84,8 +84,8 @@ public abstract class Player implements ITimedEntity, IPrintStat {
     public void dropItem(IItem i) {
         if (room == null || room.getRoomItems().size() >= 10)
             return;
-        i.dropItem(this);
         room.addItem(i);
+        i.dropItem(this);
     }
 
     public void useItem(IItem i) {

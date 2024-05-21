@@ -32,14 +32,15 @@ public class Cleaner extends Player implements IVMCleaner{
 
     @Override
     public void getOut() {
-        if(room == null)
+        return;
+/*         if(room == null)
         return;
         for (Room r : room.getNeighbours()) {
             boolean success = move(r);
             if (success) {
                 return;
             }
-        }
+        } */
     }
     @Override
     public EPlayerState getPlayerState() {
