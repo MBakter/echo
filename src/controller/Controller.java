@@ -74,6 +74,8 @@ public class Controller implements IController {
             if(studentMoveCounter >= students.size()) {
                 for (Teacher teacher : teachers) {
                     TeacherMove(teacher);
+                    if(endOfGame)
+                        return true;
                 }
                 for (Cleaner cleaner : cleaners) {
                     CleanerMove(cleaner);
@@ -111,6 +113,9 @@ public class Controller implements IController {
     }
 
     private static void StudentMove(Student s) {
+        if(endOfGame)
+            return;
+
         curPlayer = s;
         if (curPlayer.getState().equals(EPlayerState.UNCONSCIOUS))
             actionCounter = -2;
@@ -123,6 +128,9 @@ public class Controller implements IController {
     }
 
     private static void TeacherMove(Teacher t) {
+        if(endOfGame)
+            return;
+
         Random r = new Random();
         if (t.getRoom().getNeighbours().size() >= 2)
             t.move(t.getRoom().getNeighbours().get(r.nextInt(t.getRoom().getNeighbours().size() - 1)));
@@ -134,6 +142,9 @@ public class Controller implements IController {
     }
 
     private static void CleanerMove(Cleaner c) {
+        if(endOfGame)
+            return;
+
         Random r = new Random();
         if (c.getRoom().getNeighbours().size() >= 2)
             c.move(c.getRoom().getNeighbours().get(r.nextInt(c.getRoom().getNeighbours().size() - 1)));
@@ -150,6 +161,9 @@ public class Controller implements IController {
     }
 
     public static boolean CanPlayerMove() {
+        if(endOfGame)
+            return false;
+
         if (actionCounter == 0) {
             View.showError("You ran out of moves!");
             return false;
@@ -164,15 +178,14 @@ public class Controller implements IController {
     }
 
     @Override
-    public void EndTurn() {
-        if(endOfGame)
-            return;
-            
+    public void EndTurn() {     
         studentMoveCounter++;
         
         if(studentMoveCounter >= students.size()) {
             for (Teacher teacher : teachers) {
-                TeacherMove(teacher);                
+                TeacherMove(teacher);  
+                if(endOfGame)
+                    return;              
             }
             for (Cleaner cleaner : cleaners) {
                 CleanerMove(cleaner);
@@ -225,9 +238,11 @@ public class Controller implements IController {
             teachers.clear();
             cleaners.clear();
             Map.clear();
+            Map = new Labyrinth();
             actionCounter = 2;
             studentMoveCounter = 0;
             timer = new Timer();
+            endOfGame = false;
         }
     }
 

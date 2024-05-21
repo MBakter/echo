@@ -11,7 +11,7 @@ import view.VBeer;
 
 public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
     private ITimer timer;
-    private EBeerState state; // Default: INACTIVE
+    private EBeerState state;
     private static int TIME = 5;
     private String name;
 
@@ -33,11 +33,13 @@ public class Beer implements IItem, ITimedEntity, IPrintStat, IVMBeer {
         name = s;
         timer = t;
         t.addEntity(this);
+        state = EBeerState.INACTIVE;
     }
 
     public Beer(Timer t) {
         timer = t;
         t.addEntity(this);
+        state = EBeerState.INACTIVE;
     }
 
     @Override
