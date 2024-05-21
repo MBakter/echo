@@ -11,5 +11,6 @@ public interface IVMRoom {
     public ArrayList<IVRoom> getNeighBourList();
     public ArrayList<ERoomEffects> getRoomState();
     public ArrayList<IVItems> getRoomItems();
+    public String getName();
     public boolean isPoisonous();
 }
