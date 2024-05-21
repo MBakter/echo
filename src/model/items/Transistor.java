@@ -142,7 +142,7 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
             System.out.printf("%s pair %s", name, "");
         System.out.printf("%s active %s", name, active);
         String roomName = "";
-        if(room != null)
+        if (room != null)
             roomName = room.getName();
         System.out.printf("%s room %s", name, roomName);
     }
@@ -164,5 +164,15 @@ public class Transistor implements IItem, IPrintStat, IVMTransistor {
     @Override
     public void acceptView(ArrayList<IVItems> l) {
         l.add(new VTransistor(this));
+    }
+
+    @Override
+    public String getPairName() {
+        if (pair != null) {
+            return pair.getName();
+        } else {
+            return "No pair!";
+        }
+
     }
 }

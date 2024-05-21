@@ -11,7 +11,6 @@ import javax.swing.JPopupMenu;
 import java.awt.event.*;
 
 import controller.IController;
-import model.items.IItem;
 import model.items.IVMTVSZ;
 import model.items.TVSZ;
 
@@ -35,19 +34,18 @@ public class VTVSZ implements IVItems{
 
         label.setIcon(new ImageIcon("textures" + File.separator + "TVSZ.png"));
         //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelTVSZ); });
-
-        JPopupMenu jp = new JPopupMenu("Choose action");
-
+        
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                JPopupMenu jp = new JPopupMenu("Choose action");
-                jp.add(new JMenuItem("Use item")).addActionListener(e -> {
-                    c.getCommands().useItem(modelTVSZ);
-                });
+                if(mouseEvent.getButton() == (MouseEvent.BUTTON3)){
+                    JPopupMenu jp = new JPopupMenu("Stats");
+                    jp.add(new JMenuItem("Health left: " + modelTVSZ.getHitpoints()));
+    
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
 
-                jp.show(label, 100, 100);
-                jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
             }
         });
 
