@@ -21,7 +21,7 @@ public class Controller implements IController {
     private static boolean endOfGame = false;
     private final String mapDirectoryPath;
     private String mapName;
-    private static final Timer timer = new Timer();
+    private static Timer timer = new Timer();
     private static IMainWindow View;
 
     static Student curPlayer = null;
@@ -29,9 +29,15 @@ public class Controller implements IController {
     private static int studentMoveCounter = 0;
     public static Commands commands = new Commands();
 
+    public static final int minStudentSize = 1;
+    public static final int minTeacherSize = 1;
+    public static final int minCleanerSize = 0;
+    public static final int maxPlayerSize = 10;
+    public static final String defaultMapName = "Mosquito.txt";
+
     public Controller(String mapDirectoryPath) {
         this.mapDirectoryPath = mapDirectoryPath; 
-        mapName = "Mosquito.txt";
+        mapName = defaultMapName;
         students.add(new Student("s0", timer));
         teachers.add(new Teacher("t0", timer));
     }
@@ -46,6 +52,62 @@ public class Controller implements IController {
     public static void endGame(boolean victory) {
         endOfGame = true;
         System.out.println(victory == true ? "*VICTORY!*" : "-DEFEAT!-");
+        View.endGame(victory);
+    }
+
+    //Return true if that was the last player and the game is over
+    //To be used after current player performed an action, checks if CP is dead
+    private static boolean checkPlayerDead() {
+        if(curPlayer.getState() == EPlayerState.DEAD) {
+            students.remove(curPlayer);
+            View.RefreshView();
+            View.showError("You Died!");
+        }
+
+        if(students.isEmpty()) {
+            endGame(false);
+            return true;
+        }
+
+        if(curPlayer.getState() == EPlayerState.DEAD) {
+            studentMoveCounter++;
+            if(studentMoveCounter >= students.size()) {
+                for (Teacher teacher : teachers) {
+                    TeacherMove(teacher);
+                }
+                for (Cleaner cleaner : cleaners) {
+                    CleanerMove(cleaner);
+                }
+                Map.randomMove();
+                studentMoveCounter = 0;
+            }
+
+            StudentMove(students.get(studentMoveCounter));
+        }
+        return false;
+    }
+
+    //Return true if that was the last player and the game is over
+    //To be used when a teacher move is up, checks all student states
+    private static boolean checkDeadPlayers() {
+        int j = -1;
+        for (int i = 0; i < students.size(); i++) {
+            if(students.get(i).getState() == EPlayerState.DEAD) {
+                j = i;
+                if(students.get(i).equals(curPlayer)) {
+                    View.RefreshView();
+                    View.showError("You Died!");
+                }
+            }
+        }
+        if(j >= 0)
+            students.remove(j);
+
+        if(students.isEmpty()) {
+            endGame(false);
+            return true;
+        }
+        return false;
     }
 
     private static void StudentMove(Student s) {
@@ -61,6 +123,8 @@ public class Controller implements IController {
         else if(t.getRoom().getNeighbours().size()==1)
         t.move(t.getRoom().getNeighbours().get(0));
         View.RefreshView();
+
+        checkDeadPlayers();
     }
 
     private static void CleanerMove(Cleaner c) {
@@ -73,6 +137,8 @@ public class Controller implements IController {
     }
 
     public static void PlayerMoved() {
+        checkPlayerDead();
+
         actionCounter--;
         View.RefreshView();
     }
@@ -87,9 +153,12 @@ public class Controller implements IController {
 
     @Override
     public void EndTurn() {
+        if(endOfGame)
+            return;
+            
         studentMoveCounter++;
         
-        if(studentMoveCounter == students.size()) {
+        if(studentMoveCounter >= students.size()) {
             for (Teacher teacher : teachers) {
                 TeacherMove(teacher);
             }
@@ -100,20 +169,9 @@ public class Controller implements IController {
             studentMoveCounter = 0;
         }
 
-        StudentMove(students.get(studentMoveCounter));
+        if(students.size() > 0)
+            StudentMove(students.get(studentMoveCounter));
     }
-
-    /* private static void GameCycle() {
-        for (Student student : students) {
-            StudentMove(student);
-        }
-        for (Teacher teacher : teachers) {
-            TeacherMove(teacher);
-        }
-        for (Cleaner cleaner : cleaners) {
-            CleanerMove(cleaner);
-        }
-    } */
 
     private boolean isGameSet() {
         if(students.size() < 1 || teachers.size() < 1 || cleaners.size() < 0)
@@ -145,28 +203,19 @@ public class Controller implements IController {
 
         StudentMove(students.get(0));
 
-/*         //TESZT***************************************
-        Student s = new Student();
-        Room r = new Room();
-        Room r2 = new Room();
-        Room r3 = new Room();
-        r.addNeighbour(r2);
-        r.addNeighbour(r3);
-        r2.addNeighbour(r);
-        r3.addNeighbour(r2);
-        r.addItem(new TVSZ());
-        r.addItem(new Purifier("Purifi"));
-        r2.addItem(new Logarlec());
-        s.setRoom(r);
-        System.out.println("Room " + r.toString() + " created");
-        System.out.println("Room " + r2.toString() + " created");
-        System.out.println("Room " + r3.toString() + " created");
-        System.out.println("Student " + s.toString() + " created");
+    }
 
-        curPlayer = s;
-
-        View.RefreshView(); */
-
+    @Override
+    public void resetGame() {
+        if(endOfGame) {
+            students.clear();
+            teachers.clear();
+            cleaners.clear();
+            Map.clear();
+            actionCounter = 2;
+            studentMoveCounter = 0;
+            timer = new Timer();
+        }
     }
 
     @Override

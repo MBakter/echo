@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import controller.Controller;
 import controller.IController;
 import model.ERoomEffects;
 
@@ -13,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.ResourceBundle.Control;
 
 public class MainWindow extends JFrame implements IMainWindow {
     
@@ -381,7 +383,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.gridy = 3;
         optionsPanel.add(mapButton, c); 
 
-        SpinnerModel studentSelect = new SpinnerNumberModel(controller.getStudentNum(),1,10,1);
+        SpinnerModel studentSelect = new SpinnerNumberModel(controller.getStudentNum(),Controller.minStudentSize, Controller.maxPlayerSize,1);
         c.gridx = 2;
         c.gridy = 0;
         c.ipadx = 10;
@@ -389,14 +391,14 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.insets = new Insets(0, 30, 0, 0);
         optionsPanel.add(new JSpinner(studentSelect), c);
 
-        SpinnerModel teacherSelect = new SpinnerNumberModel(controller.getTeacherNum(), 1, 10, 1);
+        SpinnerModel teacherSelect = new SpinnerNumberModel(controller.getTeacherNum(), Controller.minTeacherSize, Controller.maxPlayerSize, 1);
         c.gridx = 2;
         c.gridy = 1;
         c.ipadx = 10;
         c.ipady = 10;
         optionsPanel.add(new JSpinner(teacherSelect), c);
 
-        SpinnerModel cleanerSelect = new SpinnerNumberModel(controller.getCleanerNum(), 0, 10, 1);
+        SpinnerModel cleanerSelect = new SpinnerNumberModel(controller.getCleanerNum(), Controller.minCleanerSize, Controller.maxPlayerSize, 1);
         c.gridx = 2;
         c.gridy = 2;
         c.ipadx = 10;
@@ -506,6 +508,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         currentVPlayer = (VStudent) controller.getCP();
         currentVRoom = (VRoom) currentVPlayer.getModelStudent().getVRoom();
 
+        if(currentVRoom == null)
+            return;
+
         if(currentVRoom.getModelRoom().isPoisonous()) 
             gamePanel.setBackground("textures" + File.separator + "BackgroundBlurred.png");
 
@@ -550,6 +555,37 @@ public class MainWindow extends JFrame implements IMainWindow {
     @Override
     public void showError(String title) {
         JOptionPane.showMessageDialog(this, title);
+    }
+
+    @Override
+    public void endGame(boolean victory) {
+        JDialog dialog = new JDialog(this, "gameOver", true);
+        dialog.setSize(300, 150);
+        dialog.setLayout(new BorderLayout());
+
+        String message = victory == true ? "VICTORY" : "DEFEAT";
+
+        JLabel messageLabel = new JLabel(message, SwingConstants.CENTER);
+        dialog.add(messageLabel, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        JButton b = new JButton("Continue");
+        buttonPanel.add(b);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        b.addActionListener(e -> { 
+            dialog.setVisible(false);
+            RefreshComponents();
+            getContentPane().remove(gamePanel);
+            controller.resetGame();
+            saveOptions(Controller.minStudentSize, Controller.minTeacherSize, Controller.minCleanerSize, Controller.defaultMapName);
+            drawMenu();
+        });
+
+        // Center the dialog on the parent frame
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+
     }
 
 }

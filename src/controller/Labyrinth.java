@@ -55,6 +55,7 @@ public class Labyrinth {
         } else {
             int i2 = random.nextInt(roomList.size() - 1);
             while (i2 == i) {
+                System.out.println("ASDASD");
                 i2 = random.nextInt(roomList.size() - 1);
             }
             initMerge(room, roomList.get(i2));
@@ -159,6 +160,10 @@ public class Labyrinth {
             throw new RuntimeException(e);
         }
         return true;
+    }
+
+    public void clear() {
+        roomList.clear();
     }
     
 }

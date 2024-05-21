@@ -18,4 +18,5 @@ public interface IController {
     ArrayList<IVItems> getVItemsOfCP();
     ICommands getCommands();
     void EndTurn();
+    void resetGame();
 }
