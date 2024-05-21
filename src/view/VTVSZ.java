@@ -38,6 +38,14 @@ public class VTVSZ implements IVItems{
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelTVSZ);
+                    });
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
                 if(mouseEvent.getButton() == (MouseEvent.BUTTON3)){
                     JPopupMenu jp = new JPopupMenu("Stats");
                     jp.add(new JMenuItem("Health left: " + modelTVSZ.getHitpoints()));

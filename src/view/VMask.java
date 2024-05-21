@@ -46,6 +46,9 @@ public class VMask implements IVItems {
                     jp.add(new JMenuItem("Use item")).addActionListener(e -> {
                         c.getCommands().useItem(modelMask);
                     });
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelMask);
+                    });
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
                 }

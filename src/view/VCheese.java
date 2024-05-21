@@ -41,7 +41,9 @@ public class VCheese implements IVItems{
                 if(mouseEvent.getButton() == MouseEvent.BUTTON1){
                     JPopupMenu jp = new JPopupMenu("Choose action");
                     jp.add(new JMenuItem("Use item")).addActionListener(e -> {c.getCommands().useItem(modelCheese);});
-                
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelCheese);
+                    });
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
                 }

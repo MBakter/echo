@@ -63,6 +63,9 @@ public class VTransistor implements IVItems{
                     jp.add(new JMenuItem("Use item")).addActionListener(e -> {
                         c.getCommands().activateTransistor(modelTransistor);
                     });
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelTransistor);
+                    });
                     jp.add(subMenu);
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());

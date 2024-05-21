@@ -45,6 +45,9 @@ public class VSponge implements IVItems {
                     jp.add(new JMenuItem("Use item")).addActionListener(e -> {
                         c.getCommands().useItem(modelSponge);
                     });
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelSponge);
+                    });
 
                     jp.show(label, 100, 100);
                     jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
