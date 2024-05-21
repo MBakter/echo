@@ -5,6 +5,10 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+
+import java.awt.event.*;
 
 import controller.IController;
 import model.items.IVMLogarlec;
@@ -29,7 +33,20 @@ public class VLogarlec implements IVItems{
         System.out.println("VLOGARLEC DRAW");
 
         label.setIcon(new ImageIcon("textures" + File.separator + "Logarlec.png"));
-        //btn.addActionListener(e -> { c.getCommands().useItem((IItem)modelLogarlec); })
+        
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton() == MouseEvent.BUTTON1){
+                    JPopupMenu jp = new JPopupMenu("Choose action");
+                    jp.add(new JMenuItem("Drop item")).addActionListener(e -> {
+                        c.getCommands().dropItem(modelLogarlec);
+                    });
+                    jp.show(label, 100, 100);
+                    jp.setLocation(mouseEvent.getXOnScreen(), mouseEvent.getYOnScreen());
+                }
+            }
+        });
     }
 
     @Override

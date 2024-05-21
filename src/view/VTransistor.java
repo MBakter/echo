@@ -42,16 +42,12 @@ public class VTransistor implements IVItems{
                 transistors.add((((VTransistor)item).modelTransistor));
             }
         }
-
-        JPopupMenu jp = new JPopupMenu("Choose action");
+        
         JMenu subMenu = new JMenu("Pair with...");
         for(int i = 0; i < transistors.size(); i++){
             final int idx = i;
             subMenu.add(new JMenuItem(transistors.get(i).getName())).addActionListener(e -> { c.getCommands().pairTransistor(modelTransistor, transistors.get(idx));});
         }
-
-
-        jp.show(label, 100, 100);
 
                 label.addMouseListener(new MouseAdapter() {
             @Override

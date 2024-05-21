@@ -30,6 +30,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private BackgroundPanel gamePanel;
 
     //Játékbeli objektumok helye*******
+    private JLabel roomNameSign;
     private JButton[] doors;
     private JLabel[] teachers;
     private JLabel[] cleaners;
@@ -257,7 +258,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         c.weighty = 1;
         c.ipadx = 0;
         c.ipady = 0;
-        
+
         JButton endButton = new JButton("End game");
         endButton.addActionListener(e -> { 
             controller.endGame();
@@ -267,6 +268,26 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         endPanel.add(endButton);
         return endPanel;
+    }
+
+    private JPanel createRoomSign(GridBagConstraints c) {
+        JPanel roomSignPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        c.insets = new Insets(10, 80, 5, 0);
+        roomSignPanel.setOpaque(false);
+        c.gridx = 3;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.weighty = 1;
+        c.ipadx = 0;
+        c.ipady = 0;
+
+        roomNameSign = new JLabel("Room");
+        roomNameSign.setFont(new Font("Arial", Font.BOLD, 30));
+        roomNameSign.setForeground(Color.GRAY);
+        roomNameSign.setPreferredSize(new Dimension(100, 40));
+        roomSignPanel.add(roomNameSign);
+        return roomSignPanel;
     }
 
     /*
@@ -285,6 +306,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         gamePanel.add(createStudentPanel(c), c);
         gamePanel.add(createItemPanel(c), c);
         gamePanel.add(createExitDoor(c), c);
+        gamePanel.add(createRoomSign(c), c);
 
     }
 
@@ -399,7 +421,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         mainPanel.add(menuPanel);
         getContentPane().add(mainPanel, BorderLayout.CENTER);
 
-        setPreferredSize(new Dimension(1920, 1130));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         pack();
 
     }
@@ -513,7 +535,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         getContentPane().add(optionPanel, BorderLayout.CENTER);
 
-        setPreferredSize(new Dimension(1920, 1130));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         pack();
     }
@@ -541,6 +563,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         controller.setParameters((int)sVal, (int)tVal, (int)cVal, (String)mVal);
     }
 
+    /*
+     * Leállítja a programot
+     */
     private void exitGame() {
         System.exit(0);
     }
@@ -587,6 +612,8 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         if(currentVRoom == null)
             return;
+
+        roomNameSign.setText(currentVRoom.getModelRoom().getName());
 
         if(currentVRoom.getModelRoom().isPoisonous()) 
             gamePanel.setBackground("textures" + File.separator + "BackgroundPoisoned.png");
