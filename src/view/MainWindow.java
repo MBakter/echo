@@ -101,7 +101,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         teachers = new JLabel[10];
         for (int i = 0; i < 10; i++) {
             teachers[i] = new JLabel();
-            /* teachers[i].setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png")); */
             teachers[i].setPreferredSize(new Dimension(55, 100));
             teacherPanel.add(teachers[i]);
         }

@@ -25,8 +25,7 @@ public class VTeacher implements IVTeacher {
     public void draw(IVStudent curPlayer, JLabel label, IController c) {
         System.out.println("VTEACHER DRAW");
 
-        label.setIcon(new ImageIcon("textures" + File.separator + "Teacher1.png"));
+        label.setIcon(new ImageIcon("textures" + File.separator + "Teacher.png"));
     }
 
- 
 }

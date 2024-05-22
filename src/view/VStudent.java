@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.*;
 
 import controller.IController;
+import model.player.EPlayerState;
 import model.player.IVMStudent;
 import model.player.Student;
 
@@ -28,7 +29,10 @@ public class VStudent implements IVStudent{
         if(modelStudent.equals(curPlayer.getModelStudent()))
             return;
 
-        label.setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
+        if(modelStudent.getPlayerState() == EPlayerState.DEAD)
+            label.setIcon(new ImageIcon("textures" + File.separator + "StudentDead.png"));
+        else
+            label.setIcon(new ImageIcon("textures" + File.separator + "Student.png"));
     }
 
 
