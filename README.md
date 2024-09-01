@@ -11,7 +11,7 @@
 
 ## Leírás
 
- - Ez a játék a szoftver projekt laboratúrium nevű tárgy keretein belül készült. A program elkészítése volt a tárgy sikeres elvégzésének szükséges és elégséges feltétele. A feladat kiírása, a *"Feladat.pdf"* file-ban olvasható
+ - Ez a játék a szoftver projekt laboratórium nevű tárgy keretein belül készült. A program elkészítése volt a tárgy sikeres elvégzésének szükséges és elégséges feltétele. A feladat kiírása, a *"Feladat.pdf"* file-ban olvasható
  - A játékot a repo klónozása után, a *Logarlec.jar* file futtatásával lehet elindítani. Amennyiben vizuális bugokba ütközne, szét esik a kép, stb... akkor a program újrafordítását javasoljuk. Ezt a következő módon lehet megtenni:
     - Amennyiben számítógépén nincs Java JDK, [innen](https://www.oracle.com/java/technologies/downloads/) tudja letölteni
     - Niysson meg egy terminált a projekt mappájában!
